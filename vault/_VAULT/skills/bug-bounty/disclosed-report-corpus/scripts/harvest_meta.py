@@ -1,0 +1,74 @@
+#!/usr/bin/env python3
+"""Stage 1: harvest all disclosed-report METADATA from the public hexbrainai.com API.
+
+Pagination: limit is capped at 100 server-side; dedupe by id; total comes from page 1.
+Rate limit: 600 req/min per IP -> ~153 pages for 15k rows in about 90 seconds.
+
+Output: hexbrain_reports.jsonl + hexbrain_reports.sqlite (table `reports`).
+"""
+import json, time, sys, sqlite3, os, urllib.request, urllib.error
+
+BASE = "https://hexbrainai.com/api/reports"
+OUT = os.path.dirname(os.path.abspath(__file__))
+JSONL = os.path.join(OUT, "hexbrain_reports.jsonl")
+DB = os.path.join(OUT, "hexbrain_reports.sqlite")
+
+
+def get(url, tries=4):
+    for i in range(tries):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "vault-harvest/1.0", "Accept": "application/json"})
+            with urllib.request.urlopen(req, timeout=40) as r:
+                return json.loads(r.read().decode())
+        except urllib.error.HTTPError as e:
+            print(f"HTTP {e.code} {e.read()[:300].decode(errors='replace')}", flush=True)
+            if e.code == 429:
+                time.sleep(65)
+                continue
+            time.sleep(3 + i * 3)
+        except Exception as e:
+            print("ERR", e, flush=True)
+            time.sleep(3 + i * 3)
+    return None
+
+
+def main():
+    first = get(BASE + "?limit=100&offset=0")
+    if not first:
+        sys.exit("first page failed")
+    total = first["total"]
+    print("total reports:", total, flush=True)
+    rows = first["rows"]
+    seen = {r["id"] for r in rows}
+    offset = 100
+    while offset < total:
+        d = get(f"{BASE}?limit=100&offset={offset}")
+        if not d:
+            print("page failed at", offset, flush=True)
+            time.sleep(10)
+            continue
+        for r in d["rows"]:
+            if r["id"] not in seen:
+                seen.add(r["id"])
+                rows.append(r)
+        offset += 100
+        print(f"{offset}/{total} ({len(rows)} unique)", flush=True)
+        time.sleep(0.2)
+
+    with open(JSONL, "w") as f:
+        for r in rows:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+
+    con = sqlite3.connect(DB)
+    con.execute("""CREATE TABLE IF NOT EXISTS reports(id INTEGER PRIMARY KEY,title TEXT,program TEXT,severity TEXT,
+        weakness TEXT,bounty REAL,votes INTEGER,reporter TEXT,disclosed_at TEXT,substate TEXT)""")
+    con.execute("DELETE FROM reports")
+    con.executemany("INSERT OR REPLACE INTO reports VALUES (?,?,?,?,?,?,?,?,?,?)",
+                    [(r.get("id"), r.get("title"), r.get("program"), r.get("severity"), r.get("weakness"),
+                      r.get("bounty"), r.get("votes"), r.get("reporter"), r.get("disclosed_at"), r.get("substate"))
+                     for r in rows])
+    con.commit()
+    print("written", len(rows), "rows ->", JSONL, DB, flush=True)
+
+
+main()

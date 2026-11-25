@@ -1,0 +1,244 @@
+---
+title: "Authentication & Session case register — 224-row ledger (188 fetched bodies + 36 dead-404 records)"
+type: register
+built: "2026-10-29"
+roster: "h1.security.nathan.sx mirror (4,419 rows, frozen 2017-09-12), title-filter + documented supplemental pass (11 OAuth-lane / session-cookie rows)"
+case_id_scheme: "AUTH-<HackerOne report id>"
+bounty_rule: "JSON bounty_amount where present (labeled json) · otherwise mirror list figure (labeled list) · 404 rows recorded, never quoted, bounty mirrored as 404-list"
+grand_total: "$123,419 roster-tagged across 98 rows ($58,278 json/28 + $58,903 list/57 + $6,238 dead-list/13) · pure class (01–07) $99,360 · adjacent+noise 08 $17,821"
+---
+
+# Case register — Authentication & Session
+
+Substate mix (188 fetched): 138 resolved · 35 informative · 7 duplicate · 8 not-applicable.
+Class census: 01 core bypass 17 · 02 fixation/hijack 14 · 03 expiry/invalidation 26 · 04 2FA/OTP 29 · 05 reset-token 20 · 06 credential-change/email-verification 17 · 07 SSO/SAML/OAuth 17 · 08 adjacent+noise 48 · dead 36.
+
+Bounty arithmetic: JSON $58,278/28 + list $58,903/57 + dead $6,238/13 = **$123,419 / 98 rows**.
+Class modules 01–07 carry $99,360 (71 rows); module 08 carries $17,821 (14 rows).
+
+| Case | Team | Substate | Bounty | Class | Note |
+|---|---|---|---|---|---|
+| [AUTH-280](https://hackerone.com/reports/280) | HackerOne | resolved | $100 (list) | 08 | HackerOne — profile URL merijn.html shows another user's profile page (impersonation-adjacent; resolved) |
+| [AUTH-284](https://hackerone.com/reports/284) | HackerOne | resolved | $100 (list) | 03 | HackerOne — cookies reused after logout to reopen the session (resolved) |
+| [AUTH-288](https://hackerone.com/reports/288) | HackerOne | resolved | $100 (list) | 03 | HackerOne — Session Management: session survives logout ($100 list) |
+| [AUTH-353](https://hackerone.com/reports/353) | HackerOne | resolved | $100 (json) | 03 | HackerOne — Session not expired on logout ($100 JSON) |
+| [AUTH-737](https://hackerone.com/reports/737) | HackerOne | resolved | $100 (json) | 03 | HackerOne — improper session management, same family ($100 JSON) |
+| [AUTH-1209](https://hackerone.com/reports/1209) | Yahoo! | 404 | - | dead | 404 — roster-only record; VK 2FA verification handling — module 04 lane |
+| [AUTH-2224](https://hackerone.com/reports/2224) | Phabricator | resolved | $1,000 (json) | 01 | Phabricator auth.email-domains — register with @phabricator.com-style domain email without owning it; confirmation sent to your own address |
+| [AUTH-2233](https://hackerone.com/reports/2233) | Phabricator | resolved | $500 (json) | 01 | Phabricator auth.email-domains (2) — same family, subaddress variant; $500 list |
+| [AUTH-2421](https://hackerone.com/reports/2421) | RelateIQ | resolved | $100 (list) | 02 | RelateIQ — JSESSIONID and XSRF token identical before and after login ($100 list) |
+| [AUTH-2559](https://hackerone.com/reports/2559) | Slack | resolved | $100 (list) | 07 | Slack — OAuth redirect_uri validation bypass via ../../ path walk; code stolen to evilsite; incl. Slack OAuth bug family ($100 list; mechanism = OAuth binding → classed 07) |
+| [AUTH-2582](https://hackerone.com/reports/2582) | Slack | informative | - | 02 | Slack — session fixation disclosing email address (informative) |
+| [AUTH-2857](https://hackerone.com/reports/2857) | Phabricator | informative | - | 08 | Phabricator — CSRF token valid even after session logout (CSRF lane) |
+| [AUTH-3577](https://hackerone.com/reports/3577) | Yahoo! | 404 | - | dead | 404 — roster-only record |
+| [AUTH-3722](https://hackerone.com/reports/3722) | Slack | informative | - | 08 | Slack — incoming webhooks allow user impersonation (informative) |
+| [AUTH-4795](https://hackerone.com/reports/4795) | concrete5 | resolved | - | 01 | concrete5 Bypass auth.email-domains — third family row; user@█████ accepted without domain ownership |
+| [AUTH-5691](https://hackerone.com/reports/5691) | C2FO | informative | - | 05 | C2FO — password reset token leakage through referrer (informative) |
+| [AUTH-6504](https://hackerone.com/reports/6504) | ReddAPI | resolved | - | 02 | ReddAPI — Session Fixation Found: session accepted pre-auth |
+| [AUTH-6907](https://hackerone.com/reports/6907) | IRCCloud | resolved | $500 (list) | 08 | IRCCloud — settings change without session-token verification (CSRF lane) |
+| [AUTH-6910](https://hackerone.com/reports/6910) | IRCCloud | resolved | $500 (list) | 08 | IRCCloud — full ATO via CSRF + password reset ($500 list; CSRF vault lane) |
+| [AUTH-6927](https://hackerone.com/reports/6927) | IRCCloud | resolved | - | 08 | IRCCloud — session cookie without Secure flag, MITM session theft (supplemental pass; transport lane) |
+| [AUTH-7041](https://hackerone.com/reports/7041) | IRCCloud | resolved | $100 (list) | 03 | IRCCloud iOS — server does not destroy session on app logout; session reusable ($100 list) |
+| [AUTH-7516](https://hackerone.com/reports/7516) | IRCCloud | resolved | - | 08 | IRCCloud — log-out CSRF (resolved; CSRF vault lane) |
+| [AUTH-7909](https://hackerone.com/reports/7909) | Localize | resolved | - | 03 | Localize — browser-cache/back-button after logout shows account pages (resolved; referenced by 158270) |
+| [AUTH-10554](https://hackerone.com/reports/10554) | Coinbase | resolved | $1,000 (json) | 04 | Coinbase — 2FA bypass for BTC transfers: internal wallet-transfer intercept, 2FA removed from the replayed request ($1,000 JSON) |
+| [AUTH-10912](https://hackerone.com/reports/10912) | Yahoo! | 404 | - | dead | 404 — roster-only record |
+| [AUTH-11722](https://hackerone.com/reports/11722) | Coinbase | informative | - | 03 | Coinbase — simultaneous session logon improper management (informative) |
+| [AUTH-13557](https://hackerone.com/reports/13557) | Factlink | informative | - | 05 | Factlink — reset token leaked through Referer (informative) |
+| [AUTH-13602](https://hackerone.com/reports/13602) | Factlink | informative | - | 03 | Factlink — session not expired on logout (informative) |
+| [AUTH-13705](https://hackerone.com/reports/13705) | Automattic | resolved | - | 08 | Simplenote — logout CSRF (CSRF vault lane) |
+| [AUTH-14552](https://hackerone.com/reports/14552) | WePay | 404 | $100 (404-list) | dead | 404 — roster-only record |
+| [AUTH-15166](https://hackerone.com/reports/15166) | Mavenlink | resolved | $100 (list) | 05 | Mavenlink — password reset token not expiring ($100 list) |
+| [AUTH-15476](https://hackerone.com/reports/15476) | FanFootage | resolved | - | 08 | FanFootage — session token not verified when changing settings (CSRF lane) |
+| [AUTH-15619](https://hackerone.com/reports/15619) | FanFootage | resolved | - | 02 | FantasyTote — cookie fixation: same cookie before and after logout (supplemental pass) |
+| [AUTH-16696](https://hackerone.com/reports/16696) | Coinbase | informative | - | 04 | Coinbase — 2FA settings changeable with no delay/freeze (informative) |
+| [AUTH-17383](https://hackerone.com/reports/17383) | HackerOne | resolved | $100 (list) | 05 | HackerOne — reset link mailed to old email still valid after email change (Anand Prakash family) ($100 list) |
+| [AUTH-17474](https://hackerone.com/reports/17474) | Phabricator | resolved | $300 (list) | 05 | Phabricator — same reset-after-email-change flaw ($300 list) |
+| [AUTH-17512](https://hackerone.com/reports/17512) | HackerOne | informative | - | 05 | HackerOne — reset_password_token brute-force (no rate limit) chain to ATO (informative) |
+| [AUTH-18501](https://hackerone.com/reports/18501) | WePay | 404 | $500 (404-list) | dead | 404 — roster-only record |
+| [AUTH-18503](https://hackerone.com/reports/18503) | Automattic | informative | - | 08 | Automattic wordpress.com — old session valid after logout (informative; A2-cited) |
+| [AUTH-19640](https://hackerone.com/reports/19640) | HackerOne | informative | - | 02 | HackerOne — cookie replay hijack with Referer/X-XHR pairing conditions (informative) |
+| [AUTH-20044](https://hackerone.com/reports/20044) | Envoy | 404 | - | dead | 404 — roster-only record |
+| [AUTH-20122](https://hackerone.com/reports/20122) | HackerOne | informative | - | 03 | HackerOne — no option to logout concurrent sessions (informative) |
+| [AUTH-21172](https://hackerone.com/reports/21172) | Mavenlink | duplicate | - | 03 | Mavenlink — server-side cookies not cleared on logout (duplicate) |
+| [AUTH-22203](https://hackerone.com/reports/22203) | Twitter | informative | - | 06 | Twitter — invalidated email address: old reset link still changes password (resolved) |
+| [AUTH-23579](https://hackerone.com/reports/23579) | Secret | resolved | - | 05 | Secret — reset-after-email-change flaw (Vinoth Kumar family) (resolved) |
+| [AUTH-23913](https://hackerone.com/reports/23913) | Twitter | resolved | - | 08 | Twitter iOS — DMs not purged after logout (local-data lane) |
+| [AUTH-23921](https://hackerone.com/reports/23921) | concrete5 | resolved | - | 05 | concrete5 — reset link survives ten password changes (resolved) |
+| [AUTH-26700](https://hackerone.com/reports/26700) | Square | 404 | $2,000 (404-list) | dead | 404 — roster-only record; Badoo CSRF — module 08 adjacency |
+| [AUTH-29331](https://hackerone.com/reports/29331) | HackerOne | resolved | $500 (json) | 06 | HackerOne — username changed on support-mail request without email verification of the requester ($500 JSON) |
+| [AUTH-33385](https://hackerone.com/reports/33385) | InVision | 404 | - | dead | 404 — roster-only record |
+| [AUTH-33432](https://hackerone.com/reports/33432) | Twitter | informative | - | 05 | Twitter — unverified mobile number associated for password-reset purpose (informative) |
+| [AUTH-39203](https://hackerone.com/reports/39203) | WePay | 404 | - | dead | 404 — roster-only record |
+| [AUTH-44864](https://hackerone.com/reports/44864) | itBit Exchange | 404 | $200 (404-list) | dead | 404 — roster-only record |
+| [AUTH-45084](https://hackerone.com/reports/45084) | Vimeo | informative | - | 06 | Vimeo — add new email without verification or password confirm → reset-password ATO (resolved) |
+| [AUTH-46109](https://hackerone.com/reports/46109) | Vimeo | informative | - | 08 | Vimeo — "vimeo" cookie base-entropy analysis (supplemental pass; speculative) |
+| [AUTH-49304](https://hackerone.com/reports/49304) | Vimeo | informative | - | 06 | Vimeo — email-verification bypass: confirmation goes to attacker primary (informative) |
+| [AUTH-50170](https://hackerone.com/reports/50170) | The Internet | resolved | $7,500 (list) | 08 | The Internet — FREAK: factoring RSA_EXPORT keys to impersonate TLS servers ($7,500 list; TLS lane) |
+| [AUTH-50703](https://hackerone.com/reports/50703) | Ubiquiti Networks | resolved | $500 (list) | 08 | Ubiquiti — login-form CSRF → ATO ($500 list; CSRF vault lane) |
+| [AUTH-51166](https://hackerone.com/reports/51166) | IRCCloud | informative | - | 06 | IRCCloud — email verification links still valid after address changed twice (informative) |
+| [AUTH-52644](https://hackerone.com/reports/52644) | itBit Exchange | 404 | $200 (404-list) | dead | 404 — roster-only record |
+| [AUTH-52645](https://hackerone.com/reports/52645) | itBit Exchange | 404 | $200 (404-list) | dead | 404 — roster-only record |
+| [AUTH-54610](https://hackerone.com/reports/54610) | Slack | resolved | $100 (list) | 05 | Slack — invalid reset link logs team members out; embedded in image tag ($100 list) |
+| [AUTH-55911](https://hackerone.com/reports/55911) | Shopify | resolved | $500 (json) | 02 | Shopify Facebook Store app — CSRF token fixation: state param reusable on /authenticated, attacker FB binds to victim shop ($500 JSON) |
+| [AUTH-64666](https://hackerone.com/reports/64666) | MapLogin | resolved | - | 06 | MapLogin — bypass email verification while creating account + no rate limit (resolved) |
+| [AUTH-64946](https://hackerone.com/reports/64946) | Legal Robot | resolved | $40 (list) | 07 | Legal Robot — OAuth login bypasses registration/waitlist during private beta ($40 list) |
+| [AUTH-65825](https://hackerone.com/reports/65825) | Coinbase | resolved | $5,000 (list) | 07 | Coinbase — OAuth authorize page clickjacking; fixed with X-Frame-Options parity ($5,000 JSON) |
+| [AUTH-66223](https://hackerone.com/reports/66223) | Coinbase | informative | - | 04 | Coinbase — SMS two-factor design weaknesses (informative) |
+| [AUTH-67660](https://hackerone.com/reports/67660) | Automattic | resolved | $100 (list) | 04 | Automattic WordPress.com — SMS verification code reusable infinitely at login; magic-code reuse ($100 list) |
+| [AUTH-77076](https://hackerone.com/reports/77076) | Romit | resolved | $250 (json) | 04 | Romit — GA code not verified server-side for DENIED accounts; any code accepted ($250 JSON) |
+| [AUTH-78781](https://hackerone.com/reports/78781) | ok.ru | resolved | $150 (list) | 08 | ok.ru — restricted group videos via mobile-site direct link ($150 list; access-control lane) |
+| [AUTH-80883](https://hackerone.com/reports/80883) | Gratipay | informative | - | 06 | Gratipay — server-side email validation errors (informative) |
+| [AUTH-83667](https://hackerone.com/reports/83667) | ownCloud | resolved | - | 02 | ownCloud apps.owncloud.com — PHPSESSID in query string; Referer/URL leakage lane (supplemental pass) |
+| [AUTH-86504](https://hackerone.com/reports/86504) | Anghami | 404 | $100 (404-list) | dead | 404 — roster-only record; Anghami Google+ login — module 07 lane |
+| [AUTH-87040](https://hackerone.com/reports/87040) | Twitter | resolved | $2,520 (list) | 08 | Twitter — XSS on OAuth authorize/authenticate endpoint via oauth_callback ($2,520 JSON; XSS lane; supplemental pass) |
+| [AUTH-90165](https://hackerone.com/reports/90165) | VK.com | resolved | $500 (json) | 04 | VK — CSRF on backup-token retrieval + framing leads to 2FA compromise ($500 JSON; Russian body) |
+| [AUTH-90643](https://hackerone.com/reports/90643) | ownCloud | informative | - | 06 | ownCloud — no email verification during registration (informative) |
+| [AUTH-91332](https://hackerone.com/reports/91332) | Imgur | informative | - | 08 | Imgur — open URL redirect on login with facebook (RDIR vault lane) |
+| [AUTH-97377](https://hackerone.com/reports/97377) | HackerOne | resolved | - | 08 | HackerOne — HackerOne impersonation (resolved) |
+| [AUTH-98247](https://hackerone.com/reports/98247) | Binary.com | resolved | $300 (list) | 01 | Binary.com — login to any cashier account via API login flow flaw ($300 list) |
+| [AUTH-98432](https://hackerone.com/reports/98432) | Twitter | resolved | $280 (list) | 08 | Twitter — mopub hash-ID app disclosure ($280 list; info-disclosure lane) |
+| [AUTH-98469](https://hackerone.com/reports/98469) | Binary.com | resolved | $50 (list) | 06 | Binary.com — email verification link doubles as password reset link (drop step=account) ($50 list) |
+| [AUTH-99273](https://hackerone.com/reports/99273) | Mail.Ru | 404 | - | dead | 404 — roster-only record |
+| [AUTH-100509](https://hackerone.com/reports/100509) | HackerOne | resolved | $1,000 (json) | 04 | HackerOne — pre-generated 2FA secret/backup codes readable from settings DOM before activation ($1,000 JSON) |
+| [AUTH-101977](https://hackerone.com/reports/101977) | Imgur | resolved | - | 07 | Imgur — login to any account using other Facebook app access token (resolved) |
+| [AUTH-106865](https://hackerone.com/reports/106865) | Informatica | resolved | - | 08 | Informatica — XXE via SAML (XXE vault lane) |
+| [AUTH-114169](https://hackerone.com/reports/114169) | Twitter | resolved | $2,520 (list) | 07 | Twitter Digits — host validation bypass via HPP on callback ($2,520 JSON) |
+| [AUTH-115245](https://hackerone.com/reports/115245) | Paragon Initiative Enterprises | duplicate | - | 08 | Paragon — duplicate of 135283, same DMARC text (duplicate; email-spoofing lane) |
+| [AUTH-115845](https://hackerone.com/reports/115845) | Legal Robot | resolved | $20 (list) | 08 | Legal Robot — rate limiting on email confirmation link ($20 list; rate-limit lane) |
+| [AUTH-116504](https://hackerone.com/reports/116504) | Ubiquiti Networks | resolved | $1,000 (list) | 01 | Ubiquiti — auth bypass on directory.corp.ubnt.com ($1,000 list) |
+| [AUTH-118948](https://hackerone.com/reports/118948) | Veris | resolved | - | 05 | Veris — password reset link is not expiring (resolved) |
+| [AUTH-121469](https://hackerone.com/reports/121469) | Badoo | resolved | $427 (json) | 01 | Badoo — video-only broken-auth report ($427 JSON); body points to attachment, no text mechanism |
+| [AUTH-121827](https://hackerone.com/reports/121827) | Badoo | resolved | $850 (list) | 07 | Badoo — FB-import link token replaces victim linked-FB account → attacker FB logs into victim ($850 list) |
+| [AUTH-123127](https://hackerone.com/reports/123127) | New Relic | 404 | - | dead | 404 — roster-only record |
+| [AUTH-123743](https://hackerone.com/reports/123743) | HackerOne | resolved | - | 08 | HackerOne — sending emails impersonating other users (resolved) |
+| [AUTH-123897](https://hackerone.com/reports/123897) | Gratipay | informative | $1 (list) | 08 | Gratipay — auto-logout after 20 minutes (inverse expiry design; $1 list) |
+| [AUTH-124151](https://hackerone.com/reports/124151) | Zomato | resolved | - | 06 | Zomato — verify-email link authenticates without password + base64 fbcid leaks id/code/email (resolved) |
+| [AUTH-124845](https://hackerone.com/reports/124845) | Shopify | resolved | $500 (json) | 04 | Shopify — password step bypassed when enabling 2-step verification: send_sms call with account-2 session ($500 JSON) |
+| [AUTH-126235](https://hackerone.com/reports/126235) | Uber | informative | - | 08 | Uber get.uber.com/check-otp — text injection only (noise) |
+| [AUTH-127645](https://hackerone.com/reports/127645) | Uber | informative | - | 02 | Uber riders.uber.com — shared-browser session impersonation: new login keeps prior session identity (informative) |
+| [AUTH-127703](https://hackerone.com/reports/127703) | Badoo | resolved | $852 (list) | 07 | Badoo — link-account CSRF via leaked rt param on google/verify.phtml ($852 list) |
+| [AUTH-128085](https://hackerone.com/reports/128085) | GitLab | resolved | - | 04 | GitLab — 2FA users sign-in without password: [REDACTED_SECRET] swappable via login header ($500 list? verify at write time) |
+| [AUTH-128777](https://hackerone.com/reports/128777) | Algolia | resolved | $100 (json) | 04 | Algolia — no rate limit on 2FA code verification → brute force ($100 JSON) |
+| [AUTH-129918](https://hackerone.com/reports/129918) | Slack | resolved | $2,000 (json) | 01 | Slack — authorization error let @secalert view tokens+secret server-side; mitigated + investigation ($2,000 JSON) |
+| [AUTH-130460](https://hackerone.com/reports/130460) | bitaccess | resolved | $50 (list) | 04 | bitaccess — bypassing OTP verification ($50 list) |
+| [AUTH-134206](https://hackerone.com/reports/134206) | Uber | informative | - | 08 | Uber — subscription settings editable anonymously via subscription-URL token (informative) |
+| [AUTH-135283](https://hackerone.com/reports/135283) | Paragon Initiative Enterprises | not-applicable | - | 08 | Paragon — DMARC-missing report titled "Email Authentication Bypass" (not-applicable; email-spoofing lane) |
+| [AUTH-135797](https://hackerone.com/reports/135797) | Romit | resolved | $50 (json) | 02 | Romit sandbox wallet — pre-auth cookies + victim login = attacker logged in as victim; shared-computer and response-splitting scenarios ($50 list) |
+| [AUTH-136169](https://hackerone.com/reports/136169) | Uber | resolved | $10,000 (json) | 01 | Uber OneLogin SAML-SSO WordPress plugin auto-provisions users from attacker-supplied username/email/role → admin on newsroom.uber.com ($10,000 JSON) |
+| [AUTH-136885](https://hackerone.com/reports/136885) | Uber | resolved | $8,000 (json) | 01 | Uber [CRITICAL] Complete Account Takeover — $8,000 JSON; body is team acknowledgment only ("Thanks for another great find @parth!"), mechanism not published |
+| [AUTH-137480](https://hackerone.com/reports/137480) | New Relic | 404 | - | dead | 404 — roster-only record |
+| [AUTH-138869](https://hackerone.com/reports/138869) | Uber | resolved | $7,000 (json) | 01 | Uber OneLogin plugin leaves default password @@@nopass@@@ + XMLRPC still honors WP user DB → pages/posts/file upload ($7,000 JSON) |
+| [AUTH-139178](https://hackerone.com/reports/139178) | New Relic | 404 | - | dead | 404 — roster-only record |
+| [AUTH-142221](https://hackerone.com/reports/142221) | Zomato | resolved | - | 04 | Zomato — bypass OTP verification when placing order (resolved; sibling of 247158) |
+| [AUTH-143482](https://hackerone.com/reports/143482) | Shopify | resolved | $3,000 (list) | 01 | Shopify Icinga monitoring server — Google-account SSO reachable, internal graphs ($3,000 list) |
+| [AUTH-143717](https://hackerone.com/reports/143717) | Uber | resolved | $10,000 (list) | 05 | Uber /rt/users/passwordless-signup — password set for any phone number; enumeratable; "New password has been created" ($10,000 JSON, critical) |
+| [AUTH-145300](https://hackerone.com/reports/145300) | Paragon Initiative Enterprises | not-applicable | - | 03 | Paragon bridge.cspr.ng — reset-link password change leaves first browser session alive (not-applicable) |
+| [AUTH-145430](https://hackerone.com/reports/145430) | Nextcloud | informative | - | 03 | Nextcloud help site — other sessions survive a password change (informative) |
+| [AUTH-145629](https://hackerone.com/reports/145629) | Algolia | resolved | $100 (list) | 04 | Algolia — account already opened without 2FA prompt on login ($100 list) |
+| [AUTH-145896](https://hackerone.com/reports/145896) | Nextcloud | resolved | - | 05 | Nextcloud — password reset link remains valid after email change |
+| [AUTH-146129](https://hackerone.com/reports/146129) | Instacart | informative | - | 06 | Instacart — personal-information update without current password (informative) |
+| [AUTH-146838](https://hackerone.com/reports/146838) | Uber | informative | - | 08 | Uber — easter-egg page authentication issue (informative) |
+| [AUTH-147182](https://hackerone.com/reports/147182) | FantasyTote | resolved | - | 06 | FantasyTote — no email verification on email change (resolved) |
+| [AUTH-147203](https://hackerone.com/reports/147203) | FantasyTote | resolved | - | 06 | FantasyTote — insecure password change mechanism → full ATO (resolved) |
+| [AUTH-147204](https://hackerone.com/reports/147204) | FantasyTote | resolved | - | 08 | FantasyTote — GET /logout link logs any user out (logout-CSRF family) |
+| [AUTH-147744](https://hackerone.com/reports/147744) | Mail.Ru | 404 | - | dead | 404 — roster-only record |
+| [AUTH-148151](https://hackerone.com/reports/148151) | ownCloud | resolved | - | 01 | ownCloud external SMB auth app — smbclient -L share-listing succeeds with invalid creds (Samba map-to-guest=bad user) |
+| [AUTH-148914](https://hackerone.com/reports/148914) | Paragon Initiative Enterprises | informative | - | 03 | Paragon CMS Airship — session management issue (informative) |
+| [AUTH-149598](https://hackerone.com/reports/149598) | GitLab | resolved | - | 04 | GitLab — insecure 2FA/authentication implementation creates brute-force lane (resolved) |
+| [AUTH-152052](https://hackerone.com/reports/152052) | concrete5 | resolved | - | 08 | concrete5 — CSRF full account takeover (CSRF vault lane) |
+| [AUTH-152080](https://hackerone.com/reports/152080) | Coursera | resolved | - | 03 | Coursera — cookies usable ~1 day after logout; account info editable |
+| [AUTH-152586](https://hackerone.com/reports/152586) | Harvest | 404 | $250 (404-list) | dead | 404 — roster-only record; Slack CSRF token fixation in Sign in with Google — cited in module 02 |
+| [AUTH-152944](https://hackerone.com/reports/152944) | New Relic | 404 | - | dead | 404 — roster-only record |
+| [AUTH-155774](https://hackerone.com/reports/155774) | Slack | resolved | $500 (json) | 08 | Slack — CSRF on add-optional-2FA-mobile-number ($500 JSON; CSRF-delivered → adjacency note) |
+| [AUTH-155862](https://hackerone.com/reports/155862) | Trello | 404 | - | dead | 404 — roster-only record |
+| [AUTH-156542](https://hackerone.com/reports/156542) | Gratipay | resolved | $1 (json) | 06 | Gratipay — resend-verification confusion binds attacker lookalike email (a1ice vs alice) ($1 JSON) |
+| [AUTH-157956](https://hackerone.com/reports/157956) | Instacart | resolved | $50 (list) | 08 | Instacart — CSRF on email notification settings ($50 list; CSRF lane) |
+| [AUTH-158270](https://hackerone.com/reports/158270) | Certly | resolved | - | 03 | Certly — back-button cache shows prior pages after logout (references 7909) |
+| [AUTH-159202](https://hackerone.com/reports/159202) | OLX | 404 | - | dead | 404 — roster-only record |
+| [AUTH-161659](https://hackerone.com/reports/161659) | Airbnb | resolved | - | 08 | Airbnb SSO gateway — SSO login names indexed via Google/robots (information disclosure) |
+| [AUTH-163467](https://hackerone.com/reports/163467) | Legal Robot | resolved | $120 (list) | 06 | Legal Robot — user info leak exposes email token + hashed password; verification bypass ($120 list) |
+| [AUTH-163834](https://hackerone.com/reports/163834) | VK.com | resolved | $1,000 (json) | 04 | VK — 2FA bypass via session-reset hash on login.vk.com ($1,000 JSON; Russian body + team summary) |
+| [AUTH-165923](https://hackerone.com/reports/165923) | Boozt Fashion AB | 404 | - | dead | 404 — roster-only record |
+| [AUTH-166942](https://hackerone.com/reports/166942) | Twitter | resolved | $560 (list) | 07 | Twitter Digits — callback_url accepts any subdomain/path; OAuth authorization leaks to third-party pages ($560 JSON; supplemental pass) |
+| [AUTH-167121](https://hackerone.com/reports/167121) | VK.com | resolved | $1,050 (json) | 04 | VK — second 2FA bypass: relogin on IP change ($1,050 JSON) |
+| [AUTH-167460](https://hackerone.com/reports/167460) | New Relic | 404 | - | dead | 404 — roster-only record |
+| [AUTH-167698](https://hackerone.com/reports/167698) | Boozt Fashion AB | 404 | - | dead | 404 — roster-only record; Boozt Session Fixation family |
+| [AUTH-167828](https://hackerone.com/reports/167828) | HackerOne | resolved | - | 07 | HackerOne — private programs using SAML enumerable (method withheld by H1) (resolved) |
+| [AUTH-168108](https://hackerone.com/reports/168108) | New Relic | 404 | - | dead | 404 — roster-only record |
+| [AUTH-171398](https://hackerone.com/reports/171398) | HackerOne | resolved | - | 07 | HackerOne SSO-SAML — Login CSRF + Open Redirect + Self-XSS chain on saml/sign_in (low; triple-finding row) |
+| [AUTH-172137](https://hackerone.com/reports/172137) | Ubiquiti Networks | duplicate | $500 (list) | 02 | Ubiquiti — sso.ubnt.com session cookie domain=.ubnt.com + takeover of ping.ubnt.com → cookie theft → full auth bypass (high, duplicate; PoC video) |
+| [AUTH-172606](https://hackerone.com/reports/172606) | Ian Dunn | not-applicable | - | 08 | Google Authenticator WP plugin — XSS in gapup_login_nonce echo (XSS lane; not-applicable) |
+| [AUTH-172609](https://hackerone.com/reports/172609) | Ian Dunn | not-applicable | - | 08 | Google Authenticator WP plugin — PHP version disclosure (not-applicable) |
+| [AUTH-173251](https://hackerone.com/reports/173251) | RubyGems | resolved | - | 08 | RubyGems — reset emails sent without TLS (transport lane) |
+| [AUTH-173551](https://hackerone.com/reports/173551) | Uber | resolved | $10,000 (json) | 05 | Uber — reset token exposed in password-reset HTTP response body → immediate ATO ($10,000 JSON, critical) |
+| [AUTH-174500](https://hackerone.com/reports/174500) | Twitter | 404 | $560 (404-list) | dead | 404 — roster-only record |
+| [AUTH-176979](https://hackerone.com/reports/176979) | Coinbase | resolved | $200 (json) | 08 | Coinbase — recurring-payment confirm request replays to restore deleted payment ($200 JSON; request-replay business logic) |
+| [AUTH-177018](https://hackerone.com/reports/177018) | Mindoktor | 404 | $300 (404-list) | dead | 404 — roster-only record; Mindoktor sensitive cookie — supplemental pass |
+| [AUTH-178293](https://hackerone.com/reports/178293) | Shopify | resolved | $1,500 (json) | 04 | Shopify — Google-Apps sign-in silently disables 2FA and hides the tab; no notification ($1,500 JSON) |
+| [AUTH-178345](https://hackerone.com/reports/178345) | HackerOne | resolved | - | 07 | HackerOne — limited open redirect using SSO-SAML: double-slash path bypasses external-link warning after 171398 fix (low; fix-rebreak) |
+| [AUTH-178567](https://hackerone.com/reports/178567) | Badoo | resolved | $260 (list) | 02 | Badoo — session cookie value = user identifier, modifiable via mus1.badoo.com sessionId param (supplemental pass) |
+| [AUTH-179421](https://hackerone.com/reports/179421) | VK.com | resolved | $1,000 (json) | 04 | VK — new 2FA bypass: password-change function flaw ($1,000 JSON) |
+| [AUTH-187705](https://hackerone.com/reports/187705) | U.S. Dept Of Defense | resolved | - | 01 | DoD website — unauthenticated user browses as authenticated user (critical, US government program) |
+| [AUTH-192648](https://hackerone.com/reports/192648) | YouPorn | 404 | $1,000 (404-list) | dead | 404 — roster-only record |
+| [AUTH-193556](https://hackerone.com/reports/193556) | Gratipay | informative | - | 02 | TTS/Federalist — session cookie unchanged before/after logout (informative) |
+| [AUTH-194832](https://hackerone.com/reports/194832) | Shopify | resolved | $500 (list) | 01 | Shopify — incomplete fix of 143482: a VPN-subdomain shopify account still accepted; fix-rebreak case |
+| [AUTH-201152](https://hackerone.com/reports/201152) | Informatica | resolved | - | 01 | Informatica ipm.informatica.com — URL-parameter change reaches internal pages; EOL decommissioned (high) |
+| [AUTH-202177](https://hackerone.com/reports/202177) | Instacart | resolved | $100 (list) | 07 | Instacart iOS — Google id_token not validated as app-issued: Meetup token accepted ($100 list) |
+| [AUTH-207552](https://hackerone.com/reports/207552) | Khan Academy | informative | - | 08 | Khan Academy — password change with no security check + unverified mobile spam (informative) |
+| [AUTH-213492](https://hackerone.com/reports/213492) | Trello | 404 | - | dead | 404 — roster-only record |
+| [AUTH-213515](https://hackerone.com/reports/213515) | Trello | 404 | - | dead | 404 — roster-only record |
+| [AUTH-213789](https://hackerone.com/reports/213789) | Nextcloud | resolved | - | 07 | HackerOne — php-saml 2.10.4 signature-validation update (LogoutRequest openssl_verify -1→true) (low; advisory, self-reported) |
+| [AUTH-214433](https://hackerone.com/reports/214433) | Trello | 404 | $768 (404-list) | dead | 404 — roster-only record |
+| [AUTH-215053](https://hackerone.com/reports/215053) | Ubiquiti Networks | resolved | $6,000 (list) | 01 | Ubiquiti airControl "Open Web-UI" — ticket auth skipped when feature used since last reboot; log in as any user ($6,000 list) |
+| [AUTH-215381](https://hackerone.com/reports/215381) | Twitter | resolved | $2,520 (list) | 07 | Periscope — OAuth authorize endpoint has no CSRF protection; 3rd-party app bound to victim ($2,520 JSON) |
+| [AUTH-219203](https://hackerone.com/reports/219203) | Harvest | 404 | - | dead | 404 — roster-only record |
+| [AUTH-219205](https://hackerone.com/reports/219205) | Uber | resolved | $5,000 (list) | 02 | Uber — saostatic.uber.com takeover + *_csid* shared-cookie window + login-CSRF relay → riders.uber.com as victim ($5,000 list; canonical chain, follow-up to 172137) |
+| [AUTH-220185](https://hackerone.com/reports/220185) | Skyliner | resolved | - | 05 | Skyliner — first reset token still valid after second request + password change ($0 bounty; resolved) |
+| [AUTH-222082](https://hackerone.com/reports/222082) | OWOX, Inc. | resolved | - | 03 | OWOX support.owox.com — after logout, Sign-in returns a live session without credentials (critical) |
+| [AUTH-223014](https://hackerone.com/reports/223014) | Uber | resolved | $8,500 (json) | 07 | Uber uchat.uberinternal.com — improper SAML verification bypasses OneLogin auth → internal chats ($8,500 JSON, high; mishre writeup) |
+| [AUTH-223326](https://hackerone.com/reports/223326) | Weblate | resolved | - | 08 | Weblate — open redirect via next= in third-party authentication (RDIR vault lane; medium) |
+| [AUTH-223327](https://hackerone.com/reports/223327) | Weblate | resolved | - | 03 | Weblate — session ID unchanged after password change; replay shows changes applied (low) |
+| [AUTH-223329](https://hackerone.com/reports/223329) | Weblate | resolved | - | 08 | Weblate — logout form without CSRF token (CSRF lane) |
+| [AUTH-223461](https://hackerone.com/reports/223461) | Weblate | resolved | - | 06 | Weblate — email change without current-password re-auth → permanent ATO via reset (low) |
+| [AUTH-223475](https://hackerone.com/reports/223475) | Weblate | resolved | - | 07 | Weblate — existing sessions stay valid after disconnecting third-party auth (low) |
+| [AUTH-223637](https://hackerone.com/reports/223637) | Weblate | resolved | - | 05 | Weblate — reset link logs attacker session in on victim email inbox scenario (resolved) |
+| [AUTH-224287](https://hackerone.com/reports/224287) | Weblate | resolved | - | 08 | Weblate — email verification over unencrypted http channel (transport lane; low) |
+| [AUTH-224379](https://hackerone.com/reports/224379) | Weblate | resolved | - | 08 | Weblate — sessionid cookie missing Secure flag (misconfig lane; cites 58679/6877) |
+| [AUTH-225653](https://hackerone.com/reports/225653) | Weblate | resolved | - | 07 | Weblate — third-party auth CSRF: attacker Ubuntu/OpenID account binds to victim; login as victim (high) |
+| [AUTH-226518](https://hackerone.com/reports/226518) | Paragon Initiative Enterprises | informative | - | 03 | Paragon bridge.cspr.ng — no session logout after password change (informative one-liner) |
+| [AUTH-226712](https://hackerone.com/reports/226712) | Paragon Initiative Enterprises | not-applicable | - | 03 | Paragon — failure to invalidate sessions on other browsers at password change (critical; NA substate) |
+| [AUTH-229417](https://hackerone.com/reports/229417) | Weblate | resolved | - | 05 | Weblate — bypasses fixes of 223329+223339: chained reset-token logout + auto-login → victim logged into attacker account (resolved) |
+| [AUTH-229528](https://hackerone.com/reports/229528) | Weblate | resolved | - | 05 | Weblate — Login CSRF: registration-confirmation + auto-login-on-reset chain (medium; CSRF-vault overlap noted) |
+| [AUTH-231041](https://hackerone.com/reports/231041) | Uber | not-applicable | - | 03 | Uber partners.uber.com — captured request replays OK after logout (not-applicable) |
+| [AUTH-231813](https://hackerone.com/reports/231813) | Cuvva | 404 | - | dead | 404 — roster-only record |
+| [AUTH-232306](https://hackerone.com/reports/232306) | Weblate | resolved | - | 03 | Weblate — session/csrf cookies set with future expiration dates (supplemental pass) |
+| [AUTH-241892](https://hackerone.com/reports/241892) | Gratipay | duplicate | - | 08 | Gratipay inside.gratipay.com — invalid certificate, MITM exposure (low) |
+| [AUTH-242622](https://hackerone.com/reports/242622) | Gratipay | not-applicable | - | 08 | Gratipay inside.gratipay.com — invalid *.herokuapp.com certificate (duplicate of 241892) |
+| [AUTH-243049](https://hackerone.com/reports/243049) | Airbnb | informative | - | 08 | Khan Academy — call-back number unverified, premium-rate abuse (business-logic lane) |
+| [AUTH-244434](https://hackerone.com/reports/244434) | WakaTime | resolved | - | 05 | WakaTime — reset token in Referer to twitter share link; token reusable (resolved) |
+| [AUTH-244778](https://hackerone.com/reports/244778) | WakaTime | duplicate | - | 08 | WakaTime — logout CSRF (duplicate; CSRF lane) |
+| [AUTH-244875](https://hackerone.com/reports/244875) | WakaTime | duplicate | - | 03 | WakaTime — session not expiring after logout (duplicate of 245124) |
+| [AUTH-245124](https://hackerone.com/reports/245124) | WakaTime | duplicate | - | 03 | WakaTime — export/import cookies after logout reopen the dashboard (duplicate) |
+| [AUTH-245408](https://hackerone.com/reports/245408) | Zomato | resolved | $1,000 (json) | 01 | Zomato /v2/auth.json?isGoogle=true — only the email is required to mint a valid session token ($1,000 JSON) |
+| [AUTH-245833](https://hackerone.com/reports/245833) | TTS Bug Bounty | resolved | $300 (list) | 03 | Federalist — user deleted from GitHub org still exercises org functions until session expires (medium) |
+| [AUTH-247158](https://hackerone.com/reports/247158) | Zomato | resolved | $250 (list) | 04 | Zomato — OTP bypass when placing an order (high) |
+| [AUTH-249337](https://hackerone.com/reports/249337) | Legal Robot | resolved | $60 (list) | 04 | Legal Robot — non-functional 2FA recovery codes ($60 list) |
+| [AUTH-249346](https://hackerone.com/reports/249346) | Legal Robot | resolved | $90 (list) | 04 | Legal Robot — missing link to 2FA recovery code for TOTP-only users ($90 list) |
+| [AUTH-249431](https://hackerone.com/reports/249431) | Legal Robot | resolved | $90 (list) | 04 | Legal Robot — 2FA user enumeration via password reset ($90 list) |
+| [AUTH-249467](https://hackerone.com/reports/249467) | Legal Robot | resolved | - | 04 | Legal Robot — 2FA user enumeration via login (high) |
+| [AUTH-249695](https://hackerone.com/reports/249695) | Legal Robot | resolved | $60 (list) | 04 | Legal Robot — 2FA error handling: silent failure, spinner continues ($60 list) |
+| [AUTH-249798](https://hackerone.com/reports/249798) | Legal Robot | resolved | $20 (list) | 03 | Legal Robot — Intercom chat session data usable with stale cookies after logout (low) |
+| [AUTH-250082](https://hackerone.com/reports/250082) | Legal Robot | resolved | $60 (list) | 04 | Legal Robot — enhancement: email confirmation for 2FA recovery ($60 list) |
+| [AUTH-250243](https://hackerone.com/reports/250243) | Legal Robot | resolved | $60 (list) | 04 | Legal Robot — 2FA users skip regular logon hooks incl. logout-other-sessions ($60 list) |
+| [AUTH-250688](https://hackerone.com/reports/250688) | TTS Bug Bounty | resolved | $150 (list) | 03 | Federalist — federalist.sid not invalidated on logout: backdoor access, session re-binds to the next login of ANY user (low) |
+| [AUTH-251200](https://hackerone.com/reports/251200) | Legal Robot | resolved | $60 (list) | 04 | Legal Robot — missing Issuer parameter on TOTP QR ($60 list) |
+| [AUTH-253448](https://hackerone.com/reports/253448) | Legal Robot | resolved | $20 (list) | 05 | Legal Robot — cross-domain Referer leakage of reset tokens; tokens were invalidated but process re-engineered ($20 list) |
+| [AUTH-253934](https://hackerone.com/reports/253934) | Boozt Fashion AB | 404 | $60 (404-list) | dead | 404 — roster-only record; Boozt Password reset token issue — module 05 lane |
+| [AUTH-255020](https://hackerone.com/reports/255020) | Legal Robot | not-applicable | - | 02 | Legal Robot — Password Reset page session fixation: page session fixed after reset (not-applicable) |
+| [AUTH-255467](https://hackerone.com/reports/255467) | arxius | 404 | - | dead | 404 — roster-only record; arxius no-email-verification — module 06 lane |
+| [AUTH-257119](https://hackerone.com/reports/257119) | WakaTime | resolved | - | 08 | WakaTime — leaderboard invitation impersonation (social-engineering lane) |
+| [AUTH-258117](https://hackerone.com/reports/258117) | Snapchat | resolved | $5,000 (list) | 08 | Snapchat — test Jenkins instance: any Google account logs in → script-console RCE ($5,000 list; RCE lane, nahamsec) |
+| [AUTH-259415](https://hackerone.com/reports/259415) | Legal Robot | resolved | $20 (list) | 04 | Legal Robot — 52-bit manual 2FA secret entry usability ($20 list) |
+| [AUTH-259416](https://hackerone.com/reports/259416) | Legal Robot | resolved | $20 (list) | 04 | Legal Robot — false statement in 2FA-disabled email ($20 list) |
+| [AUTH-260492](https://hackerone.com/reports/260492) | Legal Robot | informative | - | 06 | Legal Robot — john*[REDACTED_EMAIL] accepted at registration (informative) |

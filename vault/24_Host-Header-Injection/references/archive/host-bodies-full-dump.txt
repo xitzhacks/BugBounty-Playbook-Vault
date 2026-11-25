@@ -1,0 +1,209 @@
+===== HOST-158019 · Host Header Injection/Redirection in: https://www.instacart.com/
+   program: instacart · bounty: None · module: host-header-injection · full-body
+--- BODY ---
+Hi,
+
+Your website is vulnerable to Host Header Injection because the host header can be changed to something outside the target domain
+
+In many cases, developers are trusting the HTTP Host header value and using it to generate links, import scripts and even generate password resets links with its value. This is a very bad idea, because the HTTP Host header can be controlled by an attacker. This can be exploited using web-cache poisoning and by abusing alternative channels like password reset emails.
+
+GET / HTTP/1.1
+Host: google.com
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: close
+
+HTTP/1.1 301 Moved Permanently
+Date: Tue, 09 Aug 2016 23:55:09 GMT
+Location: https://google.com/
+Server: nginx
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+Connection: Close
+Content-Type: text/html
+Content-Length: 178
+
+Reference: https://www.acunetix.com/vulnerabilities/web/host-header-attack
+
+Regards,
+Clarck
+
+===== HOST-229498 · Host header injection/redirection via newsletter signup
+   program: starbucks · bounty: None · module: host-header-injection · full-body
+--- BODY ---
+Good evening,
+
+There's a host header injection vulnerability via all newsletter signups in the referrer attribute. This works with all pages that have "Join our email list" signup boxes.
+
+####Since the referrer attribute can be changed to an outside domain the email being received redirects all links within the "Welcome to Starbucks" email. So in result the member is redirected to a malicious site from the email they used.
+
+The Starbucks logo redirects to the referrer url. I can make another directory for the other links to redirect perfectly with the session cookie name. 
+
+###POC:
+
+I sent this post request to a test email:
+```
+Host: rewards.www.starbucks.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:53.0) Gecko/20100101 Firefox/53.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: https://r1otnetsec.herokuapp.com/
+X-NewRelic-ID: VQUHVlNSARACV1JSBAIGVA==
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+X-Requested-With: XMLHttpRequest
+Content-Length: 66
+Cookie: ███████
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+```
+Post body:
+```
+newsletter_signup=[REDACTED_EMAIL]&newsletter_placement=footer
+```
+The resulting response:
+```
+Cache-Control: private
+Content-Type: application/json; charset=utf-8
+Server: Microsoft-IIS/7.5
+p3p: CP="CAO PSA OUR"
+Set-Cookie: ASP.NET_SessionId=███████; domain=.starbucks.com; path=/; secure; HttpOnly
+x-newrelic-app-data: PxQGUlZUDQIJR1NRBAEEVVUDFB9AMQYAZBBZDEtZV0ZaCldOfDdwTSFmdA4IF0pcXAgEEBhhRQkHVEVAJAkRDxJOCEwIFAQcA1EKVgVTBE5UGhVUUlQOBwMgJVQEcwZTIHUUHwQHDxFVPw==
+X-Powered-By: ASP.NET
+x-frame-options: SAMEORIGIN
+Date: Thu, 18 May 2017 02:53:52 GMT
+Content-Length: 457
+Via: 1.1 sjc1-10
+newsletter_signup=[REDACTED_EMAIL]&newsletter_placement=footer
+```
+###The referrer attritube is encoded and sent to the victims email.
+
+###As a result my url https://r1otnetsec.herokuapp.com/ is sent in place of the normal starbucks url. Clicking the image url sends the user to the malicious page.
+
+Please refer to the screenshots of the email links being changed. This makes it very easy to steal customer credentials by redirect. 
+
+I look forward to hearing from you and have a good evening!
+
+===== HOST-1444675 · Host Header Injection leads to Open Redirect and Content Spoofing or Text Injection.
+   program: omise · bounty: 300.0 · module: host-header-injection · full-body
+--- BODY ---
+## Summary:
+
+1.) Open Redirection
+The https://dashboard.omise.co/test/dashboard website is vulnerable to an Open Redirection flaw if the server receives a crafted X-Forwarded-Host header.
+
+Description:
+Open Redirect is a vulnerability in which the attacker manipulates a web page to redirect the users to unknown destinations (malicious/phishing destinations in most cases).
+
+Steps To Reproduce:
+
+1. Visit https://dashboard.omise.co/signin and sign in with your credentials and make sure you have not verified your email.
+2. Once you log in, you will be on this page --  https://dashboard.omise.co/test/dashboard , send the request to Repeater and add X-Forwarded-Host: bing.com below Host: dashboard.omise.co
+3. Open the request in the browser and click on "here" inside --> Please check your mailbox (***********@gmail.com) to confirm your email address.
+If you did not get an email from us, please click here to request another email.
+4. It will redirect to a malicious page.
+
+POC:
+Attached Video.
+
+  2.)  Content Spoofing or Text Injection.
+The https://dashboard.omise.co/test/settings website is vulnerable to a Content Spoofing or Text Injection flaw if the server receives a crafted X-Forwarded-Host header.
+Description:
+Content spoofing, also referred to as content injection, "arbitrary text injection" or virtual defacement, is an attack targeting a user made possible by an injection vulnerability in a web application. When an application does not properly handle user-supplied data, an attacker can supply content to a web application, typically via a parameter value, that is reflected back to the user. This presents the user with a modified page under the context of the trusted domain.
+
+Steps To Reproduce:
+
+1. Visit https://dashboard.omise.co/signin and sign in with your credentials and make sure you have not verified your email.
+2. Once you log in, go to Settings  https://dashboard.omise.co/test/settings , send the request to Repeater and add X-Forwarded-Host: bing.com below Host: dashboard.omise.co
+3. Open the request in the browser and in the Settings option under Chains mark Enable account chaining CheckBox.
+4. Once you mark the check box it will show the URL, copy that URL and paste it in the browser.
+5. It will redirect.
+
+POC:
+Attached Video.
+
+## Impact
+
+Open Redirection Impact - 
+An attacker can redirect users to malicious websites, which can lead to phishing attacks.
+
+Content Spoofing or Text Injection Impact - 
+An attacker can create a valid webpage with malicious recommendations and the user believes the recommendation as it was from the stock website.
+
+===== HOST-1783015 · Host header injection that bypassed protection and allowed accessing multiple subdomains
+   program: urbancompany · bounty: 500.0 · module: host-header-injection · full-body
+--- BODY ---
+> NOTE! Thanks for submitting a report! Please replace *all* the [square] sections below with the pertinent details. Remember, the more detail you provide, the easier it is for us to verify and then potentially issue a bounty, so be sure to take your time filling out the report!
+
+**Name of Vulnerability:*Host header injection/SSRF
+**Areas affected:** [App/ Website + URL/Location] https://www.urbancompany.com  and it allowed accessing otherwise inaccessible subdomains https://av.urbancompany.com , https://ims.urbancompany.com , https://mesh.urbancompany.com
+**User Details:** [Registered Email and Registered Mobile Number used for the purpose of signing up an account with Urbanclap] N/A
+**Summary:** [add summary of the vulnerability] Ability to access certain subdomains (which should be presumably only for internal/trusted sources ) through host header manipulation.
+to be able to access.
+**Description:** [add more details about this vulnerability]
+
+## Steps To Reproduce:
+
+(Add details for how we can reproduce the issue through manual testing only)
+
+  1. Go to any of the three subdomains using any browser and after a while you'll see this:
+
+{F2046658}
+
+
+  2. Using burp and Match and Replace rule:
+
+{F2046655}
+
+ 3. Now using burp chromium go to https://www.urbancompany.com , 
+and you'll see the following for the Host: mesh.urbancompany.com:
+
+{F2046657}
+
+
+and for Host: av.urbancompany.com:
+
+{F2046651}
+
+and for Host: ims.urbancompany.com:
+
+{F2046654}
+
+
+Some interesting endpoints:
+For av.urbancompany.com:
+
+{F2046652}
+
+
+{F2046653}
+
+
+
+For mesh.urbancompany.com, potentially means ability to access user files, but because I don't know any of the files I was unable to confirm if it would ask for some authorization upon request to the existing file:
+
+{F2046659}
+
+This endpoint looks interesting, but for some reason it doesn't actually initiate any uploading when I tried to upload files with mentioned extension:
+
+{F2046656}
+
+
+Additional note:
+All three subdomains resolve to the same ip address, which implies that if you have other subdomains associated with this ip address those subdomains are probably affected by this bypass as well.
+
+Thank you for looking into this, and please let me know if you have any questions and/or if you need me to do some more testing, like fuzzing all the found endpoints to determine if there are some interesting bugs there.
+
+Sincerely,
+@musashi42
+
+## Supporting Material/References:
+Attached are the screenshots.
+  * List any additional material (e.g. screenshots, logs, etc.)
+
+## Impact
+
+Impact is dependent on whether ability to access the subdomains in question is considered as a bypass and if any of the disclosed information (especially various accessible js files) shouldn't be accessible in this way, in addition if there are more sensitive endpoints that I simply didn't find with my limited wordlists but larger wordlists would find. In addition, there's also a question if more interesting subdomains are associated with the same ip address as the three that I mentioned in the report and if those subdomains are even more interesting for the attacker because this bypass should work on any subdomain that's been associated with the ip address of the three mentioned subdomains.
+

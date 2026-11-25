@@ -1,0 +1,55 @@
+===== LX-787113 · CodeQL query for finding LDAP Injection (CWE-90) vulnerabilities in Java
+   program: github-security-lab · bounty: 3000.0 · module: codeql-corpus-block · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== LX-824925 · XPath Injection query in java
+   program: github-security-lab · bounty: None · module: codeql-corpus-block · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== LX-852316 · Go/CWE-643: XPath Injection Query in Go
+   program: github-security-lab · bounty: 1800.0 · module: codeql-corpus-block · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== LX-956295 · LDAP injection vulnerability in Java
+   program: github-security-lab · bounty: 2500.0 · module: codeql-corpus-block · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== LX-1050706 · [javascript] CWE-90: CodeQL to detect LDAP Injection
+   program: github-security-lab · bounty: None · module: codeql-corpus-block · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== LX-1095708 · [Java] CWE-522: Insecure LDAP authentication 
+   program: github-security-lab · bounty: 1800.0 · module: codeql-corpus-block · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== LX-1133572 · [Java] CWE-297: Insecure LDAP endpoint configuration
+   program: github-security-lab · bounty: 1800.0 · module: codeql-corpus-block · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== LX-1212273 · [Python] CWE-090: LDAP Injection 
+   program: github-security-lab · bounty: 4500.0 · module: codeql-corpus-block · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== LX-1287575 · [Python] CWE-287: LDAP Improper Authentication
+   program: github-security-lab · bounty: 1800.0 · module: codeql-corpus-block · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== LX-1350076 · [Python] CWE-522: Insecure LDAP Authentication
+   program: github-security-lab · bounty: 1800.0 · module: codeql-corpus-block · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== LX-1397942 · [GO]: [CWE-090: LDAP Injection All For One]
+   program: github-security-lab · bounty: None · module: codeql-corpus-block · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+

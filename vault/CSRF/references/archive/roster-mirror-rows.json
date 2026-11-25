@@ -1,0 +1,1834 @@
+[
+{
+"id": "547",
+"title": "CSRF login",
+"team": "HackerOne &#9733 \u2605",
+"bounty": "$100",
+"b": 100,
+"pred": "generic-csrf"
+},
+{
+"id": "1620",
+"title": "A csrf vulnerability which add and remove a favorite team from a user account.",
+"team": "Yahoo!",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "2228",
+"title": "Login CSRF using Twitter OAuth",
+"team": "Phabricator",
+"bounty": "$300",
+"b": 300,
+"pred": "login-csrf"
+},
+{
+"id": "2628",
+"title": "CSRF vulnerability on https://sehacure.slack.com/account/settings",
+"team": "Slack",
+"bounty": "$100",
+"b": 100,
+"pred": "generic-csrf"
+},
+{
+"id": "2635",
+"title": "csrf",
+"team": "Slack",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "2638",
+"title": "CSRF on add comment section",
+"team": "Slack",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "2857",
+"title": "CSRF token valid even after the session logout of a particular user",
+"team": "Phabricator",
+"bounty": "-",
+"b": 0,
+"pred": "logout-csrf"
+},
+{
+"id": "2974",
+"title": "https://www.okcupid.com/hidden-users CSRF vulnerability.",
+"team": "OkCupid",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "4461",
+"title": "Server Side Request Forgery",
+"team": "Yahoo!",
+"bounty": "$500",
+"b": 500,
+"pred": "other"
+},
+{
+"id": "5946",
+"title": "Marking notifications as read CSRF bug",
+"team": "HackerOne &#9733 \u2605",
+"bounty": "$100",
+"b": 100,
+"pred": "generic-csrf"
+},
+{
+"id": "6378",
+"title": "CSRF - Adding/Removing items to cart - shop.khanacademy.org",
+"team": "Khan Academy",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "6700",
+"title": "CSRF Token missing on http://baseball.fantasysports.yahoo.com/b1/127146/messages",
+"team": "Yahoo!",
+"bounty": "$400",
+"b": 400,
+"pred": "oauth-token"
+},
+{
+"id": "6702",
+"title": "CSRF Token is missing on DELETE message option on http://baseball.fantasysports.yahoo.com/b1/127146/messages",
+"team": "Yahoo!",
+"bounty": "$200",
+"b": 200,
+"pred": "oauth-token"
+},
+{
+"id": "6871",
+"title": "Login CSRF",
+"team": "IRCCloud",
+"bounty": "$100",
+"b": 100,
+"pred": "login-csrf"
+},
+{
+"id": "6872",
+"title": "Sign up CSRF",
+"team": "IRCCloud",
+"bounty": "$100",
+"b": 100,
+"pred": "generic-csrf"
+},
+{
+"id": "6888",
+"title": "HTML Form without CSRF protection",
+"team": "IRCCloud",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "6910",
+"title": "Full account takeover using CSRF and password reset",
+"team": "IRCCloud",
+"bounty": "$500",
+"b": 500,
+"pred": "account-settings"
+},
+{
+"id": "7051",
+"title": "User Account Creation CSRF",
+"team": "IRCCloud",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "7116",
+"title": "CSRF to Account Take Over Bug",
+"team": "IRCCloud",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "7332",
+"title": "CSRF - Creating accounts",
+"team": "IRCCloud",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "7436",
+"title": "Unwanted Spamming Using CSRF [LOGGED IN USER]",
+"team": "IRCCloud",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "7516",
+"title": "Log Out Cross site Request Forgery",
+"team": "IRCCloud",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "7531",
+"title": "Login CSRF can be bypassed (Similar approach to previous one).",
+"team": "IRCCloud",
+"bounty": "$100",
+"b": 100,
+"pred": "login-csrf"
+},
+{
+"id": "7608",
+"title": "invite1.us2.msg.vip.bf1.yahoo.com/ - CSRF/email disclosure",
+"team": "Yahoo!",
+"bounty": "$400",
+"b": 400,
+"pred": "account-settings"
+},
+{
+"id": "7849",
+"title": "HTML form without CSRF protection",
+"team": "Automattic",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "7863",
+"title": "HTML Form Without CSRF protection",
+"team": "Localize",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "7865",
+"title": "Sign-up Form CSRF",
+"team": "Localize",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "7870",
+"title": "Change user settings through CSRF",
+"team": "Localize",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "7916",
+"title": "No Cross-Site Request Forgery protection at multiple locations",
+"team": "Localize",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "7936",
+"title": "Login CSRF in Secret.ly",
+"team": "Secret",
+"bounty": "-",
+"b": 0,
+"pred": "login-csrf"
+},
+{
+"id": "7962",
+"title": "CSRF in adding phrase.",
+"team": "Localize",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "8216",
+"title": "Group Creation Via CSRF",
+"team": "Localize",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "8218",
+"title": "Group Deletion Via CSRF",
+"team": "Localize",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "8224",
+"title": "Private Project Access Request Accpeted Via CSRF",
+"team": "Localize",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "8226",
+"title": "Private Project Access Request Invitation Sent Via CSRF",
+"team": "Localize",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "8273",
+"title": "Projects Watch or Notifications Settings Change Via CSRF",
+"team": "Localize",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "8767",
+"title": "CSRF in Cloudflare login",
+"team": "CloudFlare",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "8806",
+"title": "Content spoofing /CSRF at https://www.cloudflare.com/ajax/modal-dialog.html",
+"team": "CloudFlare",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "8843",
+"title": "CSRF - Disabling orders at https://panel.stopthehacker.com/manage/disable-order/order/ID",
+"team": "StopTheHacker",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "8849",
+"title": "csrf on password change functionality",
+"team": "CloudFlare",
+"bounty": "-",
+"b": 0,
+"pred": "account-settings"
+},
+{
+"id": "8943",
+"title": "System Status Update CSRF",
+"team": "CloudFlare",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "9062",
+"title": "No CSRF token used in Phone Verification POST",
+"team": "Mail.Ru",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "10563",
+"title": "CSRF on &quot;Set as primary&quot; option on the accounts page",
+"team": "Coinbase",
+"bounty": "$100",
+"b": 100,
+"pred": "generic-csrf"
+},
+{
+"id": "10829",
+"title": "CSRF in function &quot;Set as primary&quot; on accounts page",
+"team": "Coinbase",
+"bounty": "$100",
+"b": 100,
+"pred": "generic-csrf"
+},
+{
+"id": "12034",
+"title": "CSRF and No password requirement in this URL Billing Info",
+"team": "CloudFlare",
+"bounty": "-",
+"b": 0,
+"pred": "account-settings"
+},
+{
+"id": "13555",
+"title": "Login CSRF using Twitter oauth",
+"team": "Factlink",
+"bounty": "-",
+"b": 0,
+"pred": "login-csrf"
+},
+{
+"id": "13583",
+"title": "Sign up CSRF",
+"team": "Factlink",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "13639",
+"title": "X/Csrf token problem",
+"team": "Factlink",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "13705",
+"title": "logout csrf app.simplenote.com/logout",
+"team": "Automattic",
+"bounty": "-",
+"b": 0,
+"pred": "logout-csrf"
+},
+{
+"id": "13856",
+"title": "CSRF in crashlytics.com",
+"team": "Twitter",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "14494",
+"title": "Clickjacking &amp; CSRF attack can be done at https://app.mavenlink.com/login",
+"team": "Mavenlink",
+"bounty": "-",
+"b": 0,
+"pred": "clickjack-chain"
+},
+{
+"id": "14702",
+"title": "CSRF &amp; Nonce Token Weak Implementation",
+"team": "WePay",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "14751",
+"title": "Typical form vulnerable to csrf attack",
+"team": "WePay",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "14883",
+"title": "[mobile.twitter.com / twitter.com] CSRF protection bypass",
+"team": "Twitter",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "15412",
+"title": "Leaking CSRF token over HTTP resulting in CSRF protection bypass",
+"team": "Coinbase",
+"bounty": "$1,000",
+"b": 1000,
+"pred": "oauth-token"
+},
+{
+"id": "15454",
+"title": "NO CSRF token found on user details update",
+"team": "FanFootage",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "17312",
+"title": "HTML Form Without CSRF Protection Vulnerability",
+"team": "Uzbey",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "17900",
+"title": "Login CSRF",
+"team": "DC Compendium",
+"bounty": "-",
+"b": 0,
+"pred": "login-csrf"
+},
+{
+"id": "18507",
+"title": "CSRF on email address operations. Also performing unintended operations.",
+"team": "WePay",
+"bounty": "$150",
+"b": 150,
+"pred": "account-settings"
+},
+{
+"id": "18698",
+"title": "Resubmitted with POC #18685 Password reset CSRF",
+"team": "RelateIQ",
+"bounty": "$190",
+"b": 190,
+"pred": "account-settings"
+},
+{
+"id": "21069",
+"title": "Login CSRF",
+"team": "Mavenlink",
+"bounty": "$100",
+"b": 100,
+"pred": "login-csrf"
+},
+{
+"id": "23150",
+"title": "CSRF login",
+"team": "Square",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "25128",
+"title": "HTML form without CSRF protection at http://try.crashlytics.com/enterprise/",
+"team": "Twitter",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "25405",
+"title": "CSRF (Make email primary) may lead to account compromise",
+"team": "WePay",
+"bounty": "-",
+"b": 0,
+"pred": "account-settings"
+},
+{
+"id": "26647",
+"title": "CSRF protection bypass on any Django powered site via Google Analytics",
+"team": "Django",
+"bounty": "$1,000",
+"b": 1000,
+"pred": "generic-csrf"
+},
+{
+"id": "26866",
+"title": "Critical : Account removing using CSRF attack",
+"team": "WePay",
+"bounty": "$350",
+"b": 350,
+"pred": "generic-csrf"
+},
+{
+"id": "30004",
+"title": "CSRF on adding clients",
+"team": "Square",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "30011",
+"title": "square google calendar integration CSRF,https://squareup.com/appointments/business/settings(state parameter not checking properly)",
+"team": "Square",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "30015",
+"title": "CSRF on adding a calendar event",
+"team": "Square",
+"bounty": "$250",
+"b": 250,
+"pred": "generic-csrf"
+},
+{
+"id": "30142",
+"title": "CSRF to connect attacker's twitter account to logged in victims account",
+"team": "99designs",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "36980",
+"title": "Notifications can mark as read by CSRF",
+"team": "Twitter",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "37301",
+"title": "CSRF Token in cookies!",
+"team": "InVision",
+"bounty": "$150",
+"b": 150,
+"pred": "oauth-token"
+},
+{
+"id": "42728",
+"title": "Data-Tags and the New HTML Sanitizer Subverts CSRF protection",
+"team": "Ruby on Rails",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "44146",
+"title": "Make API calls on behalf of another user (CSRF protection bypass)",
+"team": "Vimeo",
+"bounty": "$1,000",
+"b": 1000,
+"pred": "generic-csrf"
+},
+{
+"id": "45050",
+"title": "[community.informatica.com] - CSRF in Private Messages allows to move user's messages to Trash",
+"team": "Informatica",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "45428",
+"title": "CSRF bypass",
+"team": "Vimeo",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "46736",
+"title": "CSRF token leakage",
+"team": "Romit",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "47357",
+"title": "CSRF token from another valid user session accepted",
+"team": "Mobile Vikings",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "49935",
+"title": "rails-ujs will send CSRF tokens to other origins",
+"team": "Ruby on Rails",
+"bounty": "$1,000",
+"b": 1000,
+"pred": "oauth-token"
+},
+{
+"id": "49974",
+"title": "The csrf token remains same after user logs in",
+"team": "Romit",
+"bounty": "$50",
+"b": 50,
+"pred": "oauth-token"
+},
+{
+"id": "50537",
+"title": "Server Side Request Forgery in macro creation",
+"team": "Phabricator",
+"bounty": "-",
+"b": 0,
+"pred": "other"
+},
+{
+"id": "50703",
+"title": "CSRF in login form would led to account takeover",
+"team": "Ubiquiti Networks",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "52635",
+"title": "UniFi v3.2.10 Cross-Site Request Forgeries / Referer-Check Bypass",
+"team": "Ubiquiti Networks",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "55911",
+"title": "CSRF token fixation in facebook store app that can lead to adding attacker to victim acc",
+"team": "Shopify",
+"bounty": "$500",
+"b": 500,
+"pred": "oauth-token"
+},
+{
+"id": "59660",
+"title": "Multiple Cross Site Request Forgery Vulnerabilities in Concrete5 version 5.7.3.1",
+"team": "concrete5",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "64184",
+"title": "No csrf protection on index.php/ccm/system/user/add_group, index.php/ccm/system/user/remove_group",
+"team": "concrete5",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "65167",
+"title": "CSRF",
+"team": "Legal Robot",
+"bounty": "$20",
+"b": 20,
+"pred": "generic-csrf"
+},
+{
+"id": "65808",
+"title": "No CSRF protection when creating new community points actions, and related stored XSS",
+"team": "concrete5",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "74595",
+"title": "The product/status method CSRF",
+"team": "DigitalSellz",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "76733",
+"title": "Using GET method for account login with CSRF token leaking to external sites Via Referer.",
+"team": "Zaption",
+"bounty": "$25",
+"b": 25,
+"pred": "oauth-token"
+},
+{
+"id": "77065",
+"title": "Stealing CSRF Tokens",
+"team": "Keybase",
+"bounty": "$500",
+"b": 500,
+"pred": "oauth-token"
+},
+{
+"id": "83239",
+"title": "owncloud.com: Allowed an attacker to force a user to change profile details. (XCSRF)",
+"team": "ownCloud",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "84372",
+"title": "owncloud.com: Account Compromise Through CSRF",
+"team": "ownCloud",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "84395",
+"title": "CSRF in apps.owncloud.com",
+"team": "ownCloud",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "85565",
+"title": "apps.owncloud.com: CSRF change privacy settings",
+"team": "ownCloud",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "86022",
+"title": "Multiple so called 'type juggling' attacks. Most notably PhabricatorUser::validateCSRFToken() is 'bypassable' in certain cases.",
+"team": "Phabricator",
+"bounty": "$450",
+"b": 450,
+"pred": "oauth-token"
+},
+{
+"id": "90165",
+"title": "CSRF \u0432 \u043f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0438 \u0440\u0435\u0437\u0435\u0440\u0432\u043d\u044b\u0445 \u0442\u043e\u043a\u0435\u043d\u043e\u0432+framing , \u043f\u0440\u0438\u0432\u043e\u0434\u044f\u0449\u0438\u0435 \u043a \u043a\u043e\u043c\u043f\u0440\u043e\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u0438 2fa",
+"team": "VK.com",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "91816",
+"title": "Server Side Request Forgery In Video to GIF Functionality",
+"team": "Imgur",
+"bounty": "$1,600",
+"b": 1600,
+"pred": "other"
+},
+{
+"id": "93154",
+"title": "Csrf near report abuse meme",
+"team": "Imgur",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "95555",
+"title": "CSRF on cards API",
+"team": "Twitter",
+"bounty": "$280",
+"b": 280,
+"pred": "generic-csrf"
+},
+{
+"id": "96470",
+"title": "Missing of csrf protection",
+"team": "Shopify",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "99321",
+"title": "[CSRF] Activate PayPal Express Checkout",
+"team": "Shopify",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "99647",
+"title": "CSRF Add Album On onpatient.com",
+"team": "drchrono",
+"bounty": "$100",
+"b": 100,
+"pred": "generic-csrf"
+},
+{
+"id": "99708",
+"title": "Limited CSRF bypass.",
+"team": "HackerOne &#9733 \u2605",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "99857",
+"title": "Request Accepts without X-CSRFToken [ Header - Cookie ]",
+"team": "drchrono",
+"bounty": "$100",
+"b": 100,
+"pred": "oauth-token"
+},
+{
+"id": "100820",
+"title": "Add tweet to collection CSRF",
+"team": "Twitter",
+"bounty": "$560",
+"b": 560,
+"pred": "generic-csrf"
+},
+{
+"id": "101909",
+"title": "account.ubnt.com CSRF",
+"team": "Ubiquiti Networks",
+"bounty": "$200",
+"b": 200,
+"pred": "generic-csrf"
+},
+{
+"id": "102194",
+"title": "[CRITICAL] CSRF leading to account take over",
+"team": "Zendesk",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "102376",
+"title": "\u041e\u0431\u0445\u043e\u0434 \u0437\u0430\u0449\u0438\u0442\u044b \u043e\u0442 csrf-\u043e\u043a \u0432 m.ok.ru",
+"team": "ok.ru",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "103351",
+"title": "[CSRF] Install premium themes",
+"team": "Shopify",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "103787",
+"title": "CSRF possible when SOP Bypass/UXSS is available",
+"team": "HackerOne &#9733 \u2605",
+"bounty": "$2,500",
+"b": 2500,
+"pred": "generic-csrf"
+},
+{
+"id": "104931",
+"title": "CSRF in Connecting Pinterest Account",
+"team": "Shopify",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "109810",
+"title": "The 'Create a New Account' action is vulnerable to CSRF",
+"team": "Coinbase",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "109839",
+"title": "CSRF in Udemy.com",
+"team": "Udemy",
+"bounty": "$25",
+"b": 25,
+"pred": "generic-csrf"
+},
+{
+"id": "110801",
+"title": "Internal GET SSRF via CSRF with Press This scan feature",
+"team": "Automattic",
+"bounty": "$250",
+"b": 250,
+"pred": "generic-csrf"
+},
+{
+"id": "111216",
+"title": "Twitter Disconnect CSRF",
+"team": "Shopify",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "111218",
+"title": "Attach Pinterest account - no State/CSRF parameter in Oauth Call back",
+"team": "Shopify",
+"bounty": "$500",
+"b": 500,
+"pred": "oauth-token"
+},
+{
+"id": "111262",
+"title": "The csrf token remains same after user logs in",
+"team": "ownCloud",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "113857",
+"title": "CSRF AT SELECTING ZAMATO HANDLE",
+"team": "Zomato",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "113865",
+"title": "CSRF AT INVITING PEOPLE THOUGH PHONE NUMBER",
+"team": "Zomato",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "114127",
+"title": "Twitter Disconnect CSRF",
+"team": "Zomato",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "114430",
+"title": "CSRF on https://shopify.com/plus",
+"team": "Shopify",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "115248",
+"title": "XSS and CSRF in Zomato Contact form",
+"team": "Zomato",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "115323",
+"title": "CSRF AT SUBSCRIBE TO LIST",
+"team": "Paragon Initiative Enterprises",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "117195",
+"title": "Login csrf.",
+"team": "Gratipay",
+"bounty": "-",
+"b": 0,
+"pred": "login-csrf"
+},
+{
+"id": "118737",
+"title": "Login CSRF using Google OAuth",
+"team": "ThisData",
+"bounty": "-",
+"b": 0,
+"pred": "login-csrf"
+},
+{
+"id": "119148",
+"title": "CSRF - Regenerate all admin api keys",
+"team": "New Relic",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "120143",
+"title": "Missing Server Side Validation of CSRF Middleware Token in Change Password Request",
+"team": "Veris",
+"bounty": "-",
+"b": 0,
+"pred": "account-settings"
+},
+{
+"id": "123092",
+"title": "CSRF - Delete all empty application policy",
+"team": "New Relic",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "123095",
+"title": "CSRF- delete all empty server policy",
+"team": "New Relic",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "123339",
+"title": "CSRF allows attacker to delete item from customer's &quot;Postilaatikko&quot;",
+"team": "LocalTapiola",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "123900",
+"title": "csrf_token cookie don't have the flag &quot;HttpOnly&quot;",
+"team": "Gratipay",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "125594",
+"title": "CSRF on eng.uber.com may lead to server-side compromise",
+"team": "Uber &#9733 \u2605",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "127703",
+"title": "[CRITICAL] Full account takeover using CSRF",
+"team": "Badoo",
+"bounty": "$852",
+"b": 852,
+"pred": "generic-csrf"
+},
+{
+"id": "129002",
+"title": "The PdfServlet-functionality used by the &quot;Tee vakuutustodistus&quot; allows injection of custom PDF-content via CSRF-attack",
+"team": "LocalTapiola",
+"bounty": "$300",
+"b": 300,
+"pred": "generic-csrf"
+},
+{
+"id": "131108",
+"title": "Akismet Several CSRF vulnerabilities",
+"team": "Automattic",
+"bounty": "$75",
+"b": 75,
+"pred": "generic-csrf"
+},
+{
+"id": "132049",
+"title": "[HIGH RISK] CSRF could potentially delete a zendesk subdomain.",
+"team": "Zendesk",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "133847",
+"title": "ProBlog 2.6.6 CSRF Exploit",
+"team": "concrete5",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "134894",
+"title": "The Anti-CSRF Library fails to restrict token to a particular IP address when being behind a reverse-proxy/WAF",
+"team": "Paragon Initiative Enterprises",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "136481",
+"title": "CSRF on Vimeo via cross site flashing leading to info disclosure and private videos go public",
+"team": "Vimeo",
+"bounty": "$750",
+"b": 750,
+"pred": "generic-csrf"
+},
+{
+"id": "137008",
+"title": "Csrf on creating course",
+"team": "Udemy",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "137229",
+"title": "Dropbox apps Server side request forgery",
+"team": "Dropbox",
+"bounty": "-",
+"b": 0,
+"pred": "other"
+},
+{
+"id": "140275",
+"title": "No CSRF validation on Account Monitors in Synthetics Block",
+"team": "New Relic",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "140377",
+"title": "don't store CSRF tokens in cookies",
+"team": "Gratipay",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "141065",
+"title": "Security Issue : CSRF Token Design Flaw",
+"team": "drchrono",
+"bounty": "$100",
+"b": 100,
+"pred": "oauth-token"
+},
+{
+"id": "141344",
+"title": "[CRITICAL] CSRF leading to account take over",
+"team": "drchrono",
+"bounty": "$50",
+"b": 50,
+"pred": "generic-csrf"
+},
+{
+"id": "143321",
+"title": "Unauthenticated CSRF(User can input any value for CSRF Token)",
+"team": "Veris",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "144147",
+"title": "Newsroom.uber HTML form without CSRF protection",
+"team": "Uber &#9733 \u2605",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "145524",
+"title": "Server side request forgery (SSRF) on nextcloud implementation.",
+"team": "Nextcloud",
+"bounty": "-",
+"b": 0,
+"pred": "other"
+},
+{
+"id": "145583",
+"title": "Lost Password CSRF",
+"team": "Nextcloud",
+"bounty": "-",
+"b": 0,
+"pred": "account-settings"
+},
+{
+"id": "148156",
+"title": "Cross Site Request Forgery (CSRF)",
+"team": "Mail.Ru",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "148417",
+"title": "CSRF with redeem coupon request",
+"team": "Instacart",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "148517",
+"title": "Possible CSRF during joining report as participant",
+"team": "HackerOne &#9733 \u2605",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "148890",
+"title": "Full path disclosure when CSRF validation failed",
+"team": "Paragon Initiative Enterprises",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "149589",
+"title": "CSRF to add admin [wordpress]",
+"team": "WordPress",
+"bounty": "$1,337",
+"b": 1337,
+"pred": "generic-csrf"
+},
+{
+"id": "150018",
+"title": "Full Path Disclosure by removing CSRF token",
+"team": "Paragon Initiative Enterprises",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "150586",
+"title": "CSRF in account configuration leads to complete account compromise",
+"team": "OLX",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "151827",
+"title": "The contribution save option seem to be vulnerable to CSRF",
+"team": "Gratipay",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "152013",
+"title": "CSRF in 'set.php' via age causes stored XSS on 'get.php' - http://www.rockstargames.com/php/videoplayer_cache/get.php'",
+"team": "Rockstar Games",
+"bounty": "$750",
+"b": 750,
+"pred": "generic-csrf"
+},
+{
+"id": "152052",
+"title": "CSRF Full Account Takeover",
+"team": "concrete5",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "152569",
+"title": "Cross-Site Request Forgery (CSRF)",
+"team": "Harvest",
+"bounty": "$100",
+"b": 100,
+"pred": "generic-csrf"
+},
+{
+"id": "152586",
+"title": "CSRF token fixation in Sign in with Google",
+"team": "Harvest",
+"bounty": "$250",
+"b": 250,
+"pred": "oauth-token"
+},
+{
+"id": "153580",
+"title": "CSRF in changing settings of Basic Google Maps Placemarks",
+"team": "Ian Dunn",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "155726",
+"title": "Create Multiple Account Using Similar X-CSRF token",
+"team": "Coinbase",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "155774",
+"title": "CSRF - Add optional two factor mobile number",
+"team": "Slack",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "156992",
+"title": "Login CSRF vulnerability",
+"team": "New Relic",
+"bounty": "-",
+"b": 0,
+"pred": "login-csrf"
+},
+{
+"id": "157270",
+"title": "CSRF vulnerability that allows an attacker to purge plugin metric data",
+"team": "New Relic",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "157956",
+"title": "CSRF To change Email Notification Settings",
+"team": "Instacart",
+"bounty": "$50",
+"b": 50,
+"pred": "account-settings"
+},
+{
+"id": "157993",
+"title": "Cross-Site Request Forgery (CSRF)",
+"team": "Instacart",
+"bounty": "$100",
+"b": 100,
+"pred": "generic-csrf"
+},
+{
+"id": "158016",
+"title": "Server side request forgery on image upload for lists",
+"team": "Instacart",
+"bounty": "$50",
+"b": 50,
+"pred": "other"
+},
+{
+"id": "161408",
+"title": "[cfire.mail.ru] CSRF Bypassed - Changing anyone's 'User Info'",
+"team": "Mail.Ru",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "163815",
+"title": "Lack of CSRF token validation at server side",
+"team": "Gratipay",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "164546",
+"title": "CSRF bypass on Submit Time sheet for Approval",
+"team": "Harvest",
+"bounty": "$150",
+"b": 150,
+"pred": "generic-csrf"
+},
+{
+"id": "165923",
+"title": "No csrf protection on logout",
+"team": "Boozt Fashion AB",
+"bounty": "-",
+"b": 0,
+"pred": "logout-csrf"
+},
+{
+"id": "166231",
+"title": "CSRF Issue",
+"team": "Legal Robot",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "171398",
+"title": "(HackerOne SSO-SAML) Login CSRF, Open Redirect, and Self-XSS Possible Exploitation",
+"team": "HackerOne &#9733 \u2605",
+"bounty": "-",
+"b": 0,
+"pred": "login-csrf"
+},
+{
+"id": "172707",
+"title": "Udemy s3 storage can be used by an attacker personal website because of missing CSRF Token",
+"team": "Udemy",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "174228",
+"title": "CSRF csrftoken in cookies",
+"team": "Gratipay",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "174328",
+"title": "CSRF in github integration",
+"team": "Slack",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "174470",
+"title": "Possible CSRF during external programs",
+"team": "HackerOne &#9733 \u2605",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "177472",
+"title": "CSRF: add item to victim's cart automatically (starbucks.com - updatecart)",
+"team": "Starbucks",
+"bounty": "$250",
+"b": 250,
+"pred": "generic-csrf"
+},
+{
+"id": "177508",
+"title": "Reflected XSS by exploiting CSRF vulnerability on teavana.com wishlist comment module. (wishlist-comments)",
+"team": "Starbucks",
+"bounty": "$375",
+"b": 375,
+"pred": "generic-csrf"
+},
+{
+"id": "177635",
+"title": "CSRF vulnerability in saving payment card on store.starbucks.com (COBilling -AddCreditCard)",
+"team": "Starbucks",
+"bounty": "$150",
+"b": 150,
+"pred": "generic-csrf"
+},
+{
+"id": "177639",
+"title": "CSRF exploit | Adding/Editing comment of wishlist items (teavana.com - Wishlist-Comments)",
+"team": "Starbucks",
+"bounty": "$375",
+"b": 375,
+"pred": "generic-csrf"
+},
+{
+"id": "178241",
+"title": "[allods.mail.ru] Cross-Site Request Forgery (Add-Item)",
+"team": "Mail.Ru",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "178384",
+"title": "CSRF in delete advertisement on olx.com.eg",
+"team": "OLX",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "178831",
+"title": "CSRF on signup endpoint (auto-api.yelp.com)",
+"team": "Yelp",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "182487",
+"title": "CSRF Token Bypass in Account Deletion",
+"team": "GitLab",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "188692",
+"title": "httponly flag not set + csrftoken in url",
+"team": "Robinhood",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "189648",
+"title": "Server Side Request Forgery (SSRF) vulnerability in a DoD website",
+"team": "U.S. Dept Of Defense",
+"bounty": "-",
+"b": 0,
+"pred": "other"
+},
+{
+"id": "191601",
+"title": "SQL Injection on /webApp/sijoitustalousuk email-parameter + potential lack of CSRF Token (viestinta.lahitapiola.fi)",
+"team": "LocalTapiola",
+"bounty": "$1,350",
+"b": 1350,
+"pred": "account-settings"
+},
+{
+"id": "191608",
+"title": "Cross-site request forgery vulnerability on a DoD website",
+"team": "U.S. Dept Of Defense",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "191831",
+"title": "Cross-site request forgery (CSRF) vulnerability on a DoD website",
+"team": "U.S. Dept Of Defense",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "192131",
+"title": "CSRF Attack on (m.badoo.com)deleting account and erasing imported contacts",
+"team": "Badoo",
+"bounty": "$280",
+"b": 280,
+"pred": "generic-csrf"
+},
+{
+"id": "195156",
+"title": "CSRF in all API endpoints when authenticated using HTTP Authentication",
+"team": "Shopify",
+"bounty": "$1,000",
+"b": 1000,
+"pred": "generic-csrf"
+},
+{
+"id": "196458",
+"title": "apps.shopify.com - CSRF token leakage through Google Analytics",
+"team": "Shopify",
+"bounty": "$500",
+"b": 500,
+"pred": "oauth-token"
+},
+{
+"id": "196715",
+"title": "CSRF Send a message at street-combats.mail.ru",
+"team": "Mail.Ru",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "198470",
+"title": "csrf blogs.starbucks.com",
+"team": "Starbucks",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "200683",
+"title": "CSRF bypass + XSS on verkkopalvelu.tapiola.fi",
+"team": "LocalTapiola",
+"bounty": "$50",
+"b": 50,
+"pred": "generic-csrf"
+},
+{
+"id": "202808",
+"title": "Cross-site request forgery (CSRF) vulnerability in a DoD website",
+"team": "U.S. Dept Of Defense",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "206319",
+"title": "Persistent CSRF in /GiftCert-AddToBasket prevents purchases on eCommerce sites",
+"team": "Starbucks",
+"bounty": "$750",
+"b": 750,
+"pred": "generic-csrf"
+},
+{
+"id": "208734",
+"title": "CSRF @ configuration",
+"team": "BrickFTP",
+"bounty": "$100",
+"b": 100,
+"pred": "generic-csrf"
+},
+{
+"id": "215381",
+"title": "CSRF on Periscope Web OAuth authorization endpoint",
+"team": "Twitter",
+"bounty": "$2,520",
+"b": 2520,
+"pred": "oauth-token"
+},
+{
+"id": "216161",
+"title": "CSRF Token Design Flaw",
+"team": "Udemy",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "217555",
+"title": "Possible to unsubscribe from activities using CSRF @ mijn.werkenbijdefensie.nl",
+"team": "Maximum",
+"bounty": "$150",
+"b": 150,
+"pred": "generic-csrf"
+},
+{
+"id": "221043",
+"title": "CSRF token validation is missing",
+"team": "Nextcloud",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+},
+{
+"id": "223329",
+"title": "Logout CSRF",
+"team": "Weblate",
+"bounty": "-",
+"b": 0,
+"pred": "logout-csrf"
+},
+{
+"id": "223333",
+"title": "CSRF : Reset API",
+"team": "Weblate",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "223345",
+"title": "CSRF : Lock and Unlock Translation",
+"team": "Weblate",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "223367",
+"title": "CSRF - Changing the full name / adding a secondary email identity of an account via a GET request",
+"team": "Weblate",
+"bounty": "-",
+"b": 0,
+"pred": "account-settings"
+},
+{
+"id": "225100",
+"title": "CSRF to Connect third party Account",
+"team": "Weblate",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "225653",
+"title": "Account Takeover using Third party Auth CSRF",
+"team": "Weblate",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "226418",
+"title": "HackerOne reports escalation to JIRA is CSRF vulnerable",
+"team": "HackerOne &#9733 \u2605",
+"bounty": "$500",
+"b": 500,
+"pred": "generic-csrf"
+},
+{
+"id": "226612",
+"title": "CSRF",
+"team": "Mixmax",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "229405",
+"title": "Csrf in watch-unwatch projects",
+"team": "Weblate",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "229528",
+"title": "Login CSRF : Login Authentication Flaw",
+"team": "Weblate",
+"bounty": "-",
+"b": 0,
+"pred": "login-csrf"
+},
+{
+"id": "230428",
+"title": "Csrf bug on signup session",
+"team": "Coinbase",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "230436",
+"title": "CSRF bug on password change",
+"team": "Coinbase",
+"bounty": "-",
+"b": 0,
+"pred": "account-settings"
+},
+{
+"id": "230688",
+"title": "CSRF \u043d\u0430 \u0441\u0431\u0440\u043e\u0441 \u043a\u043b\u044e\u0447\u0430 \u0442\u0440\u0430\u043d\u0441\u043b\u044f\u0446\u0438\u0438.",
+"team": "VK.com",
+"bounty": "$100",
+"b": 100,
+"pred": "generic-csrf"
+},
+{
+"id": "230837",
+"title": "CSRF To Like/Unlike Photos",
+"team": "Zomato",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "230863",
+"title": "CSRF bypass ( Delate Source Translation From dictionaries ) in demo.weblate.org",
+"team": "Weblate",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "239170",
+"title": "CSRF bug",
+"team": "Bumble",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "244778",
+"title": "Logout CSRF",
+"team": "WakaTime",
+"bounty": "-",
+"b": 0,
+"pred": "logout-csrf"
+},
+{
+"id": "245346",
+"title": "JSON CSRF on POST Heartbeats API",
+"team": "WakaTime",
+"bounty": "-",
+"b": 0,
+"pred": "json-csrf"
+},
+{
+"id": "249234",
+"title": "Posting to Twitter CSRF on php/post_twitter_authenticate.php",
+"team": "Zomato",
+"bounty": "$50",
+"b": 50,
+"pred": "generic-csrf"
+},
+{
+"id": "250430",
+"title": "CSRF on cuvva.insure allows to attacker to send multiple SMS to download the app without visiting the cuvva",
+"team": "Cuvva",
+"bounty": "-",
+"b": 0,
+"pred": "generic-csrf"
+},
+{
+"id": "251918",
+"title": "Flash CSRF: Update Ad Frequency %: [cp-ng.pinion.gg]",
+"team": "Unikrn",
+"bounty": "$40",
+"b": 40,
+"pred": "generic-csrf"
+},
+{
+"id": "253128",
+"title": "CSRF Vulnerability allows attackers to steal SocialClub private token.",
+"team": "Rockstar Games",
+"bounty": "$600",
+"b": 600,
+"pred": "oauth-token"
+},
+{
+"id": "257237",
+"title": "CSRF Token",
+"team": "Udemy",
+"bounty": "-",
+"b": 0,
+"pred": "oauth-token"
+}
+]

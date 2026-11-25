@@ -1,0 +1,908 @@
+{
+ "upload": [
+  {
+   "title": "How I was rewarded a $1000 bounty after abusing File Upload functionality to Stored XSS Vulnerability leading to credential theft of a vistor in a website.",
+   "link": "https://kunalkhubchandani.medium.com/how-i-was-rewarded-a-1000-bounty-after-abusing-file-upload-functionality-to-stored-xss-945a40ac6f94"
+  },
+  {
+   "title": "Unrestricted File Upload",
+   "link": "https://binamrapandey.medium.com/unrestricted-file-upload-e95e1c6fb80"
+  },
+  {
+   "title": "Reveal the page admin that uploaded a video on the page in comment section",
+   "link": "https://lokeshdlk77.medium.com/reveal-the-page-admin-that-uploaded-a-video-on-the-page-in-comment-section-9760e4a31453"
+  },
+  {
+   "title": "The YouTube bug that allowed unlisted uploads to any channel",
+   "link": "https://medium.com/bugbountywriteup/the-youtube-bug-that-allowed-uploads-to-any-channel-3b41c7b7902a"
+  },
+  {
+   "title": "Unauthenticated File upload Vulnerability on Synology Sub-domain",
+   "link": "https://blog.securelayer7.net/unauthenticated-file-upload-vulnerability-on-synology-sub-domain/"
+  },
+  {
+   "title": "Upload to the future",
+   "link": "https://medium.com/bugbountywriteup/upload-to-the-future-1fd38fd502bd"
+  },
+  {
+   "title": "XSS, RCE & HTML File Upload in same endpoint",
+   "link": "https://medium.com/@sa1tama0/xss-rce-html-file-upload-in-same-endpoint-4a03348445f4"
+  },
+  {
+   "title": "My First Bug: Blind SSRF Through Profile Picture Upload",
+   "link": "https://medium.com/@swaysthinking/my-first-bug-blind-ssrf-through-profile-picture-upload-72f00fd27bc6"
+  },
+  {
+   "title": "RCE via image upload functionality",
+   "link": "https://medium.com/@escapesequence89/rce-via-image-upload-functionality-925c902943b8"
+  },
+  {
+   "title": "Guest Blog: From File Upload to RCE",
+   "link": "https://www.synack.com/blog/guest-blog-from-file-upload-to-rce/"
+  },
+  {
+   "title": "How I was able to see Private Video Uploader Via Facebook Rights Manager.[Responsible Disclosure]",
+   "link": "https://medium.com/@kishoretk/how-i-was-able-to-see-identity-of-a-private-video-up-loader-via-rights-manager-responsible-39d996517b6e"
+  },
+  {
+   "title": "Unrestricted CV File Upload",
+   "link": "https://victoni.github.io/unrestricted-file-upload-on-pdf/"
+  },
+  {
+   "title": "Exploitation of the CVE-2018-15961 \u2013 Unrestricted File Upload in Adobe ColdFusion",
+   "link": "https://supras.io/exploitation-of-the-cve-2018-15961-unrestricted-file-upload-in-adobe-coldfusion/"
+  },
+  {
+   "title": "Remote Image Upload Leads to RCE (Inject Malicious Code to PHP-GD Image)",
+   "link": "https://medium.com/@asdqwedev/remote-image-upload-leads-to-rce-inject-malicious-code-to-php-gd-image-90e1e8b2aada"
+  },
+  {
+   "title": "ManageEngine ServiceDesk Plus: Arbitrary File Upload",
+   "link": "https://medium.com/@ducanhbui/manageengine-servicedesk-plus-arbitrary-file-upload-4bab0bd00425"
+  },
+  {
+   "title": "How I Gain Unrestricted File Upload Remote Code Execution Bug Bounty",
+   "link": "https://medium.com/@shayboy123/how-i-gain-unrestricted-file-upload-remote-code-execution-bug-bounty-381d0aab0dad"
+  },
+  {
+   "title": "Uploading Backdoor For Fun And Profit.",
+   "link": "https://medium.com/@mohdaltaf163/uploading-backdoor-for-fun-and-profit-rce-db-cred-p1-2cdaa00e2125"
+  },
+  {
+   "title": "External XML Entity via File Upload (SVG)",
+   "link": "https://0xatul.github.io/posts/2020/02/external-xml-entity-via-file-upload-svg/"
+  },
+  {
+   "title": "Arbitary File Upload too Stored XSS - Bug Bounty",
+   "link": "https://m0chan.github.io/2020/02/04/Arbitary-File-Upload-Too-Stored-XSS.html"
+  },
+  {
+   "title": "Vimeo upload function SSRF",
+   "link": "https://medium.com/@dPhoeniixx/vimeo-upload-function-ssrf-7466d8630437"
+  },
+  {
+   "title": "EXIF Geolocation Data Not Stripped From Uploaded Images",
+   "link": "https://medium.com/@souravnewatia/exif-geolocation-data-not-stripped-from-uploaded-images-794d20d2fa7d"
+  },
+  {
+   "title": "Race Condition that could Result to RCE\u200a- (A story with an App that temporary stored an uploaded file within 2 seconds before moving it to Amazon S3)",
+   "link": "https://medium.com/bugbountywriteup/race-condition-that-could-result-to-rce-a-story-with-an-app-that-temporary-stored-an-uploaded-9a4065368ba3"
+  },
+  {
+   "title": "Exploiting File Uploads Pt. 2 \u2013 A Tale of a $3k worth RCE.",
+   "link": "https://anotherhackerblog.com/exploiting-file-uploads-pt-2/"
+  },
+  {
+   "title": "Exploiting File Uploads Pt. 1 \u2013 MIME Sniffing to Stored XSS #bugbounty",
+   "link": "https://anotherhackerblog.com/exploiting-file-uploads-pt1/"
+  },
+  {
+   "title": "From file upload to email:pass",
+   "link": "https://medium.com/@frostnull/from-file-upload-to-email-pass-dc7141aa1ff6"
+  },
+  {
+   "title": "Should you be concerned about LastPass uploading your passwords to its server?",
+   "link": "https://palant.info/2019/03/18/should-you-be-concerned-about-lastpass-uploading-your-passwords-to-its-server/"
+  },
+  {
+   "title": "Antihack.me Blind XSS To PHP File Upload Vulnerability",
+   "link": "https://blog.saycure.io/2019/01/24/antihack-xss-2-php-upload/"
+  },
+  {
+   "title": "Uploading files to api.techprep.fb.com",
+   "link": "https://ysamm.com/?p=12"
+  },
+  {
+   "title": "Abusing ACL Permissions to Overwrite other User\u2019s Uploaded Files/Videos on s3 Bucket",
+   "link": "https://medium.com/@armaanpathan/abusing-acl-permissions-to-overwrite-other-users-uploaded-files-videos-on-s3-bucket-162c8877728"
+  },
+  {
+   "title": "Unauthenticated user can upload an attachment at HackerOne",
+   "link": "https://medium.com/@modam3r5/unauthenticated-user-can-upload-an-attachment-at-hackerone-aff2a0c573b8"
+  },
+  {
+   "title": "How i was able to upload files to api.techprep.fb.com",
+   "link": "https://medium.com/@samm0uda/how-i-was-able-to-upload-files-to-api-techprep-fb-com-74308ff767b"
+  },
+  {
+   "title": "Path traversal while uploading results in RCE",
+   "link": "https://blog.harshjaiswal.com/path-traversal-while-uploading-results-in-rce"
+  },
+  {
+   "title": "Chain The Bugs to Pwn an Organisation ( LFI + Unrestricted File Upload = Remote Code Execution )",
+   "link": "https://medium.com/@armaanpathan/chain-the-bugs-to-pwn-an-organisation-lfi-unrestricted-file-upload-remote-code-execution-93dfa78ecce"
+  },
+  {
+   "title": "How I hacked Apple.com (Unrestricted File Upload)",
+   "link": "https://medium.com/@jonathanbouman/how-i-hacked-apple-com-unrestricted-file-upload-bcda047e27e3"
+  },
+  {
+   "title": "RCE by uploading a web.config",
+   "link": "https://poc-server.com/blog/2018/05/22/rce-by-uploading-a-web-config/"
+  },
+  {
+   "title": "How I got stored XSS using file upload",
+   "link": "https://medium.com/@vis_hacker/how-i-got-stored-xss-using-file-upload-5c33e19df51e"
+  },
+  {
+   "title": "Unrestricted File Upload to RCE | Bug Bounty POC",
+   "link": "https://blog.securitybreached.org/2017/12/19/unrestricted-file-upload-to-rce-bug-bounty-poc/"
+  },
+  {
+   "title": "How I could have mass uploaded from every Flickr account!",
+   "link": "https://ret2got.wordpress.com/2017/10/05/how-i-could-have-mass-uploaded-from-every-flickr-account/"
+  },
+  {
+   "title": "Papyal XML Upload Cross Site Scripting Vulnerability",
+   "link": "https://blog.it-securityguard.com/bugbounty-papyal-xml-upload-cross-site-scripting-vulnerability/"
+  },
+  {
+   "title": "Waze arbitrary file upload",
+   "link": "http://blog.shashank.co/2013/12/waze-arbitrary-file-upload.html"
+  },
+  {
+   "title": "Arbitrary Upload Any File Extensions - Xelkomy's blog",
+   "link": "https://blog.xelkomy.com/posts/Arbitrary-Upload-Any-File-Extetions/"
+  },
+  {
+   "title": "Spip Preauth RCE 2024: Part 2, A Big Upload",
+   "link": "https://thinkloveshare.com/hacking/spip_preauth_rce_2024_part_2_a_big_upload/"
+  },
+  {
+   "title": "The Art of Intrusion: File Upload Bypass & WAF XSS Evasion in AWS S3 Demystified",
+   "link": "https://laburity.com/file-upload-bypass-waf-xss/"
+  },
+  {
+   "title": "CVE-2023-25365 / XSS via file upload bypass",
+   "link": "https://cupc4k3.medium.com/cve-2023-25365-xss-via-file-upload-bypass-ddf4d2a106a7"
+  },
+  {
+   "title": "Unrestricted File Upload Lead to Stored XSS at Microsoft main domain",
+   "link": "https://medium.com/@cavdarbashas/unrestricted-file-upload-lead-to-stored-xss-at-microsoft-main-domain-baa9cadac6bd"
+  },
+  {
+   "title": "Revisiting an Old Bug: File Upload to Code Execution",
+   "link": "https://www.securifera.com/blog/2023/10/25/cve-2021-27198/"
+  },
+  {
+   "title": "Simple Bugs 0x02: Overwritting Uploaded Files",
+   "link": "https://vitorfalcao.com/posts/simple-bugs/overwritting-files/"
+  },
+  {
+   "title": "Bug Bounty: como encontrei o bug Unrestricted File Upload",
+   "link": "https://medium.com/@paulo_mota/bug-bounty-como-encontrei-o-bug-unrestricted-file-upload-dd1a61adc9fd"
+  },
+  {
+   "title": "Uploading the Webshell using filename of Content-Disposition Header Story!",
+   "link": "https://ymohagheghi.medium.com/uploading-the-webshell-using-filename-of-content-disposition-header-story-59ba87752311"
+  },
+  {
+   "title": "Unrestricted file upload in Rocket TRUfusion Enterprise <= 7.9.6.0",
+   "link": "https://www.synacktiv.com/sites/default/files/2022-11/trufusion_enterprise_unauthenticated_arbitrary_file_write.pdf"
+  },
+  {
+   "title": "SSRF & LFI In Uploads Feature",
+   "link": "https://medium.com/@raymond-lind/ssrf-lfi-in-uploads-feature-a134aa467abf"
+  },
+  {
+   "title": "23000$ for Authentication Bypass & File Upload & Arbitrary File Overwrite",
+   "link": "https://medium.com/@h4x0r_dz/23000-for-authentication-bypass-file-upload-arbitrary-file-overwrite-2578b730a5f8"
+  },
+  {
+   "title": "How I abused the file upload function to get a high severity vulnerability in Bug Bounty",
+   "link": "https://infosecwriteups.com/how-i-abused-the-file-upload-function-to-get-a-high-severity-vulnerability-in-bug-bounty-7cdcf349080b"
+  },
+  {
+   "title": "LiveHelperChat - Remote Code Execution via Vulnerable Theme Upload Function",
+   "link": "https://arben.sh/research/LiveHelperChat-RCE/"
+  },
+  {
+   "title": "File Upload Bypass to RCE == $$$$",
+   "link": "https://sagarsajeev.medium.com/file-upload-bypass-to-rce-76991b47ad8f"
+  },
+  {
+   "title": "How I earned 500$ by uploading a file: write-up of one of my first bug bounty",
+   "link": "https://medium.com/@seeu-inspace/how-i-earned-500-by-uploading-a-file-write-up-of-one-of-my-first-bug-bounty-c174cf8ea553"
+  },
+  {
+   "title": "Filesatck Upload Advisory Summary",
+   "link": "https://bishopfox.com/blog/filestack-upload-advisory"
+  },
+  {
+   "title": "Chained Bug: XML File Upload to XSS to CSRF to Full Account Take Over (ATO)",
+   "link": "https://systemweakness.com/chained-bug-xml-file-upload-to-xss-to-csrf-to-full-account-take-over-ato-156409c41b57"
+  },
+  {
+   "title": "Exploiting a File Upload Vulnerability \u2014 A Directory Traversal Attack",
+   "link": "https://systemweakness.com/exploiting-a-file-upload-vulnerability-a-directory-traversal-attack-419308cdb059"
+  },
+  {
+   "title": "XSS | HTML Injection and File Upload Bypass in HUAWEI Subdomain",
+   "link": "https://medium.com/@Bishoo97x/xss-html-injection-and-file-upload-bypass-in-huawei-subdomain-64966ba4f4ac"
+  },
+  {
+   "title": "Achieving Remote Code Execution via Unrestricted File Upload",
+   "link": "https://medium.com/@haroonhameed_76621/achieving-remote-code-execution-via-unrestricted-file-upload-6050f360c218"
+  },
+  {
+   "title": "SSRF & LFI In Uploads Feature",
+   "link": "https://web.archive.org/web/20220315080229/https://medium.com/@raymond-lind/ssrf-lfi-in-uploads-feature-321d83b93ec0"
+  },
+  {
+   "title": "Remote Code Execution in .tgz File Upload",
+   "link": "https://machevalia.blog/blog/remote-code-execution-in-tgz-file-upload"
+  },
+  {
+   "title": "SQL Injection - The File Upload Playground",
+   "link": "https://shahjerry33.medium.com/sql-injection-the-file-upload-playground-6580b089d013"
+  },
+  {
+   "title": "XSS via file upload",
+   "link": "https://sharmajijvs.medium.com/xss-via-file-upload-a2bcc1e5d7f7"
+  },
+  {
+   "title": "File Upload to RCE",
+   "link": "https://ahmed8magdy.medium.com/file-upload-to-rce-538bb4128062"
+  },
+  {
+   "title": "Unrestricted File Upload Leads to SSRF and RCE",
+   "link": "https://itsfading.github.io/posts/Unrestricted-File-Upload-Leads-to-SSRF-and-RCE/"
+  },
+  {
+   "title": "Bypassed! and uploaded a sweet reverse shell",
+   "link": "https://infosecwriteups.com/bypassed-and-uploaded-a-sweet-reverse-shell-d15e1bbf5836"
+  },
+  {
+   "title": "Exploiting File Upload Functionality in Unique Way.",
+   "link": "https://rohit-soni.medium.com/exploiting-file-upload-functionality-in-unique-way-6081b8f658dd"
+  },
+  {
+   "title": "Account takeover via stored XSS with arbitrary file upload",
+   "link": "https://0xbadb00da.medium.com/account-takeover-via-stored-xss-with-arbitrary-file-upload-2774ec6cff51"
+  },
+  {
+   "title": "Exploiting Unrestricted File Upload to achieve Remote Code Execution on a bug bounty program",
+   "link": "https://mase289.medium.com/exploiting-unrestricted-file-upload-to-achieve-remote-code-execution-on-a-bug-bounty-program-85661516712"
+  },
+  {
+   "title": "Bragging Rights: Killing File Uploads softly",
+   "link": "https://infosecwriteups.com/bragging-rights-killing-file-uploads-softly-fba35a4e485a"
+  },
+  {
+   "title": "XSS in Facebook CDN due to improper filtering of uploaded files extensions",
+   "link": "https://ysamm.com/?p=632"
+  },
+  {
+   "title": "Access files uploaded by employees to internal CDNs / Regenerate URL signature of user uploaded content.",
+   "link": "https://ysamm.com/?p=606"
+  },
+  {
+   "title": "Self-XSS to rXSS via Uploaded File Name",
+   "link": "https://enfinlay.github.io//xss/selfxss/upload/bugbounty/2021/02/09/selfxss-to-rxss-via-file-name.html"
+  },
+  {
+   "title": "XSS, RCE & HTML File Upload in same endpoint",
+   "link": "https://sa1tama0.medium.com/xss-rce-html-file-upload-in-same-endpoint-4a03348445f4"
+  },
+  {
+   "title": "Bypassing file upload filter by source code review in Bolt CMS",
+   "link": "https://blog.stazot.com/boltcms-file-upload-bypass/"
+  },
+  {
+   "title": "Unrestricted CV File Upload",
+   "link": "https://web.archive.org/web/20200601005729/https://vict0ni.me/unrestricted-file-upload-on-pdf/"
+  },
+  {
+   "title": "Remote Image Upload Leads to RCE (Inject Malicious Code to PHP-GD Image)",
+   "link": "https://asdqw3.medium.com/remote-image-upload-leads-to-rce-inject-malicious-code-to-php-gd-image-90e1e8b2aada"
+  },
+  {
+   "title": "External XML Entity via File Upload (SVG)",
+   "link": "https://web.archive.org/web/20200305081812/https://0xatul.github.io/posts/2020/02/external-xml-entity-via-file-upload-svg/"
+  },
+  {
+   "title": "Arbitary File Upload too Stored XSS - Bug Bounty",
+   "link": "https://web.archive.org/web/20200515015005/https://m0chan.github.io/2020/02/04/Arbitary-File-Upload-Too-Stored-XSS.html"
+  },
+  {
+   "title": "Arbitary File Upload Vulnerability in Google Nest (Write Up)",
+   "link": "https://blog.evanricafort.com/2015/12/arbitary-file-upload-vulnerability-in.html"
+  },
+  {
+   "title": "Papyal XML Upload Cross Site Scripting Vulnerability",
+   "link": "https://wss.sh/en/blog/bugbounty-papyal-xml-upload-cross-site-scripting-vulnerability/"
+  }
+ ],
+ "traversal": [
+  {
+   "title": "Analysis of CVE-2019-14994 \u2013 Jira Service Desk Path Traversal leads to Massive Information Disclosure",
+   "link": "https://samcurry.net/analysis-of-cve-2019-14994/"
+  },
+  {
+   "title": "RCE using Path Traversal",
+   "link": "https://incogbyte.github.io/pathtraversal/"
+  },
+  {
+   "title": "Simple PathTraversal bypass",
+   "link": "https://medium.com/@frostnull/hi-guys-again-here-bringing-an-experience-to-share-with-you-as-usual-i-will-overshadow-some-f85a1d5a8d8c"
+  },
+  {
+   "title": "Remote Code Execution via Path Traversal in the Device Metadata Authoring Wizard",
+   "link": "https://posts.specterops.io/remote-code-execution-via-path-traversal-in-the-device-metadata-authoring-wizard-a0d5839fc54f"
+  },
+  {
+   "title": "Traversing the Path to RCE",
+   "link": "https://hawkinsecurity.com/2018/08/27/traversing-the-path-to-rce/"
+  },
+  {
+   "title": "Prezi (map.prezi.com) Path Traversal",
+   "link": "https://blog.it-securityguard.com/bug-bounty-prezi-map-prezi-com-path-traversal/"
+  },
+  {
+   "title": "Directory Traversal, SQL Injection and Server-Side Request Forgery",
+   "link": "https://research.aurainfosec.io/disclosure/sagecrm2/"
+  },
+  {
+   "title": "Oracle Retail Xstore Suite: Pre-authenticated Path Traversal",
+   "link": "https://www.synacktiv.com/advisories/oracle-retail-xstore-suite-pre-authenticated-path-traversal"
+  },
+  {
+   "title": "Path Traversal and Code Execution in CSLA.NET (CVE-2024-28698)",
+   "link": "https://www.intruder.io/research/path-traversal-and-code-execution-in-csla-net-cve-2024-28698"
+  },
+  {
+   "title": "Exploiting Client-Side Path Traversal to Perform Cross-Site Request Forgery - Introducing CSPT2CSRF",
+   "link": "https://blog.doyensec.com/2024/07/02/cspt2csrf.html"
+  },
+  {
+   "title": "The power of Client-Side Path Traversal: How I found and escalated 2 bugs through \u201c../\u201d",
+   "link": "https://medium.com/@Nightbloodz/the-power-of-client-side-path-traversal-how-i-found-and-escalated-2-bugs-through-670338afc90f"
+  },
+  {
+   "title": "From an Innocent Client-Side Path Traversal to Account Takeover",
+   "link": "https://kapytein.nl/from-an-innocent-client-side-path-traversal-to-account-takeover"
+  },
+  {
+   "title": "Wind River VxWorks tarExtract directory traversal vulnerability (CVE-2023-38346)",
+   "link": "https://www.pentagrid.ch/en/blog/wind-river-vxworks-tarextract-directory-traversal-vulnerability/"
+  },
+  {
+   "title": "ZeroQlik: Achieving Unauthenticated Remote Code Execution via HTTP Request Tunneling and Path Traversal",
+   "link": "https://www.praetorian.com/blog/qlik-sense-technical-exploit/"
+  },
+  {
+   "title": "Authenticated Arbitrary File Download (Path Traversal)",
+   "link": "https://research.aurainfosec.io/disclosure/papercut/"
+  },
+  {
+   "title": "Hunting for Nginx Alias Traversals in the wild",
+   "link": "https://labs.hakaioffsec.com/nginx-alias-traversal/"
+  },
+  {
+   "title": "RCE via Path Traversal vulnerability in Onlyoffice CommunityServer < 12.5.2 (CVE-2023-34939)",
+   "link": "https://github.com/firsov/onlyoffice/blob/main/CVE-2023-34939-PoC.md"
+  },
+  {
+   "title": "SharePoint Webpart Property Traversal Vulnerability Analysis (CVE-2022\u201338053, CVE-2023\u201321742, CVE-2023\u201321717)",
+   "link": "https://testbnull.medium.com/ph\u00e2n-t%C3%ADch-l\u1ed7-h\u1ed5ng-sharepoint-webpart-property-traversal-cve-2022-38053-cve-2023-21742-bc6931698a5f"
+  },
+  {
+   "title": "Directory Traversal and LFI worth $400",
+   "link": "https://medium.com/@hritkmjth/directory-traversal-and-lfi-worth-400-c4422785d3bd"
+  },
+  {
+   "title": "How I Earned $$$ for Excessive Data Exposure Through Directory Traversal Leads to Product Price Manipulation",
+   "link": "https://mshibilmp.medium.com/how-i-earned-for-excessive-data-exposure-through-directory-traversal-leads-to-product-price-4582e5371774"
+  },
+  {
+   "title": "Directory Traversal Vulnerability in Huawei HG255s Products",
+   "link": "https://infosecwriteups.com/directory-ttraversal-vulnerability-in-huawei-hg255s-products-dce941a1d015"
+  },
+  {
+   "title": "CVE-2019\u20136238: Apple XAR directory traversal vulnerability",
+   "link": "https://yilmazcanyigit.medium.com/cve-2019-6238-apple-xar-directory-traversal-vulnerability-9a32ba8b3b7d"
+  },
+  {
+   "title": "Path Traversal Vulnerability in Payara Platform",
+   "link": "https://sec-consult.com/vulnerability-lab/advisory/path-traversal-vulnerability-in-payara-platform/"
+  },
+  {
+   "title": "Chaining Path Traversal with SSRF to disclose internal git repo data in a Bank Asset",
+   "link": "https://blog.niksthehacker.com/chaining-path-traversal-with-ssrf-to-disclose-internal-git-repo-data-in-a-bank-asset-8af4de6f12e"
+  },
+  {
+   "title": "Directory traversal in PDF viewing application. Leading to full database takeover",
+   "link": "https://medium.com/@wrinnsec/directory-traversal-in-pdf-viewing-application-leading-to-full-database-takeover-376e68eadd86"
+  },
+  {
+   "title": "Practical Client Side Path Traversal Attacks",
+   "link": "https://mr-medi.github.io/research/2022/11/04/practical-client-side-path-traversal-attacks.html"
+  },
+  {
+   "title": "Useless path traversals in Zyxel admin interface (CVE-2022-2030)",
+   "link": "https://security.humanativaspa.it/useless-path-traversals-in-zyxel-admin-interface-cve-2022-2030/"
+  },
+  {
+   "title": "Path Traversal / Arbitrary File Write",
+   "link": "https://labs.jumpsec.com/zoho-manageengine-desktop-central-path-traversal-arbitrary-file-write/"
+  },
+  {
+   "title": "Unrar Path Traversal Vulnerability affects Zimbra Mail",
+   "link": "https://blog.sonarsource.com/zimbra-pre-auth-rce-via-unrar-0day/"
+  },
+  {
+   "title": "Meta's SparkAR RCE Via ZIP Path Traversal",
+   "link": "https://blog.fadyothman.com/metas-sparkar/"
+  },
+  {
+   "title": "How I access other domains in infinityfree.net using Directory Traversal",
+   "link": "https://xkurtph.medium.com/how-i-access-other-domains-in-infinityfree-net-using-directory-traversal-4625692d6a2d"
+  },
+  {
+   "title": "[ Directory Traversal attack ] How did I find it using GitHub",
+   "link": "https://web.archive.org/web/20220306040035/https://medium.com/@1337Fenrir/how-did-i-find-directory-traversal-attack-using-github-9b051ed749ca"
+  },
+  {
+   "title": "Analyzing a PJL directory traversal vulnerability \u2013 exploiting the Lexmark MC3224i printer (part 2)",
+   "link": "https://research.nccgroup.com/2022/02/18/analyzing-a-pjl-directory-traversal-vulnerability-exploiting-the-lexmark-mc3224i-printer-part-2/"
+  },
+  {
+   "title": "QRCDR ZeroDay Path Traversal Vulnerability",
+   "link": "https://n0lsec.medium.com/qrcdr-path-traversal-vulnerability-bb89acc0c100"
+  },
+  {
+   "title": "Path Traversal Paradise",
+   "link": "https://kuldeep.io/posts/path-traversal-paradise/"
+  },
+  {
+   "title": "Common Nginx Misconfiguration leads to Path Traversal",
+   "link": "https://systemweakness.com/common-nginx-misconfiguration-leads-to-path-traversal-d58701e997bc"
+  },
+  {
+   "title": "GHSL-2021-1053: Path traversal in Grafana REST API - CVE-2021-43813, CVE-2021-43815",
+   "link": "https://securitylab.github.com/advisories/GHSL-2021-1053_Grafana/"
+  },
+  {
+   "title": "CVE-2021-43798 - Path Traversal Vulnerability In Grafana",
+   "link": "https://j0vsec.com/post/cve-2021-43798/"
+  },
+  {
+   "title": "How I found the Grafana zero-day Path Traversal exploit that gave me access to your logs",
+   "link": "https://labs.detectify.com/2021/12/15/zero-day-path-traversal-grafana/"
+  },
+  {
+   "title": "Why u should use burp to test Path Traversal Vulnerability and also get RXSS",
+   "link": "https://infosecwriteups.com/why-u-should-use-burp-to-test-path-traversal-vulnerability-and-also-get-rxss-2743cbb16a3c"
+  },
+  {
+   "title": "Path Traversal in MobileSafari",
+   "link": "https://feed.bugs.xdavidhu.me/bugs/0006"
+  },
+  {
+   "title": "Cmd Hijack - a command/argument confusion with path traversal in cmd.exe",
+   "link": "https://hackingiscool.pl/cmdhijack-command-argument-confusion-with-path-traversal-in-cmd-exe/"
+  },
+  {
+   "title": "RCE using Path Traversal",
+   "link": "https://web.archive.org/web/20201120053519/https://incogbyte.github.io/pathtraversal/"
+  },
+  {
+   "title": "Traversing the Path to RCE",
+   "link": "https://blog.hawkeyesecurity.com/2018/08/27/traversing-the-path-to-rce/"
+  },
+  {
+   "title": "5k$ for path traversal on *.paypal-corp.com subdomain",
+   "link": "https://twitter.com/0x01alka/status/1001763583447969792"
+  },
+  {
+   "title": "Prezi (map.prezi.com) Path Traversal",
+   "link": "https://wss.sh/en/blog/bug-bounty-prezi-map-prezi-com-path-traversal/"
+  },
+  {
+   "title": "Facebook FBML DOM Traversal (Information Disclosure)",
+   "link": "https://maustin.net/articles/2011-08/FBML_dom_traversal"
+  }
+ ],
+ "lfi-rfi": [
+  {
+   "title": "Full Local File Read via Error Based XXE using XLIFF File",
+   "link": "https://pwn.vg/articles/2021-06/local-file-read-via-error-based-xxe"
+  },
+  {
+   "title": "How i got my First Bug Bounty in Intersting Target (LFI to SXSS)",
+   "link": "https://ph-hitachi.medium.com/how-i-got-my-first-bug-bounty-in-intersting-target-lfi-to-sxss-58fa5c4f5882"
+  },
+  {
+   "title": "RCE via LFI Log Poisoning - The Death Potion",
+   "link": "https://shahjerry33.medium.com/rce-via-lfi-log-poisoning-the-death-potion-c0831cebc16d"
+  },
+  {
+   "title": "SSTI to Local File Read",
+   "link": "https://www.r29k.com/articles/bb/ssti"
+  },
+  {
+   "title": "Leveraging LFI to RCE in a website with +20000 users",
+   "link": "https://medium.com/bugbountywriteup/leveraging-lfi-to-rce-in-a-website-with-20000-users-129050f9982b"
+  },
+  {
+   "title": "Stealing local files using Safari Web Share API",
+   "link": "https://blog.redteam.pl/2020/08/stealing-local-files-using-safari-web.html"
+  },
+  {
+   "title": "Local file read via XSS using PDF generate functionality",
+   "link": "https://echopwn.com/local-file-read-via-xss-using-pdf-generate-functionality/"
+  },
+  {
+   "title": "SSRF | Reading Local Files from DownNotifier server",
+   "link": "https://www.openbugbounty.org/blog/leonmugen/ssrf-reading-local-files-from-downnotifier-server/"
+  },
+  {
+   "title": "My First LFI",
+   "link": "https://cyberzombie.in/my-first-lfi/"
+  },
+  {
+   "title": "How I escalated RFI into LFI",
+   "link": "http://hassankhanyusufzai.com/RFI_LFI_writeup/"
+  },
+  {
+   "title": "Bug Bounty - Information Disclosure through error message + WAF Bypass led to Local File Inclusion",
+   "link": "https://spenkk.github.io/bugbounty/Local-File-Inclusion/"
+  },
+  {
+   "title": "Google bug bounty: LFI on production servers in \u201cspringboard.google.Com\u201d \u2014 $13,337 USD",
+   "link": "https://medium.com/@vulnerabilitylabs/bug-bounty-lfi-at-google-com-3c2e17d8c912"
+  },
+  {
+   "title": "Local File Inclusion in peering.google.com",
+   "link": "https://www.updatelap.com/2019/05/local-file-inclusion-in-peeringgooglecom.html"
+  },
+  {
+   "title": "WRITE UP \u2013 GOOGLE BUG BOUNTY: LFI ON PRODUCTION SERVERS in \u201cspringboard.google.com\u201d \u2013 $13,337 USD",
+   "link": "https://omespino.com/write-up-google-bug-bounty-lfi-on-production-servers-in-redacted-google-com-13337-usd/"
+  },
+  {
+   "title": "Ssrf to Read Local Files and Abusing the AWS metadata",
+   "link": "https://medium.com/@pratiky054/ssrf-to-read-local-files-and-abusing-the-aws-metadata-8621a4bf382"
+  },
+  {
+   "title": "PDFReacter SSRF to ROOT Level Local File Read which led to RCE",
+   "link": "https://medium.com/@armaanpathan/pdfreacter-ssrf-to-root-level-local-file-read-which-led-to-rce-eb460ffb3129"
+  },
+  {
+   "title": "LFI To 10 Servers Pwn",
+   "link": "https://nirmaldahal.com.np/lfi-to-10-server-pwn/"
+  },
+  {
+   "title": "LFI in Apigee portals",
+   "link": "https://offensi.com/2019/01/31/lfi-in-apigee-portals/"
+  },
+  {
+   "title": "Magento \u2013 RCE & Local File Read with low privilege admin rights",
+   "link": "https://blog.scrt.ch/2019/01/24/magento-rce-local-file-read-with-low-privilege-admin-rights/"
+  },
+  {
+   "title": "Abusing MySQL clients to get LFI from the server/client",
+   "link": "https://www.vesiluoma.com/abusing-mysql-clients/"
+  },
+  {
+   "title": "Exploiting SSRF like a Boss\u200a\u2014\u200aEscalation of an SSRF to Local File Read!",
+   "link": "https://medium.com/@zain.sabahat/exploiting-ssrf-like-a-boss-c090dc63d326"
+  },
+  {
+   "title": "Evernote For Windows Read Local File and Command Execute Vulnerabilities",
+   "link": "https://paper.seebug.org/737/"
+  },
+  {
+   "title": "Local file inclusion at IKEA.com",
+   "link": "https://medium.com/@jonathanbouman/local-file-inclusion-at-ikea-com-e695ed64d82f"
+  },
+  {
+   "title": "LFI to 10 servers pwn",
+   "link": "https://nirmaldahal.com.np/lfi-to-10-servers-pwn/"
+  },
+  {
+   "title": "How we got LFI in apache Drill (Recon like a boss)",
+   "link": "https://medium.com/bugbountywriteup/how-we-got-lfi-in-apache-drill-recon-like-a-boss-6f739a79d87d"
+  },
+  {
+   "title": "#BugBounty\u200a\u2014\u200a\u201dJourney from LFI to RCE!!!\u201d-How I was able to get the same in one of the India\u2019s popular property buy/sell company.",
+   "link": "https://medium.com/@logicbomb_1/bugbounty-journey-from-lfi-to-rce-how-a69afe5a0899"
+  },
+  {
+   "title": "LFI to Command Execution: Deutche Telekom Bug Bounty",
+   "link": "https://medium.com/@maxon3/lfi-to-command-execution-deutche-telekom-bug-bounty-6fe0de7df7a6"
+  },
+  {
+   "title": " Local File Read via XSS in Dynamically Generated PDF ",
+   "link": "http://www.noob.ninja/2017/11/local-file-read-via-xss-in-dynamically.html"
+  },
+  {
+   "title": "From SSRF to Local File Disclosure",
+   "link": "https://medium.com/@tungpun/from-ssrf-to-local-file-disclosure-58962cdc589f"
+  },
+  {
+   "title": "Upgrade from LFI to RCE via PHP Sessions",
+   "link": "https://www.rcesecurity.com/2017/08/from-lfi-to-rce-via-php-sessions/"
+  },
+  {
+   "title": "One Cloud-based Local File Inclusion = Many Companies affected",
+   "link": "https://panchocosil.blogspot.com/2017/05/one-cloud-based-local-file-inclusion.html"
+  },
+  {
+   "title": "Reading local files from Facebook\u2019s server (fixed)",
+   "link": "https://josipfranjkovic.blogspot.com/2014/12/reading-local-files-from-facebooks.html"
+  },
+  {
+   "title": "Magix Bug Bounty: magix.com (RCE, SQLi) and xara.com (LFI, XSS)",
+   "link": "https://www.rcesecurity.com/2014/04/magix-bug-bounty-magix-com-rce-sqli-and-xara-com-lfi-xss/"
+  },
+  {
+   "title": "LFI in Nokia maps",
+   "link": "http://blog.shashank.co/2013/10/lfi-in-nokia-maps.html"
+  },
+  {
+   "title": "IIS welcome page to source code review to LFI!",
+   "link": "https://medium.com/@omarahmed_13016/iis-welcome-page-to-source-code-review-to-lfi-23ec581049f5"
+  },
+  {
+   "title": "The Hunt for XXE to LFI: How I Uncovered CVE-2019\u20139670 in a Bug Bounty Program",
+   "link": "https://infosecwriteups.com/the-hunt-for-xxe-to-lfi-how-i-uncovered-cve-2019-9670-in-a-bug-bounty-program-5668e4afa806"
+  },
+  {
+   "title": "Unmasking an RFI to LFI Escalation",
+   "link": "https://laburity.com/unmasking-an-rfi-to-lfi-escalation/"
+  },
+  {
+   "title": "Weird LFI and escalating the impact from High to Critical",
+   "link": "https://medium.com/@snoopy101/weird-lfi-and-escalating-the-impact-from-high-to-critical-3e804f5366e9"
+  },
+  {
+   "title": "One LFI bypass to rule them all (using base64)",
+   "link": "https://matan-h.com/one-lfi-bypass-to-rule-them-all-using-base64/"
+  },
+  {
+   "title": "Found SSRF and LFI in Just 10 minutes of using burp!",
+   "link": "https://xelkomy.medium.com/found-ssrf-and-lfi-in-just-10-minutes-of-using-burp-492fddef3f3e"
+  },
+  {
+   "title": "A short tell of LFI from PDF link \u2192 Professor the Hunter",
+   "link": "https://medium.com/@bughuntar/a-short-tell-of-lfi-from-pdf-link-professor-the-hunter-43a8be853e"
+  },
+  {
+   "title": "LFI - An Interesting Tweak",
+   "link": "https://shahjerry33.medium.com/lfi-an-interesting-tweak-9c5638dbdd1b"
+  },
+  {
+   "title": "From Shodan Dork to Grafana \ud83d\udccaLocal File Inclusion",
+   "link": "https://varmaanu001.medium.com/from-shodan-dork-to-grafana-local-file-inclusion-e77dc4cfc264"
+  },
+  {
+   "title": "Critical Local File Read in Electron Desktop App",
+   "link": "https://bugcrowd.com/disclosures/f7ce8504-0152-483b-bbf3-fb9b759f9f89/critical-local-file-read-in-electron-desktop-app"
+  },
+  {
+   "title": "URL filter bypass, RFI and XSS",
+   "link": "https://bergee.it/blog/url-filter-bypass-rfi-and-xss/"
+  },
+  {
+   "title": "Local File Inclusion (interesting method)",
+   "link": "https://captainhoook.medium.com/local-file-inclusion-interesting-method-8263c2cb7cd2"
+  },
+  {
+   "title": "Write Up \u2013 Apple N/A: PII Information, Full Contact List, Main Phone No. And Main Icloud Email Extracted; Bug Patched: Arbitrary Local File Read Via Zip File And Symlinks On Ios Files App.",
+   "link": "https://omespino.com/write-up-apple-bug-bounty-n-a-arbitrary-local-file-read-via-zip-file-and-symlinks-usd/"
+  },
+  {
+   "title": "Write Up \u2013 Google VRP N/A: Arbitrary Local File Read (Macos) Via &#x3c;&#x61;&#x3e; Tag And Null Byte (&#x25;&#x30;&#x30;) In Google Earth Pro Desktop App",
+   "link": "https://omespino.com/write-up-google-vrp-n-a-arbitrary-local-file-read-macos-via-a-tag-and-null-byte-in-google-earth-pro-desktop-app/"
+  },
+  {
+   "title": "Bug Bounty Guest Post: Local File Read via Stored XSS in The Opera Browser",
+   "link": "https://blogs.opera.com/security/2021/09/bug-bounty-guest-post-local-file-read-via-stored-xss-in-the-opera-browser/"
+  },
+  {
+   "title": "Bypassing LFI (Local File Inclusion)",
+   "link": "https://medium.com/@abhishake21/bypassing-lfi-local-file-inclusion-ebf4274e7027"
+  },
+  {
+   "title": "Bug Bounty - Information Disclosure through error message + WAF Bypass led to Local File Inclusion",
+   "link": "https://arben.sh/bugbounty/Local-File-Inclusion/"
+  },
+  {
+   "title": "PHP fopen() function to local file inclusion",
+   "link": "https://xhzeem.me/posts/PHP-fopen-function-to-local-file-inclusion/read/"
+  },
+  {
+   "title": "Spilling Local Files via XXE when HTTP OOB fails",
+   "link": "https://blog.noob.ninja/spilling-local-files-via-xxe-when/"
+  },
+  {
+   "title": "LFI to 10 servers pwn",
+   "link": "https://nirmaldahal.com.np/posts/2017/12/lfi-to-10-servers-pwn/"
+  },
+  {
+   "title": "Upgrade from LFI to RCE via PHP Sessions",
+   "link": "https://web.archive.org/web/20220818204507/https://www.rcesecurity.com/2017/08/from-lfi-to-rce-via-php-sessions/"
+  },
+  {
+   "title": "One Cloud-based Local File Inclusion = Many Companies affected",
+   "link": "http://panchocosil.blogspot.com/2017/05/one-cloud-based-local-file-inclusion.html"
+  },
+  {
+   "title": "Local File XSS Vulnerability in Wordpress.com (Write Up)",
+   "link": "https://web.archive.org/web/20210511011807/https://blog.evanricafort.com/2015/12/local-file-xss-vulnerability-in.html"
+  }
+ ],
+ "arbitrary-file": [
+  {
+   "title": "Arbitrary File Write On Client By ADB Pull",
+   "link": "https://daeken.svbtle.com/arbitrary-file-write-by-adb-pull"
+  },
+  {
+   "title": "Chaining multiple low-impact bugs to arbitrary file read in GitLab",
+   "link": "https://blog.nyangawa.me/security/GitLab-Local-File-Read/"
+  },
+  {
+   "title": "From blind XXE to root-level file read access",
+   "link": "https://honoki.net/2018/12/from-blind-xxe-to-root-level-file-read-access/"
+  },
+  {
+   "title": "Arbitrary File Read in one of the largest CRMs",
+   "link": "https://medium.com/@mantissts/arbitrary-file-read-in-one-of-the-largest-crms-658caa2f05d2"
+  },
+  {
+   "title": "Escalating XSS in PhantomJS Image Rendering to SSRF/Local-File Read",
+   "link": "https://buer.haus/2017/06/29/escalating-xss-in-phantomjs-image-rendering-to-ssrflocal-file-read/"
+  },
+  {
+   "title": "Analysis of CVE-2024-43044 \u2014 From file read to RCE in Jenkins through agents",
+   "link": "https://blog.convisoappsec.com/en/analysis-of-cve-2024-43044/"
+  },
+  {
+   "title": "From Limited file read to full access on Jenkins (CVE-2024-23897)",
+   "link": "https://xphantom.nl/posts/crypto-attack-jenkins/"
+  },
+  {
+   "title": "ZSATrayManager Arbitrary File Deletion (CVE-2023-41969)",
+   "link": "https://medium.com/csg-govtech/catch-me-if-you-can-local-privilege-escalation-in-zscaler-client-connector-7ad997bd7058"
+  },
+  {
+   "title": "Devfile file write vulnerability in GitLab",
+   "link": "https://gitlab-com.gitlab.io/gl-security/security-tech-notes/security-research-tech-notes/devfile/"
+  },
+  {
+   "title": "CVE-2023-36049: Microsoft .NET CRLF Injection Arbitrary File Write/deletion Vulnerability",
+   "link": "https://www.zerodayinitiative.com/blog/2024/3/6/cve-2023-36049-microsoft-net-crlf-injection-arbitrary-file-writedeletion-vulnerability"
+  },
+  {
+   "title": "Silverpeas App: Multiple CVEs leading to File Read on Server",
+   "link": "https://rhinosecuritylabs.com/research/silverpeas-file-read-cves/"
+  },
+  {
+   "title": "Partial File Read in phpList <= 3.6.12 (CVE-2023-35834)",
+   "link": "https://www.synacktiv.com/sites/default/files/2023-07/synacktiv-phplist-partial-file-read.pdf"
+  },
+  {
+   "title": "LibreOffice Arbitrary File Write (CVE-2023-1883)",
+   "link": "https://secfault-security.com/blog/libreoffice.html"
+  },
+  {
+   "title": "Avast Anti-Virus privileged arbitrary file create on virus restore (CVE-2023-1586)",
+   "link": "https://the-deniss.github.io/posts/avast-privileged-arbitrary-file-create-on-restore/"
+  },
+  {
+   "title": "Avast Anti-Virus privileged arbitrary file create on virus quarantine (CVE-2023-1585 and CVE-2023-1587)",
+   "link": "https://the-deniss.github.io/posts/2023/04/26/avast-privileged-arbitrary-file-create-on-quarantine.html"
+  },
+  {
+   "title": "PHP Filter Chains: File Read From Error-based Oracle",
+   "link": "https://www.synacktiv.com/publications/php-filter-chains-file-read-from-error-based-oraclel"
+  },
+  {
+   "title": "A New Vector For \u201cDirty\u201d Arbitrary File Write to RCE",
+   "link": "https://blog.doyensec.com/2023/02/28/new-vector-for-dirty-arbitrary-file-write-2-rce.html"
+  },
+  {
+   "title": "EoP via Arbitrary File Write/Overwite in Group Policy Client \u201cgpsvc\u201d \u2013 CVE-2022-37955",
+   "link": "https://decoder.cloud/2023/02/16/eop-via-arbitrary-file-write-overwite-in-group-policy-client-gpsvc-cve-2022-37955/"
+  },
+  {
+   "title": "Doing it the researcher\u2019s way: How I Managed to Get SSTI (Server Side Template Injection) which lead to arbitrary file reading on One of the Leading Payment Systems in Asia",
+   "link": "https://medium.com/@jazdprince/doing-it-the-researchers-way-how-i-managed-to-get-ssti-server-side-template-injection-which-66b239ca0104"
+  },
+  {
+   "title": "Arbitrary File Corruption: End\u200a-\u200ato\u200a-\u200aEnd Encrypted Messaging Application",
+   "link": "https://nmochea.medium.com/arbitrary-file-corruption-end-to-end-encrypted-messaging-application-674963dceef8"
+  },
+  {
+   "title": "CVE-2022-26113: FortiClient Arbitrary File Write As SYSTEM",
+   "link": "https://rhinosecuritylabs.com/research/cve-2022-26113-forticlient-arbitrary-file-write-as-system/"
+  },
+  {
+   "title": "(ZOHO) Manage Engine Desktop Central \u2013 SQL Injection / Arbitrary File Write",
+   "link": "https://labs.jumpsec.com/zoho-manage-engine-desktop-central-sql-injection-arbitrary-file-write/"
+  },
+  {
+   "title": "CVE-2021-3779: Ruby-MySQL Gem Client File Read (FIXED)",
+   "link": "https://www.rapid7.com/blog/post/2022/06/28/cve-2021-3779-ruby-mysql-gem-client-file-read-fixed/"
+  },
+  {
+   "title": "CVE-2022-31749: WatchGuard Authenticated Arbitrary File Read/Write (Fixed)",
+   "link": "https://www.rapid7.com/blog/post/2022/06/23/cve-2022-31749-watchguard-authenticated-arbitrary-file-read-write-fixed/"
+  },
+  {
+   "title": "Abusing Arbitrary File Deletes To Escalate Privilege And Other Great Tricks",
+   "link": "https://www.zerodayinitiative.com/blog/2022/3/16/abusing-arbitrary-file-deletes-to-escalate-privilege-and-other-great-tricks"
+  },
+  {
+   "title": "Technical Advisory \u2013 Apple macOS XAR \u2013 Arbitrary File Write (CVE-2022-22582)",
+   "link": "https://research.nccgroup.com/2022/03/15/technical-advisory-apple-macos-xar-arbitrary-file-write-cve-2022-22582/"
+  },
+  {
+   "title": "VMware vCenter earlier versions (7.0.2.00100) has unauthorized arbitrary file read + ssrf + xss vulnerability",
+   "link": "https://github.com/l0ggg/VMware_vCenter"
+  },
+  {
+   "title": "Apple XAR \u2013 Arbitrary File Write (CVE-2021-30833)",
+   "link": "https://research.nccgroup.com/2021/10/28/technical-advisory-apple-xar-arbitrary-file-write-cve-2021-30833/"
+  },
+  {
+   "title": "OVE-20210809-0001 Visual Studio Code .ipynb Jupyter Notebook XSS (Arbitrary File Read)",
+   "link": "https://github.com/justinsteven/advisories/blob/master/2021_vscode_ipynb_xss_arbitrary_file_read.md"
+  },
+  {
+   "title": "Escalating XSS to Arbitrary File Read",
+   "link": "https://www.pethuraj.com/blog/escalating-xss-to-arbitrary-file-read/"
+  },
+  {
+   "title": "GitLab Arbitrary File Read & Write through Kroki - CVE-2021-22203",
+   "link": "https://ledz1996.gitlab.io/blog/writeups/CVE-2021-22203-gitlab-arbitrary-file-read-write-through-kroki"
+  },
+  {
+   "title": "Google Photos : Theft of Database & Arbitrary Files Android Vulnerability",
+   "link": "https://servicenger.com/blog/mobile/google-photos-theft-of-database-arbitrary-files-android-vulnerability/"
+  },
+  {
+   "title": "Facebook Messenger Desktop App Arbitrary File Read",
+   "link": "https://medium.com/@renwa/facebook-messenger-desktop-app-arbitrary-file-read-db2374550f6d"
+  },
+  {
+   "title": "OpenEMR 5.0.1.3 Arbitrary File Actions",
+   "link": "https://jsecu.github.io/2020/11/17/openemr/"
+  },
+  {
+   "title": "$$ Bounties for Unauthenticated file read in Cisco ASA CVE-2020\u20133452",
+   "link": "https://infosecwriteups.com/bounties-for-unauthenticated-file-read-in-cisco-asa-cve-2020-3452-9a0b9143370e"
+  }
+ ],
+ "shell-upload": [
+  {
+   "title": "A Tale of Two Formats: Exploiting Insecure XML and ZIP File Parsers to Create a Web Shell",
+   "link": "https://spaceraccoon.dev/a-tale-of-two-formats-exploiting-insecure-xml-and-zip-file-parsers-to-create-a"
+  },
+  {
+   "title": "How i found web shell on AntiHack.me and Awarded Gold Coin And SWAG",
+   "link": "https://rudr4sarkar.blogspot.com/2019/01/how-i-found-web-shell-on-antihackme-and.html"
+  }
+ ]
+}

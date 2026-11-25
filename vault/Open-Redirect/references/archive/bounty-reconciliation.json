@@ -1,0 +1,1190 @@
+[
+ {
+  "case_id": "RDIR-2414",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-2575",
+  "class": "02",
+  "bounty_src": "mirror",
+  "bounty": 100
+ },
+ {
+  "case_id": "RDIR-2622",
+  "class": "01",
+  "bounty_src": "mirror",
+  "bounty": 200
+ },
+ {
+  "case_id": "RDIR-2731",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-4549",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-5199",
+  "class": "05",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-6035",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-6357",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-6564",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-7357",
+  "class": "05",
+  "bounty_src": "json",
+  "bounty": 100
+ },
+ {
+  "case_id": "RDIR-7900",
+  "class": "02",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-12949",
+  "class": "02",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-12964",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-13553",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-16718",
+  "class": "01",
+  "bounty_src": "json",
+  "bounty": 100
+ },
+ {
+  "case_id": "RDIR-22142",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-23386",
+  "class": "07",
+  "bounty_src": "json",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-25160",
+  "class": "03",
+  "bounty_src": "mirror",
+  "bounty": 400
+ },
+ {
+  "case_id": "RDIR-26962",
+  "class": "02",
+  "bounty_src": "json",
+  "bounty": 3000
+ },
+ {
+  "case_id": "RDIR-27987",
+  "class": "07",
+  "bounty_src": "mirror",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-28865",
+  "class": "04",
+  "bounty_src": "json",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-29480",
+  "class": "08",
+  "bounty_src": "json",
+  "bounty": 300
+ },
+ {
+  "case_id": "RDIR-34084",
+  "class": "04",
+  "bounty_src": "mirror",
+  "bounty": 420
+ },
+ {
+  "case_id": "RDIR-39198",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-39631",
+  "class": "01",
+  "bounty_src": "json",
+  "bounty": 280
+ },
+ {
+  "case_id": "RDIR-42240",
+  "class": "04",
+  "bounty_src": "mirror",
+  "bounty": 1000
+ },
+ {
+  "case_id": "RDIR-44157",
+  "class": "04",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-45516",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-46818",
+  "class": "07",
+  "bounty_src": "json",
+  "bounty": 560
+ },
+ {
+  "case_id": "RDIR-48516",
+  "class": "06",
+  "bounty_src": "mirror",
+  "bounty": 1400
+ },
+ {
+  "case_id": "RDIR-49759",
+  "class": "03",
+  "bounty_src": "json",
+  "bounty": 1400
+ },
+ {
+  "case_id": "RDIR-50752",
+  "class": "03",
+  "bounty_src": "json",
+  "bounty": 560
+ },
+ {
+  "case_id": "RDIR-51265",
+  "class": "04",
+  "bounty_src": "mirror",
+  "bounty": 2000
+ },
+ {
+  "case_id": "RDIR-52035",
+  "class": "01",
+  "bounty_src": "json",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-55525",
+  "class": "02",
+  "bounty_src": "json",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-55546",
+  "class": "01",
+  "bounty_src": "json",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-56662",
+  "class": "06",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-57163",
+  "class": "01",
+  "bounty_src": "mirror",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-63158",
+  "class": "04",
+  "bounty_src": "mirror",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-66994",
+  "class": "08",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-67929",
+  "class": "04",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-76738",
+  "class": "04",
+  "bounty_src": "mirror",
+  "bounty": 25
+ },
+ {
+  "case_id": "RDIR-77221",
+  "class": "01",
+  "bounty_src": "mirror",
+  "bounty": 25
+ },
+ {
+  "case_id": "RDIR-91332",
+  "class": "02",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-94637",
+  "class": "05",
+  "bounty_src": "json",
+  "bounty": 30
+ },
+ {
+  "case_id": "RDIR-95640",
+  "class": "06",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-99435",
+  "class": "03",
+  "bounty_src": "mirror",
+  "bounty": 153
+ },
+ {
+  "case_id": "RDIR-101962",
+  "class": "01",
+  "bounty_src": "mirror",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-103772",
+  "class": "01",
+  "bounty_src": "mirror",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-104087",
+  "class": "04",
+  "bounty_src": "json",
+  "bounty": 1000
+ },
+ {
+  "case_id": "RDIR-106348",
+  "class": "08",
+  "bounty_src": "json",
+  "bounty": 100
+ },
+ {
+  "case_id": "RDIR-106350",
+  "class": "08",
+  "bounty_src": "json",
+  "bounty": 250
+ },
+ {
+  "case_id": "RDIR-108113",
+  "class": "03",
+  "bounty_src": "mirror",
+  "bounty": 2520
+ },
+ {
+  "case_id": "RDIR-111968",
+  "class": "04",
+  "bounty_src": "mirror",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-113112",
+  "class": "01",
+  "bounty_src": "mirror",
+  "bounty": 50
+ },
+ {
+  "case_id": "RDIR-114529",
+  "class": "01",
+  "bounty_src": "mirror",
+  "bounty": 200
+ },
+ {
+  "case_id": "RDIR-119236",
+  "class": "01",
+  "bounty_src": "json",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-123625",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-124620",
+  "class": "07",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-125000",
+  "class": "01",
+  "bounty_src": "json",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-125791",
+  "class": "01",
+  "bounty_src": "json",
+  "bounty": 3000
+ },
+ {
+  "case_id": "RDIR-126203",
+  "class": "04",
+  "bounty_src": "json",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-129091",
+  "class": "01",
+  "bounty_src": "mirror",
+  "bounty": 75
+ },
+ {
+  "case_id": "RDIR-131082",
+  "class": "01",
+  "bounty_src": "json",
+  "bounty": 150
+ },
+ {
+  "case_id": "RDIR-131728",
+  "class": "01",
+  "bounty_src": "mirror",
+  "bounty": 50
+ },
+ {
+  "case_id": "RDIR-138786",
+  "class": "08",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-140432",
+  "class": "03",
+  "bounty_src": "mirror",
+  "bounty": 10
+ },
+ {
+  "case_id": "RDIR-140447",
+  "class": "04",
+  "bounty_src": "json",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-141355",
+  "class": "01",
+  "bounty_src": "mirror",
+  "bounty": 260
+ },
+ {
+  "case_id": "RDIR-143240",
+  "class": "06",
+  "bounty_src": "mirror",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-143265",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-145306",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-145392",
+  "class": "04",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-151831",
+  "class": "08",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-153652",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-155222",
+  "class": "04",
+  "bounty_src": "mirror",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-157465",
+  "class": "05",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-158019",
+  "class": "05",
+  "bounty_src": "mirror",
+  "bounty": 150
+ },
+ {
+  "case_id": "RDIR-158148",
+  "class": "08",
+  "bounty_src": "mirror",
+  "bounty": 560
+ },
+ {
+  "case_id": "RDIR-158434",
+  "class": "04",
+  "bounty_src": "mirror",
+  "bounty": 1000
+ },
+ {
+  "case_id": "RDIR-159522",
+  "class": "04",
+  "bounty_src": "mirror",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-160047",
+  "class": "01",
+  "bounty_src": "json",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-160498",
+  "class": "07",
+  "bounty_src": "mirror",
+  "bounty": 300
+ },
+ {
+  "case_id": "RDIR-161991",
+  "class": "01",
+  "bounty_src": "mirror",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-163124",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-163272",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-165046",
+  "class": "04",
+  "bounty_src": "mirror",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-165136",
+  "class": "07",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-169759",
+  "class": "01",
+  "bounty_src": "mirror",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-171398",
+  "class": "02",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-172746",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-175085",
+  "class": "07",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-175168",
+  "class": "04",
+  "bounty_src": "mirror",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-177624",
+  "class": "06",
+  "bounty_src": "json",
+  "bounty": 140
+ },
+ {
+  "case_id": "RDIR-178278",
+  "class": "06",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-178345",
+  "class": "02",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-181088",
+  "class": "07",
+  "bounty_src": "json",
+  "bounty": 100
+ },
+ {
+  "case_id": "RDIR-181225",
+  "class": "07",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-186862",
+  "class": "08",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-187006",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-187969",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-188266",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-191196",
+  "class": "08",
+  "bounty_src": "mirror",
+  "bounty": 2500
+ },
+ {
+  "case_id": "RDIR-196846",
+  "class": "06",
+  "bounty_src": "mirror",
+  "bounty": 375
+ },
+ {
+  "case_id": "RDIR-203726",
+  "class": "01",
+  "bounty_src": "mirror",
+  "bounty": 100
+ },
+ {
+  "case_id": "RDIR-207170",
+  "class": "03",
+  "bounty_src": "mirror",
+  "bounty": 3000
+ },
+ {
+  "case_id": "RDIR-209821",
+  "class": "08",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-210875",
+  "class": "05",
+  "bounty_src": "mirror",
+  "bounty": 300
+ },
+ {
+  "case_id": "RDIR-211065",
+  "class": "07",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-211213",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-212629",
+  "class": "07",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-213056",
+  "class": "08",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-213114",
+  "class": "07",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-214034",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-215970",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-217430",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-218705",
+  "class": "08",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-220737",
+  "class": "07",
+  "bounty_src": "mirror",
+  "bounty": 50
+ },
+ {
+  "case_id": "RDIR-223326",
+  "class": "02",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-223718",
+  "class": "02",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-224317",
+  "class": "02",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-226408",
+  "class": "02",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-231760",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-236599",
+  "class": "04",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-238117",
+  "class": "02",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-244958",
+  "class": "03",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-246897",
+  "class": "01",
+  "bounty_src": "mirror",
+  "bounty": 420
+ },
+ {
+  "case_id": "RDIR-258632",
+  "class": "01",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-260278",
+  "class": "07",
+  "bounty_src": "mirror",
+  "bounty": 20
+ },
+ {
+  "case_id": "RDIR-259151",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 128
+ },
+ {
+  "case_id": "RDIR-252894",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-244721",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-243062",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-242314",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 50
+ },
+ {
+  "case_id": "RDIR-239503",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 350
+ },
+ {
+  "case_id": "RDIR-219599",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-219458",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-219215",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 400
+ },
+ {
+  "case_id": "RDIR-216806",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 250
+ },
+ {
+  "case_id": "RDIR-210384",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-206811",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 100
+ },
+ {
+  "case_id": "RDIR-194207",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 400
+ },
+ {
+  "case_id": "RDIR-193027",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-192375",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-192373",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-191387",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 450
+ },
+ {
+  "case_id": "RDIR-190188",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 400
+ },
+ {
+  "case_id": "RDIR-183796",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 450
+ },
+ {
+  "case_id": "RDIR-181939",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-179763",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 100
+ },
+ {
+  "case_id": "RDIR-179568",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 666
+ },
+ {
+  "case_id": "RDIR-179328",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 400
+ },
+ {
+  "case_id": "RDIR-177485",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-172696",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-172363",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-167107",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-164895",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 400
+ },
+ {
+  "case_id": "RDIR-163707",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-159275",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 150
+ },
+ {
+  "case_id": "RDIR-158034",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-148640",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-144525",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-132251",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-131552",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-127741",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-123172",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-122054",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-116315",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-115860",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-113332",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-112224",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-104896",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 100
+ },
+ {
+  "case_id": "RDIR-100200",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 100
+ },
+ {
+  "case_id": "RDIR-96474",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-87804",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-87027",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 500
+ },
+ {
+  "case_id": "RDIR-66384",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-50379",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-46497",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-45513",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 64
+ },
+ {
+  "case_id": "RDIR-44739",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-38157",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 150
+ },
+ {
+  "case_id": "RDIR-37593",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 250
+ },
+ {
+  "case_id": "RDIR-29263",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 250
+ },
+ {
+  "case_id": "RDIR-25334",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 250
+ },
+ {
+  "case_id": "RDIR-20661",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-19948",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-17902",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-15298",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-14699",
+  "class": "404",
+  "bounty_src": "404-mirror",
+  "bounty": 300
+ },
+ {
+  "case_id": "RDIR-11209",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-7731",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-4570",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-4521",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-2989",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-2322",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-2126",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ },
+ {
+  "case_id": "RDIR-1429",
+  "class": "404",
+  "bounty_src": "none",
+  "bounty": null
+ }
+]

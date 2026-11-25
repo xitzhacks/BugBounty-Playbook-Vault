@@ -1,0 +1,40 @@
+{"id": 1, "class": "SSRF", "q": "ssrf through an image insert feature that fetches a url server side", "expect": [67389], "marker": "SSRF issue", "tech": "ssrf"}
+{"id": 2, "class": "SSRF", "q": "ssrf reading aws ec2 metadata service through an image generator", "expect": [53088], "marker": "metadata", "tech": "metadata"}
+{"id": 3, "class": "RCE", "q": "rce via polyglot ascii file processed by imagemagick mvg in profile picture upload", "expect": [135072], "marker": "graphic-context", "tech": "imagemagick"}
+{"id": 4, "class": "LFI", "q": "arbitrary file read through crafted png raw profile chunk processed by imagemagick", "expect": [1858574], "marker": "Raw profile type", "tech": "file read"}
+{"id": 5, "class": "XSS", "q": "stored xss by uploading an svg file used as avatar", "expect": [765679], "marker": "SVG", "tech": "svg"}
+{"id": 6, "class": "IDOR", "q": "delete other users private messages by changing the object id in an api call", "expect": [1213237], "marker": "DELETE /api", "tech": "idor"}
+{"id": 7, "class": "IDOR", "q": "graphql mutation lets a merchant download another shop billing invoice pdf", "expect": [2207248], "marker": "BillingDocumentDownload", "tech": "graphql"}
+{"id": 8, "class": "IDOR", "q": "delete anyones spotlight story by changing the ids parameter in a graphql mutation", "expect": [1819832], "marker": "DeleteStorySnaps", "tech": "graphql"}
+{"id": 9, "class": "IDOR", "q": "upload a profile picture onto another account by changing the id post parameter", "expect": [43617], "marker": "_get_image_url", "tech": "idor"}
+{"id": 10, "class": "ACL", "q": "private uploaded file becomes public after generating an image transformation", "expect": [1984060], "marker": "transformation", "tech": "access control"}
+{"id": 11, "class": "CONF", "q": "cache poisoning using x-forwarded-host on a blog page leading to reflected payload", "expect": [977851], "marker": "X-Forwarded-Host", "tech": "x-forwarded-host"}
+{"id": 12, "class": "REDIR", "q": "open redirect on a login page via the return_to parameter", "expect": [1087189], "marker": "return_to", "tech": "redirect"}
+{"id": 13, "class": "REDIR", "q": "open redirect in an oauth login flow chained to account takeover token theft", "expect": [905607], "marker": "redirectUrl", "tech": "oauth"}
+{"id": 14, "class": "XSS", "q": "dom xss in a trading charting library via indicatorsFile parameter loading external script", "expect": [351275], "marker": "indicatorsFile", "tech": "dom"}
+{"id": 15, "class": "XSS", "q": "stored xss in wordpress admin media library via unescaped attachment filename", "expect": [3931771], "marker": "get_media_item", "tech": "upload"}
+{"id": 16, "class": "CONF", "q": "double encoded non standard ascii characters bypass a waf and allow reflected xss", "expect": [716761], "marker": "629745", "tech": "waf"}
+{"id": 17, "class": "SQLI", "q": "aws waf managed rules bypassed with sql grammar mutations", "expect": [3591725], "marker": "grammar", "tech": "waf"}
+{"id": 18, "class": "INJ", "q": "http request smuggling lets an attacker steal a user access token in bulk through a proxy", "expect": [771666], "marker": "X-Access-Token", "tech": "smuggling"}
+{"id": 19, "class": "CRYPTO", "q": "starttls stripping because the library does not check the server reply", "expect": [144782], "marker": "starttls", "tech": "tls"}
+{"id": 20, "class": "RCE", "q": "phar deserialization allows arbitrary file delete", "expect": [921288], "marker": "phar", "tech": "phar"}
+{"id": 21, "class": "INFO", "q": "publicly accessible debug log leaks server paths and plugin details", "expect": [3318295], "marker": "debug.log", "tech": "information disclosure"}
+{"id": 22, "class": "DOS", "q": "long password accepted at login causes application level denial of service", "expect": [1168804], "marker": "Denial of Service", "tech": "dos"}
+{"id": 23, "class": "RCE", "q": "apache airflow example dags allow command injection through a triggered dag config", "expect": [1492896], "marker": "command injection", "tech": "command"}
+{"id": 24, "class": "XSS", "q": "post based reflected xss through a search_phrase parameter in a form", "expect": [1451394], "marker": "search_phrase", "tech": "xss"}
+{"id": 25, "class": "INFO", "q": "shared access moderator can read the owner account details through an api endpoint", "expect": [1072893], "marker": "shared-access", "tech": "access control"}
+{"id": 26, "q": "ssrf through a pdf generation service fetching external resources", "expect": [1628209], "marker": "pdf", "tech": "ssrf", "class": "SSRF"}
+{"id": 27, "q": "subdomain takeover because a dns record points at an unclaimed third party service", "expect": [779442], "marker": "storybook", "tech": "subdomain", "class": "CONF"}
+{"id": 28, "q": "graphql introspection left enabled exposes the whole schema", "expect": [419883], "marker": "introspection", "tech": "graphql", "class": "INJ"}
+{"id": 29, "q": "web cache deception serves another users authenticated page from cache", "expect": [1271944], "marker": "cache deception", "tech": "cache", "class": "CONF"}
+{"id": 30, "q": "cors policy reflects any origin with credentials allowing api data theft", "expect": [426165], "marker": "Access-Control-Allow-Origin", "tech": "cors", "class": "CRYPTO"}
+{"id": 31, "q": "prototype pollution in a diagram renderer leads to stored xss", "expect": [1106238], "marker": "prototype", "tech": "prototype", "class": "XSS"}
+{"id": 32, "q": "single sign on assertion lets an attacker authenticate as another tenant", "expect": [136169], "marker": "OneLogin", "tech": "sso", "class": "AUTH"}
+{"id": 33, "q": "two factor secrets and backup codes can be pre-generated for other accounts", "expect": [100509], "marker": "backup", "tech": "2fa", "class": "AUTH"}
+{"id": 34, "q": "git repository allows overwriting arbitrary local files leading to code execution", "expect": [587854], "marker": "overwrit", "tech": "file", "class": "LFI"}
+{"id": 35, "q": "local privilege escalation through apache httpd configuration parsing", "expect": [520903], "marker": "Apache", "tech": "privilege", "class": "RCE"}
+{"id": 36, "q": "remote command execution through a github repository import feature", "expect": [1679624], "marker": "import", "tech": "command", "class": "RCE"}
+{"id": 37, "q": "pre authentication rce on a vpn appliance through a deserialization bug", "expect": [591295], "marker": "VPN", "tech": "deserial", "class": "RCE"}
+{"id": 38, "q": "stored xss through a diagram rendering service", "expect": [1731349], "marker": "Kroki", "tech": "xss", "class": "XSS"}
+{"id": 39, "q": "remote code execution in a kibana version through a plugin api", "expect": [861744], "marker": "Kibana", "tech": "command", "class": "RCE"}
+{"id": 40, "q": "sql injection in an ecommerce product parameter dumping the database", "expect": [1044716], "marker": "saleslead", "tech": "sql", "class": "SQLI"}

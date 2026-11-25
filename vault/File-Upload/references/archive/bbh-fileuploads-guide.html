@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Learning to test file uploads | Guides on BugBountyHunter.com </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Browse guides written to help you with your bug bounty hunt. Learn various tips, tricks and techniques and begin finding more bugs">
+    <meta name="author" content="@zseano">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://www.bugbountyhunter.com/assets/css/theme-style.min.css" rel="stylesheet">
+    <link href="https://www.bugbountyhunter.com/assets/css/custom-style.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f750f9d33e.js" crossorigin="anonymous"></script>
+    <link href="assets/plugins/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+    <link href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://www.bugbountyhunter.com/assets/favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://www.bugbountyhunter.com/assets/favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://www.bugbountyhunter.com/assets/favicons/favicon.ico">
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link rel="manifest" href="assets/favicons/manifest.json">
+    <link rel="shortcut icon" href="assets/favicons/favicon.ico">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Rambla:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Calligraffitti' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/retina.js/1.3.0/retina.min.js"></script>
+    <style type="text/css">
+    .f-circle {
+font-family: Arial;
+font-weight: bold;
+display: block;
+border: 1px solid #860000;
+border-radius: 999px;
+padding: 6px 12px;
+}
+
+input { border: 1px solid #55A79A; }
+  </style>
+  </head>
+  
+  <body class="page page-header-navbar-below navbar-layout-navbar-below">
+
+
+<div class="alert alert-warning" style="margin-bottom:25px" role="alert"> <i class="fad fa-info-circle icon-3x text-info" aria-hidden="true"></i> You are currently browsing our old platform which contains outdated information and non-working challenges. Our membership platform continues to operate as normal for current members and you can access BARKER. 
+<br><br>Our new website is <b>very close</b> to being released, so please keep an eye on our site over the next month for fresh updated content!</div>
+
+<div id="header" style="background:#343a40 !important;">
+    <div style="visibility: hidden; display: none; width: 1349px; height: 173px; margin: 0px; float: none; position: static; inset: 0px auto auto;"></div><div data-toggle="" class="" style="top: 0px;"><div class="inner">
+      <div class="header" style="background:#343a40 !important;">
+
+        <div class="header-inner container">
+          <div class="header-brand">
+            <a class="header-brand-text" href="https://www.bugbountyhunter.com/" title="Home">
+              <h1 class="h2">
+               <img src="https://www.bugbountyhunter.com/assets/img/newlogo.png" style="box-shadow: 0px 0px 5px #55a79a;  border-radius: 30%; width:100px; height:100px; margin-right:5px;">  <span class="text-white">Bug</span><span class="text-primary">Bounty</span><span class="text-white">Hunter</span> 
+              </h1>
+            </a>
+          </div>
+          <div class="header-block order-12">
+          <!-- <button type="button" class="mb-2 btn btn-outline-warning" style="margin-right:15px;"> <i class="fad fa-user-plus text-white "></i> Create an account</button> -->
+
+           
+
+            <a href="https://www.bugbountyhunter.com/login" style="padding: 15px 10px 10px 15px;" class="mb-2 btn btn-info"><i class="fad fa-sign-in text-white"></i> Access your account</a>
+
+          
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar navbar-expand-md">
+        <div class="navbar-main collapse bg-dark navbar-dark">
+          <ul class="nav navbar-nav container dropdown-effect-fade">
+
+          <li class="nav-item"> <a class="nav-link dropdown-toggle" style="border:none; color:rgba(255,255,255,.75); background-color:#343a40" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="https://www.bugbountyhunter.com/assets/img/question-mark2.png"> Getting started</a>
+          <div class="dropdown-menu dropdown-menu" style="background: #292b2c;">
+            <a href="#" data-toggle="modal" data-target="#myModal" class="text-white dropdown-item" style="padding: 25px 20px 25px 20px !important; background: #292b2c; border:none; font-size:15px;" href="#"><img src="https://www.bugbountyhunter.com/assets/img/vulnerability2.png" style="display:inline; width:45px;"> Learn about vulnerability types </a>
+            <a href="https://www.bugbountyhunter.com/getting-started" class="text-white dropdown-item" style="padding: 25px 20px 25px 20px !important; background: #292b2c; border:none; font-size:15px;" href="#"><img src="https://www.bugbountyhunter.com/assets/img/start-up.png" style="display:inline; width:45px;"> Getting started in bug bounties </a>
+          </div> 
+          </li>
+            <li class="nav-item"> <a  class="nav-link dropdown-toggle" style="border:none; color:rgba(255,255,255,.75); background-color:#343a40" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="https://www.bugbountyhunter.com/assets/img/computer-code.png"> Test your knowledge</a>
+          <div class="dropdown-menu dropdown-menu" style="background: #292b2c;">
+            <a style="padding: 25px 20px 25px 20px !important; background: #292b2c; border:none; font-size:15px;" class="text-white dropdown-item" href="https://www.bugbountyhunter.com/training"><img src="https://www.bugbountyhunter.com/assets/img/hacking.png" style="width: 45px;
+    display: inline;
+"> Free Web Application Challenges</a>
+              <!-- <a style="padding: 25px 20px 25px 20px !important; background: #292b2c; border:none; font-size:15px;" class="text-white dropdown-item" href="https://www.bugbountyhunter.com/membership"><img src="https://www.bugbountyhunter.com/assets/img/hacking1.png" style="width: 45px;
+    display: inline;
+">  BugBountyHunter Membership</a> -->
+                       
+          </div> 
+          </li>
+
+        <li class="nav-item"> <a  class="nav-link dropdown-toggle" style="border:none; color:rgba(255,255,255,.75); background-color:#343a40" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="https://www.bugbountyhunter.com/assets/img/computer-science.png"> Guides for your hunts </a>
+          <div class="dropdown-menu dropdown-menu" style="background: #292b2c;">
+            <a href="https://www.bugbountyhunter.com/zseano" class="text-primary dropdown-item" style="padding: 20px 15px 20px 15px !important; background: #292b2c; border:none; font-size:15px;"><img src="https://www.bugbountyhunter.com/assets/img/bookphoto.png" style="box-shadow: 0px 0px 15px #55a79a;  border-radius: 50%; width:50px; height:50px; margin-right:5px; display:inline;">  ZSeano's Methodology</a>
+            <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/guides/?type=notetaking" target="_blank" class="text-white dropdown-item"><img src="https://www.bugbountyhunter.com/assets/img/scroll-letter.png" style="display:inline;"> Effective Note Taking for bug bounties</a> 
+            <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/guides/?type=javascript_files" class="text-white dropdown-item"><img src="https://www.bugbountyhunter.com/assets/img/scroll-letter.png" style="display:inline;"> Making use of JavaScript (.js) files</a> 
+            <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/guides/?type=apitesting" class="text-white dropdown-item"><img src="https://www.bugbountyhunter.com/assets/img/scroll-letter.png" style="display:inline;">Testing APIs</a>
+            <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/guides/?type=fileuploads" class="text-white dropdown-item"><img src="https://www.bugbountyhunter.com/assets/img/scroll-letter.png" style="display:inline;"> Testing file uploads</a> 
+            <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/guides/?type=bugbounty_toolkit" class="text-white dropdown-item"><img src="https://www.bugbountyhunter.com/assets/img/scroll-letter.png" style="display:inline;"> Bug Bounty ToolKit</a> 
+            <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/guides/?type=waybackmachine" class="text-white dropdown-item"><img src="https://www.bugbountyhunter.com/assets/img/scroll-letter.png" style="display:inline;"> Finding bugs using WayBackMachine </a> 
+
+          </div> 
+          </li>
+
+        <li class="nav-item"> <a  class="nav-link dropdown-toggle" style="border:none; color:rgba(255,255,255,.75); background-color:#343a40" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="https://www.bugbountyhunter.com/assets/img/resources.png"> Useful Resources </a>
+          <div class="dropdown-menu dropdown-menu" style="background: #292b2c;">
+
+            <a href="https://www.bugbountyhunter.com/disclosed" class="text-white dropdown-item" style="padding: 15px 10px 15px 10px !important; background: #292b2c; border:none; font-size:15px;"><img src="https://www.bugbountyhunter.com/assets/img/h1.png" style="margin-right:5px; display:inline; width:20px; height:30px;">  Disclosed HackerOne Reports </a>
+            <a href="https://www.bugbountyhunter.com/publicprograms" class="text-white dropdown-item" style="padding: 15px 10px 15px 10px !important; background: #292b2c; border:none; font-size:15px;"><i class="fad fa-chart-area icon-2x text-info"></i>  Public HackerOne Programs </a>
+
+          </div> 
+          </li>   
+
+        <li class="nav-item"> <a  class="nav-link dropdown-toggle" style="border:none; color:rgba(255,255,255,.75); background-color:#343a40" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="https://www.bugbountyhunter.com/assets/img/users-idea.png"> Our community</a>
+          <div class="dropdown-menu dropdown-menu" style="background: #292b2c;">
+           <a style="padding: 25px 20px 25px 20px !important; background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/viewhunters" target="_blank" class="text-white dropdown-item"><img src="https://www.bugbountyhunter.com/assets/img/achievement.png" style="width: 45px;
+    display: inline;
+"> Endorsed Members</a> 
+
+        <a href="https://www.bugbountyhunter.com/hackevents" class="text-white dropdown-item" style="padding: 15px 10px 15px 10px !important; background: #292b2c; border:none; font-size:15px;"><img src="https://www.bugbountyhunter.com/assets/img/circle-cropped.png" style="margin-right:5px; display:inline; width:50px; height:50px;">  Hackevents </a>
+
+            <div class="dropdown dropdown-submenu dropdown-menu-left">
+          <a href="" style="padding: 25px 20px 25px 20px !important; background: #292b2c; border:none; font-size:15px;" class="text-white dropdown-item dropdown-toggle" id="headers-drop" data-toggle="dropdown" data-hover="dropdown" data-close-others="false" style="border:none; font-size:15px;"><img src="https://www.bugbountyhunter.com/assets/img/author.png" style="
+    display: inline;width: 45px;
+"> Member Articles </a>
+
+        <div class="dropdown-menu text-white" style="background: #292b2c; border:none;" role="menu" aria-labelledby="headers-drop"> 
+          <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/articles/?on=bongo-barker-experience" target="_blank" class="" style="white-space:normal !important;"><i class="fas fa-book-reader text-info"></i> My BARKER Experience</a><br> — Contributed by <a class="text-info" href="https://www.bugbountyhunter.com/hunter/bongo" target="_blank">bongo</a> 
+          <hr>
+          <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/articles/?on=hackingonbb" target="_blank" class="" style="white-space:normal !important;"><i class="fas fa-book-reader text-info"></i> Reaching 1000+ reps on H1 and how you can do it too! </a><br> — Contributed by <a class="text-info" href="https://www.bugbountyhunter.com/hunter/ibruteforce" target="_blank">iBruteforce</a> 
+          <hr>
+          <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/articles/?on=HackeventExperience" target="_blank" class="" style="white-space:normal !important;"><i class="fas fa-book-reader text-info"></i> My Hackevent Experience </a><br> — Contributed by <a class="text-info" href="https://www.bugbountyhunter.com/hunter/ibruteforce" target="_blank">iBruteforce</a>
+          <hr>
+          <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/articles/?on=elieehel-bugbountyhunter" target="_blank" class="" style="white-space:normal !important;"><i class="fas fa-book-reader text-info"></i> BugBountyHunter Experience & Review </a><br> — Contributed by <a  class="text-info"href="https://www.bugbountyhunter.com/hunter/eliee" target="_blank">eliee</a>  
+          <hr>
+          <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/articles/?on=bugboutyhunter.com_experience" target="_blank" class="" style="white-space:normal !important;"><i class="fas fa-book-reader text-info"></i> BugBountyHunter.com Review </a><br> — Contributed by <a  class="text-info"href="https://www.bugbountyhunter.com/hunter/gprime31" target="_blank">gprime31</a> 
+          <hr>
+          <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/articles/?on=mass-assignment-and-learning-new-things" target="_blank" class="" style="white-space:normal !important;"><i class="fas fa-book-reader text-info"></i> <span class="badge badge-warning" style="display: inline !important;">Challenge Available</span> Mass assignement and learning new things </a><br> — Contributed by <a class="text-info" href="https://www.bugbountyhunter.com/hunter/jomar" target="_blank">Jomar</a> 
+          <hr>
+          <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/articles/?on=hackingonbb" target="_blank" class="" style="white-space:normal !important;"><i class="fas fa-book-reader text-info"></i> Reaching 1000+ reps on H1 and how you can do it too! </a><br> — Contributed by <a class="text-info" href="https://www.bugbountyhunter.com/hunter/ibruteforce" target="_blank">iBruteforce</a> 
+           </div>
+
+          </div>
+          </div>
+          </div>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document" style="padding-top: 0% !important;">
+<div class="modal-content text-white" style="
+    background: #1a1d20;
+    border: 1px solid #55a79a;
+    border-radius:25px;
+    padding: 15px 15px 15px;">
+<div class="modal-header">
+<h4 class="modal-title" id="myModalLabel">
+  <i class="fad fa-list-alt text-info icon-2x"></i> Choose vulnerability type
+</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+</div>
+<div class="modal-body">
+<div class="list-group"> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=xss" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i> Cross Site Scripting (XSS)
+<br>
+<span class="badge badge-success">5 labs available</span>
+</a> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=csrf" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  Cross Site Request Forgery (CSRF)
+<br>
+<span class="badge badge-success">1 lab available</span>
+</a> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=open_redirect" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  Open Redirects (+Oauth flows)
+<br>
+<span class="badge badge-success">3 labs available</span>
+</a> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=access_control" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  Broken Access Control
+<br>
+<span class="badge badge-info">Free Labs coming soon! Available for members</span>
+</a> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=ssrf" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  Server Side Request Forgery (SSRF)
+<br>
+<span class="badge badge-info">Free Labs coming soon! Available for members</span></a> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=sql" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  SQL Injection (SQLi)
+<br>
+<span class="badge badge-info">Free Labs coming soon! Available for members</span>
+ </a> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=command_injection" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  Command Injection
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=idor" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  Insecure Direct Object Reference (IDOR)
+<br>
+<span class="badge badge-success">1 Lab Available</span>
+</a> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=xxe" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%);" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  XML External Entity (XXE)
+<br>
+<span class="badge badge-info">Free Labs coming soon! Available for members</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+ <div id="content" class="p-8 text-white" style="padding-top:2rem !important;background:#292b2c;">
+          
+<div class="row">
+<div class="col-5">
+<div class="alert alert" style="  margin-bottom:30px;  padding-top: 15px;
+    border: 3px solid white;
+    background: linear-gradient( 
+0deg
+ , black, #444444);
+    border: 4px solid orange;
+    box-shadow: 0 2px 10px rgb(4 4 4), 0 10px 10px rgb(0 0 0);" role="alert">
+<h4 class="alert-heading">
+<i class="fas fa-lightbulb-on text-warning icon-3x"></i>&nbsp Tip from @zseano
+</h4>
+<hr style="background-color:white;">
+<p><p>You will often see a version number on API queries, such as /api/v2.0/execute or even as a parameter, /api/getuser?v=2.0. Try OLDER versions to see what's changed in older versions and how it works. The more knowledge on a web application the more likely you are to find something!</p></p>
+</div>
+<hr style="background-color:white">
+
+<div style="margin-bottom: 30px;
+          padding: 15px 15px 15px 15px;
+    margin-top: 15px;
+    background: linear-gradient( 
+0deg
+ , black, #444444);
+    border: 4px solid #5cdbb7;
+    box-shadow: 0 2px 10px rgb(4 4 4), 0 10px 10px rgb(0 0 0);">
+<h4><i class="fas fa-toolbox text-primary icon-3x"></i> Resources </h4>
+A list of useful websites, blog posts, reports tools to help you.
+<hr style="background-color:white;">
+<ul>
+<li><a href="https://portswigger.net/web-security/file-upload" target="_blank" rel="noreferrer">PortSwiggers Guide on File Uploads</a></li>
+<li><a href="https://hackerone.com/reports/506646" target="_blank" rel="noreferrer">Disclosed report: Webshell via File Upload on ecjobs.starbucks.com.cn</a>
+</ul>
+</p>
+</div>
+</div>
+<div class="col-7">
+<p class="text-lead"><h3><i class="far fa-info-square text-info icon-3x"></i> Learning to test file uploads</h3>
+<hr style="background:white" />
+<p>Almost every website offers the ability for a user to upload a file, usually an an image for their profile photo or when sharing content. There is a 99% chance the developer has created a filter as to what files to allow and what to block, for example they won't want you uploading <code>.html</code> files for your <b>profile photo!</b> </p>
+<p>In this article we will explore how we can determine what filters may be in place, and get an idea into how the developers are determining what file type we are uploading.</p>
+<p style="margin-top:15px;"><i class="far fa-info-square text-danger icon-3x"></i> When testing file uploads you may find your file is uploaded to a third party domain, such as <code>.amazonaws.com</code> or even <code>.cloudfront.net</code>. This means the file has been stored on an external cloud service and thus the malicious file would not affect your target domain. <b>However</b> sometimes companies will add DNS records to subdomains pointing to their cloud service (usually S3 bucket). For example, <code>media.example.com</code> may be used to render images from their S3 bucket.</p>
+<p style="margin-top:15px;"><h4><i class="fad fa-arrow-to-right text-warning icon-2x"></i> How do they determine what the file is?</h4></p>
+<p>Imagine when editing your profile they may say <b>only photos are allowed</b>, but how are they actually validating it's a photo? It could be via <code>.extension</code> or even <code>mime type</code>. As well as this, are all photos saved in the same format regardless of the photo type we uploaded? For example if you uploaded a <b>.png</b> file, do they simply not care and will save as .jpg regardless? Let's explore some common things we can test in order to test their file uploads.
+</p>
+<p>For the text below, imagine the feature you are testing only allows for .png and .jpg</p>
+<ul>
+<li><p><i class="fad fa-arrow-to-right text-warning icon-2x"></i> <code>Testing file extension</code> - Simple, I first test for .txt to check how strict the filter actually is. A .txt file is harmless and may not be filtered and may help me determine how they handle file uploads and they may be filtering based on <b>malicious</b> extensions, rather than <b>valid extensions</b>. If the .txt file is successful, then I know the <b>file extension</b> is trusted server side. So let's try cause some impact.
+</p>
+<p>If then trying to upload <b>.html, .php, .xml</b> in order to increase impact you notice the extension is filtered due to being malicious, then we can try <b>URL encoding</b> characters such as <b>Null bytes, %00</b>, <b>New lines, %0d%0a</b> and <b>tabs, %09 %07</b> in order to bypass filters. For example:</p>
+</li></ul>
+</div>
+</div>
+<div class="col-12" style="margin:0 auto;">
+<ul><li>
+<p><pre style="margin-bottom: -0.5rem !important;"><code>------WebKitFormBoundaryAxbOlwnrQnLjU1j9
+Content-Disposition: form-data; name="imageupload"; filename="malicious.jpg%0d%0a.html"
+Content-Type: image/png
+&lt;html&gt;HTML code!&lt;/html&gt;</code>
+</pre>
+</p>
+<p>With the above request, using Burp suite you could then <b>RIGHT CLICK</b> on <code>%0d%0a</code> in the request, Click <b>Convert Selection</b> and choose <b>URL Decode</b>. You will see your payload "disappear", and now when sending the request your payload will be sent url encoded and may bypass filters. <b>The same can be achieved when using PASTE FROM FILE</b> if you have saved your specific payload via command line.</p>
+<img src="https://www.bugbountyhunter.com/assets/img/burpEncode_2.png" style="margin-bottom:15px;">
+<br>
+<img src="https://www.bugbountyhunter.com/assets/img/burpEncode_1.png" style="margin-bottom:15px;">
+<p>If changing it to .txt or other extensions does not work, sometimes actually a lot of developers will sometimes create filters for <b>image/*</b>, meaning an <b>.svg</b> upload will work as it's content type is <b>image/svg+xml</b>. .svg files are classed as photos and some developers do not realise they can be used to achieve XSS. Not only this, but sometimes popular Frameworks can be the issue, as for example in Laravel you could have:
+<pre style="margin-bottom: -0.5rem !important;"><code>$request->validate([
+   'post_body' => 'required|string|max:150',
+   'post_image' => 'nullable|image|max:1024',
+]);
+    </code>
+</pre>
+The code above says to only allows for <b>image</b>, however as described above an <b>.svg</b> file is considered an image! This would result in XSS. <a href="https://laravel.com/docs/6.x/validation#rule-image" target="_blank">This is defined here in Laravel in validation rules for images.</a>
+</li>
+<br>
+<li><p><i class="fad fa-arrow-to-right text-info icon-2x"></i> <code>Testing content type and file headers</code> - If the file extension approach doesn't work, then next we can try playing with the content-type. Leaving the <b>file extension</b> as <b>.jpg</b> along with the correct image headers (ÿøÿà for example), we could simply try changing the <b>Content-Type</b> to <b>text/html</b>. When saved server side, the code may allow the file upload as <b>.jpg</b> is found for the extension, but when viewed the content type will be set to <b>text/html</b>. This is especially common if the URL to browse your file doesn't have an extension by default and typically looks like, <code>https://www.example.com/media/QmVQcbUNxs3qV991rwAcpJp6mTFFvRV9JcJnEvZNy5Vzvh</code>. This is because the server is happy to save your upload due to it being <b>.jpg</b> with the correct headers, <b>ÿøÿà</b>, but then uses the <b>Content-Type</b> when viewed. </p>
+<p><b>HOWEVER!</b> Changing the Content-Type isn't the only thing we can try here. Sometimes just changing this isn't enough, and it is recommend to add the corrosponding file headers required for the file upload. For example for <b>text/html</b> you'd add <code>&lt;html&gt;code here</code>, and for <b>application/xml</b> you'd add <code>&lt;?xml&gt;</code>. </p></li>
+<br>
+<li><p><i class="fad fa-arrow-to-right text-info icon-2x"></i> <code>Testing filenames</code> - Using certain characters in the actual filename can help bypass filters. For example what happens if you provide a file name of <code>zseano.php/.jpg</code> - the code may see <b>.jpg</b> and allow, but the server actually writes it to the server as <b>zseano.php</b> and misses everything after the forward slash. Other common characters to try are <code>#</code>, <code>@</code>, <code>;</code>, <code>\</code> <code>+</code>, <code>&</code>, <code>`</code>. Don't forget to try something as simple as case sensitive filters, <code>.PhP</code>, although uncommon in 2022 in my opinion.</p>
+<p><i class="far fa-info-square text-danger icon-3x"></i> If the filename is saved based on your input, then you could check if the filename is on the page anywhere and you can smuggle XSS characters in the filename. Some developers may think users can’t save files with &lt; and &gt; in them, but we are simply modifying the request via our proxy tool (burp suite).</p>
+<p><pre><code>------WebKitFormBoundarySrtFN30pCNmqmNz2
+Content-Disposition: form-data; name="file"; filename="&lt;svg onload=confirm()>58832_300x300.jpg"
+Content-Type: image/jpeg
+ÿØÿà
+....
+</code>
+</pre>
+</p>
+</li>
+</ul>
+<p style="margin-top:15px;"><h4><i class="fad fa-arrow-to-right text-warning icon-2x"></i> Example file upload requests</h4></p>
+<pre><code>------WebKitFormBoundaryAxbOlwnrQnLjU1j9
+Content-Disposition: form-data; name="imageupload"; filename="zseano.jpg"
+Content-Type: text/html
+
+&lt;html&gt;&lt;h2&gt;codehere&lt;/h2&gt;
+</code>
+</pre>
+<p>Sometimes providing NO file extension (or even filename) will cause it to default to the content-type or file extension.</p>
+<pre><code>
+------WebKitFormBoundaryAxbOlwnrQnLjU1j9
+Content-Disposition: form-data; name="imageupload"; filename="zseano."
+Content-Type: text/html
+
+&lt;html&gt;&lt;h2&gt;codehere&lt;/h2&gt;
+</code></pre>
+<pre><code>
+------WebKitFormBoundaryAxbOlwnrQnLjU1j9
+Content-Disposition: form-data; name="imageupload"; filename=".html"
+Content-Type: image/png
+
+&lt;html>HTML code!&lt;/html>
+</code></pre>
+<pre><code>------WebKitFormBoundaryAxbOlwnrQnLjU1j9
+Content-Disposition: form-data; name="imageupload"; filename="zseano.jpg#/?&=+\.html"
+Content-Type: image/jpeg
+
+&lt;html&gt;&lt;h2&gt;codehere&lt;/h2&gt;
+</code>
+</pre>
+<pre><code>------WebKitFormBoundaryAxbOlwnrQnLjU1j9
+Content-Disposition: form-data; name="imageupload"; filename="zseano.jpg%0d%0a.php"
+Content-Type: application/php
+
+&lt;?php echo "oops!"; ?&gt;
+</code>
+</pre>
+<pre><code>------WebKitFormBoundaryAxbOlwnrQnLjU1j9
+Content-Disposition: form-data; name="imageupload"; filename="zseano.jpg%u0025%u0030%u0039.php"
+Content-Type: application/php
+
+&lt;?php echo "oops!"; ?&gt;
+</code>
+</pre>
+<p>Sometimes if you leave the image header this is enough to bypass the checks. Below is a real payload used on a bug bounty program.</p>
+<pre><code>------WebKitFormBoundaryoMZOWnpiPkiDc0yV
+Content-Disposition: form-data; name="oauth_application[logo_image_file]"; filename="testing1.jpg"
+Content-Type: text/html
+
+ÿØÿà
+&lt;script>alert(0)&lt;/script>
+</code></pre> </div>
+
+            </p>
+
+    </div>
+  
+
+
+                  
+    <footer id="footer" class="p-0" style="background: #343a40 !important;">
+  <div style="text-align:center; margin-top:60px; padding-bottom:35px;">
+  <div class="row">
+  <div class="col-md-4">
+  <h4 class="text-uppercase text-white">
+    <i class="fad fa-envelope text-primary icon-2x"></i> Follow Us
+  </h4>
+  <hr class="w-80" style="background-color:white;">
+  <address>
+  <ul class="list-unstyled">
+  <li><abbr title="Twitter"><i class="fab fa-twitter"></i></abbr>
+    <a href="https://www.twitter.com/bugbountyhunt3r" target="_blank">BugBountyHunt3r</a></li>
+  </ul>
+  BugBountyHunter LTD is a company registered in England and Wales with company number 13455081<br>
+  <small>71-75 SHELTON STREET, COVENT GARDEN, LONDON, ENGLAND, WC2H 9JQ</small>
+  </address>
+  </div>
+
+   
+  <div class="col-md-4">
+  <h4 class="text-uppercase text-white">
+    <i class="fas fa-exclamation-triangle icon-2x text-red"></i> Important Information
+  </h4>
+    <hr class="w-80" style="background-color:white;">
+    <p>Make sure to read our <a href="https://www.bugbountyhunter.com/terms#hackdisclaimer">"Hacking Disclaimer"</a>, our <a href="https://www.bugbountyhunter.com/terms">terms of service</a> and our <a href="https://www.bugbountyhunter.com/privacy"> privacy policy. </a></p>
+  </div>
+
+    <div class="col-md-4">
+  <h4 class="text-uppercase text-white">
+    <i class="fad fa-laptop-code text-orange icon-2x"></i> Hands on Hacking
+  </h4>
+    <hr class="w-80" style="background-color:white;">
+    <p><a href="https://www.bugbountyhunter.com/training"> <i class="fad fa-code text-info icon-1x" aria-hidden="true"></i> Free Web Application Challenges</a></p>
+    <p><a href="https://www.bugbountyhunter.com/playground"><i class="fad fa-code text-purple icon-1x" aria-hidden="true"></i> ZSeano's Playground</a></p>
+    <!-- <p><a href="https://www.bugbountyhunter.com/membership"><span class="badge badge-danger" style="display: inline !important;">BARKER</span> BugBountyHunter Membership</a></p> -->
+  </div>
+   
+  </div>
+  </div>
+    <a href="#top" class="btn btn-icon btn-dark pos-fixed pos-b pos-r mr-3 mb-3 scroll-state-hidden" title="Back to top" data-scroll="scroll-state"><i class="fa fa-chevron-up"></i></a>
+  </div>
+  </div>
+</footer> 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://www.bugbountyhunter.com/assets/js/script.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  </body>
+</html>
+

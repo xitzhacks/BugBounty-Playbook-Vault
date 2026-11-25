@@ -1,0 +1,3 @@
+# split database parts are binary blobs; keep git from diffing them
+vault/_VAULT/reports.sqlite.part-* binary
+*.sqlite binary

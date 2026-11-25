@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+vault/_VAULT/reports.sqlite
+vault/_VAULT/reports.sqlite-wal
+vault/_VAULT/reports.sqlite-shm

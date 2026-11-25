@@ -1,0 +1,503 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Become a bug bounty hunter - Learn about web application vulnerabilities and how to find them on bug bounty programs | BugBountyHunter.com</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="BugBountyHunter is a training platform created by bug bounty hunter zseano designed to help you learn all about web application vulnerabilities and how get involved in bug bounties. Begin participating from the comfort of your own home.">
+  <meta name="author" content="@zseano">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link href="https://www.bugbountyhunter.com/assets/css/theme-style.min.css" rel="stylesheet">
+  <link href="https://www.bugbountyhunter.com/assets/css/custom-style.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/f750f9d33e.js" crossorigin="anonymous"></script>
+  <link href="https://www.bugbountyhunter.com/assets/plugins/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+  <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+  <link href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.bugbountyhunter.com/assets/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://www.bugbountyhunter.com/assets/favicons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://www.bugbountyhunter.com/assets/favicons/favicon.ico">
+  <link rel="manifest" href="assets/favicons/manifest.json">
+  <link rel="shortcut icon" href="assets/favicons/favicon.ico">
+  <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Rambla:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Calligraffitti' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/retina.js/2.1.3/retina.min.js"></script>
+  <style type="text/css">
+  .f-circle {
+    font-family: Arial;
+    font-weight: bold;
+    display: block;
+    border: 1px solid #860000;
+    border-radius: 999px;
+    padding: 6px 12px;
+  }
+  </style>
+</head>
+
+
+  
+<body class="page page-header-navbar-below navbar-layout-navbar-below" style="background: #292b2c;">
+
+
+<div class="alert alert-warning" style="margin-bottom:25px" role="alert"> <i class="fad fa-info-circle icon-3x text-info" aria-hidden="true"></i> You are currently browsing our old platform which contains outdated information and non-working challenges. Our membership platform continues to operate as normal for current members and you can access BARKER. 
+<br><br>Our new website is <b>very close</b> to being released, so please keep an eye on our site over the next month for fresh updated content!</div>
+
+<div id="header" style="background:#343a40 !important;">
+    <div style="visibility: hidden; display: none; width: 1349px; height: 173px; margin: 0px; float: none; position: static; inset: 0px auto auto;"></div><div data-toggle="" class="" style="top: 0px;"><div class="inner">
+      <div class="header" style="background:#343a40 !important;">
+
+        <div class="header-inner container">
+          <div class="header-brand">
+            <a class="header-brand-text" href="https://www.bugbountyhunter.com/" title="Home">
+              <h1 class="h2">
+               <img src="https://www.bugbountyhunter.com/assets/img/newlogo.png" style="box-shadow: 0px 0px 5px #55a79a;  border-radius: 30%; width:100px; height:100px; margin-right:5px;">  <span class="text-white">Bug</span><span class="text-primary">Bounty</span><span class="text-white">Hunter</span> 
+              </h1>
+            </a>
+          </div>
+          <div class="header-block order-12">
+          <!-- <button type="button" class="mb-2 btn btn-outline-warning" style="margin-right:15px;"> <i class="fad fa-user-plus text-white "></i> Create an account</button> -->
+
+           
+
+            <a href="https://www.bugbountyhunter.com/login" style="padding: 15px 10px 10px 15px;" class="mb-2 btn btn-info"><i class="fad fa-sign-in text-white"></i> Access your account</a>
+
+          
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar navbar-expand-md">
+        <div class="navbar-main collapse bg-dark navbar-dark">
+          <ul class="nav navbar-nav container dropdown-effect-fade">
+
+          <li class="nav-item"> <a class="nav-link dropdown-toggle" style="border:none; color:rgba(255,255,255,.75); background-color:#343a40" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="https://www.bugbountyhunter.com/assets/img/question-mark2.png"> Getting started</a>
+          <div class="dropdown-menu dropdown-menu" style="background: #292b2c;">
+            <a href="#" data-toggle="modal" data-target="#myModal" class="text-white dropdown-item" style="padding: 25px 20px 25px 20px !important; background: #292b2c; border:none; font-size:15px;" href="#"><img src="https://www.bugbountyhunter.com/assets/img/vulnerability2.png" style="display:inline; width:45px;"> Learn about vulnerability types </a>
+            <a href="https://www.bugbountyhunter.com/getting-started" class="text-white dropdown-item" style="padding: 25px 20px 25px 20px !important; background: #292b2c; border:none; font-size:15px;" href="#"><img src="https://www.bugbountyhunter.com/assets/img/start-up.png" style="display:inline; width:45px;"> Getting started in bug bounties </a>
+          </div> 
+          </li>
+            <li class="nav-item"> <a  class="nav-link dropdown-toggle" style="border:none; color:rgba(255,255,255,.75); background-color:#343a40" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="https://www.bugbountyhunter.com/assets/img/computer-code.png"> Test your knowledge</a>
+          <div class="dropdown-menu dropdown-menu" style="background: #292b2c;">
+            <a style="padding: 25px 20px 25px 20px !important; background: #292b2c; border:none; font-size:15px;" class="text-white dropdown-item" href="https://www.bugbountyhunter.com/training"><img src="https://www.bugbountyhunter.com/assets/img/hacking.png" style="width: 45px;
+    display: inline;
+"> Free Web Application Challenges</a>
+              <!-- <a style="padding: 25px 20px 25px 20px !important; background: #292b2c; border:none; font-size:15px;" class="text-white dropdown-item" href="https://www.bugbountyhunter.com/membership"><img src="https://www.bugbountyhunter.com/assets/img/hacking1.png" style="width: 45px;
+    display: inline;
+">  BugBountyHunter Membership</a> -->
+                       
+          </div> 
+          </li>
+
+        <li class="nav-item"> <a  class="nav-link dropdown-toggle" style="border:none; color:rgba(255,255,255,.75); background-color:#343a40" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="https://www.bugbountyhunter.com/assets/img/computer-science.png"> Guides for your hunts </a>
+          <div class="dropdown-menu dropdown-menu" style="background: #292b2c;">
+            <a href="https://www.bugbountyhunter.com/zseano" class="text-primary dropdown-item" style="padding: 20px 15px 20px 15px !important; background: #292b2c; border:none; font-size:15px;"><img src="https://www.bugbountyhunter.com/assets/img/bookphoto.png" style="box-shadow: 0px 0px 15px #55a79a;  border-radius: 50%; width:50px; height:50px; margin-right:5px; display:inline;">  ZSeano's Methodology</a>
+            <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/guides/?type=notetaking" target="_blank" class="text-white dropdown-item"><img src="https://www.bugbountyhunter.com/assets/img/scroll-letter.png" style="display:inline;"> Effective Note Taking for bug bounties</a> 
+            <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/guides/?type=javascript_files" class="text-white dropdown-item"><img src="https://www.bugbountyhunter.com/assets/img/scroll-letter.png" style="display:inline;"> Making use of JavaScript (.js) files</a> 
+            <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/guides/?type=apitesting" class="text-white dropdown-item"><img src="https://www.bugbountyhunter.com/assets/img/scroll-letter.png" style="display:inline;">Testing APIs</a>
+            <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/guides/?type=fileuploads" class="text-white dropdown-item"><img src="https://www.bugbountyhunter.com/assets/img/scroll-letter.png" style="display:inline;"> Testing file uploads</a> 
+            <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/guides/?type=bugbounty_toolkit" class="text-white dropdown-item"><img src="https://www.bugbountyhunter.com/assets/img/scroll-letter.png" style="display:inline;"> Bug Bounty ToolKit</a> 
+            <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/guides/?type=waybackmachine" class="text-white dropdown-item"><img src="https://www.bugbountyhunter.com/assets/img/scroll-letter.png" style="display:inline;"> Finding bugs using WayBackMachine </a> 
+
+          </div> 
+          </li>
+
+        <li class="nav-item"> <a  class="nav-link dropdown-toggle" style="border:none; color:rgba(255,255,255,.75); background-color:#343a40" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="https://www.bugbountyhunter.com/assets/img/resources.png"> Useful Resources </a>
+          <div class="dropdown-menu dropdown-menu" style="background: #292b2c;">
+
+            <a href="https://www.bugbountyhunter.com/disclosed" class="text-white dropdown-item" style="padding: 15px 10px 15px 10px !important; background: #292b2c; border:none; font-size:15px;"><img src="https://www.bugbountyhunter.com/assets/img/h1.png" style="margin-right:5px; display:inline; width:20px; height:30px;">  Disclosed HackerOne Reports </a>
+            <a href="https://www.bugbountyhunter.com/publicprograms" class="text-white dropdown-item" style="padding: 15px 10px 15px 10px !important; background: #292b2c; border:none; font-size:15px;"><i class="fad fa-chart-area icon-2x text-info"></i>  Public HackerOne Programs </a>
+
+          </div> 
+          </li>   
+
+        <li class="nav-item"> <a  class="nav-link dropdown-toggle" style="border:none; color:rgba(255,255,255,.75); background-color:#343a40" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="https://www.bugbountyhunter.com/assets/img/users-idea.png"> Our community</a>
+          <div class="dropdown-menu dropdown-menu" style="background: #292b2c;">
+           <a style="padding: 25px 20px 25px 20px !important; background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/viewhunters" target="_blank" class="text-white dropdown-item"><img src="https://www.bugbountyhunter.com/assets/img/achievement.png" style="width: 45px;
+    display: inline;
+"> Endorsed Members</a> 
+
+        <a href="https://www.bugbountyhunter.com/hackevents" class="text-white dropdown-item" style="padding: 15px 10px 15px 10px !important; background: #292b2c; border:none; font-size:15px;"><img src="https://www.bugbountyhunter.com/assets/img/circle-cropped.png" style="margin-right:5px; display:inline; width:50px; height:50px;">  Hackevents </a>
+
+            <div class="dropdown dropdown-submenu dropdown-menu-left">
+          <a href="" style="padding: 25px 20px 25px 20px !important; background: #292b2c; border:none; font-size:15px;" class="text-white dropdown-item dropdown-toggle" id="headers-drop" data-toggle="dropdown" data-hover="dropdown" data-close-others="false" style="border:none; font-size:15px;"><img src="https://www.bugbountyhunter.com/assets/img/author.png" style="
+    display: inline;width: 45px;
+"> Member Articles </a>
+
+        <div class="dropdown-menu text-white" style="background: #292b2c; border:none;" role="menu" aria-labelledby="headers-drop"> 
+          <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/articles/?on=bongo-barker-experience" target="_blank" class="" style="white-space:normal !important;"><i class="fas fa-book-reader text-info"></i> My BARKER Experience</a><br> — Contributed by <a class="text-info" href="https://www.bugbountyhunter.com/hunter/bongo" target="_blank">bongo</a> 
+          <hr>
+          <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/articles/?on=hackingonbb" target="_blank" class="" style="white-space:normal !important;"><i class="fas fa-book-reader text-info"></i> Reaching 1000+ reps on H1 and how you can do it too! </a><br> — Contributed by <a class="text-info" href="https://www.bugbountyhunter.com/hunter/ibruteforce" target="_blank">iBruteforce</a> 
+          <hr>
+          <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/articles/?on=HackeventExperience" target="_blank" class="" style="white-space:normal !important;"><i class="fas fa-book-reader text-info"></i> My Hackevent Experience </a><br> — Contributed by <a class="text-info" href="https://www.bugbountyhunter.com/hunter/ibruteforce" target="_blank">iBruteforce</a>
+          <hr>
+          <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/articles/?on=elieehel-bugbountyhunter" target="_blank" class="" style="white-space:normal !important;"><i class="fas fa-book-reader text-info"></i> BugBountyHunter Experience & Review </a><br> — Contributed by <a  class="text-info"href="https://www.bugbountyhunter.com/hunter/eliee" target="_blank">eliee</a>  
+          <hr>
+          <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/articles/?on=bugboutyhunter.com_experience" target="_blank" class="" style="white-space:normal !important;"><i class="fas fa-book-reader text-info"></i> BugBountyHunter.com Review </a><br> — Contributed by <a  class="text-info"href="https://www.bugbountyhunter.com/hunter/gprime31" target="_blank">gprime31</a> 
+          <hr>
+          <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/articles/?on=mass-assignment-and-learning-new-things" target="_blank" class="" style="white-space:normal !important;"><i class="fas fa-book-reader text-info"></i> <span class="badge badge-warning" style="display: inline !important;">Challenge Available</span> Mass assignement and learning new things </a><br> — Contributed by <a class="text-info" href="https://www.bugbountyhunter.com/hunter/jomar" target="_blank">Jomar</a> 
+          <hr>
+          <a style="background: #292b2c; border:none; font-size:15px;" href="https://www.bugbountyhunter.com/articles/?on=hackingonbb" target="_blank" class="" style="white-space:normal !important;"><i class="fas fa-book-reader text-info"></i> Reaching 1000+ reps on H1 and how you can do it too! </a><br> — Contributed by <a class="text-info" href="https://www.bugbountyhunter.com/hunter/ibruteforce" target="_blank">iBruteforce</a> 
+           </div>
+
+          </div>
+          </div>
+          </div>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document" style="padding-top: 0% !important;">
+<div class="modal-content text-white" style="
+    background: #1a1d20;
+    border: 1px solid #55a79a;
+    border-radius:25px;
+    padding: 15px 15px 15px;">
+<div class="modal-header">
+<h4 class="modal-title" id="myModalLabel">
+  <i class="fad fa-list-alt text-info icon-2x"></i> Choose vulnerability type
+</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+</div>
+<div class="modal-body">
+<div class="list-group"> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=xss" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i> Cross Site Scripting (XSS)
+<br>
+<span class="badge badge-success">5 labs available</span>
+</a> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=csrf" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  Cross Site Request Forgery (CSRF)
+<br>
+<span class="badge badge-success">1 lab available</span>
+</a> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=open_redirect" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  Open Redirects (+Oauth flows)
+<br>
+<span class="badge badge-success">3 labs available</span>
+</a> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=access_control" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  Broken Access Control
+<br>
+<span class="badge badge-info">Free Labs coming soon! Available for members</span>
+</a> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=ssrf" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  Server Side Request Forgery (SSRF)
+<br>
+<span class="badge badge-info">Free Labs coming soon! Available for members</span></a> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=sql" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  SQL Injection (SQLi)
+<br>
+<span class="badge badge-info">Free Labs coming soon! Available for members</span>
+ </a> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=command_injection" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  Command Injection
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=idor" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%); margin-bottom:10px;" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  Insecure Direct Object Reference (IDOR)
+<br>
+<span class="badge badge-success">1 Lab Available</span>
+</a> 
+  <a href="https://www.bugbountyhunter.com/vulnerability/?type=xxe" style="border: 1px solid #55a79a; background: rgb(19,20,20,1);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 4%, rgba(19,20,20,1) 96%, rgba(19,20,20,1) 100%);" class="list-group-item"><i class="fas fa-arrow-alt-from-left icon-2x text-white"></i>  XML External Entity (XXE)
+<br>
+<span class="badge badge-info">Free Labs coming soon! Available for members</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div> 
+
+<div id="highlighted" class="bg-black pos-md-relative">
+  <div class="overlay overlay-op-9 text-left" style="background: url('https://www.bugbountyhunter.com/assets/img/gB.png') 0% 0% / cover;">
+  <div class="text-center text-white" style="height:637px">
+  <div class="container h-70 d-flex justify-content-center flex-column pt-lg-6">
+
+  <h3 style="margin-top:45px;" class="display-4 text-white font-weight-bold text-letter-spacing-xs mt-lg-7">
+    Helping you become a <span class="text-danger">Bug</span><span class="text-primary">Bounty</span><span class="text-white">Hunter</span>
+  </h3>
+  <hr class="bg-primary  p-1  text-center h-1" style="width:80%">
+    We're on a mission to be your go-to place for everything bug bounties and to help you learn how to get started. 
+    <hr> Learn how to test for security vulnerabilities on web applications with our various real-life web applications and begin to gain the confidence needed to apply your newly found knowledge on bug bounty programs. Browse and digest security researcher tutorials, guides, writeups and find information related to public bug bounty programs.
+   <hr style="background-color:white;">
+   <p><i class="fa-solid fa-circle-heart icon-2x text-pink"></i> Made with love by <a href="https://www.twitter.com/zseano" target="_blank" class="text-info">@zseano</a></p>
+
+   </div>
+   </div>
+
+   </div>
+ </div>
+
+<section class="slice-xlg sct-color-1 text-white" style="background: #292b2c; padding-bottom:3rem !important;">
+  <div class="container" style="padding-right:0px !important; padding-left:0px !important;">
+
+  <div class="row align-items-md-center">
+  <div class="col-md-7">
+ <div class="px-2 py-0 text-center text-lg-left">
+<h2 class="heading heading-2 strong-600 line-height-1_6" style="margin-top:55px;">
+<img src="https://www.bugbountyhunter.com/assets/img/webappvuln1.png">
+<br> Learning about <span class="text-primary">web application</span> <span class="text-danger">vulnerabilities</span>
+</h2>
+<hr style="background-color:white;">
+<p class="line-height-1_6 mt-4">
+New or experienced, learn about various vulnerability types on custom made web application challenges based on real bug bounty findings! Learn about new techniques and bypasses whilst embracing the mindset of a hacker. 
+<hr>
+You have knowledge on what type of vulnerability you should be looking for but are you able to find it? <b>There are no flags</b> to find and instead you're learning about the various mistakes developers make when developing and how vulnerabilities arise from this.
+</p>
+<p class="line-height-1_6 mt-4">
+The stage is yours, take it and have some fun!</p>
+<a style="margin-right:25px; margin-top:15px; margin-bottom:45px;" href="/training" class="btn btn-primary btn-lg py-lg-2 px-lg-5" data-toggle="scroll-link">
+Browse free challenges <i class="fad fa-angle-double-right text-danger icon-1x"></i>
+</a>
+  </div>
+  </div>
+
+
+
+<div class="col-md-5 ml-lg-auto" style="padding-top:8.5rem !important;">
+<div class="list-group" style="width:450px;">
+  <div class="row">
+
+  
+  <div class="col-md-6">
+    <div class="card card-body text-center text-white"  style="background: rgb(19,20,20);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 0%, rgba(38,57,41,1) 43%, rgba(38,57,41,1) 62%, rgba(19,20,20,1) 100%); border-radius:15px; border: 4px solid #55A79A" data-url="https://www.bugbountyhunter.com/challenge?id=4">
+  <h5 class="card-title">
+    <p style="font-size:25px; padding-bottom:15px;">
+              <span style="margin-right:10px;" class="badge badge-success">For newcomers</span>
+    </p>
+      Only relative redirects are allowed!  </h5>
+  <hr style="background-color:white;">
+  <code>Open Redirect</code>
+  <a href="https://www.bugbountyhunter.com/challenge?id=4">Browse challenge <i class="fad fa-angle-double-right text-danger"></i></a>
+    </div> 
+  </div>
+
+ 
+  <div class="col-md-6">
+    <div class="card card-body text-center text-white"  style="background: rgb(19,20,20);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 0%, rgba(38,57,41,1) 43%, rgba(38,57,41,1) 62%, rgba(19,20,20,1) 100%); border-radius:15px; border: 4px solid #55A79A" data-url="https://www.bugbountyhunter.com/challenge?id=13">
+  <h5 class="card-title">
+    <p style="font-size:25px; padding-bottom:15px;">
+     <font color=orange>🔥</font>
+         <span style="margin-right:10px;" class="badge badge-warning">Level up</span>
+    </p>
+      There's a leak somewhere!  </h5>
+  <hr style="background-color:white;">
+  <code>Recon</code>
+  <a href="https://www.bugbountyhunter.com/challenge?id=13">Browse challenge <i class="fad fa-angle-double-right text-danger"></i></a>
+    </div> 
+  </div>
+
+ 
+  <div class="col-md-6">
+    <div class="card card-body text-center text-white"  style="background: rgb(19,20,20);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 0%, rgba(38,57,41,1) 43%, rgba(38,57,41,1) 62%, rgba(19,20,20,1) 100%); border-radius:15px; border: 4px solid #55A79A" data-url="https://www.bugbountyhunter.com/challenge?id=7">
+  <h5 class="card-title">
+    <p style="font-size:25px; padding-bottom:15px;">
+              <span style="margin-right:10px;" class="badge badge-success">For newcomers</span>
+    </p>
+      You may only redirect to *.bugbountyhunter.com  </h5>
+  <hr style="background-color:white;">
+  <code>Open Redirect</code>
+  <a href="https://www.bugbountyhunter.com/challenge?id=7">Browse challenge <i class="fad fa-angle-double-right text-danger"></i></a>
+    </div> 
+  </div>
+
+ 
+  <div class="col-md-6">
+    <div class="card card-body text-center text-white"  style="background: rgb(19,20,20);
+background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 0%, rgba(38,57,41,1) 43%, rgba(38,57,41,1) 62%, rgba(19,20,20,1) 100%); border-radius:15px; border: 4px solid #55A79A" data-url="https://www.bugbountyhunter.com/challenge?id=6">
+  <h5 class="card-title">
+    <p style="font-size:25px; padding-bottom:15px;">
+     <font color=orange>🔥</font>
+         <span style="margin-right:10px;" class="badge badge-warning">Level up</span>
+    </p>
+      This strict URL filter should prevent XSS, right?  </h5>
+  <hr style="background-color:white;">
+  <code>XSS</code>
+  <a href="https://www.bugbountyhunter.com/challenge?id=6">Browse challenge <i class="fad fa-angle-double-right text-danger"></i></a>
+    </div> 
+  </div>
+
+ 
+  
+  </div>
+  </div>
+
+  </div>
+</div>
+  
+
+
+ <div class="row" style="margin-top:45px;">
+  <div class="col-7">
+    <img src="https://www.bugbountyhunter.com/assets/img/ffhNew2.png" style="box-shadow: 0px 0px 5px #fff; width:100%; margin-top:55px;">
+  </div>
+  <div class="col-5" style="margin-top:25px;">
+    <h3><img src="https://www.bugbountyhunter.com/assets/img/puzzle1.png"> <span class="badge badge-info">Extended learning</span></h3>
+    <h2 class="text-warning">ZSeano's Playground</h2>
+    <hr style="background-color:white;">
+      <p class="line-height-1_6 mt-4">
+      <b>FastFoodHackings</b> is a demo web application designed to test your approach to discovering vulnerabilities. <b>You've learnt about various vulnerability types from our other challenges</b>, but now can you go and find them without knowing <b>where they are</b> and using your newly acquired hacker mindset?
+      <hr>
+       With over <b>25</b> unique findings to discover but <b>no knowledge</b> on what to find, it's up to <b>you</b> to learn the hacker mindset and discover all of the vulnerabilities! Learn how the web application works and explore the various features available and begin your hunt!</p>
+      <p class="line-height-1_6 mt-4">Please note there is no triage available for this demo.</p>
+      <a style="margin-right:25px; margin-top:15px; margin-bottom:45px;" href="/playground" class="btn btn-primary btn-lg py-lg-2 px-lg-5" data-toggle="scroll-link">
+      Visit playground <i class="fad fa-angle-double-right text-danger icon-1x"></i>
+    </a>
+  </div>
+ </div>
+ </div>
+</section>
+
+
+
+
+<!-- 
+  <hr class="bg-primary p-1 mb-1 my-auto text-center h-2" style="width:85%">
+<section class="slice-lg sct-color-1 text-white" style="background: #292b2c; padding-bottom:4rem !important;">
+  <div class="container" style="padding-right:0px !important; padding-left:0px !important;">
+  <div class="row cols-xs-space cols-md-space cols-lg-space">
+  <div class="col-lg-7 ml-lg-auto order-lg-2">
+  <div class="px-3 py-3 text-center text-lg-left" style="margin-top:6rem">
+  <h2 class="heading heading-2 strong-600 line-height-1_6" style="margin-top:35px;">
+  <img src="https://www.bugbountyhunter.com/barker_logo.jpg" style="box-shadow: 0px 0px 5px #fff;  border-radius: 50%; width:140px; height:140px; margin-top:-20px; margin-bottom:15px;">
+  <span class="badge badge-success" style="font-size:21px; display: inline !important;">BugBountyHunter Membership</span>
+  <br>
+</h2>
+<h2>
+  <hr style="background-color:white;">
+    Gain <span class="text-primary">confidence</span> testing web applications with <span class="text-danger">BARKER</span>
+  </h2>
+  <p class="line-height-1_6 mt-4">
+    Take your learning to the next level and put your knowledge & skills around web vulnerabilities to the test and apply them on our <b>fully working</b> web application dubbed <b>BARKER</b> with real triage and access to a private community.</p>
+  <p class="line-height-1_6 mt-4">
+     BARKER contains over <b>100 real-life vulnerabilities</b>, <b>real bugs from real life scenarios</b>, all you have to do is understand the features & begin testing for vulnerabilities! <code>True hacker style.</code> Signup, login and begin interacting with the various features and start testing for vulnerabilities instantly.</p>
+  <p class="line-height-1_6 mt-4">
+  Learn to write reports based on your findings which will then be triaged by us. The more bugs you find, the higher your level and rank on the leaderboard!
+  </p>
+  <p class="line-height-1_6 mt-4">
+   Gain confidence as you go through the application & begin to understand how everything works, parameters used etc, rather than being told, "<i>there's xss here, can you find the bypass?</i>". Over time the more you play with <b>BARKER</b>, the more you'll begin to find. How many bugs are <i>staring at you in the face?</i></p>
+  <a style="margin-right:25px; margin-top:15px; margin-bottom:45px;" href="/membership" class="btn btn-primary btn-lg py-lg-2 px-lg-5" data-toggle="scroll-link">
+  Learn more about joining BugBountyHunter <i class="fad fa-angle-double-right text-danger icon-1x" aria-hidden="true"></i>
+  </a>
+  </div>
+  </div>
+
+  <div class="col-4" style="">
+    <img src="assets/img/barker-preview1.png" style="width:480px; margin-bottom:35px; margin-top:7rem;"> <br>
+    <img src="https://www.bugbountyhunter.com/membership/test.png" style="width:490px;">
+  </div>
+  </div>
+  </div>
+</section> -->
+
+
+
+<hr class="bg-primary p-1 mb-1 my-auto text-center h-2" style="width:85%; margin-top:15px;">
+
+<section class="slice-lg sct-color-1 text-white" style="background: #292b2c; padding-top:4rem !important; padding-bottom:8rem !important;"> 
+<div class="container">
+  <h2 class="heading heading-2 strong-600 line-height-1_6">
+<i class="fal fa-users-crown text-warning icon-2x"></i> Our Community </span> 
+</h2>
+<div class="alert alert-cyan-dark" style="margin-top:25px; margin-bottom:35px;" role="alert"> Learn from our members disclosed reports and see the various approaches taken to discovering vulnerabilities on our members <a href="https://www.bugbountyhunter.com/hackevents">Hackevent web application</a>, <b>FirstBlood</b>. Follow their guides and get to know our members and browse their progress via their public profile.</div>
+
+<h3 class="text-white"><i class="fad fa-toolbox text-info"></i> Contributed by members <small><a style="margin-left:10px;" class="btn btn-primary" href="https://www.bugbountyhunter.com/viewhunters">View our honourable members <i class="fad fa-angle-double-right text-danger icon-1x"></i></a></small></h3>
+<hr>
+<div class="row">
+        <div class="col-4">
+              <a href="https://www.bugbountyhunter.com/guides/?type=notetaking" class="list-group-item list-group-item-action text-white" style="margin-bottom:10px; background: rgb(19,20,20);
+                  background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 0%, rgba(38,57,41,1) 43%, rgba(38,57,41,1) 62%, rgba(19,20,20,1) 100%); border-radius:15px; border: 4px solid #55a79a">
+              <h4 class="list-group-item-heading text-warning">
+                <i class="fad fa-external-link-alt text-primary icon-1x"></i> Notetaking for bug bounties
+              </h4>
+              <p class="list-group-item-text">An article contributed by one of our top hackers, <code>iBruteforce</code> giving you tips and advice on taking effective notes when participating in bug bounties</p>
+              </a>
+          </div>
+        <div class="col-4">
+                <a href="https://www.bugbountyhunter.com/articles/?on=bugboutyhunter.com_experience" class="list-group-item list-group-item-action text-white" style="margin-bottom:20px; background: rgb(19,20,20);
+                  background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 0%, rgba(38,57,41,1) 43%, rgba(38,57,41,1) 62%, rgba(19,20,20,1) 100%); border-radius:15px; border: 4px solid #55a79a">
+                  <h4 class="list-group-item-heading text-warning">
+                    <i class="fad fa-external-link-alt text-primary icon-1x"></i> BugBountyHunter Member Review
+                  </h4>
+                    <p class="list-group-item-text">A review of our membership from one of our top hackers, <code>GPRIME31</code>. </p>
+                  </a>
+          </div>
+        <div class="col-4">
+              <a href="https://www.bugbountyhunter.com/articles/?on=firstbloodhackers" class="list-group-item list-group-item-action text-white" style="margin-bottom:20px; background: rgb(19,20,20);
+                background: linear-gradient(90deg, rgba(19,20,20,1) 0%, rgba(19,20,20,1) 0%, rgba(38,57,41,1) 43%, rgba(38,57,41,1) 62%, rgba(19,20,20,1) 100%); border-radius:15px; border: 4px solid #55a79a">
+                  <h4 class="list-group-item-heading text-warning">
+                    <i class="fad fa-external-link-alt text-primary icon-1x"></i> My methodology for "FirstBlood" Hackevent
+                  </h4>
+                    <p class="list-group-item-text">An article contributed by one of our top hackers, <code>Jomar</code> detailing his methodology during our members hackevent, FirstBlood</p>
+                </a>
+          </div>
+
+</div>
+  </div>
+  </div>
+  </div>
+  </div>
+</section>
+
+<footer id="footer" class="p-0" style="background: #343a40 !important;">
+  <div style="text-align:center; margin-top:60px; padding-bottom:35px;">
+  <div class="row">
+  <div class="col-md-4">
+  <h4 class="text-uppercase text-white">
+    <i class="fad fa-envelope text-primary icon-2x"></i> Follow Us
+  </h4>
+  <hr class="w-80" style="background-color:white;">
+  <address>
+  <ul class="list-unstyled">
+  <li><abbr title="Twitter"><i class="fab fa-twitter"></i></abbr>
+    <a href="https://www.twitter.com/bugbountyhunt3r" target="_blank">BugBountyHunt3r</a></li>
+  </ul>
+  BugBountyHunter LTD is a company registered in England and Wales with company number 13455081<br>
+  <small>71-75 SHELTON STREET, COVENT GARDEN, LONDON, ENGLAND, WC2H 9JQ</small>
+  </address>
+  </div>
+
+   
+  <div class="col-md-4">
+  <h4 class="text-uppercase text-white">
+    <i class="fas fa-exclamation-triangle icon-2x text-red"></i> Important Information
+  </h4>
+    <hr class="w-80" style="background-color:white;">
+    <p>Make sure to read our <a href="https://www.bugbountyhunter.com/terms#hackdisclaimer">"Hacking Disclaimer"</a>, our <a href="https://www.bugbountyhunter.com/terms">terms of service</a> and our <a href="https://www.bugbountyhunter.com/privacy"> privacy policy. </a></p>
+  </div>
+
+    <div class="col-md-4">
+  <h4 class="text-uppercase text-white">
+    <i class="fad fa-laptop-code text-orange icon-2x"></i> Hands on Hacking
+  </h4>
+    <hr class="w-80" style="background-color:white;">
+    <p><a href="https://www.bugbountyhunter.com/training"> <i class="fad fa-code text-info icon-1x" aria-hidden="true"></i> Free Web Application Challenges</a></p>
+    <p><a href="https://www.bugbountyhunter.com/playground"><i class="fad fa-code text-purple icon-1x" aria-hidden="true"></i> ZSeano's Playground</a></p>
+    <!-- <p><a href="https://www.bugbountyhunter.com/membership"><span class="badge badge-danger" style="display: inline !important;">BARKER</span> BugBountyHunter Membership</a></p> -->
+  </div>
+   
+  </div>
+  </div>
+    <a href="#top" class="btn btn-icon btn-dark pos-fixed pos-b pos-r mr-3 mb-3 scroll-state-hidden" title="Back to top" data-scroll="scroll-state"><i class="fa fa-chevron-up"></i></a>
+  </div>
+  </div>
+</footer> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://www.bugbountyhunter.com/assets/js/script.min.js"></script>
+</body>
+</html>

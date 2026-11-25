@@ -1,0 +1,1970 @@
+[
+ {
+  "id": "260492",
+  "team": "Legal Robot",
+  "bounty": "-",
+  "title": "Invalid Email Verification",
+  "arms": [
+   "email-verification"
+  ]
+ },
+ {
+  "id": "259416",
+  "team": "Legal Robot",
+  "bounty": "$20",
+  "title": "Incorrect email content when disabling 2FA",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "259415",
+  "team": "Legal Robot",
+  "bounty": "$20",
+  "title": "Lengthy manual entry of 2FA secret",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "258117",
+  "team": "Snapchat",
+  "bounty": "$5,000",
+  "title": "RCE/LFI on test Jenkins instance due to improper authentication flow",
+  "arms": [
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "257119",
+  "team": "WakaTime",
+  "bounty": "-",
+  "title": "Impersonation of Wakatime user using Invitation functionality.",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "255467",
+  "team": "arxius",
+  "bounty": "-",
+  "title": "No Email Verification and No email sent on Forget Pasword",
+  "arms": [
+   "email-verification"
+  ]
+ },
+ {
+  "id": "255020",
+  "team": "Legal Robot",
+  "bounty": "-",
+  "title": "Password Reset page Session Fixation",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "253934",
+  "team": "Boozt Fashion AB",
+  "bounty": "$60",
+  "title": "Password reset token issue",
+  "arms": [
+   "reset-token"
+  ]
+ },
+ {
+  "id": "253448",
+  "team": "Legal Robot",
+  "bounty": "$20",
+  "title": "[Cross-domain Referer leakage] Password reset token leakage via referer",
+  "arms": [
+   "reset-token"
+  ]
+ },
+ {
+  "id": "251200",
+  "team": "Legal Robot",
+  "bounty": "$60",
+  "title": "Missing Issuer parameter on TOTP 2FA",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "250688",
+  "team": "TTS Bug Bounty",
+  "bounty": "$150",
+  "title": "The Federalsit session cookie (federalist.sid) is not properly invalidated - backdoor access to the account is possible",
+  "arms": [
+   "cookie-invalidation"
+  ]
+ },
+ {
+  "id": "250243",
+  "team": "Legal Robot",
+  "bounty": "$60",
+  "title": "Users with 2FA can have multiple sessions",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "250082",
+  "team": "Legal Robot",
+  "bounty": "$60",
+  "title": "Enhancement: email confirmation for 2FA recovery",
+  "arms": [
+   "mfa-2fa",
+   "email-verification"
+  ]
+ },
+ {
+  "id": "249798",
+  "team": "Legal Robot",
+  "bounty": "$20",
+  "title": "Intercom chat session information persists after logout",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "249695",
+  "team": "Legal Robot",
+  "bounty": "$60",
+  "title": "2FA Error Handling on Google Authenticator",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "249467",
+  "team": "Legal Robot",
+  "bounty": "-",
+  "title": "2FA user enumeration via login",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "249431",
+  "team": "Legal Robot",
+  "bounty": "$90",
+  "title": "2FA user enumeration via password reset",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "249346",
+  "team": "Legal Robot",
+  "bounty": "$90",
+  "title": "Missing link to 2FA recovery code",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "249337",
+  "team": "Legal Robot",
+  "bounty": "$60",
+  "title": "Non-functional 2FA recovery codes",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "247158",
+  "team": "Zomato",
+  "bounty": "$250",
+  "title": "Bypass OTP verification when placing Order",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "245833",
+  "team": "TTS Bug Bounty",
+  "bounty": "$300",
+  "title": "The user, who was deleted from Github Organization, still can access all functions of federalist, in case he didn't do logout",
+  "arms": [
+   "logout",
+   "cookie-invalidation"
+  ]
+ },
+ {
+  "id": "245408",
+  "team": "Zomato",
+  "bounty": "$1,000",
+  "title": "Login to any account with the emailaddress",
+  "arms": [
+   "login-any"
+  ]
+ },
+ {
+  "id": "245124",
+  "team": "WakaTime",
+  "bounty": "-",
+  "title": "Session not expired on logout",
+  "arms": [
+   "session-family",
+   "logout"
+  ]
+ },
+ {
+  "id": "244875",
+  "team": "WakaTime",
+  "bounty": "-",
+  "title": "Session Not Expired On Logout",
+  "arms": [
+   "session-family",
+   "logout"
+  ]
+ },
+ {
+  "id": "244778",
+  "team": "WakaTime",
+  "bounty": "-",
+  "title": "Logout CSRF",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "244434",
+  "team": "WakaTime",
+  "bounty": "-",
+  "title": "[https://wakatime.com/reset_password/] Leaking password reset token via referrer",
+  "arms": [
+   "reset-token"
+  ]
+ },
+ {
+  "id": "243049",
+  "team": "Airbnb",
+  "bounty": "-",
+  "title": "Call back number not verified",
+  "arms": [
+   "email-verification"
+  ]
+ },
+ {
+  "id": "242622",
+  "team": "Gratipay",
+  "bounty": "-",
+  "title": "Possible User Session Hijack using Invalid HTTPS certificate on inside.gratipay.com domain",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "241892",
+  "team": "Gratipay",
+  "bounty": "-",
+  "title": "Possible user session hijack by invalid HTTPS certificate on inside.gratipay.com domain",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "231813",
+  "team": "Cuvva",
+  "bounty": "-",
+  "title": "Verification code for Underwriter dashboard can be brute-forced",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "231041",
+  "team": "Uber",
+  "bounty": "-",
+  "title": "Session not expired When logout [partners.uber.com]",
+  "arms": [
+   "session-family",
+   "logout"
+  ]
+ },
+ {
+  "id": "229528",
+  "team": "Weblate",
+  "bounty": "-",
+  "title": "Login CSRF : Login Authentication Flaw",
+  "arms": [
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "229417",
+  "team": "Weblate",
+  "bounty": "-",
+  "title": "Design Flaw in session management of password reset",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "226712",
+  "team": "Paragon Initiative Enterprises",
+  "bounty": "-",
+  "title": "Broken Authentication & Session Management - Failure to Invalidate Session on all other browsers at Password change",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "226518",
+  "team": "Paragon Initiative Enterprises",
+  "bounty": "-",
+  "title": "no session logout after changing the password in https://bridge.cspr.ng/",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "225653",
+  "team": "Weblate",
+  "bounty": "-",
+  "title": "Account Takeover using Third party Auth CSRF",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "224379",
+  "team": "Weblate",
+  "bounty": "-",
+  "title": "session id missing secure flag - Hosted Website",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "224287",
+  "team": "Weblate",
+  "bounty": "-",
+  "title": "Email verification over an unencrypted channel",
+  "arms": [
+   "email-verification"
+  ]
+ },
+ {
+  "id": "223637",
+  "team": "Weblate",
+  "bounty": "-",
+  "title": "[hosted.weblate.org]Account Takeover",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "223475",
+  "team": "Weblate",
+  "bounty": "-",
+  "title": "Existing sessions valid after removing third party auth",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "223461",
+  "team": "Weblate",
+  "bounty": "-",
+  "title": "Weak e-mail change functionality could lead to account takeover",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "223329",
+  "team": "Weblate",
+  "bounty": "-",
+  "title": "Logout CSRF",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "223327",
+  "team": "Weblate",
+  "bounty": "-",
+  "title": "No expiration of session ID after Password change",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "223326",
+  "team": "Weblate",
+  "bounty": "-",
+  "title": "Open Redirect via \"next\" parameter in third-party authentication",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "223014",
+  "team": "Uber",
+  "bounty": "$8,500",
+  "title": "SAML Authentication Bypass on uchat.uberinternal.com",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth",
+   "sso-saml"
+  ]
+ },
+ {
+  "id": "222082",
+  "team": "OWOX, Inc.",
+  "bounty": "-",
+  "title": "Broken Authentication & Session Management (Login Bypass) at support.owox.com",
+  "arms": [
+   "bypass-core",
+   "session-family",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "220185",
+  "team": "Skyliner",
+  "bounty": "-",
+  "title": "Password reset Token not expiring",
+  "arms": [
+   "reset-token"
+  ]
+ },
+ {
+  "id": "219205",
+  "team": "Uber",
+  "bounty": "$5,000",
+  "title": "Authentication bypass on auth.uber.com via subdomain takeover of saostatic.uber.com",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "219203",
+  "team": "Harvest",
+  "bounty": "-",
+  "title": "Login bypass on travel.\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 aka \"Harvest Spring Summit 2017\"",
+  "arms": [
+   "bypass-core"
+  ]
+ },
+ {
+  "id": "215053",
+  "team": "Ubiquiti Networks",
+  "bounty": "$6,000",
+  "title": "Ability to log in as any user without authentication if \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 is empty",
+  "arms": [
+   "logged-in-as"
+  ]
+ },
+ {
+  "id": "214433",
+  "team": "Trello",
+  "bounty": "$768",
+  "title": "Rate limiting of incorrect Two Factor Authentication codes not enforced",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "213789",
+  "team": "Nextcloud",
+  "bounty": "-",
+  "title": "Update php-saml library to 2.10.5",
+  "arms": [
+   "sso-saml"
+  ]
+ },
+ {
+  "id": "213515",
+  "team": "Trello",
+  "bounty": "-",
+  "title": "Phone verification code fails to expire and can be used multiple times also in different accounts to verify same cellphone number on Trello.com",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "213492",
+  "team": "Trello",
+  "bounty": "-",
+  "title": "Email authentication token fails to expire and can be used multiple times for same Email address on Trello.com",
+  "arms": [
+   "token-expiry"
+  ]
+ },
+ {
+  "id": "207552",
+  "team": "Khan Academy",
+  "bounty": "-",
+  "title": "No Security check at changing password and at adding mobile number which leads to account takeover and spam",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "202177",
+  "team": "Instacart",
+  "bounty": "$100",
+  "title": "Login with Google Not Authenticated on iOS App",
+  "arms": [
+   "login-any"
+  ]
+ },
+ {
+  "id": "201152",
+  "team": "Informatica",
+  "bounty": "-",
+  "title": "[ipm.informatica.com]- Broken Authentication",
+  "arms": [
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "194832",
+  "team": "Shopify",
+  "bounty": "$500",
+  "title": "Authentication Bypass on monitoring server",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "193556",
+  "team": "Gratipay",
+  "bounty": "-",
+  "title": "Session Fixation At Logout /Session Misconfiguration",
+  "arms": [
+   "session-family",
+   "logout"
+  ]
+ },
+ {
+  "id": "192648",
+  "team": "YouPorn",
+  "bounty": "$1,000",
+  "title": "Account takeover via Pornhub Oauth",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "187705",
+  "team": "U.S. Dept Of Defense",
+  "bounty": "-",
+  "title": "Authentication bypass vulnerability on a DoD website",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "179421",
+  "team": "VK.com",
+  "bounty": "$1,000",
+  "title": "\u041d\u043e\u0432\u044b\u0439 2FA Bypass",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "178345",
+  "team": "HackerOne",
+  "bounty": "-",
+  "title": "Limited Open redirection using SSO-SAML",
+  "arms": [
+   "sso-saml"
+  ]
+ },
+ {
+  "id": "178293",
+  "team": "Shopify",
+  "bounty": "$1,500",
+  "title": "Misconfiguration in Two Factor Authorisation",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "176979",
+  "team": "Coinbase",
+  "bounty": "$200",
+  "title": "Authentication Issue",
+  "arms": [
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "174500",
+  "team": "Twitter",
+  "bounty": "$560",
+  "title": "Circumventing the Twitter account lockout process [ACCOUNT TAKEOVER]",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "173551",
+  "team": "Uber",
+  "bounty": "$10,000",
+  "title": "password reset token leaking allowed for ATO of an Uber account",
+  "arms": [
+   "reset-token"
+  ]
+ },
+ {
+  "id": "173251",
+  "team": "RubyGems",
+  "bounty": "-",
+  "title": "Password Reset emails missing TLS leads account takeover",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "172609",
+  "team": "Ian Dunn",
+  "bounty": "-",
+  "title": "Google Authenticator0.6 - PHP Version Dosclosure",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "172606",
+  "team": "Ian Dunn",
+  "bounty": "-",
+  "title": "Google Authenticator - Cross Site Scripting",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "172137",
+  "team": "Ubiquiti Networks",
+  "bounty": "$500",
+  "title": "Authentication bypass on sso.ubnt.com via subdomain takeover of ping.ubnt.com",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth",
+   "sso-saml"
+  ]
+ },
+ {
+  "id": "171398",
+  "team": "HackerOne",
+  "bounty": "-",
+  "title": "(HackerOne SSO-SAML) Login CSRF, Open Redirect, and Self-XSS Possible Exploitation",
+  "arms": [
+   "sso-saml"
+  ]
+ },
+ {
+  "id": "168108",
+  "team": "New Relic",
+  "bounty": "-",
+  "title": "SSO Authentication Bypass",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth",
+   "sso-saml"
+  ]
+ },
+ {
+  "id": "167828",
+  "team": "HackerOne",
+  "bounty": "-",
+  "title": "Ability to enumerate private programs using SAML",
+  "arms": [
+   "sso-saml"
+  ]
+ },
+ {
+  "id": "167698",
+  "team": "Boozt Fashion AB",
+  "bounty": "-",
+  "title": "Broken Authentication and Session Management(Session Fixation)",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "167460",
+  "team": "New Relic",
+  "bounty": "-",
+  "title": "Session Hijacking",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "167121",
+  "team": "VK.com",
+  "bounty": "$1,050",
+  "title": "\u0412\u0442\u043e\u0440\u043e\u0439 \u0441\u043f\u043e\u0441\u043e\u0431 \u043e\u0431\u0445\u043e\u0434\u0430 2FA",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "165923",
+  "team": "Boozt Fashion AB",
+  "bounty": "-",
+  "title": "No csrf protection on logout",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "163834",
+  "team": "VK.com",
+  "bounty": "$1,000",
+  "title": "\u041e\u0431\u0445\u043e\u0434 2\u0443\u0445-\u0448\u0430\u0433\u043e\u0432\u043e\u0439 \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u0438 / 2FA Bypass",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "163467",
+  "team": "Legal Robot",
+  "bounty": "$120",
+  "title": "User Information leak allows user to bypass email verification.",
+  "arms": [
+   "email-verification"
+  ]
+ },
+ {
+  "id": "161659",
+  "team": "Airbnb",
+  "bounty": "-",
+  "title": "\u2588\u2588\u2588\u2588 discloses valid Airbnb SSO login names via Google Search Results",
+  "arms": [
+   "sso-saml"
+  ]
+ },
+ {
+  "id": "159202",
+  "team": "OLX",
+  "bounty": "-",
+  "title": "Full Account Takeover",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "158270",
+  "team": "Certly",
+  "bounty": "-",
+  "title": "Business logic Failure - Browser cache management and logout vulnerability in Certly",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "157956",
+  "team": "Instacart",
+  "bounty": "$50",
+  "title": "CSRF To change Email Notification Settings",
+  "arms": [
+   "email-change"
+  ]
+ },
+ {
+  "id": "156542",
+  "team": "Gratipay",
+  "bounty": "$1",
+  "title": "Avoid \"resend verification email\" confusion",
+  "arms": [
+   "email-verification"
+  ]
+ },
+ {
+  "id": "155862",
+  "team": "Trello",
+  "bounty": "-",
+  "title": "Verification Code Reused For activating 2FA",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "155774",
+  "team": "Slack",
+  "bounty": "$500",
+  "title": "CSRF - Add optional two factor mobile number",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "152944",
+  "team": "New Relic",
+  "bounty": "-",
+  "title": "Session Management Flaw",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "152586",
+  "team": "Harvest",
+  "bounty": "$250",
+  "title": "CSRF token fixation in Sign in with Google",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "152080",
+  "team": "Coursera",
+  "bounty": "-",
+  "title": "Broken authentication and session management flaw",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "152052",
+  "team": "concrete5",
+  "bounty": "-",
+  "title": "CSRF Full Account Takeover",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "149598",
+  "team": "GitLab",
+  "bounty": "-",
+  "title": "Insecure 2FA/authentication implementation creates a brute force vulnerability",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "148914",
+  "team": "Paragon Initiative Enterprises",
+  "bounty": "-",
+  "title": "Session Management Issue CMS Airship",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "148151",
+  "team": "ownCloud",
+  "bounty": "-",
+  "title": "SMB User Authentication Bypass and Persistence",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "147744",
+  "team": "Mail.Ru",
+  "bounty": "-",
+  "title": "Back Refresh Attack after registration and successful logout",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "147204",
+  "team": "FantasyTote",
+  "bounty": "-",
+  "title": "Bypass logout",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "147203",
+  "team": "FantasyTote",
+  "bounty": "-",
+  "title": "Insecure password change mechanism may lead to full account takeover",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "147182",
+  "team": "FantasyTote",
+  "bounty": "-",
+  "title": "No email verification required when we change email from settings",
+  "arms": [
+   "email-change",
+   "email-verification"
+  ]
+ },
+ {
+  "id": "146838",
+  "team": "Uber",
+  "bounty": "-",
+  "title": "Authentication Issue for easter egg on bonjour.uber.com",
+  "arms": [
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "146129",
+  "team": "Instacart",
+  "bounty": "-",
+  "title": "Authentication Bypass in Updating Personal Information",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "145896",
+  "team": "Nextcloud",
+  "bounty": "-",
+  "title": "Password reset link remains valid after email change",
+  "arms": [
+   "email-change"
+  ]
+ },
+ {
+  "id": "145629",
+  "team": "Algolia",
+  "bounty": "$100",
+  "title": "2-factor authentication bypass",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "145430",
+  "team": "Nextcloud",
+  "bounty": "-",
+  "title": "help.nextcloud.com: Session Management Issue",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "145300",
+  "team": "Paragon Initiative Enterprises",
+  "bounty": "-",
+  "title": "Session Management",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "143717",
+  "team": "Uber",
+  "bounty": "$10,000",
+  "title": "Change any Uber user's password through /rt/users/passwordless-signup - Account Takeover (critical)",
+  "arms": [
+   "ato-impersonation",
+   "passwordless"
+  ]
+ },
+ {
+  "id": "143482",
+  "team": "Shopify",
+  "bounty": "$3,000",
+  "title": "Authentication Bypass on Icinga monitoring server",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "142221",
+  "team": "Zomato",
+  "bounty": "-",
+  "title": "Bypass OTP verification when placing Order",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "139178",
+  "team": "New Relic",
+  "bounty": "-",
+  "title": "Improper Session Management",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "138869",
+  "team": "Uber",
+  "bounty": "$7,000",
+  "title": "OneLogin authentication bypass on WordPress sites via XMLRPC",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "137480",
+  "team": "New Relic",
+  "bounty": "-",
+  "title": "New Relic - Session Hijacking",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "136885",
+  "team": "Uber",
+  "bounty": "$8,000",
+  "title": "[CRITICAL] -- Complete Account Takeover",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "136169",
+  "team": "Uber",
+  "bounty": "$10,000",
+  "title": "OneLogin authentication bypass on WordPress sites",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "135797",
+  "team": "Romit",
+  "bounty": "$50",
+  "title": "Session Fixation",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "135283",
+  "team": "Paragon Initiative Enterprises",
+  "bounty": "-",
+  "title": "Email Authentication Bypass",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "134206",
+  "team": "Uber",
+  "bounty": "-",
+  "title": "Defect-Security | Driver-Broken Authentication | Able to update the Subscription Setting anonymously",
+  "arms": [
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "130460",
+  "team": "bitaccess",
+  "bounty": "$50",
+  "title": "BYASSING OTP Verification",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "129918",
+  "team": "Slack",
+  "bounty": "$2,000",
+  "title": "Authentication bypass leads to sensitive data exposure (token+secret)",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "128777",
+  "team": "Algolia",
+  "bounty": "$100",
+  "title": "No rate-limit in Two factor Authentication leads to bypass using bruteforce attack",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "128085",
+  "team": "GitLab",
+  "bounty": "-",
+  "title": "Bypassing password authentication of users that have 2FA enabled",
+  "arms": [
+   "bypass-core",
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "127703",
+  "team": "Badoo",
+  "bounty": "$852",
+  "title": "[CRITICAL] Full account takeover using CSRF",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "127645",
+  "team": "Uber",
+  "bounty": "-",
+  "title": "Session Impersonation in riders.uber.com",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "126235",
+  "team": "Uber",
+  "bounty": "-",
+  "title": "text injection in get.uber.com/check-otp",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "124845",
+  "team": "Shopify",
+  "bounty": "$500",
+  "title": "Bypassed password authentication before enabling OTP verification",
+  "arms": [
+   "bypass-core",
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "124151",
+  "team": "Zomato",
+  "bounty": "-",
+  "title": "Authentication Bypassing and Sensitive Information Disclosure on Verify Email Address in Registration Flow",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth",
+   "email-verification"
+  ]
+ },
+ {
+  "id": "123897",
+  "team": "Gratipay",
+  "bounty": "$1",
+  "title": "auto-logout after 20 minutes",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "123743",
+  "team": "HackerOne",
+  "bounty": "-",
+  "title": "Sending emails (via HackerOne) impersonating other users",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "123127",
+  "team": "New Relic",
+  "bounty": "-",
+  "title": "no email confirmation on signup",
+  "arms": [
+   "email-verification"
+  ]
+ },
+ {
+  "id": "121827",
+  "team": "Badoo",
+  "bounty": "$850",
+  "title": "Account Takeover",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "121469",
+  "team": "Badoo",
+  "bounty": "$427",
+  "title": "Broken Authentication on Badoo",
+  "arms": [
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "118948",
+  "team": "Veris",
+  "bounty": "-",
+  "title": "Password reset link is not Expiring",
+  "arms": [
+   "token-expiry"
+  ]
+ },
+ {
+  "id": "116504",
+  "team": "Ubiquiti Networks",
+  "bounty": "$1,000",
+  "title": "Auth bypass on directory.corp.ubnt.com",
+  "arms": [
+   "bypass-core"
+  ]
+ },
+ {
+  "id": "115845",
+  "team": "Legal Robot",
+  "bounty": "$20",
+  "title": "Rate limiting on Email confirmation link",
+  "arms": [
+   "email-verification"
+  ]
+ },
+ {
+  "id": "115245",
+  "team": "Paragon Initiative Enterprises",
+  "bounty": "-",
+  "title": "Email Authentication bypass Vulnerability",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "114169",
+  "team": "Twitter",
+  "bounty": "$2,520",
+  "title": "Bypassing Digits web authentication's host validation with HPP",
+  "arms": [
+   "bypass-core"
+  ]
+ },
+ {
+  "id": "106865",
+  "team": "Informatica",
+  "bounty": "-",
+  "title": "[rev-app.informatica.com] - XXE via SAML",
+  "arms": [
+   "sso-saml"
+  ]
+ },
+ {
+  "id": "101977",
+  "team": "Imgur",
+  "bounty": "-",
+  "title": "Login to any user account using other facebook app access token",
+  "arms": [
+   "login-any"
+  ]
+ },
+ {
+  "id": "100509",
+  "team": "HackerOne",
+  "bounty": "$1,000",
+  "title": "Pre-generation of 2FA secret/backup codes seems like an unnecessary risk",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "99273",
+  "team": "Mail.Ru",
+  "bounty": "-",
+  "title": "[gitmm.corp.mail.ru] Auth Bypass, Information Disclosure",
+  "arms": [
+   "bypass-core"
+  ]
+ },
+ {
+  "id": "98469",
+  "team": "Binary.com",
+  "bounty": "$50",
+  "title": "Email Verification Link can be Used as Password Reset Link!",
+  "arms": [
+   "email-verification"
+  ]
+ },
+ {
+  "id": "98432",
+  "team": "Twitter",
+  "bounty": "$280",
+  "title": "Urgent : Disclosure of all the apps with hash ID in mopub through API request (Authentication bypass)",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "98247",
+  "team": "Binary.com",
+  "bounty": "$300",
+  "title": "login to any user's cashier account and full account information disclosure",
+  "arms": [
+   "login-any"
+  ]
+ },
+ {
+  "id": "97377",
+  "team": "HackerOne",
+  "bounty": "-",
+  "title": "Hackerone impersonation",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "91332",
+  "team": "Imgur",
+  "bounty": "-",
+  "title": "Open Url redirection on login with facebook",
+  "arms": [
+   "login-any"
+  ]
+ },
+ {
+  "id": "90643",
+  "team": "ownCloud",
+  "bounty": "-",
+  "title": "No email verification during registration",
+  "arms": [
+   "email-verification"
+  ]
+ },
+ {
+  "id": "90165",
+  "team": "VK.com",
+  "bounty": "$500",
+  "title": "CSRF \u0432 \u043f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0438 \u0440\u0435\u0437\u0435\u0440\u0432\u043d\u044b\u0445 \u0442\u043e\u043a\u0435\u043d\u043e\u0432+framing , \u043f\u0440\u0438\u0432\u043e\u0434\u044f\u0449\u0438\u0435 \u043a \u043a\u043e\u043c\u043f\u0440\u043e\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u0438 2fa",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "86504",
+  "team": "Anghami",
+  "bounty": "$100",
+  "title": "[CRITICAL] Login To Any Account Linked With Google+ With Email Only",
+  "arms": [
+   "login-any"
+  ]
+ },
+ {
+  "id": "80883",
+  "team": "Gratipay",
+  "bounty": "-",
+  "title": "Authentication errors in server side validaton of E-MAIL",
+  "arms": [
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "78781",
+  "team": "ok.ru",
+  "bounty": "$150",
+  "title": "Critical : Access to group videos where videos are restricted for all users(Broken authentication )",
+  "arms": [
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "77076",
+  "team": "Romit",
+  "bounty": "$250",
+  "title": "GA code not verified on the server side allows sending Verification Documents on behalf of another user",
+  "arms": [
+   "email-verification"
+  ]
+ },
+ {
+  "id": "67660",
+  "team": "Automattic",
+  "bounty": "$100",
+  "title": "Verification code issues for Two-Step Authentication",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "66223",
+  "team": "Coinbase",
+  "bounty": "-",
+  "title": "Two-factor authentication (via SMS)",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "64946",
+  "team": "Legal Robot",
+  "bounty": "$40",
+  "title": "Registration bypass using OAuth logical bug",
+  "arms": [
+   "bypass-core"
+  ]
+ },
+ {
+  "id": "64666",
+  "team": "MapLogin",
+  "bounty": "-",
+  "title": "Bypass verification of email while creating account(No rate limiting enable for verification code)",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "55911",
+  "team": "Shopify",
+  "bounty": "$500",
+  "title": "CSRF token fixation in facebook store app that can lead to adding attacker to victim acc",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "54610",
+  "team": "Slack",
+  "bounty": "$100",
+  "title": "Logout any user of same team",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "52645",
+  "team": "itBit Exchange",
+  "bounty": "$200",
+  "title": "secretKey for OTP , is getting leaked in response of a delete request !",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "52644",
+  "team": "itBit Exchange",
+  "bounty": "$200",
+  "title": "confirmation bypass of 2FA devices while they are deleting",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "51166",
+  "team": "IRCCloud",
+  "bounty": "-",
+  "title": "Email verification links still valid after changing it 2x",
+  "arms": [
+   "email-verification"
+  ]
+ },
+ {
+  "id": "50703",
+  "team": "Ubiquiti Networks",
+  "bounty": "$500",
+  "title": "CSRF in login form would led to account takeover",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "50170",
+  "team": "The Internet",
+  "bounty": "$7,500",
+  "title": "FREAK: Factoring RSA_EXPORT Keys to Impersonate TLS Servers",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "49304",
+  "team": "Vimeo",
+  "bounty": "-",
+  "title": "Bypassing Email verification",
+  "arms": [
+   "email-verification"
+  ]
+ },
+ {
+  "id": "45084",
+  "team": "Vimeo",
+  "bounty": "-",
+  "title": "Full account takeover via Add a New Email to account without email verified and without password confirmation.",
+  "arms": [
+   "ato-impersonation",
+   "passwordless"
+  ]
+ },
+ {
+  "id": "44864",
+  "team": "itBit Exchange",
+  "bounty": "$200",
+  "title": "Unsecure data in \"device\" response - OTP",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "39203",
+  "team": "WePay",
+  "bounty": "-",
+  "title": "Broken Authentication \u2013 Session Token bug",
+  "arms": [
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "33432",
+  "team": "Twitter",
+  "bounty": "-",
+  "title": "BROKEN AUTHENTICATION IN MOBILE VERIFICATION",
+  "arms": [
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "33385",
+  "team": "InVision",
+  "bounty": "-",
+  "title": "Password reset tokens is valid after changing the password by logging in the account",
+  "arms": [
+   "reset-token"
+  ]
+ },
+ {
+  "id": "29331",
+  "team": "HackerOne",
+  "bounty": "$500",
+  "title": "No email verification on username change",
+  "arms": [
+   "email-verification"
+  ]
+ },
+ {
+  "id": "26700",
+  "team": "Square",
+  "bounty": "$2,000",
+  "title": "CRITICAL Account takeover via AngularJS template injection in connect.squareup.com",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "23921",
+  "team": "concrete5",
+  "bounty": "-",
+  "title": "broken authentication",
+  "arms": [
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "23913",
+  "team": "Twitter",
+  "bounty": "-",
+  "title": "User's DM won't deleted after logout from Twitter for iOS (com.atebits.xxx.application-state)",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "23579",
+  "team": "Secret",
+  "bounty": "-",
+  "title": "Broken Authentication and Session Management",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "22203",
+  "team": "Twitter",
+  "bounty": "-",
+  "title": "Broken authentication and invalidated email address leads to account takeover",
+  "arms": [
+   "broken-improper-auth",
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "21172",
+  "team": "Mavenlink",
+  "bounty": "-",
+  "title": "Cookies are not cleared from Server side on Logout",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "20122",
+  "team": "HackerOne",
+  "bounty": "-",
+  "title": "No option to logout concurrent sessions",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "20044",
+  "team": "Envoy",
+  "bounty": "-",
+  "title": "Authentication Bypass",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "19640",
+  "team": "HackerOne",
+  "bounty": "-",
+  "title": "Session Hijacking attack (Different Scenario)",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "18503",
+  "team": "Automattic",
+  "bounty": "-",
+  "title": "Top 10 2013-A2-Broken Authentication and Session Management - wordpress.com",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "18501",
+  "team": "WePay",
+  "bounty": "$500",
+  "title": "Session Fixation",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "17512",
+  "team": "HackerOne",
+  "bounty": "-",
+  "title": "Account takeover",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "17474",
+  "team": "Phabricator",
+  "bounty": "$300",
+  "title": "Broken Authentication and Session Management",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "17383",
+  "team": "HackerOne",
+  "bounty": "$100",
+  "title": "Category- Broken Authentication and Session Management (leads to account compromise if some conditions are met)",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "16696",
+  "team": "Coinbase",
+  "bounty": "-",
+  "title": "2FA settings allowed to be changed with no delay/freeze on funds",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "15476",
+  "team": "FanFootage",
+  "bounty": "-",
+  "title": "Session Token is not Verified while changing Account Setting's which Result In account Takeover",
+  "arms": [
+   "ato-impersonation",
+   "email-verification"
+  ]
+ },
+ {
+  "id": "15166",
+  "team": "Mavenlink",
+  "bounty": "$100",
+  "title": "Password reset token not expiring",
+  "arms": [
+   "reset-token"
+  ]
+ },
+ {
+  "id": "14552",
+  "team": "WePay",
+  "bounty": "$100",
+  "title": "Session fixation in wepay.com",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "13705",
+  "team": "Automattic",
+  "bounty": "-",
+  "title": "logout csrf app.simplenote.com/logout",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "13602",
+  "team": "Factlink",
+  "bounty": "-",
+  "title": "Session not expired on logout",
+  "arms": [
+   "session-family",
+   "logout"
+  ]
+ },
+ {
+  "id": "13557",
+  "team": "Factlink",
+  "bounty": "-",
+  "title": "Leaking of password reset token through referer",
+  "arms": [
+   "reset-token"
+  ]
+ },
+ {
+  "id": "11722",
+  "team": "Coinbase",
+  "bounty": "-",
+  "title": "Simultaneous Session Logon : Improper Session Management",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "10912",
+  "team": "Yahoo!",
+  "bounty": "-",
+  "title": "Authentication Bypass due to Session Mismanagement",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "10554",
+  "team": "Coinbase",
+  "bounty": "$1,000",
+  "title": "Bypassing 2FA for BTC transfers",
+  "arms": [
+   "mfa-2fa"
+  ]
+ },
+ {
+  "id": "7909",
+  "team": "Localize",
+  "bounty": "-",
+  "title": "Business logic Failure - Browser cache management and logout vulnerability.",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "7516",
+  "team": "IRCCloud",
+  "bounty": "-",
+  "title": "Log Out Cross site Request Forgery",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "7041",
+  "team": "IRCCloud",
+  "bounty": "$100",
+  "title": "iOS application does not destroy session upon logout.",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "6910",
+  "team": "IRCCloud",
+  "bounty": "$500",
+  "title": "Full account takeover using CSRF and password reset",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "6907",
+  "team": "IRCCloud",
+  "bounty": "$500",
+  "title": "Session Token is not Verified while changing Account Setting's which Result In account Takeover",
+  "arms": [
+   "ato-impersonation",
+   "email-verification"
+  ]
+ },
+ {
+  "id": "6504",
+  "team": "ReddAPI",
+  "bounty": "-",
+  "title": "Session Fixation Found",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "5691",
+  "team": "C2FO",
+  "bounty": "-",
+  "title": "Password reset token leakage through referrer at https://app.c2fo.com/password/reset/",
+  "arms": [
+   "reset-token"
+  ]
+ },
+ {
+  "id": "4795",
+  "team": "concrete5",
+  "bounty": "-",
+  "title": "Bypass auth.email-domains",
+  "arms": [
+   "bypass-core"
+  ]
+ },
+ {
+  "id": "3722",
+  "team": "Slack",
+  "bounty": "-",
+  "title": "User impersonation is possible with incoming webhooks",
+  "arms": [
+   "ato-impersonation"
+  ]
+ },
+ {
+  "id": "3577",
+  "team": "Yahoo!",
+  "bounty": "-",
+  "title": "Authentication bypass at fast.corp.yahoo.com",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "2857",
+  "team": "Phabricator",
+  "bounty": "-",
+  "title": "CSRF token valid even after the session logout of a particular user",
+  "arms": [
+   "logout"
+  ]
+ },
+ {
+  "id": "2582",
+  "team": "Slack",
+  "bounty": "-",
+  "title": "Session Fixation disclosing email address",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "2559",
+  "team": "Slack",
+  "bounty": "$100",
+  "title": "Broken Authentication (including Slack OAuth bugs)",
+  "arms": [
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "2421",
+  "team": "RelateIQ",
+  "bounty": "$100",
+  "title": "Value of JSESSIONID and XSRF token parameter in cookie remains same before and after login",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "2233",
+  "team": "Phabricator",
+  "bounty": "$500",
+  "title": "Bypass auth.email-domains (2)",
+  "arms": [
+   "bypass-core"
+  ]
+ },
+ {
+  "id": "2224",
+  "team": "Phabricator",
+  "bounty": "$1,000",
+  "title": "Bypass auth.email-domains",
+  "arms": [
+   "bypass-core"
+  ]
+ },
+ {
+  "id": "1209",
+  "team": "Yahoo!",
+  "bounty": "-",
+  "title": "Authentication Bypass in Yahoo Groups",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "737",
+  "team": "HackerOne",
+  "bounty": "$100",
+  "title": "Improper session management",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "353",
+  "team": "HackerOne",
+  "bounty": "$100",
+  "title": "Session not expired on logout",
+  "arms": [
+   "session-family",
+   "logout"
+  ]
+ },
+ {
+  "id": "288",
+  "team": "HackerOne",
+  "bounty": "$100",
+  "title": "Session Management",
+  "arms": [
+   "session-family"
+  ]
+ },
+ {
+  "id": "284",
+  "team": "HackerOne",
+  "bounty": "$100",
+  "title": "Broken Authentication and session management OWASP A2",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ]
+ },
+ {
+  "id": "280",
+  "team": "HackerOne",
+  "bounty": "$100",
+  "title": "Real impersonation",
+  "arms": [
+   "ato-impersonation"
+  ]
+ }
+]

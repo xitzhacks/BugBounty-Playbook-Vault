@@ -1,0 +1,709 @@
+{
+ "713": {
+  "title": "Upload profile photo from URL",
+  "team": "HackerOne",
+  "mirror_bounty": "$500",
+  "arms": [
+   "upload"
+  ]
+ },
+ "1092": {
+  "title": "Directory Traversal",
+  "team": "Yahoo!",
+  "mirror_bounty": "-",
+  "arms": [
+   "traversal"
+  ]
+ },
+ "1675": {
+  "title": "Local file inclusion",
+  "team": "Yahoo!",
+  "mirror_bounty": "$1,390",
+  "arms": [
+   "lfi",
+   "incl"
+  ]
+ },
+ "3370": {
+  "title": "Directory traversal attack in view resolver CVE-2014-0130",
+  "team": "Ruby on Rails",
+  "mirror_bounty": "$1,500",
+  "arms": [
+   "traversal"
+  ]
+ },
+ "4836": {
+  "title": "From Unrestricted File Upload to Remote Command Execution",
+  "team": "Yahoo!",
+  "mirror_bounty": "$800",
+  "arms": [
+   "upload"
+  ]
+ },
+ "6674": {
+  "title": "REMOTE CODE EXECUTION/LOCAL FILE INCLUSION/XSPA/SSRF, view-source:http://sb*.geo.sp1.yahoo.com/, 4/6/14, #SpringClean",
+  "team": "Yahoo!",
+  "mirror_bounty": "$3,000",
+  "arms": [
+   "lfi",
+   "incl"
+  ]
+ },
+ "7929": {
+  "title": "Arbitrary file uploads to Amazon WS.",
+  "team": "HackerOne",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload",
+   "fileread"
+  ]
+ },
+ "12388": {
+  "title": "Multiple Upload Vulnerability !File Upload + File Inclusion (Access Not Forbidden)",
+  "team": "InVision",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload",
+   "incl"
+  ]
+ },
+ "14092": {
+  "title": "Remote file Inclusion - RFI in upload",
+  "team": "Slack",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload",
+   "rfi",
+   "incl"
+  ]
+ },
+ "18371": {
+  "title": "Directory Traversal at http://staging.jsdelivr.net/",
+  "team": "jsDelivr",
+  "mirror_bounty": "-",
+  "arms": [
+   "traversal"
+  ]
+ },
+ "18851": {
+  "title": ".NET Type Traversal Vulnerability CVE-2014-0257",
+  "team": "Sandbox Escape",
+  "mirror_bounty": "$5,000",
+  "arms": [
+   "traversal"
+  ]
+ },
+ "19532": {
+  "title": "Missing \"size check\" on files to upload could make memory leaks.",
+  "team": "Uzbey",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "20616": {
+  "title": "e.mail.ru: File upload \"Chapito\" circus",
+  "team": "Mail.Ru",
+  "mirror_bounty": "$1,000",
+  "arms": [
+   "upload"
+  ]
+ },
+ "20720": {
+  "title": "cloud.mail.ru: File upload XSS using Content-Type header",
+  "team": "Mail.Ru",
+  "mirror_bounty": "$150",
+  "arms": [
+   "upload"
+  ]
+ },
+ "27704": {
+  "title": "malicious file upload",
+  "team": "Square",
+  "mirror_bounty": "$2,000",
+  "arms": [
+   "upload",
+   "malfile"
+  ]
+ },
+ "31187": {
+  "title": "Reflected XSS on www.bookfresh.com/index.html?view=upload_form",
+  "team": "Bookfresh",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "39428": {
+  "title": "Phabricator Phame Blog Skins Local File Inclusion",
+  "team": "Phabricator",
+  "mirror_bounty": "$500",
+  "arms": [
+   "lfi",
+   "incl"
+  ]
+ },
+ "39658": {
+  "title": "Reflected File Download",
+  "team": "HackerOne",
+  "mirror_bounty": "-",
+  "arms": [
+   "fileread"
+  ]
+ },
+ "43440": {
+  "title": "Arbitrary file existence disclosure in Action Pack CVE-2014-7829",
+  "team": "Ruby on Rails",
+  "mirror_bounty": "$1,000",
+  "arms": [
+   "fileread"
+  ]
+ },
+ "43850": {
+  "title": "abusing Thumbnails(https://vimeo.com/upload/select_thumb) to see a private video",
+  "team": "Vimeo",
+  "mirror_bounty": "$1,000",
+  "arms": [
+   "upload"
+  ]
+ },
+ "45368": {
+  "title": "ftp upload of video allows naming that is not sanitized as the manual naming",
+  "team": "Vimeo",
+  "mirror_bounty": "$100",
+  "arms": [
+   "upload"
+  ]
+ },
+ "50658": {
+  "title": "Reflected File Download attack allows attacker to 'upload' executables to hackerone.com domain",
+  "team": "HackerOne",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload",
+   "fileread"
+  ]
+ },
+ "51265": {
+  "title": "Flash Cross Domain Policy Bypass by Using File Upload and Redirection - only in Chrome",
+  "team": "Flash",
+  "mirror_bounty": "$2,000",
+  "arms": [
+   "upload"
+  ]
+ },
+ "52383": {
+  "title": "unknow files Upload  in profile photo",
+  "team": "Dropbox Acquisitions",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "59665": {
+  "title": "Local File Inclusion Vulnerability in Concrete5 version 5.7.3.1",
+  "team": "concrete5",
+  "mirror_bounty": "-",
+  "arms": [
+   "lfi",
+   "incl"
+  ]
+ },
+ "73480": {
+  "title": "Arbritrary file Upload on AirMax",
+  "team": "Ubiquiti Networks",
+  "mirror_bounty": "$18,000",
+  "arms": [
+   "upload"
+  ]
+ },
+ "84374": {
+  "title": "apps.owncloud.com: Malicious file upload leads to remote code execution",
+  "team": "ownCloud",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload",
+   "malfile"
+  ]
+ },
+ "97452": {
+  "title": "Staff members with no permission can access to the files, uploaded by the administrator",
+  "team": "Shopify",
+  "mirror_bounty": "$500",
+  "arms": [
+   "upload"
+  ]
+ },
+ "97501": {
+  "title": "SVG parser loads external resources on image upload",
+  "team": "Shopify",
+  "mirror_bounty": "$500",
+  "arms": [
+   "upload"
+  ]
+ },
+ "97657": {
+  "title": "File upload XSS (Java applet) on http://slackatwork.com/",
+  "team": "Slack",
+  "mirror_bounty": "$200",
+  "arms": [
+   "upload"
+  ]
+ },
+ "97672": {
+  "title": "File Upload XSS in image uploading of App in mopub",
+  "team": "Twitter",
+  "mirror_bounty": "$1,120",
+  "arms": [
+   "upload"
+  ]
+ },
+ "105787": {
+  "title": "XXE in upload file feature",
+  "team": "Informatica",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "107960": {
+  "title": "Reflected File Download in community.ubnt.com/restapi/",
+  "team": "Ubiquiti Networks",
+  "mirror_bounty": "$150",
+  "arms": [
+   "fileread"
+  ]
+ },
+ "111269": {
+  "title": "[ssrf] libav vulnerable during conversion of uploaded videos",
+  "team": "Pornhub",
+  "mirror_bounty": "$1,500",
+  "arms": [
+   "upload"
+  ]
+ },
+ "114389": {
+  "title": "Remote File Upload Vulnerability in business-blog.zomato.com",
+  "team": "Zomato",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "115857": {
+  "title": "SSRF and local file read in video to gif converter",
+  "team": "Imgur",
+  "mirror_bounty": "$800",
+  "arms": [
+   "fileread"
+  ]
+ },
+ "116575": {
+  "title": "Remote Code Execution (upload)",
+  "team": "Legal Robot",
+  "mirror_bounty": "$120",
+  "arms": [
+   "upload"
+  ]
+ },
+ "122475": {
+  "title": "Local file read in image editor",
+  "team": "Imgur",
+  "mirror_bounty": "$5,000",
+  "arms": [
+   "fileread"
+  ]
+ },
+ "126374": {
+  "title": "Uploading Plain Text to uber-documents.s3.amazonaws.com Through the Driver Document Upload Page",
+  "team": "Uber",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "130591": {
+  "title": "Stored XSS thru SVG upload",
+  "team": "Moneybird",
+  "mirror_bounty": "$25",
+  "arms": [
+   "upload"
+  ]
+ },
+ "131028": {
+  "title": "Malicious File Upload",
+  "team": "Moneybird",
+  "mirror_bounty": "$100",
+  "arms": [
+   "upload",
+   "malfile"
+  ]
+ },
+ "134032": {
+  "title": "newrelic.com rails directory traversal vuln",
+  "team": "New Relic",
+  "mirror_bounty": "-",
+  "arms": [
+   "traversal"
+  ]
+ },
+ "135072": {
+  "title": "RCE in profile picture upload",
+  "team": "HackerOne",
+  "mirror_bounty": "$2,500",
+  "arms": [
+   "upload"
+  ]
+ },
+ "140548": {
+  "title": "[upload-X.my.mail.ru] /uploadphoto Insecure Direct Object References",
+  "team": "Mail.Ru",
+  "mirror_bounty": "$160",
+  "arms": [
+   "upload"
+  ]
+ },
+ "142135": {
+  "title": "XSS \u0432 upload.php",
+  "team": "VK.com",
+  "mirror_bounty": "$1,500",
+  "arms": [
+   "upload"
+  ]
+ },
+ "142352": {
+  "title": "(Pornhub & Youporn & Brazzers ANDROID APP) : Upload Malicious APK / Overrite Existing APK  / Android BackOffice Access",
+  "team": "Pornhub",
+  "mirror_bounty": "$1,500",
+  "arms": [
+   "upload"
+  ]
+ },
+ "142562": {
+  "title": "[RCE] Unserialize to XXE - file disclosure on ams.upload.pornhub.com",
+  "team": "Pornhub",
+  "mirror_bounty": "$10,000",
+  "arms": [
+   "upload"
+  ]
+ },
+ "143903": {
+  "title": "File upload over private IM channel",
+  "team": "Slack",
+  "mirror_bounty": "$500",
+  "arms": [
+   "upload"
+  ]
+ },
+ "145604": {
+  "title": "Avatar image upload and bypass  real image verification",
+  "team": "Nextcloud",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "145950": {
+  "title": "Uploading files to a folder where invited user don't have any EDIT privilege",
+  "team": "Nextcloud",
+  "mirror_bounty": "$250",
+  "arms": [
+   "upload"
+  ]
+ },
+ "147570": {
+  "title": "Local File Inclusion path bypass",
+  "team": "concrete5",
+  "mirror_bounty": "-",
+  "arms": [
+   "lfi",
+   "incl"
+  ]
+ },
+ "150783": {
+  "title": "Arbitrary File Reading",
+  "team": "OLX",
+  "mirror_bounty": "-",
+  "arms": [
+   "fileread"
+  ]
+ },
+ "155690": {
+  "title": "Arbitrary File Upload in Logo & Log in image Theming setting.",
+  "team": "Nextcloud",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload",
+   "fileread"
+  ]
+ },
+ "158016": {
+  "title": "Server side request forgery on image upload for lists",
+  "team": "Instacart",
+  "mirror_bounty": "$50",
+  "arms": [
+   "upload"
+  ]
+ },
+ "158021": {
+  "title": "Image Upload Path Disclosure",
+  "team": "Instacart",
+  "mirror_bounty": "$100",
+  "arms": [
+   "upload"
+  ]
+ },
+ "158505": {
+  "title": "Reflected File Download on recipe list search",
+  "team": "Instacart",
+  "mirror_bounty": "-",
+  "arms": [
+   "fileread"
+  ]
+ },
+ "159820": {
+  "title": "Issues with uploading list images",
+  "team": "Instacart",
+  "mirror_bounty": "$150",
+  "arms": [
+   "upload"
+  ]
+ },
+ "163421": {
+  "title": "Wordpress: Directory Traversal / Denial of Serivce",
+  "team": "Nextcloud",
+  "mirror_bounty": "-",
+  "arms": [
+   "traversal"
+  ]
+ },
+ "167481": {
+  "title": "Android - Possible to intercept broadcasts about uploaded files",
+  "team": "Nextcloud",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "172694": {
+  "title": "Critical : Malware and XSS file can be uploaded and executed on udemy",
+  "team": "Udemy",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "179034": {
+  "title": "[Airship CMS] Local File Inclusion - RST Parser",
+  "team": "Paragon Initiative Enterprises",
+  "mirror_bounty": "-",
+  "arms": [
+   "lfi",
+   "incl"
+  ]
+ },
+ "182557": {
+  "title": "links the user may download can be a malicious files",
+  "team": "Brave Software",
+  "mirror_bounty": "-",
+  "arms": [
+   "malfile"
+  ]
+ },
+ "183568": {
+  "title": "[Buddypress] Arbitrary File Deletion through bp_avatar_set",
+  "team": "WordPress",
+  "mirror_bounty": "$350",
+  "arms": [
+   "fileread"
+  ]
+ },
+ "183925": {
+  "title": "Unrestricted File Download / Path Traversal",
+  "team": "U.S. Dept Of Defense",
+  "mirror_bounty": "-",
+  "arms": [
+   "traversal",
+   "fileread"
+  ]
+ },
+ "183978": {
+  "title": "Local File Inclusion vulnerability on an Army system allows downloading local files",
+  "team": "U.S. Dept Of Defense",
+  "mirror_bounty": "-",
+  "arms": [
+   "lfi",
+   "incl"
+  ]
+ },
+ "184596": {
+  "title": "Unrestricted File Upload",
+  "team": "U.S. Dept Of Defense",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "186326": {
+  "title": "Arbitary file download vulnerability on a DoD website",
+  "team": "U.S. Dept Of Defense",
+  "mirror_bounty": "-",
+  "arms": [
+   "fileread"
+  ]
+ },
+ "187413": {
+  "title": "SVG Uploads / Attachments can be viewed by anyone that knows the URL",
+  "team": "Trello",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "191243": {
+  "title": "File upload vulnerability on a DoD website",
+  "team": "U.S. Dept Of Defense",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "193877": {
+  "title": "The contact page is vulnerable to self-XSS via upload file name",
+  "team": "Trello",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "194351": {
+  "title": "Able to download arbitrary  PHP files at yelpblog.com",
+  "team": "Yelp",
+  "mirror_bounty": "$100",
+  "arms": [
+   "fileread"
+  ]
+ },
+ "196448": {
+  "title": "Local file inclusion vulnerability on a DoD website",
+  "team": "U.S. Dept Of Defense",
+  "mirror_bounty": "-",
+  "arms": [
+   "lfi",
+   "incl"
+  ]
+ },
+ "201529": {
+  "title": "Can upload files without authentication on AirFibre 3.2",
+  "team": "Ubiquiti Networks",
+  "mirror_bounty": "$150",
+  "arms": [
+   "upload"
+  ]
+ },
+ "202681": {
+  "title": "XSS in content type header when uploading file.",
+  "team": "arxius",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "203515": {
+  "title": "Wordpress 4.7.2 - Two XSS in Media Upload when file too large.",
+  "team": "WordPress",
+  "mirror_bounty": "$350",
+  "arms": [
+   "upload"
+  ]
+ },
+ "208481": {
+  "title": "Remote file inclusion vulnerability on a DoD website",
+  "team": "U.S. Dept Of Defense",
+  "mirror_bounty": "-",
+  "arms": [
+   "rfi",
+   "incl"
+  ]
+ },
+ "213558": {
+  "title": "Arbitrary Local-File Read from Admin - Restore From Backup due to Symlinks",
+  "team": "Discourse",
+  "mirror_bounty": "$512",
+  "arms": [
+   "fileread"
+  ]
+ },
+ "221928": {
+  "title": "Malicious file can be hidden as Card Attachment or Card Cover image",
+  "team": "Trello",
+  "mirror_bounty": "$128",
+  "arms": [
+   "malfile"
+  ]
+ },
+ "228377": {
+  "title": "SSRF in upload IMG through URL",
+  "team": "Discourse",
+  "mirror_bounty": "$64",
+  "arms": [
+   "upload"
+  ]
+ },
+ "230714": {
+  "title": "Arbitary file download vulnerability on a DoD website",
+  "team": "U.S. Dept Of Defense",
+  "mirror_bounty": "-",
+  "arms": [
+   "fileread"
+  ]
+ },
+ "230870": {
+  "title": "Arbitary file download vulnerability on a DoD website",
+  "team": "U.S. Dept Of Defense",
+  "mirror_bounty": "-",
+  "arms": [
+   "fileread"
+  ]
+ },
+ "232614": {
+  "title": "Uploaded XLF files result in External Entity Execution",
+  "team": "Weblate",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "248745": {
+  "title": "Unpatched (https://hackerone.com/reports/221928)- Unviladate File Upload to XSS on trello-attachment Bucket",
+  "team": "Trello",
+  "mirror_bounty": "-",
+  "arms": [
+   "upload"
+  ]
+ },
+ "254200": {
+  "title": "Escaping images directory in S3 bucket when saving new avatar, using Path Traversal in filename",
+  "team": "Unikrn",
+  "mirror_bounty": "$50",
+  "arms": [
+   "traversal"
+  ]
+ },
+ "258117": {
+  "title": "RCE/LFI on test Jenkins instance due to improper authentication flow",
+  "team": "Snapchat",
+  "mirror_bounty": "$5,000",
+  "arms": [
+   "lfi"
+  ]
+ },
+ "258460": {
+  "title": "[Quora Android] Possible to steal arbitrary files from mobile device",
+  "team": "Quora",
+  "mirror_bounty": "$500",
+  "arms": [
+   "fileread"
+  ]
+ }
+}

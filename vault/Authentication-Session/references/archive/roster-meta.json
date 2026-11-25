@@ -1,0 +1,3620 @@
+[
+ {
+  "id": "260492",
+  "team": "Legal Robot",
+  "title_mirror": "Invalid Email Verification",
+  "bounty_mirror": "-",
+  "arms": [
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "Invalid Email Verification",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": ""
+ },
+ {
+  "id": "259416",
+  "team": "Legal Robot",
+  "title_mirror": "Incorrect email content when disabling 2FA",
+  "bounty_mirror": "$20",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "Incorrect email content when disabling 2FA",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Business Logic Errors"
+ },
+ {
+  "id": "259415",
+  "team": "Legal Robot",
+  "title_mirror": "Lengthy manual entry of 2FA secret",
+  "bounty_mirror": "$20",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "Lengthy manual entry of 2FA secret",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Business Logic Errors"
+ },
+ {
+  "id": "258117",
+  "team": "Snapchat",
+  "title_mirror": "RCE/LFI on test Jenkins instance due to improper authentication flow",
+  "bounty_mirror": "$5,000",
+  "arms": [
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "snapchat",
+  "title_json": "RCE/LFI on test Jenkins instance due to improper authentication flow",
+  "year": "2017",
+  "sev": "medium",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Access Control - Generic"
+ },
+ {
+  "id": "257119",
+  "team": "WakaTime",
+  "title_mirror": "Impersonation of Wakatime user using Invitation functionality.",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "wakatime",
+  "title_json": "Impersonation of Wakatime user using Invitation functionality.",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "255467",
+  "team": "arxius",
+  "title_mirror": "No Email Verification and No email sent on Forget Pasword",
+  "bounty_mirror": "-",
+  "arms": [
+   "email-verification"
+  ],
+  "live": false
+ },
+ {
+  "id": "255020",
+  "team": "Legal Robot",
+  "title_mirror": "Password Reset page Session Fixation",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "Password Reset page Session Fixation",
+  "year": "2017",
+  "sev": "medium",
+  "bounty_json": null,
+  "sub": "not-applicable",
+  "weak": "Session Fixation"
+ },
+ {
+  "id": "253934",
+  "team": "Boozt Fashion AB",
+  "title_mirror": "Password reset token issue",
+  "bounty_mirror": "$60",
+  "arms": [
+   "reset-token"
+  ],
+  "live": false
+ },
+ {
+  "id": "253448",
+  "team": "Legal Robot",
+  "title_mirror": "[Cross-domain Referer leakage] Password reset token leakage via referer",
+  "bounty_mirror": "$20",
+  "arms": [
+   "reset-token"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "[Cross-domain Referer leakage] Password reset token leakage via referer",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Information Disclosure"
+ },
+ {
+  "id": "251200",
+  "team": "Legal Robot",
+  "title_mirror": "Missing Issuer parameter on TOTP 2FA",
+  "bounty_mirror": "$60",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "Missing Issuer parameter on TOTP 2FA",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": ""
+ },
+ {
+  "id": "250688",
+  "team": "TTS Bug Bounty",
+  "title_mirror": "The Federalsit session cookie (federalist.sid) is not properly invalidated - backdoor access to the account is possible",
+  "bounty_mirror": "$150",
+  "arms": [
+   "cookie-invalidation"
+  ],
+  "live": true,
+  "handle": "gsa_bbp",
+  "title_json": "The Federalsit session cookie (federalist.sid) is not properly invalidated - backdoor access to the account is possible",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Insufficient Session Expiration"
+ },
+ {
+  "id": "250243",
+  "team": "Legal Robot",
+  "title_mirror": "Users with 2FA can have multiple sessions",
+  "bounty_mirror": "$60",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "Users with 2FA can have multiple sessions",
+  "year": "2017",
+  "sev": "none",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "250082",
+  "team": "Legal Robot",
+  "title_mirror": "Enhancement: email confirmation for 2FA recovery",
+  "bounty_mirror": "$60",
+  "arms": [
+   "mfa-2fa",
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "Enhancement: email confirmation for 2FA recovery",
+  "year": "2017",
+  "sev": "medium",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Business Logic Errors"
+ },
+ {
+  "id": "249798",
+  "team": "Legal Robot",
+  "title_mirror": "Intercom chat session information persists after logout",
+  "bounty_mirror": "$20",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "Intercom chat session information persists after logout",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Session Fixation"
+ },
+ {
+  "id": "249695",
+  "team": "Legal Robot",
+  "title_mirror": "2FA Error Handling on Google Authenticator",
+  "bounty_mirror": "$60",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "2FA Error Handling on Google Authenticator",
+  "year": "2017",
+  "sev": "none",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": ""
+ },
+ {
+  "id": "249467",
+  "team": "Legal Robot",
+  "title_mirror": "2FA user enumeration via login",
+  "bounty_mirror": "-",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "2FA user enumeration via login",
+  "year": "2017",
+  "sev": "high",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Business Logic Errors"
+ },
+ {
+  "id": "249431",
+  "team": "Legal Robot",
+  "title_mirror": "2FA user enumeration via password reset",
+  "bounty_mirror": "$90",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "2FA user enumeration via password reset",
+  "year": "2017",
+  "sev": "medium",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Business Logic Errors"
+ },
+ {
+  "id": "249346",
+  "team": "Legal Robot",
+  "title_mirror": "Missing link to 2FA recovery code",
+  "bounty_mirror": "$90",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "Missing link to 2FA recovery code",
+  "year": "2017",
+  "sev": "medium",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Business Logic Errors"
+ },
+ {
+  "id": "249337",
+  "team": "Legal Robot",
+  "title_mirror": "Non-functional 2FA recovery codes",
+  "bounty_mirror": "$60",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "Non-functional 2FA recovery codes",
+  "year": "2017",
+  "sev": "none",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Access Control - Generic"
+ },
+ {
+  "id": "247158",
+  "team": "Zomato",
+  "title_mirror": "Bypass OTP verification when placing Order",
+  "bounty_mirror": "$250",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "eternal",
+  "title_json": "Bypass OTP verification when placing Order",
+  "year": "2017",
+  "sev": "high",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Access Control - Generic"
+ },
+ {
+  "id": "245833",
+  "team": "TTS Bug Bounty",
+  "title_mirror": "The user, who was deleted from Github Organization, still can access all functions of federalist, in case he didn't do logout",
+  "bounty_mirror": "$300",
+  "arms": [
+   "logout",
+   "cookie-invalidation"
+  ],
+  "live": true,
+  "handle": "gsa_bbp",
+  "title_json": "The user, who was deleted from Github Organization, still can access all functions of federalist, in case he didn't do logout",
+  "year": "2017",
+  "sev": "medium",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "245408",
+  "team": "Zomato",
+  "title_mirror": "Login to any account with the emailaddress",
+  "bounty_mirror": "$1,000",
+  "arms": [
+   "login-any"
+  ],
+  "live": true,
+  "handle": "eternal",
+  "title_json": "Login to any account with the emailaddress",
+  "year": "2017",
+  "sev": "high",
+  "bounty_json": "1000.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "245124",
+  "team": "WakaTime",
+  "title_mirror": "Session not expired on logout",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family",
+   "logout"
+  ],
+  "live": true,
+  "handle": "wakatime",
+  "title_json": "Session not expired on logout",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "duplicate",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "244875",
+  "team": "WakaTime",
+  "title_mirror": "Session Not Expired On Logout",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family",
+   "logout"
+  ],
+  "live": true,
+  "handle": "wakatime",
+  "title_json": "Session Not Expired On Logout",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "duplicate",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "244778",
+  "team": "WakaTime",
+  "title_mirror": "Logout CSRF",
+  "bounty_mirror": "-",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "wakatime",
+  "title_json": "Logout CSRF",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "duplicate",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "244434",
+  "team": "WakaTime",
+  "title_mirror": "[https://wakatime.com/reset_password/] Leaking password reset token via referrer",
+  "bounty_mirror": "-",
+  "arms": [
+   "reset-token"
+  ],
+  "live": true,
+  "handle": "wakatime",
+  "title_json": "Leaking password reset token via referrer from external Twitter share button",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Information Disclosure"
+ },
+ {
+  "id": "243049",
+  "team": "Airbnb",
+  "title_mirror": "Call back number not verified",
+  "bounty_mirror": "-",
+  "arms": [
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "airbnb",
+  "title_json": "Call back number not verified",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Business Logic Errors"
+ },
+ {
+  "id": "242622",
+  "team": "Gratipay",
+  "title_mirror": "Possible User Session Hijack using Invalid HTTPS certificate on inside.gratipay.com domain",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "gratipay",
+  "title_json": "Possible User Session Hijack using Invalid HTTPS certificate on inside.gratipay.com domain",
+  "year": "2017",
+  "sev": "medium",
+  "bounty_json": null,
+  "sub": "not-applicable",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "241892",
+  "team": "Gratipay",
+  "title_mirror": "Possible user session hijack by invalid HTTPS certificate on inside.gratipay.com domain",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "gratipay",
+  "title_json": "Possible user session hijack by invalid HTTPS certificate on inside.gratipay.com domain",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "duplicate",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "231813",
+  "team": "Cuvva",
+  "title_mirror": "Verification code for Underwriter dashboard can be brute-forced",
+  "bounty_mirror": "-",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": false
+ },
+ {
+  "id": "231041",
+  "team": "Uber",
+  "title_mirror": "Session not expired When logout [partners.uber.com]",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family",
+   "logout"
+  ],
+  "live": true,
+  "handle": "uber",
+  "title_json": "Session not expired When logout [partners.uber.com]",
+  "year": "2017",
+  "sev": "none",
+  "bounty_json": null,
+  "sub": "not-applicable",
+  "weak": ""
+ },
+ {
+  "id": "229528",
+  "team": "Weblate",
+  "title_mirror": "Login CSRF : Login Authentication Flaw",
+  "bounty_mirror": "-",
+  "arms": [
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "weblate",
+  "title_json": "Login CSRF : Login Authentication Flaw",
+  "year": "2017",
+  "sev": "medium",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "229417",
+  "team": "Weblate",
+  "title_mirror": "Design Flaw in session management of password reset",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "weblate",
+  "title_json": "Design Flaw in session management of password reset ",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Access Control - Generic"
+ },
+ {
+  "id": "226712",
+  "team": "Paragon Initiative Enterprises",
+  "title_mirror": "Broken Authentication & Session Management - Failure to Invalidate Session on all other browsers at Password change",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "paragonie",
+  "title_json": "Broken Authentication & Session Management - Failure to Invalidate Session on all other browsers at Password change",
+  "year": "2017",
+  "sev": "critical",
+  "bounty_json": null,
+  "sub": "not-applicable",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "226518",
+  "team": "Paragon Initiative Enterprises",
+  "title_mirror": "no session logout after changing the password in https://bridge.cspr.ng/",
+  "bounty_mirror": "-",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "paragonie",
+  "title_json": "no session logout after changing the password  in https://bridge.cspr.ng/",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": ""
+ },
+ {
+  "id": "225653",
+  "team": "Weblate",
+  "title_mirror": "Account Takeover using Third party Auth CSRF",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "weblate",
+  "title_json": "Account Takeover using Third party Auth CSRF",
+  "year": "2017",
+  "sev": "high",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "224379",
+  "team": "Weblate",
+  "title_mirror": "session id missing secure flag - Hosted Website",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "weblate",
+  "title_json": "session id missing secure flag - Hosted Website",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": ""
+ },
+ {
+  "id": "224287",
+  "team": "Weblate",
+  "title_mirror": "Email verification over an unencrypted channel",
+  "bounty_mirror": "-",
+  "arms": [
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "weblate",
+  "title_json": "Email verification over an unencrypted channel",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Man-in-the-Middle"
+ },
+ {
+  "id": "223637",
+  "team": "Weblate",
+  "title_mirror": "[hosted.weblate.org]Account Takeover",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "weblate",
+  "title_json": "[hosted.weblate.org]Account Takeover",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": ""
+ },
+ {
+  "id": "223475",
+  "team": "Weblate",
+  "title_mirror": "Existing sessions valid after removing third party auth",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "weblate",
+  "title_json": "Existing sessions valid after removing third party auth",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "223461",
+  "team": "Weblate",
+  "title_mirror": "Weak e-mail change functionality could lead to account takeover",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "weblate",
+  "title_json": "Weak e-mail change functionality could lead to account takeover",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "223329",
+  "team": "Weblate",
+  "title_mirror": "Logout CSRF",
+  "bounty_mirror": "-",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "weblate",
+  "title_json": "Logout CSRF",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "223327",
+  "team": "Weblate",
+  "title_mirror": "No expiration of session ID after Password change",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "weblate",
+  "title_json": "No expiration of session ID after Password change",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Insufficient Session Expiration"
+ },
+ {
+  "id": "223326",
+  "team": "Weblate",
+  "title_mirror": "Open Redirect via \"next\" parameter in third-party authentication",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "weblate",
+  "title_json": "Open Redirect via \"next\" parameter in third-party authentication",
+  "year": "2017",
+  "sev": "medium",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Open Redirect"
+ },
+ {
+  "id": "223014",
+  "team": "Uber",
+  "title_mirror": "SAML Authentication Bypass on uchat.uberinternal.com",
+  "bounty_mirror": "$8,500",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth",
+   "sso-saml"
+  ],
+  "live": true,
+  "handle": "uber",
+  "title_json": "SAML Authentication Bypass on uchat.uberinternal.com",
+  "year": "2017",
+  "sev": "high",
+  "bounty_json": "8500.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "222082",
+  "team": "OWOX, Inc.",
+  "title_mirror": "Broken Authentication & Session Management (Login Bypass) at support.owox.com",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core",
+   "session-family",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "owox",
+  "title_json": "Broken Authentication & Session Management (Login Bypass) at support.owox.com",
+  "year": "2017",
+  "sev": "critical",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "220185",
+  "team": "Skyliner",
+  "title_mirror": "Password reset Token not expiring",
+  "bounty_mirror": "-",
+  "arms": [
+   "reset-token"
+  ],
+  "live": true,
+  "handle": "skyliner",
+  "title_json": "Password reset Token not expiring ",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Deserialization of Untrusted Data"
+ },
+ {
+  "id": "219205",
+  "team": "Uber",
+  "title_mirror": "Authentication bypass on auth.uber.com via subdomain takeover of saostatic.uber.com",
+  "bounty_mirror": "$5,000",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "uber",
+  "title_json": "Authentication bypass on auth.uber.com via subdomain takeover of saostatic.uber.com",
+  "year": "2017",
+  "sev": "critical",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "219203",
+  "team": "Harvest",
+  "title_mirror": "Login bypass on travel.\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 aka \"Harvest Spring Summit 2017\"",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core"
+  ],
+  "live": false
+ },
+ {
+  "id": "215053",
+  "team": "Ubiquiti Networks",
+  "title_mirror": "Ability to log in as any user without authentication if \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 is empty",
+  "bounty_mirror": "$6,000",
+  "arms": [
+   "logged-in-as"
+  ],
+  "live": true,
+  "handle": "ui",
+  "title_json": "Ability to log in as any user without authentication if \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 is empty",
+  "year": "2017",
+  "sev": "critical",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "214433",
+  "team": "Trello",
+  "title_mirror": "Rate limiting of incorrect Two Factor Authentication codes not enforced",
+  "bounty_mirror": "$768",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": false
+ },
+ {
+  "id": "213789",
+  "team": "Nextcloud",
+  "title_mirror": "Update php-saml library to 2.10.5",
+  "bounty_mirror": "-",
+  "arms": [
+   "sso-saml"
+  ],
+  "live": true,
+  "handle": "nextcloud",
+  "title_json": "Update php-saml library to 2.10.5",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cryptographic Issues - Generic"
+ },
+ {
+  "id": "213515",
+  "team": "Trello",
+  "title_mirror": "Phone verification code fails to expire and can be used multiple times also in different accounts to verify same cellphone number on Trello.com",
+  "bounty_mirror": "-",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": false
+ },
+ {
+  "id": "213492",
+  "team": "Trello",
+  "title_mirror": "Email authentication token fails to expire and can be used multiple times for same Email address on Trello.com",
+  "bounty_mirror": "-",
+  "arms": [
+   "token-expiry"
+  ],
+  "live": false
+ },
+ {
+  "id": "207552",
+  "team": "Khan Academy",
+  "title_mirror": "No Security check at changing password and at adding mobile number which leads to account takeover and spam",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "khanacademy",
+  "title_json": "No Security check at changing password and at adding mobile number which leads to account takeover and spam",
+  "year": "2017",
+  "sev": "medium",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "202177",
+  "team": "Instacart",
+  "title_mirror": "Login with Google Not Authenticated on iOS App",
+  "bounty_mirror": "$100",
+  "arms": [
+   "login-any"
+  ],
+  "live": true,
+  "handle": "instacart",
+  "title_json": "Login with Google Not Authenticated on iOS App",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "201152",
+  "team": "Informatica",
+  "title_mirror": "[ipm.informatica.com]- Broken Authentication",
+  "bounty_mirror": "-",
+  "arms": [
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "informatica",
+  "title_json": "[ipm.informatica.com]- Broken Authentication",
+  "year": "2017",
+  "sev": "high",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "194832",
+  "team": "Shopify",
+  "title_mirror": "Authentication Bypass on monitoring server",
+  "bounty_mirror": "$500",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "shopify",
+  "title_json": "Authentication Bypass on monitoring server",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "193556",
+  "team": "Gratipay",
+  "title_mirror": "Session Fixation At Logout /Session Misconfiguration",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family",
+   "logout"
+  ],
+  "live": true,
+  "handle": "gratipay",
+  "title_json": "Session Fixation At Logout /Session Misconfiguration",
+  "year": "2016",
+  "sev": "none",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "192648",
+  "team": "YouPorn",
+  "title_mirror": "Account takeover via Pornhub Oauth",
+  "bounty_mirror": "$1,000",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": false
+ },
+ {
+  "id": "187705",
+  "team": "U.S. Dept Of Defense",
+  "title_mirror": "Authentication bypass vulnerability on a DoD website",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "deptofdefense",
+  "title_json": "Authentication bypass vulnerability on a DoD website",
+  "year": "2017",
+  "sev": "critical",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "179421",
+  "team": "VK.com",
+  "title_mirror": "\u041d\u043e\u0432\u044b\u0439 2FA Bypass",
+  "bounty_mirror": "$1,000",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "vkcom",
+  "title_json": "\u041d\u043e\u0432\u044b\u0439 2FA Bypass",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": "1000.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "178345",
+  "team": "HackerOne",
+  "title_mirror": "Limited Open redirection using SSO-SAML",
+  "bounty_mirror": "-",
+  "arms": [
+   "sso-saml"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "Limited Open redirection using SSO-SAML",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Open Redirect"
+ },
+ {
+  "id": "178293",
+  "team": "Shopify",
+  "title_mirror": "Misconfiguration in Two Factor Authorisation",
+  "bounty_mirror": "$1,500",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "shopify",
+  "title_json": "Misconfiguration in Two Factor Authorisation",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": "1500.0",
+  "sub": "resolved",
+  "weak": ""
+ },
+ {
+  "id": "176979",
+  "team": "Coinbase",
+  "title_mirror": "Authentication Issue",
+  "bounty_mirror": "$200",
+  "arms": [
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "coinbase",
+  "title_json": "Authentication Issue",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": "200.0",
+  "sub": "resolved",
+  "weak": "Privilege Escalation"
+ },
+ {
+  "id": "174500",
+  "team": "Twitter",
+  "title_mirror": "Circumventing the Twitter account lockout process [ACCOUNT TAKEOVER]",
+  "bounty_mirror": "$560",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": false
+ },
+ {
+  "id": "173551",
+  "team": "Uber",
+  "title_mirror": "password reset token leaking allowed for ATO of an Uber account",
+  "bounty_mirror": "$10,000",
+  "arms": [
+   "reset-token"
+  ],
+  "live": true,
+  "handle": "uber",
+  "title_json": "password reset token leaking allowed for ATO of an Uber account",
+  "year": "2017",
+  "sev": "critical",
+  "bounty_json": "10000.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "173251",
+  "team": "RubyGems",
+  "title_mirror": "Password Reset emails missing TLS leads account takeover",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "rubygems",
+  "title_json": "Password Reset emails missing TLS leads account takeover",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "172609",
+  "team": "Ian Dunn",
+  "title_mirror": "Google Authenticator0.6 - PHP Version Dosclosure",
+  "bounty_mirror": "-",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "iandunn-projects",
+  "title_json": "Google Authenticator0.6 - PHP Version Dosclosure",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "not-applicable",
+  "weak": "Information Disclosure"
+ },
+ {
+  "id": "172606",
+  "team": "Ian Dunn",
+  "title_mirror": "Google Authenticator - Cross Site Scripting",
+  "bounty_mirror": "-",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "iandunn-projects",
+  "title_json": "Google Authenticator - Cross Site Scripting",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "not-applicable",
+  "weak": "Cross-site Scripting (XSS) - Generic"
+ },
+ {
+  "id": "172137",
+  "team": "Ubiquiti Networks",
+  "title_mirror": "Authentication bypass on sso.ubnt.com via subdomain takeover of ping.ubnt.com",
+  "bounty_mirror": "$500",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth",
+   "sso-saml"
+  ],
+  "live": true,
+  "handle": "ui",
+  "title_json": "Authentication bypass on sso.ubnt.com via subdomain takeover of ping.ubnt.com",
+  "year": "2016",
+  "sev": "high",
+  "bounty_json": null,
+  "sub": "duplicate",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "171398",
+  "team": "HackerOne",
+  "title_mirror": "(HackerOne SSO-SAML) Login CSRF, Open Redirect, and Self-XSS Possible Exploitation",
+  "bounty_mirror": "-",
+  "arms": [
+   "sso-saml"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "(HackerOne SSO-SAML) Login CSRF, Open Redirect, and Self-XSS Possible Exploitation",
+  "year": "2016",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-site Scripting (XSS) - Generic"
+ },
+ {
+  "id": "168108",
+  "team": "New Relic",
+  "title_mirror": "SSO Authentication Bypass",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth",
+   "sso-saml"
+  ],
+  "live": false
+ },
+ {
+  "id": "167828",
+  "team": "HackerOne",
+  "title_mirror": "Ability to enumerate private programs using SAML",
+  "bounty_mirror": "-",
+  "arms": [
+   "sso-saml"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "Ability to enumerate private programs using SAML",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Information Disclosure"
+ },
+ {
+  "id": "167698",
+  "team": "Boozt Fashion AB",
+  "title_mirror": "Broken Authentication and Session Management(Session Fixation)",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ],
+  "live": false
+ },
+ {
+  "id": "167460",
+  "team": "New Relic",
+  "title_mirror": "Session Hijacking",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": false
+ },
+ {
+  "id": "167121",
+  "team": "VK.com",
+  "title_mirror": "\u0412\u0442\u043e\u0440\u043e\u0439 \u0441\u043f\u043e\u0441\u043e\u0431 \u043e\u0431\u0445\u043e\u0434\u0430 2FA",
+  "bounty_mirror": "$1,050",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "vkcom",
+  "title_json": "\u0412\u0442\u043e\u0440\u043e\u0439 \u0441\u043f\u043e\u0441\u043e\u0431 \u043e\u0431\u0445\u043e\u0434\u0430 2FA",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": "1050.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "165923",
+  "team": "Boozt Fashion AB",
+  "title_mirror": "No csrf protection on logout",
+  "bounty_mirror": "-",
+  "arms": [
+   "logout"
+  ],
+  "live": false
+ },
+ {
+  "id": "163834",
+  "team": "VK.com",
+  "title_mirror": "\u041e\u0431\u0445\u043e\u0434 2\u0443\u0445-\u0448\u0430\u0433\u043e\u0432\u043e\u0439 \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u0438 / 2FA Bypass",
+  "bounty_mirror": "$1,000",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "vkcom",
+  "title_json": "\u041e\u0431\u0445\u043e\u0434 2\u0443\u0445-\u0448\u0430\u0433\u043e\u0432\u043e\u0439 \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u0438 / 2FA Bypass",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": "1000.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "163467",
+  "team": "Legal Robot",
+  "title_mirror": "User Information leak allows user to bypass email verification.",
+  "bounty_mirror": "$120",
+  "arms": [
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "User Information leak allows user to bypass email verification.",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "161659",
+  "team": "Airbnb",
+  "title_mirror": "\u2588\u2588\u2588\u2588 discloses valid Airbnb SSO login names via Google Search Results",
+  "bounty_mirror": "-",
+  "arms": [
+   "sso-saml"
+  ],
+  "live": true,
+  "handle": "airbnb",
+  "title_json": "\u2588\u2588\u2588\u2588 discloses valid Airbnb SSO login names via Google Search Results",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Information Disclosure"
+ },
+ {
+  "id": "159202",
+  "team": "OLX",
+  "title_mirror": "Full Account Takeover",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": false
+ },
+ {
+  "id": "158270",
+  "team": "Certly",
+  "title_mirror": "Business logic Failure - Browser cache management and logout vulnerability in Certly",
+  "bounty_mirror": "-",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "certly",
+  "title_json": "Business logic Failure - Browser cache management and logout vulnerability in Certly",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "157956",
+  "team": "Instacart",
+  "title_mirror": "CSRF To change Email Notification Settings",
+  "bounty_mirror": "$50",
+  "arms": [
+   "email-change"
+  ],
+  "live": true,
+  "handle": "instacart",
+  "title_json": "CSRF To change Email Notification Settings ",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "156542",
+  "team": "Gratipay",
+  "title_mirror": "Avoid \"resend verification email\" confusion",
+  "bounty_mirror": "$1",
+  "arms": [
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "gratipay",
+  "title_json": "Avoid \"resend verification email\" confusion",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": "1.0",
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "155862",
+  "team": "Trello",
+  "title_mirror": "Verification Code Reused For activating 2FA",
+  "bounty_mirror": "-",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": false
+ },
+ {
+  "id": "155774",
+  "team": "Slack",
+  "title_mirror": "CSRF - Add optional two factor mobile number",
+  "bounty_mirror": "$500",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "slack",
+  "title_json": "CSRF - Add optional two factor mobile number",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": "500.0",
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "152944",
+  "team": "New Relic",
+  "title_mirror": "Session Management Flaw",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": false
+ },
+ {
+  "id": "152586",
+  "team": "Harvest",
+  "title_mirror": "CSRF token fixation in Sign in with Google",
+  "bounty_mirror": "$250",
+  "arms": [
+   "session-family"
+  ],
+  "live": false
+ },
+ {
+  "id": "152080",
+  "team": "Coursera",
+  "title_mirror": "Broken authentication and session management flaw",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "coursera",
+  "title_json": "Broken authentication and session management flaw ",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "152052",
+  "team": "concrete5",
+  "title_mirror": "CSRF Full Account Takeover",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "concretecms",
+  "title_json": "CSRF Full Account Takeover",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "149598",
+  "team": "GitLab",
+  "title_mirror": "Insecure 2FA/authentication implementation creates a brute force vulnerability",
+  "bounty_mirror": "-",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "gitlab",
+  "title_json": "Insecure 2FA/authentication implementation creates a brute force vulnerability",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "148914",
+  "team": "Paragon Initiative Enterprises",
+  "title_mirror": "Session Management Issue CMS Airship",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "paragonie",
+  "title_json": "Session Management Issue CMS Airship",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Memory Corruption - Generic"
+ },
+ {
+  "id": "148151",
+  "team": "ownCloud",
+  "title_mirror": "SMB User Authentication Bypass and Persistence",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "owncloud",
+  "title_json": "SMB User Authentication Bypass and Persistence",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "147744",
+  "team": "Mail.Ru",
+  "title_mirror": "Back Refresh Attack after registration and successful logout",
+  "bounty_mirror": "-",
+  "arms": [
+   "logout"
+  ],
+  "live": false
+ },
+ {
+  "id": "147204",
+  "team": "FantasyTote",
+  "title_mirror": "Bypass logout",
+  "bounty_mirror": "-",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "fantasytote",
+  "title_json": "Bypass logout ",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "147203",
+  "team": "FantasyTote",
+  "title_mirror": "Insecure password change mechanism may lead to full account takeover",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "fantasytote",
+  "title_json": "Insecure password change mechanism may lead to full account takeover",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cryptographic Issues - Generic"
+ },
+ {
+  "id": "147182",
+  "team": "FantasyTote",
+  "title_mirror": "No email verification required when we change email from settings",
+  "bounty_mirror": "-",
+  "arms": [
+   "email-change",
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "fantasytote",
+  "title_json": "No email verification required when we change email from settings",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Uncontrolled Resource Consumption"
+ },
+ {
+  "id": "146838",
+  "team": "Uber",
+  "title_mirror": "Authentication Issue for easter egg on bonjour.uber.com",
+  "bounty_mirror": "-",
+  "arms": [
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "uber",
+  "title_json": "Authentication Issue for easter egg on bonjour.uber.com",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "146129",
+  "team": "Instacart",
+  "title_mirror": "Authentication Bypass in Updating Personal Information",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "instacart",
+  "title_json": "Authentication Bypass in Updating Personal Information",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "145896",
+  "team": "Nextcloud",
+  "title_mirror": "Password reset link remains valid after email change",
+  "bounty_mirror": "-",
+  "arms": [
+   "email-change"
+  ],
+  "live": true,
+  "handle": "nextcloud",
+  "title_json": "Password reset link remains valid after email change",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "145629",
+  "team": "Algolia",
+  "title_mirror": "2-factor authentication bypass",
+  "bounty_mirror": "$100",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "algolia",
+  "title_json": "2-factor authentication bypass",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "145430",
+  "team": "Nextcloud",
+  "title_mirror": "help.nextcloud.com: Session Management Issue",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "nextcloud",
+  "title_json": "help.nextcloud.com: Session Management Issue",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": ""
+ },
+ {
+  "id": "145300",
+  "team": "Paragon Initiative Enterprises",
+  "title_mirror": "Session Management",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "paragonie",
+  "title_json": "Session Management",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "not-applicable",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "143717",
+  "team": "Uber",
+  "title_mirror": "Change any Uber user's password through /rt/users/passwordless-signup - Account Takeover (critical)",
+  "bounty_mirror": "$10,000",
+  "arms": [
+   "ato-impersonation",
+   "passwordless"
+  ],
+  "live": true,
+  "handle": "uber",
+  "title_json": "Change any Uber user's password through /rt/users/passwordless-signup - Account Takeover (critical)",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "143482",
+  "team": "Shopify",
+  "title_mirror": "Authentication Bypass on Icinga monitoring server",
+  "bounty_mirror": "$3,000",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "shopify",
+  "title_json": "Authentication Bypass on Icinga monitoring server",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "142221",
+  "team": "Zomato",
+  "title_mirror": "Bypass OTP verification when placing Order",
+  "bounty_mirror": "-",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "eternal",
+  "title_json": "Bypass OTP verification when placing Order",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "139178",
+  "team": "New Relic",
+  "title_mirror": "Improper Session Management",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": false
+ },
+ {
+  "id": "138869",
+  "team": "Uber",
+  "title_mirror": "OneLogin authentication bypass on WordPress sites via XMLRPC",
+  "bounty_mirror": "$7,000",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "uber",
+  "title_json": "OneLogin authentication bypass on WordPress sites via XMLRPC",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": "7000.0",
+  "sub": "resolved",
+  "weak": "Code Injection"
+ },
+ {
+  "id": "137480",
+  "team": "New Relic",
+  "title_mirror": "New Relic - Session Hijacking",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": false
+ },
+ {
+  "id": "136885",
+  "team": "Uber",
+  "title_mirror": "[CRITICAL] -- Complete Account Takeover",
+  "bounty_mirror": "$8,000",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "uber",
+  "title_json": "[CRITICAL] -- Complete Account Takeover",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": "8000.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "136169",
+  "team": "Uber",
+  "title_mirror": "OneLogin authentication bypass on WordPress sites",
+  "bounty_mirror": "$10,000",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "uber",
+  "title_json": "OneLogin authentication bypass on WordPress sites",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": "10000.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "135797",
+  "team": "Romit",
+  "title_mirror": "Session Fixation",
+  "bounty_mirror": "$50",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "enter",
+  "title_json": "Session Fixation",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": "50.0",
+  "sub": "resolved",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "135283",
+  "team": "Paragon Initiative Enterprises",
+  "title_mirror": "Email Authentication Bypass",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "paragonie",
+  "title_json": "Email Authentication Bypass",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "not-applicable",
+  "weak": "Memory Corruption - Generic"
+ },
+ {
+  "id": "134206",
+  "team": "Uber",
+  "title_mirror": "Defect-Security | Driver-Broken Authentication | Able to update the Subscription Setting anonymously",
+  "bounty_mirror": "-",
+  "arms": [
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "uber",
+  "title_json": "Defect-Security | Driver-Broken Authentication | Able to update the Subscription Setting anonymously",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "130460",
+  "team": "bitaccess",
+  "title_mirror": "BYASSING OTP Verification",
+  "bounty_mirror": "$50",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "bitaccess",
+  "title_json": "BYASSING  OTP Verification",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "129918",
+  "team": "Slack",
+  "title_mirror": "Authentication bypass leads to sensitive data exposure (token+secret)",
+  "bounty_mirror": "$2,000",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "slack",
+  "title_json": "Authentication bypass leads to sensitive data exposure (token+secret)",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": "2000.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "128777",
+  "team": "Algolia",
+  "title_mirror": "No rate-limit in Two factor Authentication leads to bypass using bruteforce attack",
+  "bounty_mirror": "$100",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "algolia",
+  "title_json": "No rate-limit in Two factor Authentication leads to bypass using bruteforce attack",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": "100.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "128085",
+  "team": "GitLab",
+  "title_mirror": "Bypassing password authentication of users that have 2FA enabled",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core",
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "gitlab",
+  "title_json": "Bypassing password authentication of users that have 2FA enabled",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "127703",
+  "team": "Badoo",
+  "title_mirror": "[CRITICAL] Full account takeover using CSRF",
+  "bounty_mirror": "$852",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "bumble",
+  "title_json": "[CRITICAL] Full account takeover using CSRF",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "127645",
+  "team": "Uber",
+  "title_mirror": "Session Impersonation in riders.uber.com",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "uber",
+  "title_json": "Session Impersonation in riders.uber.com",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "126235",
+  "team": "Uber",
+  "title_mirror": "text injection in get.uber.com/check-otp",
+  "bounty_mirror": "-",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "uber",
+  "title_json": "text injection in get.uber.com/check-otp",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": ""
+ },
+ {
+  "id": "124845",
+  "team": "Shopify",
+  "title_mirror": "Bypassed password authentication before enabling OTP verification",
+  "bounty_mirror": "$500",
+  "arms": [
+   "bypass-core",
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "shopify",
+  "title_json": "Bypassed password authentication before enabling OTP verification",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": "500.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "124151",
+  "team": "Zomato",
+  "title_mirror": "Authentication Bypassing and Sensitive Information Disclosure on Verify Email Address in Registration Flow",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth",
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "eternal",
+  "title_json": "Authentication Bypassing and Sensitive Information Disclosure on Verify Email Address in Registration Flow",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "123897",
+  "team": "Gratipay",
+  "title_mirror": "auto-logout after 20 minutes",
+  "bounty_mirror": "$1",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "gratipay",
+  "title_json": "auto-logout after 20 minutes",
+  "year": "2016",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "123743",
+  "team": "HackerOne",
+  "title_mirror": "Sending emails (via HackerOne) impersonating other users",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "Sending emails (via HackerOne) impersonating other users",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "123127",
+  "team": "New Relic",
+  "title_mirror": "no email confirmation on signup",
+  "bounty_mirror": "-",
+  "arms": [
+   "email-verification"
+  ],
+  "live": false
+ },
+ {
+  "id": "121827",
+  "team": "Badoo",
+  "title_mirror": "Account Takeover",
+  "bounty_mirror": "$850",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "bumble",
+  "title_json": "Account Takeover",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "121469",
+  "team": "Badoo",
+  "title_mirror": "Broken Authentication on Badoo",
+  "bounty_mirror": "$427",
+  "arms": [
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "bumble",
+  "title_json": "Broken Authentication on Badoo",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": "427.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "118948",
+  "team": "Veris",
+  "title_mirror": "Password reset link is not Expiring",
+  "bounty_mirror": "-",
+  "arms": [
+   "token-expiry"
+  ],
+  "live": true,
+  "handle": "veris",
+  "title_json": "Password reset link is not Expiring",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "116504",
+  "team": "Ubiquiti Networks",
+  "title_mirror": "Auth bypass on directory.corp.ubnt.com",
+  "bounty_mirror": "$1,000",
+  "arms": [
+   "bypass-core"
+  ],
+  "live": true,
+  "handle": "ui",
+  "title_json": "Auth bypass on directory.corp.ubnt.com",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "115845",
+  "team": "Legal Robot",
+  "title_mirror": "Rate limiting on Email confirmation link",
+  "bounty_mirror": "$20",
+  "arms": [
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "  Rate limiting on Email confirmation link",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "115245",
+  "team": "Paragon Initiative Enterprises",
+  "title_mirror": "Email Authentication bypass Vulnerability",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "paragonie",
+  "title_json": "Email Authentication bypass Vulnerability",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "duplicate",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "114169",
+  "team": "Twitter",
+  "title_mirror": "Bypassing Digits web authentication's host validation with HPP",
+  "bounty_mirror": "$2,520",
+  "arms": [
+   "bypass-core"
+  ],
+  "live": true,
+  "handle": "x",
+  "title_json": "Bypassing Digits web authentication's host validation with HPP",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "106865",
+  "team": "Informatica",
+  "title_mirror": "[rev-app.informatica.com] - XXE via SAML",
+  "bounty_mirror": "-",
+  "arms": [
+   "sso-saml"
+  ],
+  "live": true,
+  "handle": "informatica",
+  "title_json": "[rev-app.informatica.com] - XXE via SAML",
+  "year": "2016",
+  "sev": "high",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Command Injection - Generic"
+ },
+ {
+  "id": "101977",
+  "team": "Imgur",
+  "title_mirror": "Login to any user account using other facebook app access token",
+  "bounty_mirror": "-",
+  "arms": [
+   "login-any"
+  ],
+  "live": true,
+  "handle": "imgur",
+  "title_json": "Login to any user account using other facebook app access token ",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "100509",
+  "team": "HackerOne",
+  "title_mirror": "Pre-generation of 2FA secret/backup codes seems like an unnecessary risk",
+  "bounty_mirror": "$1,000",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "Pre-generation of 2FA secret/backup codes seems like an unnecessary risk",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": "1000.0",
+  "sub": "resolved",
+  "weak": ""
+ },
+ {
+  "id": "99273",
+  "team": "Mail.Ru",
+  "title_mirror": "[gitmm.corp.mail.ru] Auth Bypass, Information Disclosure",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core"
+  ],
+  "live": false
+ },
+ {
+  "id": "98469",
+  "team": "Binary.com",
+  "title_mirror": "Email Verification Link can be Used as Password Reset Link!",
+  "bounty_mirror": "$50",
+  "arms": [
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "deriv",
+  "title_json": "Email Verification Link can be Used as Password Reset Link!",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "98432",
+  "team": "Twitter",
+  "title_mirror": "Urgent : Disclosure of all the apps with hash ID in mopub through API request (Authentication bypass)",
+  "bounty_mirror": "$280",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "x",
+  "title_json": "Urgent : Disclosure of all the apps with hash ID in mopub through API request (Authentication bypass) ",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "98247",
+  "team": "Binary.com",
+  "title_mirror": "login to any user's cashier account and full account information disclosure",
+  "bounty_mirror": "$300",
+  "arms": [
+   "login-any"
+  ],
+  "live": true,
+  "handle": "deriv",
+  "title_json": "login to any user's cashier account and full account information disclosure",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "97377",
+  "team": "HackerOne",
+  "title_mirror": "Hackerone impersonation",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "Hackerone impersonation",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": ""
+ },
+ {
+  "id": "91332",
+  "team": "Imgur",
+  "title_mirror": "Open Url redirection on login with facebook",
+  "bounty_mirror": "-",
+  "arms": [
+   "login-any"
+  ],
+  "live": true,
+  "handle": "imgur",
+  "title_json": "Open Url redirection on login with facebook",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Cryptographic Issues - Generic"
+ },
+ {
+  "id": "90643",
+  "team": "ownCloud",
+  "title_mirror": "No email verification during registration",
+  "bounty_mirror": "-",
+  "arms": [
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "owncloud",
+  "title_json": "No email verification during registration",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "90165",
+  "team": "VK.com",
+  "title_mirror": "CSRF \u0432 \u043f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0438 \u0440\u0435\u0437\u0435\u0440\u0432\u043d\u044b\u0445 \u0442\u043e\u043a\u0435\u043d\u043e\u0432+framing , \u043f\u0440\u0438\u0432\u043e\u0434\u044f\u0449\u0438\u0435 \u043a \u043a\u043e\u043c\u043f\u0440\u043e\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u0438 2fa",
+  "bounty_mirror": "$500",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "vkcom",
+  "title_json": "CSRF \u0432 \u043f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0438 \u0440\u0435\u0437\u0435\u0440\u0432\u043d\u044b\u0445 \u0442\u043e\u043a\u0435\u043d\u043e\u0432+framing , \u043f\u0440\u0438\u0432\u043e\u0434\u044f\u0449\u0438\u0435 \u043a \u043a\u043e\u043c\u043f\u0440\u043e\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u0438 2fa",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": "500.0",
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "86504",
+  "team": "Anghami",
+  "title_mirror": "[CRITICAL] Login To Any Account Linked With Google+ With Email Only",
+  "bounty_mirror": "$100",
+  "arms": [
+   "login-any"
+  ],
+  "live": false
+ },
+ {
+  "id": "80883",
+  "team": "Gratipay",
+  "title_mirror": "Authentication errors in server side validaton of E-MAIL",
+  "bounty_mirror": "-",
+  "arms": [
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "gratipay",
+  "title_json": "Authentication errors in server side validaton of E-MAIL",
+  "year": "2015",
+  "sev": "none",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "78781",
+  "team": "ok.ru",
+  "title_mirror": "Critical : Access to group videos where videos are restricted for all users(Broken authentication )",
+  "bounty_mirror": "$150",
+  "arms": [
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "ok",
+  "title_json": "Critical : Access to group videos where videos are restricted for all users(Broken authentication )",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "77076",
+  "team": "Romit",
+  "title_mirror": "GA code not verified on the server side allows sending Verification Documents on behalf of another user",
+  "bounty_mirror": "$250",
+  "arms": [
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "enter",
+  "title_json": "GA code not verified on the server side allows sending Verification Documents on behalf of another user",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": "250.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "67660",
+  "team": "Automattic",
+  "title_mirror": "Verification code issues for Two-Step Authentication",
+  "bounty_mirror": "$100",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "automattic",
+  "title_json": "Verification code issues for Two-Step Authentication",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "66223",
+  "team": "Coinbase",
+  "title_mirror": "Two-factor authentication (via SMS)",
+  "bounty_mirror": "-",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "coinbase",
+  "title_json": "Two-factor authentication (via SMS)",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "64946",
+  "team": "Legal Robot",
+  "title_mirror": "Registration bypass using OAuth logical bug",
+  "bounty_mirror": "$40",
+  "arms": [
+   "bypass-core"
+  ],
+  "live": true,
+  "handle": "legalrobot",
+  "title_json": "Registration bypass using OAuth logical bug",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "UI Redressing (Clickjacking)"
+ },
+ {
+  "id": "64666",
+  "team": "MapLogin",
+  "title_mirror": "Bypass verification of email while creating account(No rate limiting enable for verification code)",
+  "bounty_mirror": "-",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "maplogin",
+  "title_json": "Bypass verification of email while creating account(No rate limiting enable for verification code)",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "55911",
+  "team": "Shopify",
+  "title_mirror": "CSRF token fixation in facebook store app that can lead to adding attacker to victim acc",
+  "bounty_mirror": "$500",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "shopify",
+  "title_json": "CSRF token fixation in facebook store app that can lead to adding attacker to victim acc ",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": "500.0",
+  "sub": "resolved",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "54610",
+  "team": "Slack",
+  "title_mirror": "Logout any user of same team",
+  "bounty_mirror": "$100",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "slack",
+  "title_json": "Logout any user of same team",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "52645",
+  "team": "itBit Exchange",
+  "title_mirror": "secretKey for OTP , is getting leaked in response of a delete request !",
+  "bounty_mirror": "$200",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": false
+ },
+ {
+  "id": "52644",
+  "team": "itBit Exchange",
+  "title_mirror": "confirmation bypass of 2FA devices while they are deleting",
+  "bounty_mirror": "$200",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": false
+ },
+ {
+  "id": "51166",
+  "team": "IRCCloud",
+  "title_mirror": "Email verification links still valid after changing it 2x",
+  "bounty_mirror": "-",
+  "arms": [
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "irccloud",
+  "title_json": "Email verification links still valid after changing it 2x",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "50703",
+  "team": "Ubiquiti Networks",
+  "title_mirror": "CSRF in login form would led to account takeover",
+  "bounty_mirror": "$500",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "ui",
+  "title_json": "CSRF in login form would led to account takeover",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "50170",
+  "team": "The Internet",
+  "title_mirror": "FREAK: Factoring RSA_EXPORT Keys to Impersonate TLS Servers",
+  "bounty_mirror": "$7,500",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "ibb",
+  "title_json": "FREAK: Factoring RSA_EXPORT Keys to Impersonate TLS Servers",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cryptographic Issues - Generic"
+ },
+ {
+  "id": "49304",
+  "team": "Vimeo",
+  "title_mirror": "Bypassing Email verification",
+  "bounty_mirror": "-",
+  "arms": [
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "vimeo",
+  "title_json": "Bypassing Email verification ",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": ""
+ },
+ {
+  "id": "45084",
+  "team": "Vimeo",
+  "title_mirror": "Full account takeover via Add a New Email to account without email verified and without password confirmation.",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation",
+   "passwordless"
+  ],
+  "live": true,
+  "handle": "vimeo",
+  "title_json": "Full account takeover via Add a New Email to account without email verified and without password confirmation.",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "44864",
+  "team": "itBit Exchange",
+  "title_mirror": "Unsecure data in \"device\" response - OTP",
+  "bounty_mirror": "$200",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": false
+ },
+ {
+  "id": "39203",
+  "team": "WePay",
+  "title_mirror": "Broken Authentication \u2013 Session Token bug",
+  "bounty_mirror": "-",
+  "arms": [
+   "broken-improper-auth"
+  ],
+  "live": false
+ },
+ {
+  "id": "33432",
+  "team": "Twitter",
+  "title_mirror": "BROKEN AUTHENTICATION IN MOBILE VERIFICATION",
+  "bounty_mirror": "-",
+  "arms": [
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "x",
+  "title_json": "BROKEN AUTHENTICATION IN MOBILE VERIFICATION  ",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "33385",
+  "team": "InVision",
+  "title_mirror": "Password reset tokens is valid after changing the password by logging in the account",
+  "bounty_mirror": "-",
+  "arms": [
+   "reset-token"
+  ],
+  "live": false
+ },
+ {
+  "id": "29331",
+  "team": "HackerOne",
+  "title_mirror": "No email verification on username change",
+  "bounty_mirror": "$500",
+  "arms": [
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "No email verification on username change",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": "500.0",
+  "sub": "resolved",
+  "weak": "Information Disclosure"
+ },
+ {
+  "id": "26700",
+  "team": "Square",
+  "title_mirror": "CRITICAL Account takeover via AngularJS template injection in connect.squareup.com",
+  "bounty_mirror": "$2,000",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": false
+ },
+ {
+  "id": "23921",
+  "team": "concrete5",
+  "title_mirror": "broken authentication",
+  "bounty_mirror": "-",
+  "arms": [
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "concretecms",
+  "title_json": "broken authentication",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "23913",
+  "team": "Twitter",
+  "title_mirror": "User's DM won't deleted after logout from Twitter for iOS (com.atebits.xxx.application-state)",
+  "bounty_mirror": "-",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "x",
+  "title_json": "User's DM won't deleted after logout from Twitter for iOS (com.atebits.xxx.application-state)",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": ""
+ },
+ {
+  "id": "23579",
+  "team": "Secret",
+  "title_mirror": "Broken Authentication and Session Management",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "secret",
+  "title_json": "Broken Authentication and Session Management",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "22203",
+  "team": "Twitter",
+  "title_mirror": "Broken authentication and invalidated email address leads to account takeover",
+  "bounty_mirror": "-",
+  "arms": [
+   "broken-improper-auth",
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "x",
+  "title_json": "Broken authentication and invalidated email address leads to account takeover",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Cryptographic Issues - Generic"
+ },
+ {
+  "id": "21172",
+  "team": "Mavenlink",
+  "title_mirror": "Cookies are not cleared from Server side on Logout",
+  "bounty_mirror": "-",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "mavenlink",
+  "title_json": "Cookies are not cleared from Server side on Logout",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "duplicate",
+  "weak": ""
+ },
+ {
+  "id": "20122",
+  "team": "HackerOne",
+  "title_mirror": "No option to logout concurrent sessions",
+  "bounty_mirror": "-",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "No option to logout concurrent sessions",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": ""
+ },
+ {
+  "id": "20044",
+  "team": "Envoy",
+  "title_mirror": "Authentication Bypass",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": false
+ },
+ {
+  "id": "19640",
+  "team": "HackerOne",
+  "title_mirror": "Session Hijacking attack (Different Scenario)",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "Session Hijacking attack (Different Scenario)",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "18503",
+  "team": "Automattic",
+  "title_mirror": "Top 10 2013-A2-Broken Authentication and Session Management - wordpress.com",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "automattic",
+  "title_json": "Top 10 2013-A2-Broken Authentication and Session Management - wordpress.com",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "18501",
+  "team": "WePay",
+  "title_mirror": "Session Fixation",
+  "bounty_mirror": "$500",
+  "arms": [
+   "session-family"
+  ],
+  "live": false
+ },
+ {
+  "id": "17512",
+  "team": "HackerOne",
+  "title_mirror": "Account takeover",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "Account takeover",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "17474",
+  "team": "Phabricator",
+  "title_mirror": "Broken Authentication and Session Management",
+  "bounty_mirror": "$300",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "phabricator",
+  "title_json": "Broken Authentication and Session Management",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "17383",
+  "team": "HackerOne",
+  "title_mirror": "Category- Broken Authentication and Session Management (leads to account compromise if some conditions are met)",
+  "bounty_mirror": "$100",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "Category- Broken Authentication and Session Management (leads to account compromise if some conditions are met)",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "16696",
+  "team": "Coinbase",
+  "title_mirror": "2FA settings allowed to be changed with no delay/freeze on funds",
+  "bounty_mirror": "-",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "coinbase",
+  "title_json": "2FA settings allowed to be changed with no delay/freeze on funds",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "15476",
+  "team": "FanFootage",
+  "title_mirror": "Session Token is not Verified while changing Account Setting's which Result In account Takeover",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation",
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "fanfootage",
+  "title_json": "Session Token is not Verified while changing Account Setting's which Result In account Takeover",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "15166",
+  "team": "Mavenlink",
+  "title_mirror": "Password reset token not expiring",
+  "bounty_mirror": "$100",
+  "arms": [
+   "reset-token"
+  ],
+  "live": true,
+  "handle": "mavenlink",
+  "title_json": "Password reset token not expiring",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "14552",
+  "team": "WePay",
+  "title_mirror": "Session fixation in wepay.com",
+  "bounty_mirror": "$100",
+  "arms": [
+   "session-family"
+  ],
+  "live": false
+ },
+ {
+  "id": "13705",
+  "team": "Automattic",
+  "title_mirror": "logout csrf app.simplenote.com/logout",
+  "bounty_mirror": "-",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "automattic",
+  "title_json": "logout csrf app.simplenote.com/logout",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "13602",
+  "team": "Factlink",
+  "title_mirror": "Session not expired on logout",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family",
+   "logout"
+  ],
+  "live": true,
+  "handle": "factlink",
+  "title_json": "Session not expired on logout",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": ""
+ },
+ {
+  "id": "13557",
+  "team": "Factlink",
+  "title_mirror": "Leaking of password reset token through referer",
+  "bounty_mirror": "-",
+  "arms": [
+   "reset-token"
+  ],
+  "live": true,
+  "handle": "factlink",
+  "title_json": "Leaking of password reset token through referer",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Information Disclosure"
+ },
+ {
+  "id": "11722",
+  "team": "Coinbase",
+  "title_mirror": "Simultaneous Session Logon : Improper Session Management",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "coinbase",
+  "title_json": "Simultaneous Session Logon : Improper Session Management",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "10912",
+  "team": "Yahoo!",
+  "title_mirror": "Authentication Bypass due to Session Mismanagement",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": false
+ },
+ {
+  "id": "10554",
+  "team": "Coinbase",
+  "title_mirror": "Bypassing 2FA for BTC transfers",
+  "bounty_mirror": "$1,000",
+  "arms": [
+   "mfa-2fa"
+  ],
+  "live": true,
+  "handle": "coinbase",
+  "title_json": "Bypassing 2FA for BTC transfers",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": "1000.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "7909",
+  "team": "Localize",
+  "title_mirror": "Business logic Failure - Browser cache management and logout vulnerability.",
+  "bounty_mirror": "-",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "localize",
+  "title_json": "Business logic Failure - Browser cache management and logout vulnerability.",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "7516",
+  "team": "IRCCloud",
+  "title_mirror": "Log Out Cross site Request Forgery",
+  "bounty_mirror": "-",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "irccloud",
+  "title_json": "Log Out Cross site Request Forgery",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "7041",
+  "team": "IRCCloud",
+  "title_mirror": "iOS application does not destroy session upon logout.",
+  "bounty_mirror": "$100",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "irccloud",
+  "title_json": "iOS application does not destroy session upon logout.",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "6910",
+  "team": "IRCCloud",
+  "title_mirror": "Full account takeover using CSRF and password reset",
+  "bounty_mirror": "$500",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "irccloud",
+  "title_json": "Full account takeover using CSRF and password reset",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "6907",
+  "team": "IRCCloud",
+  "title_mirror": "Session Token is not Verified while changing Account Setting's which Result In account Takeover",
+  "bounty_mirror": "$500",
+  "arms": [
+   "ato-impersonation",
+   "email-verification"
+  ],
+  "live": true,
+  "handle": "irccloud",
+  "title_json": "Session Token is not Verified while changing Account Setting's which Result In account Takeover",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "6504",
+  "team": "ReddAPI",
+  "title_mirror": "Session Fixation Found",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "reddapi",
+  "title_json": "Session Fixation Found",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": ""
+ },
+ {
+  "id": "5691",
+  "team": "C2FO",
+  "title_mirror": "Password reset token leakage through referrer at https://app.c2fo.com/password/reset/",
+  "bounty_mirror": "-",
+  "arms": [
+   "reset-token"
+  ],
+  "live": true,
+  "handle": "c2fo",
+  "title_json": "Password reset token leakage through referrer at https://app.c2fo.com/password/reset/",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Information Disclosure"
+ },
+ {
+  "id": "4795",
+  "team": "concrete5",
+  "title_mirror": "Bypass auth.email-domains",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core"
+  ],
+  "live": true,
+  "handle": "concretecms",
+  "title_json": "Bypass auth.email-domains",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "3722",
+  "team": "Slack",
+  "title_mirror": "User impersonation is possible with incoming webhooks",
+  "bounty_mirror": "-",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "slack",
+  "title_json": "User impersonation is possible with incoming webhooks",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "3577",
+  "team": "Yahoo!",
+  "title_mirror": "Authentication bypass at fast.corp.yahoo.com",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": false
+ },
+ {
+  "id": "2857",
+  "team": "Phabricator",
+  "title_mirror": "CSRF token valid even after the session logout of a particular user",
+  "bounty_mirror": "-",
+  "arms": [
+   "logout"
+  ],
+  "live": true,
+  "handle": "phabricator",
+  "title_json": "CSRF token valid even after the session logout of a particular user",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "2582",
+  "team": "Slack",
+  "title_mirror": "Session Fixation disclosing email address",
+  "bounty_mirror": "-",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "slack",
+  "title_json": "Session Fixation disclosing email address",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Information Disclosure"
+ },
+ {
+  "id": "2559",
+  "team": "Slack",
+  "title_mirror": "Broken Authentication (including Slack OAuth bugs)",
+  "bounty_mirror": "$100",
+  "arms": [
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "slack",
+  "title_json": "Broken Authentication (including Slack OAuth bugs)",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "2421",
+  "team": "RelateIQ",
+  "title_mirror": "Value of JSESSIONID and XSRF token parameter in cookie remains same before and after login",
+  "bounty_mirror": "$100",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "relateiq",
+  "title_json": "Value of JSESSIONID  and XSRF token parameter in cookie remains same before and after login",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "2233",
+  "team": "Phabricator",
+  "title_mirror": "Bypass auth.email-domains (2)",
+  "bounty_mirror": "$500",
+  "arms": [
+   "bypass-core"
+  ],
+  "live": true,
+  "handle": "phabricator",
+  "title_json": "Bypass auth.email-domains (2)",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": "500.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "2224",
+  "team": "Phabricator",
+  "title_mirror": "Bypass auth.email-domains",
+  "bounty_mirror": "$1,000",
+  "arms": [
+   "bypass-core"
+  ],
+  "live": true,
+  "handle": "phabricator",
+  "title_json": "Bypass auth.email-domains",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": "1000.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "1209",
+  "team": "Yahoo!",
+  "title_mirror": "Authentication Bypass in Yahoo Groups",
+  "bounty_mirror": "-",
+  "arms": [
+   "bypass-core",
+   "broken-improper-auth"
+  ],
+  "live": false
+ },
+ {
+  "id": "737",
+  "team": "HackerOne",
+  "title_mirror": "Improper session management",
+  "bounty_mirror": "$100",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "Improper session management",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": "100.0",
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "353",
+  "team": "HackerOne",
+  "title_mirror": "Session not expired on logout",
+  "bounty_mirror": "$100",
+  "arms": [
+   "session-family",
+   "logout"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "Session not expired on logout",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": "100.0",
+  "sub": "resolved",
+  "weak": ""
+ },
+ {
+  "id": "288",
+  "team": "HackerOne",
+  "title_mirror": "Session Management",
+  "bounty_mirror": "$100",
+  "arms": [
+   "session-family"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "Session Management",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": ""
+ },
+ {
+  "id": "284",
+  "team": "HackerOne",
+  "title_mirror": "Broken Authentication and session management OWASP A2",
+  "bounty_mirror": "$100",
+  "arms": [
+   "session-family",
+   "broken-improper-auth"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "Broken Authentication and session management OWASP A2",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "280",
+  "team": "HackerOne",
+  "title_mirror": "Real impersonation",
+  "bounty_mirror": "$100",
+  "arms": [
+   "ato-impersonation"
+  ],
+  "live": true,
+  "handle": "security",
+  "title_json": "Real impersonation",
+  "year": "2013",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": ""
+ },
+ {
+  "id": "215381",
+  "team": "Twitter",
+  "title_mirror": "CSRF on Periscope Web OAuth authorization endpoint",
+  "bounty_mirror": "$2,520",
+  "arms": [
+   "supplemental"
+  ],
+  "supp": true,
+  "live": true,
+  "handle": "x",
+  "title_json": "CSRF on Periscope Web OAuth authorization endpoint ",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-Site Request Forgery (CSRF)"
+ },
+ {
+  "id": "166942",
+  "team": "Twitter",
+  "title_mirror": "leaking Digits OAuth authorization to third party websites",
+  "bounty_mirror": "$560",
+  "arms": [
+   "supplemental"
+  ],
+  "supp": true,
+  "live": true,
+  "handle": "x",
+  "title_json": "leaking Digits OAuth authorization to third party websites",
+  "year": "2017",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Information Disclosure"
+ },
+ {
+  "id": "65825",
+  "team": "Coinbase",
+  "title_mirror": "OAuth authorization page vulnerable to clickjacking",
+  "bounty_mirror": "$5,000",
+  "arms": [
+   "supplemental"
+  ],
+  "supp": true,
+  "live": true,
+  "handle": "coinbase",
+  "title_json": "OAuth authorization page vulnerable to clickjacking",
+  "year": "2016",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "87040",
+  "team": "Twitter",
+  "title_mirror": "XSS on OAuth authorize/authenticate endpoint",
+  "bounty_mirror": "$2,520",
+  "arms": [
+   "supplemental"
+  ],
+  "supp": true,
+  "live": true,
+  "handle": "x",
+  "title_json": "XSS on OAuth authorize/authenticate endpoint",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Cross-site Scripting (XSS) - Generic"
+ },
+ {
+  "id": "15619",
+  "team": "FanFootage",
+  "title_mirror": "Cookie fixation",
+  "bounty_mirror": "-",
+  "arms": [
+   "supplemental"
+  ],
+  "supp": true,
+  "live": true,
+  "handle": "fanfootage",
+  "title_json": "Cookie fixation",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Uncontrolled Resource Consumption"
+ },
+ {
+  "id": "178567",
+  "team": "Badoo",
+  "title_mirror": "Arbitrary modification value \"session\" (Cookie) in badoo.com",
+  "bounty_mirror": "$260",
+  "arms": [
+   "supplemental"
+  ],
+  "supp": true,
+  "live": true,
+  "handle": "bumble",
+  "title_json": "Arbitrary modification value \"session\" (Cookie) in badoo.com",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": ""
+ },
+ {
+  "id": "83667",
+  "team": "ownCloud",
+  "title_mirror": "apps.owncloud.com: Session Cookie in URL can be captured by hackers",
+  "bounty_mirror": "-",
+  "arms": [
+   "supplemental"
+  ],
+  "supp": true,
+  "live": true,
+  "handle": "owncloud",
+  "title_json": "apps.owncloud.com: Session Cookie in URL can be captured by hackers",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Improper Authentication - Generic"
+ },
+ {
+  "id": "6927",
+  "team": "IRCCloud",
+  "title_mirror": "Session cookie can be leaked over an unencrypted HTTP connection",
+  "bounty_mirror": "-",
+  "arms": [
+   "supplemental"
+  ],
+  "supp": true,
+  "live": true,
+  "handle": "irccloud",
+  "title_json": "Session cookie can be leaked over an unencrypted HTTP connection",
+  "year": "2014",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": "Violation of Secure Design Principles"
+ },
+ {
+  "id": "232306",
+  "team": "Weblate",
+  "title_mirror": "Improper Cookie expiration | Cookies Expiration Set to Future",
+  "bounty_mirror": "-",
+  "arms": [
+   "supplemental"
+  ],
+  "supp": true,
+  "live": true,
+  "handle": "weblate",
+  "title_json": "Improper Cookie expiration | Cookies Expiration Set to Future ",
+  "year": "2017",
+  "sev": "low",
+  "bounty_json": null,
+  "sub": "resolved",
+  "weak": ""
+ },
+ {
+  "id": "177018",
+  "team": "Mindoktor",
+  "title_mirror": "Storing sensitive information on cookie post-registration",
+  "bounty_mirror": "$300",
+  "arms": [
+   "supplemental"
+  ],
+  "supp": true,
+  "live": false
+ },
+ {
+  "id": "46109",
+  "team": "Vimeo",
+  "title_mirror": "Brute force on \"vimeo\" cookie",
+  "bounty_mirror": "-",
+  "arms": [
+   "supplemental"
+  ],
+  "supp": true,
+  "live": true,
+  "handle": "vimeo",
+  "title_json": "Brute force on \"vimeo\" cookie",
+  "year": "2015",
+  "sev": "",
+  "bounty_json": null,
+  "sub": "informative",
+  "weak": "Improper Authentication - Generic"
+ }
+]
