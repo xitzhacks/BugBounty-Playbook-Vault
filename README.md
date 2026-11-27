@@ -60,7 +60,7 @@ rejoin byte-for-byte into `reports.sqlite`.
 | Requirement | Why |
 |---|---|
 | `git` | clone the repo |
-| **Python 3.10+** | scripts and MCP server |
+| **Python 3.10+** | scripts and MCP server; `setup.sh` selects 3.13 → 3.12 → 3.11 → 3.10 and fails with a clear message on older interpreters |
 | **`sqlite3` CLI** | join/verify helpers and direct queries |
 | ~1.2 GB free disk | 378 MB parts + 378 MB joined DB + venv/model cache |
 | Internet on first run | downloads the embedding model (~90 MB, cached after) |
@@ -89,11 +89,13 @@ python3 -m venv .venv
 .venv/bin/python scripts/search.py "ssrf cloud metadata" -k 5
 ```
 
-Or run the installer after step 2 — it creates the venv, verifies counts, runs a
-smoke test, and offers to register the MCP server with Hermes:
+Or run the installer after step 2 — it selects a supported Python, creates the venv,
+verifies the database, and runs a smoke test. MCP registration is **opt-in** and does
+nothing unless you ask for it:
 
 ```bash
-bash setup.sh
+bash setup.sh                      # no Hermes side effects
+VAULT_REGISTER_MCP=1 bash setup.sh  # also register the vault MCP with Hermes
 ```
 
 Expected output from `join_db.sh`:
@@ -218,6 +220,10 @@ Use **absolute paths**:
 | `VAULT_ROOT` | `<repo>/vault` | root used by `search.py` |
 | `EMBED_MODEL` | `sentence-transformers/all-MiniLM-L6-v2` | alternative fastembed model |
 | `RERANK_MODEL` | `jinaai/jina-reranker-v1-turbo-en` | model used by `--rerank` |
+| `PYTHON` | auto-detected | interpreter used by `setup.sh` to build the venv |
+| `VAULT_REGISTER_MCP` | `0` | set to `1` to let `setup.sh` register the Hermes MCP |
+| `VAULT_SKILLS_SRC` | *(required)* | skills source for `ingest_skills.py` / `refresh.sh` |
+| `VAULT_EXPORT_DIR` | `~/vault-export` | output directory for `make_bundle.sh` |
 
 Test the server by hand:
 

@@ -3,8 +3,9 @@
 
 Register once, then every session gets these tools without loading the DB into context:
 
-  hermes config set mcp.servers.vault.command "$(which python3)"
-  hermes config set mcp.servers.vault.args '["<repo>/scripts/mcp_server.py"]'
+  hermes mcp add vault --command "$PWD/.venv/bin/python" --args "$PWD/scripts/mcp_server.py"
+
+(Registration is opt-in at install time: VAULT_REGISTER_MCP=1 bash setup.sh.)
 
 Tools
   vault_search(query, class?, program?, severity?, min_bounty?, k?)  hybrid BM25+vector over reports and our docs

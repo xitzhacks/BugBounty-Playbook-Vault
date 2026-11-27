@@ -133,10 +133,14 @@ def main():
         sims = mat @ qv.astype("float32")
         # filter BEFORE ranking: a tight filter (e.g. class=bounty>5000) can hold almost no
         # neighbours of the global top-200, so mask the whole matrix first.
+        # chunks.kind is only 'report'/'doc'; skills are marked by path, so do not
+        # filter on kind for --kind skill (the path filter below already handles it).
+        kind_sql = "" if a.kind in (None, "skill") else "AND c.kind=?"
+        kind_args = [] if a.kind in (None, "skill") else [a.kind]
         if where or a.kind:
             allowed = {r["id"] for r in con.execute(
                 f"""SELECT c.id FROM chunks c LEFT JOIN reports r ON r.id=c.report_id
-                    WHERE 1=1 {filt} {'AND c.kind=?' if a.kind else ''}""", args + ([a.kind] if a.kind else []))}
+                    WHERE 1=1 {filt} {kind_sql}""", args + kind_args)}
             if allowed:
                 mask = np.fromiter((cid in allowed for cid in ids), dtype=bool, count=len(ids))
                 sims = np.where(mask, sims, -1.0)

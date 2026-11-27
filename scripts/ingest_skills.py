@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 """Mirror every skill into the vault and index its markdown in the same DB.
 
-- Source: ~/.hermes/profiles/batman/skills (this profile's skills only)
+- Source: VAULT_SKILLS_SRC env var or the first argument (required; no hardcoded machine path)
+
+The mirrored destination is only replaced after the source is validated.
 - Skips: .hub, .curator_backups, .git and other hidden dirs (those are caches/backups, not skills)
 - Copies .md + scripts/templates/references into Vault/_VAULT/skills/<skill>/...
 - Indexes each .md as a row in `documents` (dir='skills'), so the existing chunker/embedder picks it up
 - Dedupe: identical markdown (sha256) is stored once; the copy is recorded as a duplicate pointer
 """
-import hashlib, os, shutil, sqlite3, time
+import hashlib, os, shutil, sqlite3, sys, time
 
-SRC = os.path.expanduser("~/.hermes/profiles/batman/skills")
+SRC = os.environ.get("VAULT_SKILLS_SRC") or (sys.argv[1] if len(sys.argv) > 1 else "")
 VAULT = os.environ.get("VAULT_ROOT", os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "vault"))
 DST = os.path.join(VAULT, "_VAULT", "skills")
 DB = os.path.join(VAULT, "_VAULT", "reports.sqlite")
@@ -30,6 +32,12 @@ def front(text):
     return out
 
 def main():
+    if not SRC or not os.path.isdir(SRC):
+        sys.exit(
+            f"skills source not found: {SRC or '(unset)'}\n"
+            "Set VAULT_SKILLS_SRC=/path/to/skills or pass the directory as the first argument.\n"
+            "No files were changed."
+        )
     con = sqlite3.connect(DB)
     con.execute("""CREATE TABLE IF NOT EXISTS skill_dupes(
         path TEXT PRIMARY KEY, canonical TEXT NOT NULL, sha256 TEXT NOT NULL)""")

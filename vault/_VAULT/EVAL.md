@@ -1,5 +1,5 @@
 ---
-title: "Eval harness — 25 operator questions, measured"
+title: "Eval harness — 40 operator questions, measured"
 type: design
 built: "2026-11-17"
 baseline: "recall@5 80% → 92% after source balancing"
@@ -9,8 +9,9 @@ baseline: "recall@5 80% → 92% after source balancing"
 
 ## Why
 
-The old "eval" was 15 queries built from report titles — it proved a known document could be found and
-nothing else. This one uses operator phrasing, with ground truth verified against the report bodies.
+The earlier title-derived eval used 15 queries (the current `eval_rag.py` defaults to 20) — it proved
+a known document could be found and nothing else. This one uses operator phrasing, with ground truth
+verified against the report bodies.
 
 ## Dataset — `eval/questions.jsonl`
 
@@ -98,7 +99,7 @@ headings.
 ## Run it
 
 ```bash
-cd ~/Bugbounty/vault && .venv/bin/python eval_run.py          # table + summary
-.venv/bin/python eval_run.py --json | jq .summary
+cd <repo> && .venv/bin/python scripts/eval_run.py            # table + summary
+.venv/bin/python scripts/eval_run.py --json | jq .summary
 ```
-45 s for 25 questions (1.8 s/question).
+Historical run: 45 s for 25 questions (1.8 s/question); the shipped questions file has 40.

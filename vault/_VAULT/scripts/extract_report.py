@@ -6,7 +6,7 @@ db = os.path.join(os.path.dirname(here), "reports.sqlite")
 rid = int(sys.argv[1]); outdir = sys.argv[2] if len(sys.argv) > 2 else "."
 con = sqlite3.connect(db); con.row_factory = sqlite3.Row
 r = con.execute("SELECT * FROM bodies WHERE id=?", (rid,)).fetchone()
-if not r: sys.exit(f"report {rid} not stored. Run: python3 ~/Bugbounty/vault/harvest_bodies.py (resumable)")
+if not r: sys.exit(f"report {rid} not stored. Run: python3 scripts/harvest_bodies.py (resumable)")
 md = [f"# {r['title']}", "", f"- Program: {r['program']}", f"- Severity: {r['severity']}",
       f"- Weakness: {r['weakness']}", f"- Bounty: {r['bounty']}", f"- Reporter: {r['reporter']}",
       f"- Disclosed: {r['disclosed_at']}", f"- Asset: {r['asset']} ({r['asset_type']})",

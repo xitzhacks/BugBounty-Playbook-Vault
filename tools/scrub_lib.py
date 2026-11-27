@@ -3,6 +3,10 @@
 
 Every rule replaces the sensitive value with a visible marker so the technique
 in a write-up stays readable while the credential/identity does not ship.
+
+Build-host note: the `path` rule and a few example patterns were written for this
+build machine (/home/kali, kali@parrot, xitzhack). They are intentional historical
+rules, not generic OS-agnostic defaults; other hosts do not need to match them.
 """
 import re
 

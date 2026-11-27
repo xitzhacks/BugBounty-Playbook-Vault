@@ -19,7 +19,7 @@ def main():
     ap.add_argument("--grep", help="substring filter on technique name")
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--show", type=int, metavar="CHUNK", help="print the chunk text for a chunk id")
-    ap.add_argument("--k", type=int, default=40)
+    ap.add_argument("--k", "-k", type=int, default=40)
     a = ap.parse_args()
     con = sqlite3.connect(DB); con.row_factory = sqlite3.Row
 

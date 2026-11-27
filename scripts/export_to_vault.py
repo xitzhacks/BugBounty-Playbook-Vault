@@ -323,7 +323,7 @@ sqlite3 reports.sqlite "SELECT dir,COUNT(*) FROM documents GROUP BY 1 ORDER BY 2
 - Titles come from the program's published report. Severity/weakness are the program's own fields where set;
   where a program set no weakness the class is inferred from the title by their published rules —
   treat those as a keyword guess, not a fact.
-- The repo (`~/Bugbounty/vault/the public HackerOne dataset`) pins `next@16.4.6`; the site is the reference
+- The `the public HackerOne dataset` repo pins `next@16.4.6`; the site is the reference
   implementation of the same idea as this vault: reports → class → playbook.
 """)
     with open(os.path.join(OUT, "scripts", "extract_report.py"), "w") as f:
@@ -335,7 +335,7 @@ db = os.path.join(os.path.dirname(here), "reports.sqlite")
 rid = int(sys.argv[1]); outdir = sys.argv[2] if len(sys.argv) > 2 else "."
 con = sqlite3.connect(db); con.row_factory = sqlite3.Row
 r = con.execute("SELECT * FROM bodies WHERE id=?", (rid,)).fetchone()
-if not r: sys.exit(f"report {rid} not stored. Run: python3 ~/Bugbounty/vault/harvest_bodies.py (resumable)")
+if not r: sys.exit(f"report {rid} not stored. Run: python3 scripts/harvest_bodies.py (resumable)")
 md = [f"# {r['title']}", "", f"- Program: {r['program']}", f"- Severity: {r['severity']}",
       f"- Weakness: {r['weakness']}", f"- Bounty: {r['bounty']}", f"- Reporter: {r['reporter']}",
       f"- Disclosed: {r['disclosed_at']}", f"- Asset: {r['asset']} ({r['asset_type']})",
@@ -348,17 +348,21 @@ print(path)
     with open(os.path.join(OUT, "scripts", "refresh.sh"), "w") as f:
         f.write("""#!/usr/bin/env bash
 # Refresh the dataset layer: metadata -> write-ups -> vault views
-set -e
-cd ~/Bugbounty/vault
-python3 harvest_meta.py
-python3 harvest_bodies.py          # resumable; only fetches what is missing
-python3 export_to_vault.py
-python3 ingest_vault_docs.py       # index every vault .md into the same DB
-python3 ingest_skills.py           # mirror + index all skills from ~/.hermes/profiles/batman/skills
-python3 dedupe_chunks.py           # exact + near-duplicate chunk removal (tombstoned)
-python3 build_techniques.py        # named-technique index (class -> technique -> chunk)
-python3 build_bypasses.py          # protection -> passage -> payload index
-python3 build_payloads.py          # fenced code blocks -> classified payload table
+# Paths are relative to the repository root; no build-host home paths.
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+PY="$ROOT/.venv/bin/python"
+[ -x "$PY" ] || PY="$(command -v python3)"
+cd "$ROOT/scripts"
+"$PY" harvest_meta.py
+"$PY" harvest_bodies.py          # resumable; only fetches what is missing
+"$PY" export_to_vault.py
+"$PY" ingest_vault_docs.py       # index every vault .md into the same DB
+"$PY" ingest_skills.py           # needs VAULT_SKILLS_SRC or a source directory argument
+"$PY" dedupe_chunks.py           # exact + near-duplicate chunk removal (tombstoned)
+"$PY" build_techniques.py        # named-technique index (class -> technique -> chunk)
+"$PY" build_bypasses.py          # protection -> passage -> payload index
+"$PY" build_payloads.py          # fenced code blocks -> classified payload table
 """)
     os.chmod(os.path.join(OUT, "scripts", "refresh.sh"), 0o755)
     print("class files:", len(by_class), "category files:", len(by_dir))

@@ -2,12 +2,17 @@
 """Retrieval smoke test: for N random reports with a real body, build a query from the report's
 own title (a few content words) and check whether that report comes back in the top-k.
 Honest label: title-derived queries, not hand-written operator questions. It measures whether the
-index can find a known document at all — a floor, not the ceiling.
+index can find a known document at all — a floor, not the ceiling. N defaults to 20 (override as
+the first argument); the earlier title-derived eval used 15 queries.
 """
 import json, random, re, sqlite3, subprocess, os, sys, time
 
 DB = os.environ.get("VAULT_DB", os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "vault", "_VAULT", "reports.sqlite"))
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+PY = os.path.join(ROOT, ".venv", "bin", "python")
+if not os.path.exists(PY):
+    PY = sys.executable
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 20
 K = 10
 STOP = set("the a an and or of to in on for with via from at by is are be as it this that how my your our".split())
@@ -27,7 +32,7 @@ rows = []
 t0 = time.time()
 for r in sample:
     q = query_from(r["title"])
-    p = subprocess.run([os.path.join(HERE, ".venv", "bin", "python"), os.path.join(HERE, "search.py"),
+    p = subprocess.run([PY, os.path.join(HERE, "search.py"),
                         q, "-k", str(K), "--json"], capture_output=True, text=True, timeout=180)
     try:
         out = json.loads(p.stdout)

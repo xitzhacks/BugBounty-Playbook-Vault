@@ -14,7 +14,7 @@ def main():
     ap.add_argument("tag", nargs="?")
     ap.add_argument("--grep")
     ap.add_argument("--show", type=int)
-    ap.add_argument("--k", type=int, default=8)
+    ap.add_argument("--k", "-k", type=int, default=8)
     ap.add_argument("--min-score", type=int, default=3)
     a = ap.parse_args()
     con = sqlite3.connect(DB); con.row_factory = sqlite3.Row

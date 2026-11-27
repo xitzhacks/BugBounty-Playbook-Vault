@@ -14,7 +14,7 @@ def main():
     ap.add_argument("cls", nargs="?")
     ap.add_argument("--grep")
     ap.add_argument("--show", type=int)
-    ap.add_argument("--k", type=int, default=10)
+    ap.add_argument("--k", "-k", type=int, default=10)
     ap.add_argument("--kind", choices=["report", "skill", "playbook"])
     a = ap.parse_args()
     con = sqlite3.connect(DB); con.row_factory = sqlite3.Row

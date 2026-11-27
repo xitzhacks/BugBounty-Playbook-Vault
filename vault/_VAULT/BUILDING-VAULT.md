@@ -48,16 +48,16 @@ a retrieval layer can serve the main agent.
 
 ## Naming
 
-The dataset directory is `Vault/_VAULT/`. Working scripts live in `~/Bugbounty/vault/`:
+The dataset directory is `vault/_VAULT/`. Working scripts live in `scripts/` (run everything from the repository root):
 `harvest_meta.py`, `harvest_bodies.py`, `export_to_vault.py`, `inject_case_stock.py`,
 `ingest_vault_docs.py`, `audit_vault.py`, `build_rag.py`, `watchdog.sh`.
 
 ## How to pick this up later
 
-1. `cd ~/Bugbounty/vault && bash watchdog.sh` — refreshes the library (resumable)
-2. `python3 export_to_vault.py && python3 inject_case_stock.py && python3 ingest_vault_docs.py`
-3. `python3 audit_vault.py` — must end at 0 failures before trusting anything
-4. Query: `sqlite3 ../projects/FAN/Vault/_VAULT/reports.sqlite "SELECT ..."`
+1. `.venv/bin/python scripts/harvest_meta.py && .venv/bin/python scripts/harvest_bodies.py` — refreshes the library (resumable)
+2. `.venv/bin/python scripts/export_to_vault.py && .venv/bin/python scripts/inject_case_stock.py && .venv/bin/python scripts/ingest_vault_docs.py`
+3. `.venv/bin/python scripts/audit_vault.py` — must end at 0 failures before trusting anything
+4. Query: `sqlite3 vault/_VAULT/reports.sqlite "SELECT ..."`
 5. Pull a write-up: `python3 ../projects/FAN/Vault/_VAULT/scripts/extract_report.py <id>`
 
 ## Open items

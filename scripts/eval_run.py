@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Eval harness: 25 operator-style questions with hand-verified ground truth.
+"""Eval harness: 40 operator-style questions with hand-verified ground truth.
 
 Scores two things:
   1. RECALL of the report layer   – does the right report appear in top-k (1/5/10), plus MRR
@@ -14,8 +14,11 @@ and still test the wrong technique.
 import argparse, json, os, re, sqlite3, subprocess, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DB = os.environ.get("VAULT_DB", os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "vault", "_VAULT", "reports.sqlite"))
-PY = os.path.join(HERE, ".venv", "bin", "python")
+ROOT = os.path.dirname(HERE)
+DB = os.environ.get("VAULT_DB", os.path.join(ROOT, "vault", "_VAULT", "reports.sqlite"))
+PY = os.path.join(ROOT, ".venv", "bin", "python")
+if not os.path.exists(PY):
+    PY = sys.executable
 
 def main():
     ap = argparse.ArgumentParser()
