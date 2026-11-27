@@ -32,7 +32,7 @@
 480 ./tools/join_db.sh
 4390 ./tools/scrub_db.py
 1374 ./tools/scrub_files.py
-5815 ./tools/scrub_lib.py
+5832 ./tools/scrub_lib.py
 2642 ./tools/verify_clean.py
 6753 ./vault/00_MASTER_CATEGORY_LIST.md
 12429 ./vault/12_Business-Logic/Account-Invite-Access-Workflows.md
